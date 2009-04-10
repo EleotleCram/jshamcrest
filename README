@@ -1,0 +1,78 @@
+jsunittest-hamcrest
+-------------------
+
+    http://github.com/danielfm/jsunittest-hamcrest/tree/master
+
+
+JsUnitTest-Hamcrest is a port of Hamcrest for JsUnitTest. Hamcrest provides a
+library of matcher objects (also known as constraints or predicates) allowing
+'match' rules to be defined declaratively. JsUnitTest provides a one-file
+JavaScript test suite.
+
+This is an open source project licenced under the terms of the Lesser General
+Public License v3.0 and sponsored by Destaquenet Technology Solutions, a
+brazilian software development and consultancy startup.
+
+
+Usage
+-----
+
+In order to use JsUnitTest-Hamcrest, you have to download and import the
+JsUnitTest script in your HTML page:
+
+<script src="jsunittest.js" type="text/javascript"></script>
+<script src="jsunittest-hamcrest.js" type="text/javascript"></script>
+
+That's it, now (almost) all the Hamcrest goodies are available at your
+JsUnitTest test cases, for example:
+
+    new Test.Unit.Runner({
+        setup: function() {
+            this.calc = new MyCalculator();
+        },
+
+        teardown: function() {
+        },
+
+        testSomething: function() { with(this) {
+            assertThat(this.calc.add(2, 3), is(equalTo(5)));
+            assertThat(this.calc.sub(2, 3), is(lessThanOrEqualTo(0)));
+            // use your imagination!
+        }},
+        
+        // ...
+    }, {'testLog':'myLog'});
+
+Very easy, isn't it?
+
+
+Building
+--------
+
+To build JsUnitTest-Hamcrest and generate the API documentation, you have to
+install Apache Ant in your machine if you don't have it already. Visit the
+following to download and to get instructions on how to install it in your
+system:
+
+    http://ant.apache.org/
+
+After that, execute the following command line to perform the build:
+
+    $ ant all
+
+
+Thanks to...
+------------
+
+    * JsUnitTest: <http://jsunittest.com/>
+    * Hamcrest: <http://code.google.com/p/hamcrest/>
+
+
+Credits
+-------
+
+    Author:  Daniel Fernandes Martins <daniel@destaquenet.com>
+    Company: Destaquenet Technology Solutions <http://www.destaquenet.com/>
+
+
+--EOF

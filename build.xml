@@ -1,0 +1,82 @@
+<project name="JsUnitTest-Hamcrest" default="hamcrest" basedir=".">
+    <property file="build.properties"/>
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="${LIB_DIR}/ant-contrib.jar"/>
+        </classpath>
+    </taskdef>
+
+    <taskdef name="jsdoctoolkit" classname="uk.co.darrenhurley.ant.tasks.JsDocToolkit">
+        <classpath>
+            <pathelement location="${LIB_DIR}/js.jar"/>
+            <pathelement location="${LIB_DIR}/jsdoctoolkit-ant-task.jar"/>
+        </classpath>
+    </taskdef>
+
+    <exec executable="git-rev-list" outputproperty="GIT_REVISION">
+        <arg value="--all"/>
+        <arg value="--max-count=1"/>
+        <arg value="--pretty"/>
+    </exec>
+
+    <propertyregex property="REV" input="${GIT_REVISION}" select="\1">
+        <regexp pattern="commit\W+([0-9a-f]+)"/>
+    </propertyregex>
+
+    <propertyregex property="DATE" input="${GIT_REVISION}" select="\1">
+        <regexp pattern="Date:\W+(.*)"/>
+    </propertyregex>
+
+    <target name="hamcrest" description="Main build target, concatenates source files and replaces special tokens">
+        <property name="DIST" value="${BUILD_DIR}/jsunittest-hamcrest.js"/>
+        <echo message="Creating ${DIST}" />
+        <mkdir dir="${BUILD_DIR}" />
+        <concat destfile="${DIST}">
+            <fileset dir="${SRC_DIR}" includes="jsunittest-hamcrest.js"/>
+            <fileset dir="${SRC_DIR}" includes="core.js"/>
+            <fileset dir="${SRC_DIR}" includes="number.js"/>
+            <fileset dir="${SRC_DIR}" includes="text.js"/>
+            <fileset dir="${SRC_DIR}" includes="object.js"/>
+            <fileset dir="${SRC_DIR}" includes="collection.js"/>
+            <fileset dir="${SRC_DIR}" includes="setup.js"/>
+        </concat>
+
+        <replaceregexp match="@VERSION" replace="${VERSION}" flags="g" byline="true" file="${DIST}"/>
+        <replaceregexp match="@DATE" replace="${DATE}" file="${DIST}"/>
+        <replaceregexp match="@REV" replace="${REV}" file="${DIST}"/>
+    </target>
+    
+    <target name="pack" depends="hamcrest" description="Remove all comments and whitespace and compress">
+        <property name="DIST_PACK" value="${BUILD_DIR}/jsunittest-hamcrest_minified.js"/>
+        <echo message="Packing ${DIST}"/>
+        <java jar="${APP_DIR}/yuicompressor.jar" fork="true">
+            <arg value="-o"/>
+            <arg value="${DIST_PACK}"/>
+            <arg value="${DIST}"/>
+        </java>
+        <echo message="Packed version created at ${DIST_PACK}"/>
+    </target>
+
+    <target name="doc" description="Generate API documentation">
+        <echo message="Creating API docs"/>
+        <jsdoctoolkit jsdochome="${APP_DIR}/jsdoc-toolkit/" template="outline" outputdir="${API_DIR}">
+            <source file="${SRC_DIR}/jsunittest-hamcrest.js"/>
+            <source file="${SRC_DIR}/core.js"/>
+            <source file="${SRC_DIR}/number.js"/>
+            <source file="${SRC_DIR}/text.js"/>
+            <source file="${SRC_DIR}/object.js"/>
+            <source file="${SRC_DIR}/collection.js"/>
+            <source file="${SRC_DIR}/setup.js"/>
+        </jsdoctoolkit>
+        <echo message="API docs created at ${API_DIR}"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${BUILD_DIR}"/>
+    </target>
+
+    <target name="all" depends="clean,hamcrest,pack,doc">
+        <echo message="Build complete."/>
+    </target>
+</project>

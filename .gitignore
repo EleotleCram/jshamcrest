@@ -1,0 +1,5 @@
+# Build directory
+build/**
+
+# Doc directory
+doc/**
