@@ -4,7 +4,7 @@ jsunittest-hamcrest
     http://github.com/danielfm/jsunittest-hamcrest/tree/master
 
 
-JsUnitTest-Hamcrest is a port of Hamcrest for JsUnitTest. Hamcrest provides a
+JsUnitTest-Hamcrest is a port of Hamcrest to JsUnitTest. Hamcrest provides a
 library of matcher objects (also known as constraints or predicates) allowing
 'match' rules to be defined declaratively. JsUnitTest provides a one-file
 JavaScript test suite.
@@ -23,8 +23,8 @@ JsUnitTest script in your HTML page:
 <script src="jsunittest.js" type="text/javascript"></script>
 <script src="jsunittest-hamcrest.js" type="text/javascript"></script>
 
-That's it, now (almost) all the Hamcrest goodies are available at your
-JsUnitTest test cases, for example:
+That's it, now (almost) all the Hamcrest goodies are available to your
+JsUnitTest Testcase, for example:
 
     new Test.Unit.Runner({
         setup: function() {
@@ -34,13 +34,19 @@ JsUnitTest test cases, for example:
         teardown: function() {
         },
 
-        testSomething: function() { with(this) {
-            assertThat(this.calc.add(2, 3), is(equalTo(5)));
-            assertThat(this.calc.sub(2, 3), is(lessThanOrEqualTo(0)));
-            // use your imagination!
+        testAdd: function() { with(this) {
+            var result = this.calc.add(2, 3);
+            assertThat(result, is(equalTo(5)));
         }},
         
+        testSub: function() { with(this) {
+            var result = this.calc.sub(2, 3);
+            assertThat(result, is(lessThanOrEqualTo(0)));
+        }},
+        
+        // use your imagination!
         // ...
+        
     }, {'testLog':'myLog'});
 
 Very easy, isn't it?
@@ -49,16 +55,18 @@ Very easy, isn't it?
 Building
 --------
 
-To build JsUnitTest-Hamcrest and generate the API documentation, you have to
-install Apache Ant in your machine if you don't have it already. Visit the
-following to download and to get instructions on how to install it in your
-system:
+To build JsUnitTest-Hamcrest, you have to install Apache Ant in your machine
+if you don't have it already. Visit the following URL to download Ant and get
+further instructions on how to install it in your system:
 
     http://ant.apache.org/
 
-After that, execute the following command line to perform the build:
+After that, execute the following command line to perform the complete build:
 
     $ ant all
+
+Doing this, the .js files built will be available inside the 'build' directory.
+The API documentation will be available inside the 'doc/api' directory.
 
 
 Thanks to...

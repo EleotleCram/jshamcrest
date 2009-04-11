@@ -1,15 +1,15 @@
 /**
- * @fileOverview Provides the core matchers.
+ * @fileOverview Provides core matchers.
  */
 
 /**
- * Aaaaa
+ * Built-in matchers.
  * @namespace
  */
 JsUnitTest.Hamcrest.Matchers = {};
 
 /**
- * Assert method to be used with the provided matchers. If the given matcher
+ * Assert method that is capable of handling matchers. If the given matcher
  * fails, this method registers a failed/error'd assertion within the current
  * TestCase object.
  * @param {object} actual Actual value under test.
@@ -18,105 +18,266 @@ JsUnitTest.Hamcrest.Matchers = {};
  * @param {string} message Message that describes the assertion, if necessary.
  */
 JsUnitTest.Hamcrest.Matchers.assertThat = function(actual, matcher, message) {
+    // Creates a 'equalTo' matcher if 'matcher' is not a valid matcher
+    if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
+        matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
+    }
+    
     if (!matcher.matches(actual)) {
-        // TODO Create a Description class to build rich assert error messages
-        this.fail('Hamcrest: assertion failed');
+        var description = new JsUnitTest.Hamcrest.Description();
+        if (message) {
+            description.append(message);
+        }
+        description.append('\nExpected: ');
+        matcher.describeTo(description);
+        description.append('\n     got: ').appendLiteral(actual).append('\n');
+        this.fail(description.get());
     } else {
         this.pass();
     }
 };
 
 /**
- * Sugar matcher frequently used to improve readability. Ex: <p>
+ * Delegate-only matcher frequently used to improve readability. Ex: <p>
+ *
+ * <pre>
  * assertThat(10, is(equalTo(10)));
+ * </pre>
+ *
  * @param {object} matcher Delegate matcher.
  * @return {object} 'is' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.is = function(matcher) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher(function(actual) {
-        return matcher.matches(actual);
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return matcher.matches(actual);
+        },
+        
+        describeTo: function(description) {
+            description.append('is ').appendDescriptionOf(matcher);
+        }
     });
 };
 
 /**
- * Negates the result of a delegate matcher. Ex: <p>
+ * The delegate matcher must not match to be successful. Ex: <p>
+ *
+ * <pre>
  * assertThat(10, not(equalTo(20)));
+ * </pre>
+ *
  * @param {object} matcher Delegate matcher.
  * @return {object} 'not' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.not = function(matcher) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher(function(actual) {
-        return !matcher.matches(actual);
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return !matcher.matches(actual);
+        },
+        
+        describeTo: function(description) {
+            description.append('not ').appendDescriptionOf(matcher);
+        }
     });
 };
 
 /**
- * Compares the actual value with the expected value. Ex: <p>
- * assertThat(10, equalTo(10));
+ * The actual number must be equal to the given number to be successful.
+ * Ex: <p>
+ *
+ * <pre>
+ * assertThat(10, equalTo('10'));
+ * </pre>
+ *
  * @param {object} expected value.
  * @return {object} 'equalTo' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.equalTo = function(expected) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher(function(actual) {
-        return actual == expected;
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return actual == expected;
+        },
+        
+        describeTo: function(description) {
+            description.append('equal to ').appendLiteral(expected);
+        }
     });
 };
 
 /**
- * Do-nothing matcher. Ex: <p>
- * assertThat(myObj, is(anything())); // Actually I don't care about myObj
+ * Useless always-match matcher. Ex: <p>
+ *
+ * <pre>
+ * assertThat(myObj, is(anything())); // I don't actually care about myObj
+ * </pre>
+ *
  * @return {object} 'anything' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.anything = function() {
-    return new JsUnitTest.Hamcrest.SimpleMatcher(function(actual) {
-        return true;
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return true;
+        },
+        
+        describeTo: function(description) {
+            description.append('anything');
+        }
     });
 };
 
 /**
- * Matcher that compares the actual value agains null. Ex: <p>
- * assertThat(myObj, is(nil())); // should be null or undefined
+ * The actual value must be null (or undefined) to be successful. Ex: <p>
+ *
+ * <pre>
+ * assertThat(myObj, is(nil())); // myObj should be null or undefined
+ * </pre>
+ *
  * @return {object} 'nil' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.nil = function() {
-    return new JsUnitTest.Hamcrest.SimpleMatcher(function(actual) {
-        return actual == null;
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return actual == null;
+        },
+        
+        describeTo: function(description) {
+            description.appendLiteral(null);
+        }
     });
 };
 
 /**
- * Matcher that compares the identity of two objects. Ex: <p>
- * assertThat(myObject, is(sameAs(anotherObj))); // Should point to the SAME instance
+ * The actual value must be the same as the given value to be successful.
+ * Ex: <p>
+ *
+ * <pre>
+ * assertThat(myObject, is(sameAs(anotherObj)));
+ * </pre>
+ *
  * @param {object} expected Expected object.
  * @return {object} 'sameAs' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.sameAs = function(expected) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher(function(actual) {
-        return actual === expected;
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return actual === expected;
+        },
+        
+        describeTo: function(description) {
+            description.append('same as ').appendLiteral(expected);
+        }
     });
 };
 
 /**
- * Matcher used to create a combinable matcher where the assertion's actual
- * value must match all matchers. Ex: <p>
- * assertThat(10, both(equalTo(10)).and(lessThan(20))); // All matchers must match
+ * Creates a combinable matcher where the actual value must match all matchers
+ * to be successful. Ex: <p>
+ *
+ * <pre>
+ * assertThat(10, both(greaterThan(5)).and(lessThan(20)));
+ * </pre>
+ *
  * @param {object} matcher Matcher that should be turn into a combinable
  * matcher.
  * @return {object} 'both' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.both = function(matcher) {
-    return new JsUnitTest.Hamcrest.CombinableMatcher(matcher);
+    return new JsUnitTest.Hamcrest.CombinableMatcher({
+        allOf: true,
+        matches: matcher.matches,
+        
+        describeTo: function(description) {
+            description.append('both ').appendDescriptionOf(matcher);
+        }
+    });
 };
 
 /**
- * Matcher used to create a combinable matcher where the assertion's actual
- * value must match any matchers. Ex: <p>
- * assertThat(10, either(equalTo(10)).or(lessThan(50))); // At least one matcher must match
+ * Creates a combinable matcher where the actual value must match at least one
+ * matcher to be successful. Ex: <p>
+ *
+ * <pre>
+ * assertThat(10, either(lessThan(20)).or(greaterThan(50)));
+ * </pre>
+ *
  * @param {object} matcher Matcher that should be turn into a combinable
  * matcher.
  * @return {object} 'either' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.either = function(matcher) {
-    return new JsUnitTest.Hamcrest.CombinableMatcher(matcher);
+    return new JsUnitTest.Hamcrest.CombinableMatcher({
+        allOf: false,
+        matches: matcher.matches,
+        
+        describeTo: function(description) {
+            description.append('either ').appendDescriptionOf(matcher);
+        }
+    });
+};
+
+/**
+ * All the given matchers should match the actual value to be sucessful. This
+ * matcher behaves pretty much like the JavaScript && operator
+ * (short-circuiting). Ex: <p>
+ *
+ * <pre>
+ * assertThat(5, allOf(greaterThan(0), lessThan(10)));
+ * </pre>
+ *
+ * @param {array} arguments List of delegate matchers.
+ * @return {object} 'allOf' matcher.
+ */
+JsUnitTest.Hamcrest.Matchers.allOf = function() {
+    var args = arguments;
+    if (args[0] instanceof Array) {
+        args = args[0];
+    }
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            for (var i = 0; i < args.length; i++) {
+                if (!args[i].matches(actual)) {
+                    return false;
+                }
+            }
+            return true;
+        },
+        
+        describeTo: function(description) {
+            description.appendList('(', ' and ', ')', args);
+        }
+    });
+};
+
+/**
+ * At least one of the given matchers should match the actual value to be
+ * sucessful. This matcher behaves pretty much like the JavaScript ||
+ * operator (short-circuiting). Ex: <p>
+ *
+ * <pre>
+ * assertThat(5, not(anyOf(lessThan(0), greaterThan(100))));
+ * </pre>
+ *
+ * @param {array} arguments List of delegate matchers.
+ * @return {object} 'allOf' matcher.
+ */
+JsUnitTest.Hamcrest.Matchers.anyOf = function() {
+    var args = arguments;
+    if (args[0] instanceof Array) {
+        args = args[0];
+    }
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            for (var i = 0; i < args.length; i++) {
+                if (args[i].matches(actual)) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        
+        describeTo: function(description) {
+            description.appendList('(', ' or ', ')', args);
+        }
+    });
 };
 
