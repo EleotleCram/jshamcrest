@@ -10,7 +10,7 @@
  * </pre>
  *
  * @param {string} String.
- * @return {object} 'equalIgnoringCase' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'equalIgnoringCase' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.equalIgnoringCase = function(str) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -33,7 +33,7 @@ JsUnitTest.Hamcrest.Matchers.equalIgnoringCase = function(str) {
  * </pre>
  *
  * @param {string} String.
- * @return {object} 'containsString' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'containsString' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.containsString = function(str) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -55,7 +55,7 @@ JsUnitTest.Hamcrest.Matchers.containsString = function(str) {
  * </pre>
  *
  * @param {string} String.
- * @return {object} 'startsWith' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'startsWith' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.startsWith = function(str) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -77,7 +77,7 @@ JsUnitTest.Hamcrest.Matchers.startsWith = function(str) {
  * </pre>
  *
  * @param {string} String.
- * @return {object} 'endsWith' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'endsWith' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.endsWith = function(str) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({

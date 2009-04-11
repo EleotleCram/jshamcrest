@@ -45,7 +45,7 @@ JsUnitTest.Hamcrest.Matchers.assertThat = function(actual, matcher, message) {
  * </pre>
  *
  * @param {object} matcher Delegate matcher.
- * @return {object} 'is' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'is' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.is = function(matcher) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -67,7 +67,7 @@ JsUnitTest.Hamcrest.Matchers.is = function(matcher) {
  * </pre>
  *
  * @param {object} matcher Delegate matcher.
- * @return {object} 'not' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'not' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.not = function(matcher) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -90,7 +90,7 @@ JsUnitTest.Hamcrest.Matchers.not = function(matcher) {
  * </pre>
  *
  * @param {object} expected value.
- * @return {object} 'equalTo' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'equalTo' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.equalTo = function(expected) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -111,7 +111,7 @@ JsUnitTest.Hamcrest.Matchers.equalTo = function(expected) {
  * assertThat(myObj, is(anything())); // I don't actually care about myObj
  * </pre>
  *
- * @return {object} 'anything' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'anything' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.anything = function() {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -132,7 +132,7 @@ JsUnitTest.Hamcrest.Matchers.anything = function() {
  * assertThat(myObj, is(nil())); // myObj should be null or undefined
  * </pre>
  *
- * @return {object} 'nil' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'nil' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.nil = function() {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -155,7 +155,7 @@ JsUnitTest.Hamcrest.Matchers.nil = function() {
  * </pre>
  *
  * @param {object} expected Expected object.
- * @return {object} 'sameAs' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'sameAs' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.sameAs = function(expected) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -188,7 +188,7 @@ JsUnitTest.Hamcrest.Matchers.sameAs = function(expected) {
  * </pre>
  *
  * @param {string} exceptionName Name of the expected exception.
- * @return {object} 'raises' matcher
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'raises' matcher
  */
 JsUnitTest.Hamcrest.Matchers.raises = function(exceptionName) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -221,7 +221,7 @@ JsUnitTest.Hamcrest.Matchers.raises = function(exceptionName) {
  *
  * @param {object} matcher Matcher that should be turn into a combinable
  * matcher.
- * @return {object} 'both' matcher.
+ * @return {JsUnitTest.Hamcrest.CombinableMatcher} 'both' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.both = function(matcher) {
     return new JsUnitTest.Hamcrest.CombinableMatcher({
@@ -244,7 +244,7 @@ JsUnitTest.Hamcrest.Matchers.both = function(matcher) {
  *
  * @param {object} matcher Matcher that should be turn into a combinable
  * matcher.
- * @return {object} 'either' matcher.
+ * @return {JsUnitTest.Hamcrest.CombinableMatcher} 'either' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.either = function(matcher) {
     return new JsUnitTest.Hamcrest.CombinableMatcher({
@@ -267,7 +267,7 @@ JsUnitTest.Hamcrest.Matchers.either = function(matcher) {
  * </pre>
  *
  * @param {array} arguments List of delegate matchers.
- * @return {object} 'allOf' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'allOf' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.allOf = function() {
     var args = arguments;
@@ -300,7 +300,7 @@ JsUnitTest.Hamcrest.Matchers.allOf = function() {
  * </pre>
  *
  * @param {array} arguments List of delegate matchers.
- * @return {object} 'allOf' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'allOf' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.anyOf = function() {
     var args = arguments;

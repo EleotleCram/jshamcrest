@@ -3,28 +3,28 @@
  */
 
 /**
- * The actual value should be an array and must contain the given expected
- * value to be sucessful. Ex: <p>
+ * The actual value should be an array and it must contain at least one value
+ * that matches the given value or matcher to be successful. Ex: <p>
  *
  * <pre>
- * assertThat([1,2,3], hasItem(equalTo(3)));
  * assertThat([1,2,3], hasItem(3));
+ * assertThat([1,2,3], hasItem(equalTo(3)));
  * </pre>
  *
- * @param {array} expected Expected value.
- * @return {object} 'hasItem' matcher.
+ * @param {array} matcher Number or matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasItem' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.hasItem = function(matcher) {
+    // Uses 'equalTo' matcher if the given object is not a matcher
+    if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
+        matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
+    }
+    
     return new JsUnitTest.Hamcrest.SimpleMatcher({
         matches: function(actual) {
             // Should be an array
             if (!(actual instanceof Array)) {
                 return false;
-            }
-            
-            // Uses 'equalTo' matcher if the given object is not a matcher
-            if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
-                matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
             }
             
             for (var i = 0; i < actual.length; i++) {
@@ -43,8 +43,8 @@ JsUnitTest.Hamcrest.Matchers.hasItem = function(matcher) {
 };
 
 /**
- * The actual value should be an array and must contain the given expected
- * values to be sucessful. Ex: <p>
+ * The actual value should be an array and it must contain at least one value
+ * that matches each given value or matcher to be sucessful. Ex: <p>
  *
  * <pre>
  * assertThat([1,2,3], hasItems(2, 3));
@@ -52,7 +52,7 @@ JsUnitTest.Hamcrest.Matchers.hasItem = function(matcher) {
  * </pre>
  *
  * @param {object...} arguments Values or matchers.
- * @return {object} 'hasItems' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasItems' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.hasItems = function() {
     var items = [];
@@ -70,7 +70,7 @@ JsUnitTest.Hamcrest.Matchers.hasItems = function() {
  * assertThat(1, isIn(1,2,3));
  * </pre>
  *
- * @return {object} 'isIn' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'isIn' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.isIn = function() {
     var args = arguments;
@@ -102,7 +102,57 @@ JsUnitTest.Hamcrest.Matchers.isIn = function() {
  * </pre>
  *
  * @function
- * @return {object} 'oneOf' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'oneOf' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.oneOf = JsUnitTest.Hamcrest.Matchers.isIn;
 
+/**
+ * The actual value should be an array and it must be empty to be sucessful.
+ * Ex: <p>
+ *
+ * <pre>
+ * assertThat([], empty());
+ * </pre>
+ *
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'empty' matcher.
+ */
+JsUnitTest.Hamcrest.Matchers.empty = function() {
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return actual instanceof Array && actual.length == 0;
+        },
+        
+        describeTo: function(description) {
+            description.append('empty');
+        }
+    });
+};
+
+/**
+ * The actual value should be an array and its size must match the given value
+ * or matcher to be sucessful. Ex: <p>
+ *
+ * <pre>
+ * assertThat([1,2,3], hasSize(3));
+ * assertThat([1,2,3], hasSize(lessThan(5)));
+ * </pre>
+ *
+ * @param {object} matcher Number or matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasSize' matcher.
+ */
+JsUnitTest.Hamcrest.Matchers.hasSize = function(matcher) {
+    // Uses 'equalTo' matcher if the given object is not a matcher
+    if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
+        matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
+    }
+    
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return actual instanceof Array && matcher.matches(actual.length);
+        },
+        
+        describeTo: function(description) {
+            description.append('has size ').appendDescriptionOf(matcher);
+        }
+    });
+};

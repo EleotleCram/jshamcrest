@@ -10,7 +10,7 @@
  * </pre>
  *
  * @param {string} property Property name.
- * @return {object} 'hasProperty' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasProperty' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.hasProperty = function(property) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -35,7 +35,7 @@ JsUnitTest.Hamcrest.Matchers.hasProperty = function(property) {
  * </pre>
  *
  * @param {function} clazz Constructor function.
- * @return {object} 'instanceOf' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'instanceOf' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.instanceOf = function(clazz) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
