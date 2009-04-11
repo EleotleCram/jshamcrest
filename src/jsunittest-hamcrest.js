@@ -197,6 +197,8 @@ JsUnitTest.Hamcrest = {
                 this.append(literal);
             } else if (typeof literal == 'string') {
                 this.append('"' + literal + '"');
+            } else if (literal instanceof Function) {
+                this.append('<Function>');
             } else {
                 this.append('{' + literal + '}');
             }

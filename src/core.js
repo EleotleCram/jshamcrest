@@ -170,6 +170,48 @@ JsUnitTest.Hamcrest.Matchers.sameAs = function(expected) {
 };
 
 /**
+ * The actual value is a function and, when invoked, it should thrown an
+ * exception with the given name to be successful. Ex: <p>
+ *
+ * <pre>
+ * var MyException = function(message) {
+ *   this.name = 'MyException';
+ *   this.message = message;
+ * };
+ * 
+ * var myFunction = function() {
+ *   // Do something dangerous...
+ *   throw new MyException('Unexpected error');
+ * }
+ *
+ * assertThat(myFunction, raises('MyException'));
+ * </pre>
+ *
+ * @param {string} exceptionName Name of the expected exception.
+ * @return {object} 'raises' matcher
+ */
+JsUnitTest.Hamcrest.Matchers.raises = function(exceptionName) {
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actualFunction) {
+            try {
+                actualFunction();
+            } catch (e) {
+                if (e.name == exceptionName) {
+                    return true;
+                } else {
+                    throw e;
+                }
+            }
+            return false;
+        },
+        
+        describeTo: function(description) {
+            description.append('raises ').append(exceptionName);
+        }
+    });
+}
+
+/**
  * Creates a combinable matcher where the actual value must match all matchers
  * to be successful. Ex: <p>
  *

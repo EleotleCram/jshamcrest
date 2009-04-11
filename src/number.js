@@ -94,22 +94,64 @@ JsUnitTest.Hamcrest.Matchers.lessThanOrEqualTo = function(threshold) {
 };
 
 /**
- * Asserts that the actual number is NaN (Not a Number). Ex: <p>
+ * Asserts that the actual value is not a number. Ex: <p>
  *
  * <pre>
- * assertThat(Math.sqrt(-1), NaN());
+ * assertThat(Math.sqrt(-1), notANumber());
  * </pre>
  *
- * @return {object} 'NaN' matcher.
+ * @return {object} 'notANumber' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.NaN = function() {
+JsUnitTest.Hamcrest.Matchers.notANumber = function() {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
         matches: function(actual) {
             return isNaN(actual);
         },
         
         describeTo: function(description) {
-            description.append('<NaN>');
+            description.append('not a number');
+        }
+    });
+};
+
+/**
+ * Asserts that the actual value is even. Ex: <p>
+ *
+ * <pre>
+ * assertThat(4, even());
+ * </pre>
+ *
+ * @return {object} 'even' matcher.
+ */
+JsUnitTest.Hamcrest.Matchers.even = function() {
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return actual % 2 == 0;
+        },
+        
+        describeTo: function(description) {
+            description.append('even');
+        }
+    });
+};
+
+/**
+ * Asserts that the actual value is odd. Ex: <p>
+ *
+ * <pre>
+ * assertThat(3, odd());
+ * </pre>
+ *
+ * @return {object} 'odd' matcher.
+ */
+JsUnitTest.Hamcrest.Matchers.odd = function() {
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return actual % 2 == 1;
+        },
+        
+        describeTo: function(description) {
+            description.append('odd');
         }
     });
 };
