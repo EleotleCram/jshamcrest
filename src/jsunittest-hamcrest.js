@@ -54,6 +54,32 @@ JsUnitTest.Hamcrest = {
     },
     
     /**
+     * Returns if the given arrays are equivalent.
+     * @param {array} array Array.
+     * @param {array} anotherArray Another array.
+     * @return {booelan} If the given arrays are equivalent.
+     */
+    isArraysEqual: function(array, anotherArray) {
+        if (array instanceof Array && anotherArray instanceof Array) {
+            if (array.length != anotherArray.length) {
+                return false;
+            }
+            
+            for (var i = 0; i < array.length; i++) {
+                var a = array[i];
+                var b = anotherArray[i];
+                
+                if (a instanceof Array || b instanceof Array) {
+                    JsUnitTest.Hamcrest.isArraysEqual(a, b);
+                } else if (a != b) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    },
+    
+    /**
      * Creates a simple matcher.
      * @class Builds a matcher object that uses external functions provided
      * by the caller in order to define the current matching logic.
@@ -175,7 +201,7 @@ JsUnitTest.Hamcrest = {
          * @return {JsUnitTest.Hamcrest.Description} this.
          */
         this.append = function(text) {
-            if (text) {
+            if (text != null) {
                 value += text;
             }
             return this;

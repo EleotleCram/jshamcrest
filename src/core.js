@@ -95,6 +95,9 @@ JsUnitTest.Hamcrest.Matchers.not = function(matcher) {
 JsUnitTest.Hamcrest.Matchers.equalTo = function(expected) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
         matches: function(actual) {
+            if (expected instanceof Array || actual instanceof Array) {
+                return JsUnitTest.Hamcrest.isArraysEqual(expected, actual);
+            }
             return actual == expected;
         },
         

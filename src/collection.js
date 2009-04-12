@@ -73,14 +73,17 @@ JsUnitTest.Hamcrest.Matchers.hasItems = function() {
  * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'isIn' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.isIn = function() {
+    var equalTo = JsUnitTest.Hamcrest.Matchers.equalTo;
+    
     var args = arguments;
     if (args[0] instanceof Array) {
         args = args[0];
     }
+    
     return new JsUnitTest.Hamcrest.SimpleMatcher({
         matches: function(actual) {
             for (var i = 0; i < args.length; i++) {
-                if (args[i] == actual) {
+                if (equalTo(args[i]).matches(actual)) {
                     return true;
                 }
             }
