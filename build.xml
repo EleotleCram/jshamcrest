@@ -14,7 +14,8 @@
         </classpath>
     </taskdef>
 
-    <exec executable="git-rev-list" outputproperty="GIT_REVISION">
+    <exec executable="git" outputproperty="GIT_REVISION">
+        <arg value="rev-list"/>
         <arg value="--all"/>
         <arg value="--max-count=1"/>
         <arg value="--pretty"/>
