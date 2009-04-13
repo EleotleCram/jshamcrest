@@ -19,14 +19,14 @@ JsUnitTest.Hamcrest.Matchers.hasItem = function(matcher) {
     if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
         matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
     }
-    
+
     return new JsUnitTest.Hamcrest.SimpleMatcher({
         matches: function(actual) {
             // Should be an array
             if (!(actual instanceof Array)) {
                 return false;
             }
-            
+
             for (var i = 0; i < actual.length; i++) {
                 if (matcher.matches(actual[i])) {
                     return true;
@@ -34,7 +34,7 @@ JsUnitTest.Hamcrest.Matchers.hasItem = function(matcher) {
             }
             return false;
         },
-        
+
         describeTo: function(description) {
             description.append('array contains item ')
                     .appendDescriptionOf(matcher);
@@ -74,12 +74,12 @@ JsUnitTest.Hamcrest.Matchers.hasItems = function() {
  */
 JsUnitTest.Hamcrest.Matchers.isIn = function() {
     var equalTo = JsUnitTest.Hamcrest.Matchers.equalTo;
-    
+
     var args = arguments;
     if (args[0] instanceof Array) {
         args = args[0];
     }
-    
+
     return new JsUnitTest.Hamcrest.SimpleMatcher({
         matches: function(actual) {
             for (var i = 0; i < args.length; i++) {
@@ -89,7 +89,7 @@ JsUnitTest.Hamcrest.Matchers.isIn = function() {
             }
             return false;
         },
-        
+
         describeTo: function(description) {
             description.append('one of ').appendLiteral(args);
         }
@@ -124,7 +124,7 @@ JsUnitTest.Hamcrest.Matchers.empty = function() {
         matches: function(actual) {
             return actual instanceof Array && actual.length == 0;
         },
-        
+
         describeTo: function(description) {
             description.append('empty');
         }
@@ -148,14 +148,15 @@ JsUnitTest.Hamcrest.Matchers.hasSize = function(matcher) {
     if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
         matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
     }
-    
+
     return new JsUnitTest.Hamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual instanceof Array && matcher.matches(actual.length);
         },
-        
+
         describeTo: function(description) {
             description.append('has size ').appendDescriptionOf(matcher);
         }
     });
 };
+

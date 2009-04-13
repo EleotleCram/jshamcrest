@@ -7,72 +7,71 @@ new Test.Unit.Runner({
     }},
 
     testHasItemWithValue: function() { with(this) {
-        assertThat(array, hasItem(2));
-        assertThat(array, hasItem([3]));
+        assert(hasItem(2).matches(array));
+        assert(hasItem([3]).matches(array));
     }},
 
     testHasItemWithMatcher: function() { with(this) {
-        assertThat(array, hasItem(greaterThan(1)));
-        assertThat(array, hasItem(equalTo([3])));
+        assert(hasItem(greaterThan(1)).matches(array));
+        assert(hasItem(equalTo([3])).matches(array));
     }},
 
     testHasItemWithInexistentValue: function() { with(this) {
-        _assertThat(array, hasItem(0)).fails();
-        _assertThat(array, hasItem([2])).fails();
+        assert(!hasItem(0).matches(array));
+        assert(!hasItem([2]).matches(array));
     }},
 
     testHasItemWithNoMatchingValue: function() { with(this) {
-        _assertThat(array, hasItem(greaterThan(4))).fails();
+        assert(!hasItem(greaterThan(4)).matches(array));
     }},
 
     testHasItemsWithValue: function() { with(this) {
-        assertThat(array, hasItems(1));
-        assertThat(array, hasItems([4,5]));
+        assert(hasItems(1).matches(array));
+        assert(hasItems([4,5]).matches(array));
     }},
 
     testHasItemsWithInexistentValues: function() { with(this) {
-        _assertThat(array, hasItems(0)).fails();
-        _assertThat(array, hasItems([4])).fails();
+        assert(!hasItems(0).matches(array));
+        assert(!hasItems([4]).matches(array));
     }},
 
     testHasItemsWithNoMatchingValues: function() { with(this) {
-        _assertThat(array, hasItems(lessThan(0))).fails();
-        _assertThat(array, hasItems(equalTo([4]))).fails();
+        assert(!hasItems(lessThan(0)).matches(array));
+        assert(!hasItems(equalTo([4])).matches(array));
     }},
-    
+
     testIsValueInArray: function() { with(this) {
-        assertThat(1, isIn(array));
-        assertThat(1, oneOf(array));
-        assertThat([3], isIn(array));
-        assertThat([3], oneOf(array));
+        assert(isIn(array).matches(1));
+        assert(oneOf(array).matches(1));
+        assert(isIn(array).matches([3]));
+        assert(oneOf(array).matches([3]));
     }},
-    
+
     testIsInexistentValueInArray: function() { with(this) {
-        _assertThat(3, isIn(array)).fails();
-        _assertThat([4], isIn(array)).fails();
-        _assertThat(3, oneOf(array)).fails();
-        _assertThat([4], oneOf(array)).fails();
+        assert(!isIn(array).matches(3));
+        assert(!isIn(array).matches([4]));
+        assert(!oneOf(array).matches(3));
+        assert(!oneOf(array).matches([4]));
     }},
-    
+
     testEmpty: function() { with(this) {
-        assertThat(array, not(empty()));
-        assertThat([], empty());
+        assert(not(empty()).matches(array));
+        assert(empty().matches([]));
     }},
-    
+
     testHasSizeWithValue: function() { with(this) {
-        assertThat(array, hasSize(4));
+        assert(hasSize(4).matches(array));
     }},
-    
+
     testHasSizeWithMatcher: function() { with(this) {
-        assertThat(array, hasSize(greaterThan(3)));
+        assert(hasSize(greaterThan(3)).matches(array));
     }},
-    
+
     testHasInvalidSizeWithValue: function() { with(this) {
-        _assertThat(array, hasSize(3)).fails();
+        assert(!hasSize(3).matches(array));
     }},
-    
+
     testHasInvalidSizeWithMatcher: function() { with(this) {
-        _assertThat(array, hasSize(lessThan(4))).fails();
+        assert(!hasSize(lessThan(4)).matches(array));
     }}
-    
-}, {'testLog': 'collectionLog'}); 
+}, {'testLog': 'collectionLog'});

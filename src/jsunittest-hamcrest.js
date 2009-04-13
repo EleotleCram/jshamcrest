@@ -31,7 +31,7 @@ JsUnitTest.Hamcrest = {
      * Library version.
      */
     version: '@VERSION',
-    
+
     /**
      * Copies the properties of the given objects to the
      * <code>JsUnitTest.Unit.Testcase</code> prototype.
@@ -43,7 +43,7 @@ JsUnitTest.Hamcrest = {
             JsUnitTest.Unit.Testcase.prototype[method] = matchers[method];
         }
     },
-    
+
     /**
      * Returns if the given object is a matcher.
      * @param {object} obj Object.
@@ -52,7 +52,7 @@ JsUnitTest.Hamcrest = {
     isMatcher: function(obj) {
         return obj instanceof JsUnitTest.Hamcrest.SimpleMatcher;
     },
-    
+
     /**
      * Returns if the given arrays are equivalent.
      * @param {array} array Array.
@@ -64,11 +64,11 @@ JsUnitTest.Hamcrest = {
             if (array.length != anotherArray.length) {
                 return false;
             }
-            
+
             for (var i = 0; i < array.length; i++) {
                 var a = array[i];
                 var b = anotherArray[i];
-                
+
                 if (a instanceof Array || b instanceof Array) {
                     JsUnitTest.Hamcrest.isArraysEqual(a, b);
                 } else if (a != b) {
@@ -78,7 +78,7 @@ JsUnitTest.Hamcrest = {
             return true;
         }
     },
-    
+
     /**
      * Creates a simple matcher.
      * @class Builds a matcher object that uses external functions provided
@@ -91,7 +91,7 @@ JsUnitTest.Hamcrest = {
      */
     SimpleMatcher: function(params) {
         params = params || {};
-        
+
         /**
          * Checks if this matcher matches the actual value.
          * @function
@@ -99,7 +99,7 @@ JsUnitTest.Hamcrest = {
          * @return {boolean} If they match or not.
          */
         this.matches = params.matches;
-        
+
         /**
          * Describes this matcher's tasks to the given descriptor.
          * @function
@@ -107,7 +107,7 @@ JsUnitTest.Hamcrest = {
          */
         this.describeTo = params.describeTo;
     },
-    
+
     /**
      * Creates a combinable matcher.
      * @class Matcher that provides an easy way to wrap several matchers into
@@ -120,9 +120,9 @@ JsUnitTest.Hamcrest = {
     CombinableMatcher: function(params) {
         // Call superclass' constructor
         JsUnitTest.Hamcrest.SimpleMatcher.apply(this, arguments);
-        
+
         params = params || {};
-        
+
         /**
          * Wraps this matcher with the given one in such a way that both
          * matchers must match the actual value to be successful.
@@ -150,14 +150,14 @@ JsUnitTest.Hamcrest = {
             var any = JsUnitTest.Hamcrest.Matchers.anyOf(this, anotherMatcher);
             return new JsUnitTest.Hamcrest.CombinableMatcher({
                 matches: any.matches,
-                
+
                 describeTo: function(description) {
                     description.appendDescriptionOf(any);
                 }
             });
         };
     },
-    
+
     /**
      * Creates a description.
      * @class Description is the object that builds assertion error messages.
@@ -171,7 +171,7 @@ JsUnitTest.Hamcrest = {
          * @private
          */
         var value = '';
-        
+
         /**
          * Gets the current content of this description.
          * @return {string} Current content of this description.
@@ -179,7 +179,7 @@ JsUnitTest.Hamcrest = {
         this.get = function() {
             return value;
         }
-        
+
         /**
          * Appends the description a self describing object to this
          * description.
@@ -194,7 +194,7 @@ JsUnitTest.Hamcrest = {
             }
             return this;
         };
-        
+
         /**
          * Appends a text to this description.
          * @param {string} text Text to append.
@@ -206,7 +206,7 @@ JsUnitTest.Hamcrest = {
             }
             return this;
         };
-        
+
         /**
          * Appends a JavaScript language's literals to this description.
          * @param {object} literal Literal to append.
@@ -230,7 +230,7 @@ JsUnitTest.Hamcrest = {
             }
             return this;
         }
-        
+
         /**
          * Appends a list of values to this description.
          * @param {string} start Start string.
@@ -250,7 +250,7 @@ JsUnitTest.Hamcrest = {
             this.append(end);
             return this;
         };
-        
+
         /**
          * Appends a list of self describing objects to this description.
          * @param {string} start Start string.

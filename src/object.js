@@ -20,7 +20,7 @@ JsUnitTest.Hamcrest.Matchers.hasProperty = function(property) {
             } catch (e) { }
             return false;
         },
-        
+
         describeTo: function(description) {
             description.append('has property ').appendLiteral(property);
         }
@@ -42,7 +42,7 @@ JsUnitTest.Hamcrest.Matchers.instanceOf = function(clazz) {
         matches: function(actual) {
             return !!(actual instanceof clazz);
         },
-        
+
         describeTo: function(description) {
             var className = clazz.name ? clazz.name : 'a class';
             description.append('instance of ').append(className);

@@ -17,7 +17,7 @@ JsUnitTest.Hamcrest.Matchers.equalIgnoringCase = function(str) {
         matches: function(actual) {
             return actual.toUpperCase() == str.toUpperCase();
         },
-        
+
         describeTo: function(description) {
             description.append('equal ignoring case "').append(str).append('"');
         }
@@ -40,7 +40,7 @@ JsUnitTest.Hamcrest.Matchers.containsString = function(str) {
         matches: function(actual) {
             return actual.indexOf(str) >= 0;
         },
-        
+
         describeTo: function(description) {
             description.append('contains string "').append(str).append('"');
         }
@@ -62,7 +62,7 @@ JsUnitTest.Hamcrest.Matchers.startsWith = function(str) {
         matches: function(actual) {
             return actual.indexOf(str) == 0;
         },
-        
+
         describeTo: function(description) {
             description.append('starts with ').appendLiteral(str);
         }
@@ -84,7 +84,7 @@ JsUnitTest.Hamcrest.Matchers.endsWith = function(str) {
         matches: function(actual) {
             return actual.lastIndexOf(str) + str.length == actual.length;
         },
-        
+
         describeTo: function(description) {
             description.append('ends with ').appendLiteral(str);
         }

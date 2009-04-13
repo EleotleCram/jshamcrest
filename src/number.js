@@ -17,7 +17,7 @@ JsUnitTest.Hamcrest.Matchers.greaterThan = function(threshold) {
         matches: function(actual) {
             return actual > threshold;
         },
-        
+
         describeTo: function(description) {
             description.append('greater than ').appendLiteral(threshold);
         }
@@ -40,7 +40,7 @@ JsUnitTest.Hamcrest.Matchers.greaterThanOrEqualTo = function(threshold) {
         matches: function(actual) {
             return actual >= threshold;
         },
-        
+
         describeTo: function(description) {
             description.append('greater than or equal to ')
                     .appendLiteral(threshold);
@@ -63,7 +63,7 @@ JsUnitTest.Hamcrest.Matchers.lessThan = function(threshold) {
         matches: function(actual) {
             return actual < threshold;
         },
-        
+
         describeTo: function(description) {
             description.append('less than ').appendLiteral(threshold);
         }
@@ -86,7 +86,7 @@ JsUnitTest.Hamcrest.Matchers.lessThanOrEqualTo = function(threshold) {
         matches: function(actual) {
             return actual <= threshold;
         },
-        
+
         describeTo: function(description) {
             description.append('less than or equal to ').append(threshold);
         }
@@ -107,7 +107,7 @@ JsUnitTest.Hamcrest.Matchers.notANumber = function() {
         matches: function(actual) {
             return isNaN(actual);
         },
-        
+
         describeTo: function(description) {
             description.append('not a number');
         }
@@ -128,7 +128,7 @@ JsUnitTest.Hamcrest.Matchers.even = function() {
         matches: function(actual) {
             return actual % 2 == 0;
         },
-        
+
         describeTo: function(description) {
             description.append('even');
         }
@@ -149,7 +149,7 @@ JsUnitTest.Hamcrest.Matchers.odd = function() {
         matches: function(actual) {
             return actual % 2 == 1;
         },
-        
+
         describeTo: function(description) {
             description.append('odd');
         }
@@ -182,7 +182,7 @@ JsUnitTest.Hamcrest.Matchers.between = function(number) {
  */
 JsUnitTest.Hamcrest.RangeMatcherBuilder = function(params) {
     params = params || {};
-    
+
     /**
      * Range start.
      * @property
@@ -190,7 +190,7 @@ JsUnitTest.Hamcrest.RangeMatcherBuilder = function(params) {
      * @private
      */
     var start = params.start;
-    
+
     /**
      * Finishes to build the range matcher.
      * @param {number} end Range end.
@@ -199,12 +199,12 @@ JsUnitTest.Hamcrest.RangeMatcherBuilder = function(params) {
     this.and = function(end) {
         var greater = end;
         var lesser = start;
-        
+
         if (start > end) {
             greater = start;
             lesser = end;
         }
-        
+
         return new JsUnitTest.Hamcrest.Matchers.allOf(
             JsUnitTest.Hamcrest.Matchers.greaterThanOrEqualTo(lesser),
             JsUnitTest.Hamcrest.Matchers.lessThanOrEqualTo(greater)
