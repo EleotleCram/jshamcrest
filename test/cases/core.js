@@ -91,6 +91,7 @@ new Test.Unit.Runner({
     testBoth: function() { with(this) {
         assert(both(greaterThan(5)).and(even()).matches(10));
         assert(!both(odd()).and(greaterThan(5)).matches(10));
+        assert(!both(greaterThan(5)).and(odd()).matches(10));
     }},
 
     testEither: function() { with(this) {
@@ -103,28 +104,24 @@ new Test.Unit.Runner({
         assert(allOf('10').matches(10));
         assert(allOf(['10']).matches(10));
         assert(allOf('10', 10).matches(10));
-        assert(allOf([10, '10']).matches(10));
         assert(!allOf(11, 10).matches(10));
         assert(!allOf('10', 11).matches(10));
-        assert(!allOf(['11', 10]).matches(10));
     }},
 
     testAllOfWithMatchers: function() { with(this) {
         assert(allOf(even()).matches(10));
-        assert(allOf(even(), greaterThan(0)).matches(10));
+        assert(allOf(even(), greaterThan(5)).matches(10));
         assert(allOf([even(), greaterThan(0)]).matches(10));
         assert(!allOf(greaterThan(0), odd()).matches(10));
-        assert(!allOf([odd(), greaterThan(10)]).matches(10));
+        assert(!allOf(odd(), greaterThan(5)).matches(10));
     }},
 
     testAnyOfWithValues: function() { with(this) {
         assert(anyOf('10').matches(10));
         assert(anyOf(['10']).matches(10));
         assert(anyOf('10', 11).matches(10));
-        assert(anyOf([11, '10']).matches(10));
         assert(!anyOf(11, 12).matches(10));
-        assert(!anyOf('12', 11).matches(10));
-        assert(!anyOf(['12', 12]).matches(10));
+        assert(!anyOf(['12', 11]).matches(10));
     }},
 
     testAnyOfWithValuesAndMatchers: function() { with(this) {
@@ -136,16 +133,15 @@ new Test.Unit.Runner({
 
     testAnyOfWithMatchers: function() { with(this) {
         assert(anyOf(even()).matches(10));
-        assert(anyOf(even(), greaterThan(10)).matches(10));
-        assert(anyOf([odd(), greaterThan(0)]).matches(10));
-        assert(!anyOf(greaterThan(10), odd()).matches(10));
-        assert(!anyOf([odd(), greaterThan(10)]).matches(10));
+        assert(anyOf(even(), greaterThan(20)).matches(10));
+        assert(anyOf([odd(), greaterThan(5)]).matches(10));
+        assert(!anyOf([greaterThan(20), odd()]).matches(10));
     }},
 
     testAnyOfWithValuesAndMatchers: function() { with(this) {
         assert(anyOf('10', equalTo(11)).matches(10));
         assert(anyOf([lessThan(5), '10']).matches(10));
         assert(!anyOf(12, lessThan(5)).matches(10));
-        assert(!anyOf(greaterThan(10), '12').matches(10));
+        assert(!anyOf([greaterThan(10), '12']).matches(10));
     }}
 }, {'testLog': 'coreLog'});
