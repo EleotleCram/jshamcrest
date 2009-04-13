@@ -116,19 +116,19 @@ new Test.Unit.Runner({
         assert(!allOf(odd(), greaterThan(5)).matches(10));
     }},
 
+    testAllOfWithValuesAndMatchers: function() { with(this) {
+        assert(allOf('10', greaterThan(5)).matches(10));
+        assert(allOf([even(), equalTo('10')]).matches(10));
+        assert(!allOf(11, greaterThan(5)).matches(10));
+        assert(!allOf([lessThan(5), 10]).matches(10));
+    }},
+
     testAnyOfWithValues: function() { with(this) {
         assert(anyOf('10').matches(10));
         assert(anyOf(['10']).matches(10));
         assert(anyOf('10', 11).matches(10));
         assert(!anyOf(11, 12).matches(10));
         assert(!anyOf(['12', 11]).matches(10));
-    }},
-
-    testAnyOfWithValuesAndMatchers: function() { with(this) {
-        assert(anyOf('10', equalTo(11)).matches(10));
-        assert(anyOf([lessThan(5), '10']).matches(10));
-        assert(!anyOf(12, lessThan(5)).matches(10));
-        assert(!anyOf(greaterThan(10), '12').matches(10));
     }},
 
     testAnyOfWithMatchers: function() { with(this) {
