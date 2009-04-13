@@ -127,11 +127,25 @@ new Test.Unit.Runner({
         assert(!anyOf(['12', 12]).matches(10));
     }},
 
+    testAnyOfWithValuesAndMatchers: function() { with(this) {
+        assert(anyOf('10', equalTo(11)).matches(10));
+        assert(anyOf([lessThan(5), '10']).matches(10));
+        assert(!anyOf(12, lessThan(5)).matches(10));
+        assert(!anyOf(greaterThan(10), '12').matches(10));
+    }},
+
     testAnyOfWithMatchers: function() { with(this) {
         assert(anyOf(even()).matches(10));
         assert(anyOf(even(), greaterThan(10)).matches(10));
         assert(anyOf([odd(), greaterThan(0)]).matches(10));
         assert(!anyOf(greaterThan(10), odd()).matches(10));
         assert(!anyOf([odd(), greaterThan(10)]).matches(10));
+    }},
+
+    testAnyOfWithValuesAndMatchers: function() { with(this) {
+        assert(anyOf('10', equalTo(11)).matches(10));
+        assert(anyOf([lessThan(5), '10']).matches(10));
+        assert(!anyOf(12, lessThan(5)).matches(10));
+        assert(!anyOf(greaterThan(10), '12').matches(10));
     }}
 }, {'testLog': 'coreLog'});
