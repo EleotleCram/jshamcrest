@@ -60,7 +60,7 @@ JsUnitTest.Hamcrest = {
      * @return {booelan} If the given arrays are equivalent.
      */
     isArraysEqual: function(array, anotherArray) {
-        if (array instanceof Array && anotherArray instanceof Array) {
+        if (array instanceof Array || anotherArray instanceof Array) {
             if (array.length != anotherArray.length) {
                 return false;
             }
@@ -70,12 +70,14 @@ JsUnitTest.Hamcrest = {
                 var b = anotherArray[i];
 
                 if (a instanceof Array || b instanceof Array) {
-                    JsUnitTest.Hamcrest.isArraysEqual(a, b);
+                    return JsUnitTest.Hamcrest.isArraysEqual(a, b);
                 } else if (a != b) {
                     return false;
                 }
             }
             return true;
+        } else {
+            return array == anotherArray;
         }
     },
 
@@ -133,7 +135,7 @@ JsUnitTest.Hamcrest = {
             var all = JsUnitTest.Hamcrest.Matchers.allOf(this, anotherMatcher);
             return new JsUnitTest.Hamcrest.CombinableMatcher({
                 matches: all.matches,
-                
+
                 describeTo: function(description) {
                     description.appendDescriptionOf(all);
                 }
