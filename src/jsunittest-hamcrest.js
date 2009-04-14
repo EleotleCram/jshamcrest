@@ -277,7 +277,7 @@ JsUnitTest.Hamcrest = {
     }
 };
 
-// CombinableMatcher is a generalization of SimpleMatcher
+// CombinableMatcher is a specialization of SimpleMatcher
 JsUnitTest.Hamcrest.CombinableMatcher.prototype =
         new JsUnitTest.Hamcrest.SimpleMatcher();
 
