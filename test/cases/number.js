@@ -1,4 +1,6 @@
-new Test.Unit.Runner({
+new TestRunner({
+    name: 'Number matchers',
+
     setup: function() { with(this) {
     }},
 
@@ -66,4 +68,4 @@ new Test.Unit.Runner({
         assert(!range.matches(4));
         assert(!range.matches(11));
     }}
-}, {'testLog': 'numberLog'});
+}, {'logger':testLogger, 'testLog': 'numberLog'});

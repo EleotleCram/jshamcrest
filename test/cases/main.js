@@ -1,4 +1,6 @@
-new Test.Unit.Runner({
+new TestRunner({
+    name: 'Core abstractions',
+
     setup: function() { with(this) {
         description = new JsUnitTest.Hamcrest.Description();
         testCase = new JsUnitTest.Unit.Testcase();
@@ -113,4 +115,4 @@ new Test.Unit.Runner({
         description.appendValueList('[', '-', ']', [1,'a',null,undefined]);
         assertEqual('[1-"a"-<null>-<undefined>]', description.get());
     }}
-}, {'testLog': 'mainLog'});
+}, {'logger':testLogger, 'testLog': 'mainLog'});

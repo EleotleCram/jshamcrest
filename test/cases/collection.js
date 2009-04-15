@@ -1,4 +1,6 @@
-new Test.Unit.Runner({
+new TestRunner({
+    name: 'Collection matchers',
+
     setup: function() { with(this) {
         array = [1,2,[3],[4,5]];
     }},
@@ -74,4 +76,4 @@ new Test.Unit.Runner({
     testHasInvalidSizeWithMatcher: function() { with(this) {
         assert(!hasSize(lessThan(4)).matches(array));
     }}
-}, {'testLog': 'collectionLog'});
+}, {'logger':testLogger, 'testLog': 'collectionLog'});

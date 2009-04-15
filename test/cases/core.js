@@ -1,4 +1,6 @@
-new Test.Unit.Runner({
+new TestRunner({
+    name: 'Core matchers',
+
     setup: function() { with(this) {
     }},
 
@@ -144,4 +146,4 @@ new Test.Unit.Runner({
         assert(!anyOf(12, lessThan(5)).matches(10));
         assert(!anyOf([greaterThan(10), '12']).matches(10));
     }}
-}, {'testLog': 'coreLog'});
+}, {'logger':testLogger, 'testLog': 'coreLog'});

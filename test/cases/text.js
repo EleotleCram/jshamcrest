@@ -1,4 +1,6 @@
-new Test.Unit.Runner({
+new TestRunner({
+    name: 'Text matchers',
+
     setup: function() { with(this) {
     }},
 
@@ -36,4 +38,4 @@ new Test.Unit.Runner({
         assert(!endsWith(' st').matches('test'));
         assert(!endsWith(' st ').matches('te st  '));
     }}
-}, {'testLog': 'textLog'});
+}, {'logger':testLogger, 'testLog': 'textLog'});

@@ -48,6 +48,21 @@
         <replaceregexp match="@REV" replace="${REV}" file="${DIST}"/>
     </target>
     
+    <target name="test" depends="hamcrest" description="Run the test suite using Rhino">
+        <echo message="Running test suite"/>
+        <java jar="${LIB_DIR}/js.jar" dir="test" fork="true" resultproperty="exitCode">
+            <arg value="testSuite.js"/>
+        </java>
+
+        <fail message="Test Suite failed">
+            <condition>
+                <not>
+                    <equals arg1="${exitCode}" arg2="0"/>
+                </not>
+            </condition>
+        </fail>
+    </target>
+    
     <target name="pack" depends="hamcrest" description="Remove all comments and whitespace and compress">
         <property name="DIST_PACK" value="${BUILD_DIR}/jsunittest-hamcrest_minified.js"/>
         <echo message="Packing ${DIST}"/>
@@ -77,7 +92,7 @@
         <delete dir="${BUILD_DIR}"/>
     </target>
 
-    <target name="all" depends="clean,hamcrest,pack,doc">
+    <target name="all" depends="clean,hamcrest,test,pack,doc">
         <echo message="Build complete."/>
     </target>
 </project>
