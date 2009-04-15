@@ -3,26 +3,53 @@
  */
 
 /**
- * Asserts that the actual object contains the given property. Ex: <p>
+ * Asserts that the actual object contains the given member (variable or
+ * function). Ex: <p>
  *
  * <pre>
- * assertThat(myObj, hasProperty('name'));
+ * assertThat(myObj, hasMember('name'));
  * </pre>
  *
- * @param {string} property Property name.
+ * @param {string} memberName Member name.
  * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasProperty' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.hasProperty = function(property) {
+JsUnitTest.Hamcrest.Matchers.hasMember = function(memberName) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
         matches: function(actual) {
             try {
-                return property in actual;
+                return memberName in actual;
             } catch (e) { }
             return false;
         },
 
         describeTo: function(description) {
-            description.append('has property ').appendLiteral(property);
+            description.append('has member ').appendLiteral(memberName);
+        }
+    });
+};
+
+/**
+ * Asserts that the actual object contains the given function. Ex: <p>
+ *
+ * <pre>
+ * assertThat(myObj, hasFunction('getName'));
+ * </pre>
+ *
+ * @param {string} property Property name.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasProperty' matcher.
+ */
+JsUnitTest.Hamcrest.Matchers.hasFunction = function(functionName) {
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            try {
+                return functionName in actual && 
+                        actual[functionName] instanceof Function;
+            } catch (e) { }
+            return false;
+        },
+
+        describeTo: function(description) {
+            description.append('has function ').appendLiteral(functionName);
         }
     });
 };
