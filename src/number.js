@@ -147,7 +147,7 @@ JsUnitTest.Hamcrest.Matchers.even = function() {
 JsUnitTest.Hamcrest.Matchers.odd = function() {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual % 2 == 1;
+            return actual % 2 != 0;
         },
 
         describeTo: function(description) {
