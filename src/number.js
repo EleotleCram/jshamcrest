@@ -168,7 +168,7 @@ JsUnitTest.Hamcrest.Matchers.odd = function() {
  */
 JsUnitTest.Hamcrest.Matchers.between = function(number) {
     return new JsUnitTest.Hamcrest.RangeMatcherBuilder({
-        start: number,
+        start: number
     });
 };
 
