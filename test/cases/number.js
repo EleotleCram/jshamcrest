@@ -60,10 +60,10 @@ new Test.Unit.Runner({
     testBetween: function() { with(this) {
         var between = JsUnitTest.Hamcrest.Matchers.between;
         var range = between(5).and(10);
-        assert(range.matches(5);
-        assert(range.matches(8);
-        assert(range.matches(10);
-        assert(!range.matches(4);
-        assert(!range.matches(11);
+        assert(range.matches(5));
+        assert(range.matches(8));
+        assert(range.matches(10));
+        assert(!range.matches(4));
+        assert(!range.matches(11));
     }}
 }, {'testLog': 'numberLog'});
