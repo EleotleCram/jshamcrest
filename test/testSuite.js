@@ -4,7 +4,7 @@
 
 // Set up the environment and load Jsunittest
 load('assets/env.js');
-load('assets/jsunittest-rhino.js');
+load('assets/jsunittest.js');
 
 // Load JsUnitTest-Hamcrest
 load('../build/jsunittest-hamcrest.js');
