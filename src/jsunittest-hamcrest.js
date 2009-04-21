@@ -221,16 +221,12 @@ JsUnitTest.Hamcrest = {
                 this.append('<null>');
             } else if (literal instanceof Array) {
                 this.appendValueList('[', ', ', ']', literal);
-            } else if (typeof literal == 'number') {
-                this.append(literal);
             } else if (typeof literal == 'string') {
                 this.append('"' + literal + '"');
             } else if (literal instanceof Function) {
                 this.append('<Function>');
-            } else if (literal instanceof RegExp) {
-                this.append(literal);
             } else {
-                this.append('{' + literal + '}');
+                this.append(literal);
             }
             return this;
         }

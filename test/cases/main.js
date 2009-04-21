@@ -92,7 +92,7 @@ new TestRunner({
             }
         };
         var value = [obj, '1', 2, null, undefined, [], function() { }];
-        var expected = '[{Object}, "1", 2, <null>, <undefined>, [], <Function>]';
+        var expected = '[Object, "1", 2, <null>, <undefined>, [], <Function>]';
 
         description.appendLiteral(value);
         assertEqual(expected, description.get());
