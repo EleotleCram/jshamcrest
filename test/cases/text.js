@@ -37,5 +37,15 @@ new TestRunner({
         assert(endsWith(' st  ').matches('te st  '));
         assert(!endsWith(' st').matches('test'));
         assert(!endsWith(' st ').matches('te st  '));
+    }},
+
+    testMatches: function() { with(this) {
+        var matches = JsUnitTest.Hamcrest.Matchers.matches;
+        var regex = /\b0[xX][0-9a-fA-F]+\b/;
+        assert(matches(regex).matches('0xb4dcaf3'));
+        assert(matches(regex).matches('0XB4DCAF3'));
+        assert(!matches(regex).matches(''));
+        assert(!matches(regex).matches('0x'));
+        assert(!matches(regex).matches('0x4head'));
     }}
 }, {'logger':testLogger, 'testLog': 'textLog'});

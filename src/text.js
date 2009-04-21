@@ -91,3 +91,25 @@ JsUnitTest.Hamcrest.Matchers.endsWith = function(str) {
     });
 };
 
+/**
+ * Asserts that the actual value matches the given regular expression. Ex: <p>
+ *
+ * <pre>
+ * assertThat('0xa4f2c', matches(/\b0[xX][0-9a-fA-F]+\b/));
+ * </pre>
+ *
+ * @param {RegExp} regex Regular expression literal.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'matches' matcher.
+ */
+JsUnitTest.Hamcrest.Matchers.matches = function(regex) {
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return regex.test(actual);
+        },
+
+        describeTo: function(description) {
+            description.append('matches ').appendLiteral(regex);
+        }
+    });
+};
+

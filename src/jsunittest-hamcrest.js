@@ -227,6 +227,8 @@ JsUnitTest.Hamcrest = {
                 this.append('"' + literal + '"');
             } else if (literal instanceof Function) {
                 this.append('<Function>');
+            } else if (literal instanceof RegExp) {
+                this.append(literal);
             } else {
                 this.append('{' + literal + '}');
             }
