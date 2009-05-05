@@ -52,6 +52,15 @@ JsUnitTest Testcase, for example:
 Very easy, isn't it?
 
 
+Downloading
+-----------
+
+Visit the following URL to download the latest version of JsUnitTest-Hamcrest
+and its API documentation:
+
+    http://github.com/danielfm/jsunittest-hamcrest/downloads
+
+
 Building
 --------
 
