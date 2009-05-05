@@ -324,7 +324,7 @@ JsUnitTest.Hamcrest.Matchers.allOf = function() {
  * </pre>
  *
  * @param {array} arguments List of delegate matchers.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'allOf' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'anyOf' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.anyOf = function() {
     var args = arguments;

@@ -11,7 +11,7 @@
  * </pre>
  *
  * @param {string} memberName Member name.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasProperty' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasMember' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.hasMember = function(memberName) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
@@ -36,7 +36,7 @@ JsUnitTest.Hamcrest.Matchers.hasMember = function(memberName) {
  * </pre>
  *
  * @param {string} property Property name.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasProperty' matcher.
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasFunction' matcher.
  */
 JsUnitTest.Hamcrest.Matchers.hasFunction = function(functionName) {
     return new JsUnitTest.Hamcrest.SimpleMatcher({
