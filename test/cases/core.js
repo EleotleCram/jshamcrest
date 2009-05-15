@@ -2,31 +2,81 @@ new TestRunner({
     name: 'Core matchers',
 
     setup: function() { with(this) {
+        oldFail = fail;
+
+        failCount = 0;
+        _fail = function(message) {
+            failCount++;
+        };
     }},
 
     teardown: function() { with(this) {
+        fail = oldFail;
     }},
 
-    testAssertThatWithSuccessfulAssertion: function() { with(this) {
+    testAssertThatWithSuccessfulMatcherAndNoMessage: function() { with(this) {
         var description = assertThat(10, greaterThan(0));
+        assertEqual(0, failCount);
         assertEqual('Success', description.get());
     }},
 
-    testAssertThatWithFailedAssertion: function() { with(this) {
-        var oldFail = fail;
-        var description;
+    testAssertThatWithSuccessfulMatcherAndMessage: function() { with(this) {
+        var description = assertThat(10, greaterThan(0), 'some text');
+        assertEqual(0, failCount);
+        assertEqual('Success', description.get());
+    }},
 
-        var failCount = 0;
-        fail = function(message) {
-            failCount++;
-        }
-
-        try {
-            description = assertThat(10, lessThan(0));
-        } finally {
-            fail = oldFail;
-        }
+    testAssertThatWithFailedMatcherAndNoMessage: function() { with(this) {
+        fail = _fail;
+        var description = assertThat(10, lessThan(0));
         assertEqual(1, failCount);
+        assertEqual('\nExpected: less than 0\n     got: 10\n', description.get());
+    }},
+
+    testAssertThatWithFailedMatcherAndMessage: function() { with(this) {
+        fail = _fail;
+        var description = assertThat(10, lessThan(0), 'some text');
+        assertEqual(1, failCount);
+        assertEqual('some text\nExpected: less than 0\n     got: 10\n', description.get());
+    }},
+
+    testAssertThatWithSuccessfulValueAndNoMessage: function() { with(this) {
+        var description = assertThat(10, '10');
+        assertEqual(0, failCount);
+        assertEqual('Success', description.get());
+    }},
+
+    testAssertThatWithSuccessfulValueAndMessage: function() { with (this) {
+        var description = assertThat(10, '10', 'some text');
+        assertEqual(0, failCount);
+        assertEqual('Success', description.get());
+    }},
+
+    testAssertThatWithFailedValueAndNoMessage: function() { with(this) {
+        fail = _fail;
+        var description = assertThat(10, '00');
+        assertEqual(1, failCount);
+        assertEqual('\nExpected: equal to "00"\n     got: 10\n', description.get());
+    }},
+
+    testAssertThatWithFailedValueAndMessage: function() { with(this) {
+        fail = _fail;
+        var description = assertThat(10, '00', 'some text');
+        assertEqual(1, failCount);
+        assertEqual('some text\nExpected: equal to "00"\n     got: 10\n', description.get());
+    }},
+
+    testAssertThatWithTrueActualAndNoMatcher: function() { with(this) {
+        var description = assertThat(10);
+        assertEqual(0, failCount);
+        assertEqual('Success', description.get());
+    }},
+
+    testAssertThatWithFalseActualAndNoMatcher: function() { with(this) {
+        fail = _fail;
+        var description = assertThat(0);
+        assertEqual(1, failCount);
+        assertEqual('\nExpected: true\n     got: 0\n', description.get());
     }},
 
     testIsWithValue: function() { with(this) {

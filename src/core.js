@@ -11,7 +11,21 @@ JsUnitTest.Hamcrest.Matchers = {};
 /**
  * Assert method that is capable of handling matchers. If the given matcher
  * fails, this method registers a failed/error'd assertion within the current
- * TestCase object.
+ * TestCase object. Ex: <p>
+ *
+ * <pre>
+ * // Asserts that something is equal to x
+ * assertThat(something, equalTo(x));
+ * assertThat(something, equalTo(x), "Some description text");
+ *
+ * // Same here
+ * assertThat(something, x);
+ * assertThat(something, x, "Some description text");
+ *
+ * // Asserts that something is a non-null value
+ * assertThat(something);
+ * </pre>
+ *
  * @param {object} actual Actual value under test.
  * @param {object} matcher Matcher to assert the correctness of the actual
  * value.
@@ -20,10 +34,16 @@ JsUnitTest.Hamcrest.Matchers = {};
  */
 JsUnitTest.Hamcrest.Matchers.assertThat = function(actual, matcher, message) {
     var description = new JsUnitTest.Hamcrest.Description();
+    var matchers = JsUnitTest.Hamcrest.Matchers;
+
+    // Actual value must be any value considered non-null by JavaScript
+    if (matcher == null) {
+        matcher = matchers.ok();
+    }
 
     // Creates a 'equalTo' matcher if 'matcher' is not a valid matcher
     if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
-        matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
+        matcher = matchers.equalTo(matcher);
     }
 
     if (!matcher.matches(actual)) {
@@ -39,6 +59,31 @@ JsUnitTest.Hamcrest.Matchers.assertThat = function(actual, matcher, message) {
         this.pass();
     }
     return description;
+};
+
+/**
+ * The actual value must be any value considered truth by the JavaScript
+ * engine. Ex: <p>
+ *
+ * <pre>
+ * assertThat(10, ok());
+ * assertThat({}, ok());
+ * assertThat(0, not(ok()));
+ * assertThat('', not(ok()));
+ * </pre>
+ *
+ * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'ok' matcher.
+ */
+JsUnitTest.Hamcrest.Matchers.ok = function() {
+    return new JsUnitTest.Hamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return actual;
+        },
+
+        describeTo: function(description) {
+            description.append('true');
+        }
+    });
 };
 
 /**
