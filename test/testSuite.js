@@ -1,13 +1,13 @@
 /**
- * JsUnitTest-Hamcrest Rhino test suite.
+ * JsHamcrest Rhino test suite.
  */
 
 // Set up the environment and load Jsunittest
 load('assets/env.js');
-load('assets/jsunittest.js');
+load('assets/jsunittest/jsunittest.js');
 
-// Load JsUnitTest-Hamcrest
-load('../build/jsunittest-hamcrest.js');
+// Load JsHamcrest
+load('../build/jshamcrest.js');
 JsHamcrest.Integration.JsUnitTest();
 
 // Test logger used to collect and display the test results

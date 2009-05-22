@@ -3,10 +3,14 @@
  * frameworks.
  */
 
+/**
+ * Methods to integrate JsHamcrest to major JavaScript testing frameworks.
+ * @namespace
+ */
 JsHamcrest.Integration = {
 
     /**
-     *
+     * JsUnitTest integration.
      */
     JsUnitTest: function() {
         var source = JsHamcrest.Matchers;
@@ -20,7 +24,7 @@ JsHamcrest.Integration = {
     },
 
     /**
-     *
+     * YUITest (Yahoo UI) integration.
      */
     YUITest: function() {
         throw 'Not implemented yet.';
