@@ -8,35 +8,35 @@ new TestRunner({
     }},
 
     testGreaterThan: function() { with(this) {
-        var greaterThan = JsUnitTest.Hamcrest.Matchers.greaterThan;
+        var greaterThan = JsHamcrest.Matchers.greaterThan;
         assert(greaterThan(5).matches(6));
         assert(!greaterThan(5).matches(5));
         assert(!greaterThan(5).matches(4));
     }},
 
     testGreaterThanOrEqualTo: function() { with(this) {
-        var greaterThanOrEqualTo = JsUnitTest.Hamcrest.Matchers.greaterThanOrEqualTo;
+        var greaterThanOrEqualTo = JsHamcrest.Matchers.greaterThanOrEqualTo;
         assert(greaterThanOrEqualTo(5).matches(6));
         assert(greaterThanOrEqualTo(5).matches(5));
         assert(!greaterThanOrEqualTo(5).matches(4));
     }},
 
     testLessThan: function() { with(this) {
-        var lessThan = JsUnitTest.Hamcrest.Matchers.lessThan;
+        var lessThan = JsHamcrest.Matchers.lessThan;
         assert(lessThan(5).matches(4));
         assert(!lessThan(5).matches(5));
         assert(!lessThan(5).matches(6));
     }},
 
     testLessThanOrEqualTo: function() { with(this) {
-        var lessThanOrEqualTo = JsUnitTest.Hamcrest.Matchers.lessThanOrEqualTo;
+        var lessThanOrEqualTo = JsHamcrest.Matchers.lessThanOrEqualTo;
         assert(lessThanOrEqualTo(5).matches(4));
         assert(lessThanOrEqualTo(5).matches(5));
         assert(!lessThanOrEqualTo(5).matches(6));
     }},
 
     testNotANumber: function() { with(this) {
-        var notANumber = JsUnitTest.Hamcrest.Matchers.notANumber;
+        var notANumber = JsHamcrest.Matchers.notANumber;
         assert(notANumber().matches('A'));
         assert(notANumber().matches(Math.sqrt(-1)));
         assert(!notANumber().matches('10'));
@@ -44,7 +44,7 @@ new TestRunner({
     }},
 
     testEven: function() { with(this) {
-        var even = JsUnitTest.Hamcrest.Matchers.even;
+        var even = JsHamcrest.Matchers.even;
         assert(even().matches(-2));
         assert(even().matches(2));
         assert(!even().matches(-1));
@@ -52,7 +52,7 @@ new TestRunner({
     }},
 
     testOdd: function() { with(this) {
-        var odd = JsUnitTest.Hamcrest.Matchers.odd;
+        var odd = JsHamcrest.Matchers.odd;
         assert(odd().matches(-1));
         assert(odd().matches(1));
         assert(!odd().matches(-2));
@@ -60,7 +60,7 @@ new TestRunner({
     }},
 
     testBetween: function() { with(this) {
-        var between = JsUnitTest.Hamcrest.Matchers.between;
+        var between = JsHamcrest.Matchers.between;
         var range = between(5).and(10);
         assert(range.matches(5));
         assert(range.matches(8));

@@ -6,60 +6,7 @@
  * Built-in matchers.
  * @namespace
  */
-JsUnitTest.Hamcrest.Matchers = {};
-
-/**
- * Assert method that is capable of handling matchers. If the given matcher
- * fails, this method registers a failed/error'd assertion within the current
- * TestCase object. Ex: <p>
- *
- * <pre>
- * // Asserts that something is equal to x
- * assertThat(something, equalTo(x));
- * assertThat(something, equalTo(x), "Some description text");
- *
- * // Same here
- * assertThat(something, x);
- * assertThat(something, x, "Some description text");
- *
- * // Asserts that something is a non-null value
- * assertThat(something);
- * </pre>
- *
- * @param {object} actual Actual value under test.
- * @param {object} matcher Matcher to assert the correctness of the actual
- * value.
- * @param {string} message Message that describes the assertion, if necessary.
- * @return {JsUnitTest.Hamcrest.Description} Test result description.
- */
-JsUnitTest.Hamcrest.Matchers.assertThat = function(actual, matcher, message) {
-    var description = new JsUnitTest.Hamcrest.Description();
-    var matchers = JsUnitTest.Hamcrest.Matchers;
-
-    // Actual value must be any value considered non-null by JavaScript
-    if (matcher == null) {
-        matcher = matchers.ok();
-    }
-
-    // Creates a 'equalTo' matcher if 'matcher' is not a valid matcher
-    if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
-        matcher = matchers.equalTo(matcher);
-    }
-
-    if (!matcher.matches(actual)) {
-        if (message) {
-            description.append(message);
-        }
-        description.append('\nExpected: ');
-        matcher.describeTo(description);
-        description.append('\n     got: ').appendLiteral(actual).append('\n');
-        this.fail(description.get());
-    } else {
-        description.append('Success');
-        this.pass();
-    }
-    return description;
-};
+JsHamcrest.Matchers = {};
 
 /**
  * The actual value must be any value considered truth by the JavaScript
@@ -72,10 +19,10 @@ JsUnitTest.Hamcrest.Matchers.assertThat = function(actual, matcher, message) {
  * assertThat('', not(ok()));
  * </pre>
  *
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'ok' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'ok' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.ok = function() {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.ok = function() {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual;
         },
@@ -95,15 +42,15 @@ JsUnitTest.Hamcrest.Matchers.ok = function() {
  * </pre>
  *
  * @param {object} matcher Delegate matcher.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'is' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'is' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.is = function(matcher) {
+JsHamcrest.Matchers.is = function(matcher) {
     // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
-        matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
+    if (!JsHamcrest.isMatcher(matcher)) {
+        matcher = JsHamcrest.Matchers.equalTo(matcher);
     }
 
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return matcher.matches(actual);
         },
@@ -123,15 +70,15 @@ JsUnitTest.Hamcrest.Matchers.is = function(matcher) {
  * </pre>
  *
  * @param {object} matcher Delegate matcher.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'not' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'not' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.not = function(matcher) {
+JsHamcrest.Matchers.not = function(matcher) {
     // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
-        matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
+    if (!JsHamcrest.isMatcher(matcher)) {
+        matcher = JsHamcrest.Matchers.equalTo(matcher);
     }
 
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return !matcher.matches(actual);
         },
@@ -151,13 +98,13 @@ JsUnitTest.Hamcrest.Matchers.not = function(matcher) {
  * </pre>
  *
  * @param {object} expected value.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'equalTo' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'equalTo' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.equalTo = function(expected) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.equalTo = function(expected) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             if (expected instanceof Array || actual instanceof Array) {
-                return JsUnitTest.Hamcrest.isArraysEqual(expected, actual);
+                return JsHamcrest.isArraysEqual(expected, actual);
             }
             return actual == expected;
         },
@@ -175,10 +122,10 @@ JsUnitTest.Hamcrest.Matchers.equalTo = function(expected) {
  * assertThat(myObj, is(anything())); // I don't actually care about myObj
  * </pre>
  *
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'anything' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'anything' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.anything = function() {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.anything = function() {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return true;
         },
@@ -196,10 +143,10 @@ JsUnitTest.Hamcrest.Matchers.anything = function() {
  * assertThat(myObj, nil()); // myObj should be null or undefined
  * </pre>
  *
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'nil' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'nil' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.nil = function() {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.nil = function() {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual == null;
         },
@@ -219,10 +166,10 @@ JsUnitTest.Hamcrest.Matchers.nil = function() {
  * </pre>
  *
  * @param {object} expected Expected object.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'sameAs' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'sameAs' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.sameAs = function(expected) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.sameAs = function(expected) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual === expected;
         },
@@ -252,10 +199,10 @@ JsUnitTest.Hamcrest.Matchers.sameAs = function(expected) {
  * </pre>
  *
  * @param {string} exceptionName Name of the expected exception.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'raises' matcher
+ * @return {JsHamcrest.SimpleMatcher} 'raises' matcher
  */
-JsUnitTest.Hamcrest.Matchers.raises = function(exceptionName) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.raises = function(exceptionName) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actualFunction) {
             try {
                 actualFunction();
@@ -285,12 +232,11 @@ JsUnitTest.Hamcrest.Matchers.raises = function(exceptionName) {
  *
  * @param {object} matcher Matcher that should be turn into a combinable
  * matcher.
- * @return {JsUnitTest.Hamcrest.CombinableMatcher} 'both' matcher.
+ * @return {JsHamcrest.CombinableMatcher} 'both' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.both = function(matcher) {
-    return new JsUnitTest.Hamcrest.CombinableMatcher({
+JsHamcrest.Matchers.both = function(matcher) {
+    return new JsHamcrest.CombinableMatcher({
         matches: matcher.matches,
-
         describeTo: function(description) {
             description.append('both ').appendDescriptionOf(matcher);
         }
@@ -307,12 +253,11 @@ JsUnitTest.Hamcrest.Matchers.both = function(matcher) {
  *
  * @param {object} matcher Matcher that should be turn into a combinable
  * matcher.
- * @return {JsUnitTest.Hamcrest.CombinableMatcher} 'either' matcher.
+ * @return {JsHamcrest.CombinableMatcher} 'either' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.either = function(matcher) {
-    return new JsUnitTest.Hamcrest.CombinableMatcher({
+JsHamcrest.Matchers.either = function(matcher) {
+    return new JsHamcrest.CombinableMatcher({
         matches: matcher.matches,
-
         describeTo: function(description) {
             description.append('either ').appendDescriptionOf(matcher);
         }
@@ -332,19 +277,19 @@ JsUnitTest.Hamcrest.Matchers.either = function(matcher) {
  * </pre>
  *
  * @param {array} arguments List of delegate matchers.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'allOf' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'allOf' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.allOf = function() {
+JsHamcrest.Matchers.allOf = function() {
     var args = arguments;
     if (args[0] instanceof Array) {
         args = args[0];
     }
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             for (var i = 0; i < args.length; i++) {
                 var matcher = args[i];
-                if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
-                    matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
+                if (!JsHamcrest.isMatcher(matcher)) {
+                    matcher = JsHamcrest.Matchers.equalTo(matcher);
                 }
                 if (!matcher.matches(actual)) {
                     return false;
@@ -369,19 +314,19 @@ JsUnitTest.Hamcrest.Matchers.allOf = function() {
  * </pre>
  *
  * @param {array} arguments List of delegate matchers.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'anyOf' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'anyOf' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.anyOf = function() {
+JsHamcrest.Matchers.anyOf = function() {
     var args = arguments;
     if (args[0] instanceof Array) {
         args = args[0];
     }
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             for (var i = 0; i < args.length; i++) {
                 var matcher = args[i];
-                if (!JsUnitTest.Hamcrest.isMatcher(matcher)) {
-                    matcher = JsUnitTest.Hamcrest.Matchers.equalTo(matcher);
+                if (!JsHamcrest.isMatcher(matcher)) {
+                    matcher = JsHamcrest.Matchers.equalTo(matcher);
                 }
                 if (matcher.matches(actual)) {
                     return true;

@@ -8,6 +8,7 @@ load('assets/jsunittest.js');
 
 // Load JsUnitTest-Hamcrest
 load('../build/jsunittest-hamcrest.js');
+JsHamcrest.Integration.JsUnitTest();
 
 // Test logger used to collect and display the test results
 var testLogger = new Test.Unit.RhinoTextLogger();

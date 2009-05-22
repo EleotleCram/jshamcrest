@@ -10,10 +10,10 @@
  * </pre>
  *
  * @param {string} String.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'equalIgnoringCase' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'equalIgnoringCase' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.equalIgnoringCase = function(str) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.equalIgnoringCase = function(str) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual.toUpperCase() == str.toUpperCase();
         },
@@ -33,10 +33,10 @@ JsUnitTest.Hamcrest.Matchers.equalIgnoringCase = function(str) {
  * </pre>
  *
  * @param {string} String.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'containsString' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'containsString' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.containsString = function(str) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.containsString = function(str) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual.indexOf(str) >= 0;
         },
@@ -55,10 +55,10 @@ JsUnitTest.Hamcrest.Matchers.containsString = function(str) {
  * </pre>
  *
  * @param {string} String.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'startsWith' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'startsWith' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.startsWith = function(str) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.startsWith = function(str) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual.indexOf(str) == 0;
         },
@@ -77,10 +77,10 @@ JsUnitTest.Hamcrest.Matchers.startsWith = function(str) {
  * </pre>
  *
  * @param {string} String.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'endsWith' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'endsWith' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.endsWith = function(str) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.endsWith = function(str) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual.lastIndexOf(str) + str.length == actual.length;
         },
@@ -99,10 +99,10 @@ JsUnitTest.Hamcrest.Matchers.endsWith = function(str) {
  * </pre>
  *
  * @param {RegExp} regex Regular expression literal.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'matches' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'matches' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.matches = function(regex) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.matches = function(regex) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return regex.test(actual);
         },

@@ -2,7 +2,7 @@ new TestRunner({
     name: 'Core abstractions',
 
     setup: function() { with(this) {
-        description = new JsUnitTest.Hamcrest.Description();
+        description = new JsHamcrest.Description();
         testCase = new JsUnitTest.Unit.Testcase();
         selfDescribing = {
             describeTo: function(description) {
@@ -14,25 +14,16 @@ new TestRunner({
     teardown: function() { with(this) {
     }},
 
-    testInstallMatchers: function() { with(this) {
-        var matchers = {
-            _matcher: {}
-        };
-
-        JsUnitTest.Hamcrest.installMatchers(matchers);
-        assertIdentical(matchers._matcher, testCase._matcher);
-    }},
-
     testIsMatcher: function() { with(this) {
         function CustomMatcher() { };
-        CustomMatcher.prototype = new JsUnitTest.Hamcrest.SimpleMatcher();
+        CustomMatcher.prototype = new JsHamcrest.SimpleMatcher();
 
-        assert(JsUnitTest.Hamcrest.isMatcher(new CustomMatcher()));
-        assert(!JsUnitTest.Hamcrest.isMatcher({}));
+        assert(JsHamcrest.isMatcher(new CustomMatcher()));
+        assert(!JsHamcrest.isMatcher({}));
     }},
 
     testIsArrayEqual: function() { with(this) {
-        var isArraysEqual = JsUnitTest.Hamcrest.isArraysEqual;
+        var isArraysEqual = JsHamcrest.isArraysEqual;
         assert(!isArraysEqual([], {}));
         assert(!isArraysEqual([1,2], [1]));
         assert(!isArraysEqual([1,[2,3]], [1,['2',2]]));
@@ -47,7 +38,7 @@ new TestRunner({
     testCreateSimpleMatcher: function() { with(this) {
         function matches(actual) { };
         function describeTo(description) { };
-        var matcher = new JsUnitTest.Hamcrest.SimpleMatcher({
+        var matcher = new JsHamcrest.SimpleMatcher({
             matches: matches,
             describeTo: describeTo
         });
@@ -59,7 +50,7 @@ new TestRunner({
     testCreateCombinableMatcher: function() { with(this) {
         function matches(actual) { };
         function describeTo(description) { };
-        var matcher = new JsUnitTest.Hamcrest.CombinableMatcher({
+        var matcher = new JsHamcrest.CombinableMatcher({
             matches: matches,
             describeTo: describeTo
         });
@@ -70,8 +61,8 @@ new TestRunner({
         assert(matcher.and);
         assert(matcher.or);
 
-        assertInstanceOf(JsUnitTest.Hamcrest.CombinableMatcher, matcher.and(50));
-        assertInstanceOf(JsUnitTest.Hamcrest.CombinableMatcher, matcher.or(50));
+        assertInstanceOf(JsHamcrest.CombinableMatcher, matcher.and(50));
+        assertInstanceOf(JsHamcrest.CombinableMatcher, matcher.or(50));
     }},
 
     testDescriptionAppend: function() { with(this) {

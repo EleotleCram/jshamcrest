@@ -11,10 +11,10 @@
  * </pre>
  *
  * @param {string} memberName Member name.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasMember' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'hasMember' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.hasMember = function(memberName) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.hasMember = function(memberName) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             try {
                 return memberName in actual;
@@ -36,10 +36,10 @@ JsUnitTest.Hamcrest.Matchers.hasMember = function(memberName) {
  * </pre>
  *
  * @param {string} property Property name.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'hasFunction' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'hasFunction' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.hasFunction = function(functionName) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.hasFunction = function(functionName) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             try {
                 return functionName in actual && 
@@ -62,10 +62,10 @@ JsUnitTest.Hamcrest.Matchers.hasFunction = function(functionName) {
  * </pre>
  *
  * @param {function} clazz Constructor function.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'instanceOf' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'instanceOf' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.instanceOf = function(clazz) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.instanceOf = function(clazz) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return !!(actual instanceof clazz);
         },

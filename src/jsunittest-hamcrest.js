@@ -17,31 +17,66 @@
  */
 
 /**
- * JsUnitTest main namespace.
- * @namespace
- */
-JsUnitTest = JsUnitTest;
-
-/**
  * Main namespace.
  * @namespace
  */
-JsUnitTest.Hamcrest = {
+JsHamcrest = {
     /**
      * Library version.
      */
     version: '@VERSION',
 
     /**
-     * Copies the properties of the given objects to the
-     * <code>JsUnitTest.Unit.Testcase</code> prototype.
-     * @param {object} matchers Object that contains the matchers to be
-     * installed.
+     * Assert method that is capable of handling matchers. If the given matcher
+     * fails, this method registers a failed/error'd assertion within the current
+     * TestCase object. Ex: <p>
+     *
+     * <pre>
+     * // Asserts that something is equal to x
+     * assertThat(something, equalTo(x));
+     * assertThat(something, equalTo(x), "Some description text");
+     *
+     * // Same here
+     * assertThat(something, x);
+     * assertThat(something, x, "Some description text");
+     *
+     * // Asserts that something evaluates to some value considered truth
+     * assertThat(something);
+     * </pre>
+     *
+     * @param {object} actual Actual value under test.
+     * @param {object} matcher Matcher to assert the correctness of the actual
+     * value.
+     * @param {string} message Message that describes the assertion, if necessary.
+     * @return {JsHamcrest.Description} Test result description.
      */
-    installMatchers: function(matchers) {
-        for (method in matchers) {
-            JsUnitTest.Unit.Testcase.prototype[method] = matchers[method];
+    assertThat: function(actual, matcher, message) {
+        var description = new JsHamcrest.Description();
+        var matchers = JsHamcrest.Matchers;
+
+        // Actual value must be any value considered non-null by JavaScript
+        if (matcher == null) {
+            matcher = matchers.ok();
         }
+
+        // Creates a 'equalTo' matcher if 'matcher' is not a valid matcher
+        if (!JsHamcrest.isMatcher(matcher)) {
+            matcher = matchers.equalTo(matcher);
+        }
+
+        if (!matcher.matches(actual)) {
+            if (message) {
+                description.append(message);
+            }
+            description.append('\nExpected: ');
+            matcher.describeTo(description);
+            description.append('\n     got: ').appendLiteral(actual).append('\n');
+            this.fail(description.get());
+        } else {
+            description.append('Success');
+            this.pass();
+        }
+        return description;
     },
 
     /**
@@ -50,7 +85,7 @@ JsUnitTest.Hamcrest = {
      * @return {boolean} If the given object is a matcher.
      */
     isMatcher: function(obj) {
-        return obj instanceof JsUnitTest.Hamcrest.SimpleMatcher;
+        return obj instanceof JsHamcrest.SimpleMatcher;
     },
 
     /**
@@ -70,7 +105,7 @@ JsUnitTest.Hamcrest = {
                 var b = anotherArray[i];
 
                 if (a instanceof Array || b instanceof Array) {
-                    return JsUnitTest.Hamcrest.isArraysEqual(a, b);
+                    return JsHamcrest.isArraysEqual(a, b);
                 } else if (a != b) {
                     return false;
                 }
@@ -121,7 +156,7 @@ JsUnitTest.Hamcrest = {
      */
     CombinableMatcher: function(params) {
         // Call superclass' constructor
-        JsUnitTest.Hamcrest.SimpleMatcher.apply(this, arguments);
+        JsHamcrest.SimpleMatcher.apply(this, arguments);
 
         params = params || {};
 
@@ -129,11 +164,11 @@ JsUnitTest.Hamcrest = {
          * Wraps this matcher with the given one in such a way that both
          * matchers must match the actual value to be successful.
          * @param {object} anotherMatcher Another matcher.
-         * @return {JsUnitTest.Hamcrest.CombinableMatcher} Combinable matcher.
+         * @return {JsHamcrest.CombinableMatcher} Combinable matcher.
          */
         this.and = function(anotherMatcher) {
-            var all = JsUnitTest.Hamcrest.Matchers.allOf(this, anotherMatcher);
-            return new JsUnitTest.Hamcrest.CombinableMatcher({
+            var all = JsHamcrest.Matchers.allOf(this, anotherMatcher);
+            return new JsHamcrest.CombinableMatcher({
                 matches: all.matches,
 
                 describeTo: function(description) {
@@ -146,11 +181,11 @@ JsUnitTest.Hamcrest = {
          * Wraps this matcher with the given one in such a way that at least
          * one of the matchers must match the actual value to be successful.
          * @param {object} anotherMatcher Another matcher.
-         * @return {JsUnitTest.Hamcrest.CombinableMatcher} Combinable matcher.
+         * @return {JsHamcrest.CombinableMatcher} Combinable matcher.
          */
         this.or = function(anotherMatcher) {
-            var any = JsUnitTest.Hamcrest.Matchers.anyOf(this, anotherMatcher);
-            return new JsUnitTest.Hamcrest.CombinableMatcher({
+            var any = JsHamcrest.Matchers.anyOf(this, anotherMatcher);
+            return new JsHamcrest.CombinableMatcher({
                 matches: any.matches,
 
                 describeTo: function(description) {
@@ -188,7 +223,7 @@ JsUnitTest.Hamcrest = {
          * @param {object} selfDescribing Any object that have a
          * <code>describeTo</code> method that accepts a description object as
          * argument.
-         * @return {JsUnitTest.Hamcrest.Description} this.
+         * @return {JsHamcrest.Description} this.
          */
         this.appendDescriptionOf = function(selfDescribing) {
             if (selfDescribing) {
@@ -200,7 +235,7 @@ JsUnitTest.Hamcrest = {
         /**
          * Appends a text to this description.
          * @param {string} text Text to append.
-         * @return {JsUnitTest.Hamcrest.Description} this.
+         * @return {JsHamcrest.Description} this.
          */
         this.append = function(text) {
             if (text != null) {
@@ -212,7 +247,7 @@ JsUnitTest.Hamcrest = {
         /**
          * Appends a JavaScript language's literals to this description.
          * @param {object} literal Literal to append.
-         * @return {JsUnitTest.Hamcrest.Description} this.
+         * @return {JsHamcrest.Description} this.
          */
         this.appendLiteral = function(literal) {
             if (literal === undefined) {
@@ -237,7 +272,7 @@ JsUnitTest.Hamcrest = {
          * @param {string} separator Separator string.
          * @param {string} end End string.
          * @param {array} list List of values.
-         * @return {JsUnitTest.Hamcrest.Description} this.
+         * @return {JsHamcrest.Description} this.
          */
         this.appendValueList = function(start, separator, end, list) {
             this.append(start);
@@ -259,7 +294,7 @@ JsUnitTest.Hamcrest = {
          * @param {array} list List of self describing objects. These objects
          * must that have a <code>describeTo</code> method that accepts a
          * description object as argument.
-         * @return {JsUnitTest.Hamcrest.Description} this.
+         * @return {JsHamcrest.Description} this.
          */
         this.appendList = function(start, separator, end, list) {
             this.append(start);
@@ -276,6 +311,6 @@ JsUnitTest.Hamcrest = {
 };
 
 // CombinableMatcher is a specialization of SimpleMatcher
-JsUnitTest.Hamcrest.CombinableMatcher.prototype =
-        new JsUnitTest.Hamcrest.SimpleMatcher();
+JsHamcrest.CombinableMatcher.prototype =
+        new JsHamcrest.SimpleMatcher();
 

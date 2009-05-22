@@ -1,8 +1,29 @@
 /**
- * @fileOverview Executes the code that installs the built-in
- * matchers to JsUnitTest.
+ * @fileOverview Methods to allow integration to major JavaScript testing
+ * frameworks.
  */
 
-// Install built-in matchers
-JsUnitTest.Hamcrest.installMatchers(JsUnitTest.Hamcrest.Matchers);
+JsHamcrest.Integration = {
+
+    /**
+     *
+     */
+    JsUnitTest: function() {
+        var source = JsHamcrest.Matchers;
+        var target = JsUnitTest.Unit.Testcase.prototype;
+
+        for (method in source) {
+            target[method] = source[method];
+        }
+
+        target.assertThat = JsHamcrest.assertThat;
+    },
+
+    /**
+     *
+     */
+    YUITest: function() {
+        throw 'Not implemented yet.';
+    }
+};
 

@@ -8,7 +8,7 @@ new TestRunner({
     }},
 
     testHasMember: function() { with(this) {
-        var hasMember = JsUnitTest.Hamcrest.Matchers.hasMember;
+        var hasMember = JsHamcrest.Matchers.hasMember;
         assert(hasMember('length').matches([]));
         assert(hasMember('matches').matches(hasMember()));
         assert(!hasMember('somethingElse').matches([]));
@@ -16,14 +16,14 @@ new TestRunner({
     }},
 
     testHasFunction: function() { with(this) {
-        var hasFunction = JsUnitTest.Hamcrest.Matchers.hasFunction;
+        var hasFunction = JsHamcrest.Matchers.hasFunction;
         assert(hasFunction('matches').matches(hasMember()));
         assert(!hasFunction('length').matches([]));
         assert(!hasFunction('somethingElse').matches(null));
     }},
 
     testInstanceOf: function() { with(this) {
-        var instanceOf = JsUnitTest.Hamcrest.Matchers.instanceOf;
+        var instanceOf = JsHamcrest.Matchers.instanceOf;
         assert(instanceOf(Array).matches([]));
         assert(instanceOf(Object).matches([]));
         assert(!instanceOf(Function).matches([]));

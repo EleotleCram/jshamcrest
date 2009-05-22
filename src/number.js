@@ -10,10 +10,10 @@
  * </pre>
  *
  * @param {number} threshold Threshold number.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'greaterThan' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'greaterThan' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.greaterThan = function(threshold) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.greaterThan = function(threshold) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual > threshold;
         },
@@ -33,10 +33,10 @@ JsUnitTest.Hamcrest.Matchers.greaterThan = function(threshold) {
  * </pre>
  *
  * @param {number} threshold Threshold number.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'greaterThanOrEqualTo' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'greaterThanOrEqualTo' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.greaterThanOrEqualTo = function(threshold) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.greaterThanOrEqualTo = function(threshold) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual >= threshold;
         },
@@ -56,10 +56,10 @@ JsUnitTest.Hamcrest.Matchers.greaterThanOrEqualTo = function(threshold) {
  * </pre>
  *
  * @param {number} threshold Threshold number.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'lessThan' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'lessThan' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.lessThan = function(threshold) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.lessThan = function(threshold) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual < threshold;
         },
@@ -79,10 +79,10 @@ JsUnitTest.Hamcrest.Matchers.lessThan = function(threshold) {
  * </pre>
  *
  * @param {number} threshold Threshold number.
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'lessThanOrEqualTo' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'lessThanOrEqualTo' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.lessThanOrEqualTo = function(threshold) {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.lessThanOrEqualTo = function(threshold) {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual <= threshold;
         },
@@ -100,10 +100,10 @@ JsUnitTest.Hamcrest.Matchers.lessThanOrEqualTo = function(threshold) {
  * assertThat(Math.sqrt(-1), notANumber());
  * </pre>
  *
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'notANumber' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'notANumber' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.notANumber = function() {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.notANumber = function() {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return isNaN(actual);
         },
@@ -121,10 +121,10 @@ JsUnitTest.Hamcrest.Matchers.notANumber = function() {
  * assertThat(4, even());
  * </pre>
  *
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'even' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'even' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.even = function() {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.even = function() {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual % 2 == 0;
         },
@@ -142,10 +142,10 @@ JsUnitTest.Hamcrest.Matchers.even = function() {
  * assertThat(3, odd());
  * </pre>
  *
- * @return {JsUnitTest.Hamcrest.SimpleMatcher} 'odd' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'odd' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.odd = function() {
-    return new JsUnitTest.Hamcrest.SimpleMatcher({
+JsHamcrest.Matchers.odd = function() {
+    return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual % 2 != 0;
         },
@@ -164,10 +164,10 @@ JsUnitTest.Hamcrest.Matchers.odd = function() {
  * </pre>
  *
  * @param {number} number Range start.
- * @return {JsUnitTest.Hamcrest.RangeMatcherBuilder} 'between' matcher.
+ * @return {JsHamcrest.RangeMatcherBuilder} 'between' matcher.
  */
-JsUnitTest.Hamcrest.Matchers.between = function(number) {
-    return new JsUnitTest.Hamcrest.RangeMatcherBuilder({
+JsHamcrest.Matchers.between = function(number) {
+    return new JsHamcrest.RangeMatcherBuilder({
         start: number
     });
 };
@@ -180,7 +180,7 @@ JsUnitTest.Hamcrest.Matchers.between = function(number) {
  * @param {object} param Configuration object.
  * @param {number} param.start Range start.
  */
-JsUnitTest.Hamcrest.RangeMatcherBuilder = function(params) {
+JsHamcrest.RangeMatcherBuilder = function(params) {
     params = params || {};
 
     /**
@@ -194,7 +194,7 @@ JsUnitTest.Hamcrest.RangeMatcherBuilder = function(params) {
     /**
      * Finishes to build the range matcher.
      * @param {number} end Range end.
-     * @return {JsUnitTest.Hamcrest.SimpleMatcher} Range matcher.
+     * @return {JsHamcrest.SimpleMatcher} Range matcher.
      */
     this.and = function(end) {
         var greater = end;
@@ -205,9 +205,9 @@ JsUnitTest.Hamcrest.RangeMatcherBuilder = function(params) {
             lesser = end;
         }
 
-        return new JsUnitTest.Hamcrest.Matchers.allOf(
-            JsUnitTest.Hamcrest.Matchers.greaterThanOrEqualTo(lesser),
-            JsUnitTest.Hamcrest.Matchers.lessThanOrEqualTo(greater)
+        return new JsHamcrest.Matchers.allOf(
+            JsHamcrest.Matchers.greaterThanOrEqualTo(lesser),
+            JsHamcrest.Matchers.lessThanOrEqualTo(greater)
         );
     }
 };

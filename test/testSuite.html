@@ -4,10 +4,18 @@
 <head>
   <title>JsUnitTest-Hamcrest Test Suite</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <script src="assets/jsunittest.js" type="text/javascript"></script>
-  <script src="../build/jsunittest-hamcrest.js" type="text/javascript"></script>
+
+  <!-- JsUnitTest -->
+  <script src="jsunittest/assets/jsunittest.js" type="text/javascript"></script>
   <link rel="stylesheet" href="assets/unittest.css" type="text/css" />
+
+  <!-- JsHamcrest -->
+  <script src="../build/jsunittest-hamcrest.js" type="text/javascript"></script>
+
   <script type="text/javascript">
+    // Integrate JsHamcrest to JsUnitTest
+    JsHamcrest.Integration.JsUnitTest();
+
     // Test runner implementation to be used by this test suite
     var TestRunner = Test.Unit.Runner;
     
