@@ -51,19 +51,18 @@ That's it! Here goes a simple usage example:
         },
 
         testAdd: function() { with(this) {
-            var result = this.calc.add(2, 3);
+            var result = calc.add(2, 3);
             assertThat(result, equalTo(5));
         }},
         
         testSub: function() { with(this) {
-            var result = this.calc.sub(2, 3);
+            var result = calc.sub(2, 3);
             assertThat(result, equalTo(-1));
         }}
     }, {'testLog':'myLog'});
 
 
-If you want to use YUITest instead JsUnitTest, the procedure is almost the
-same:
+If you want to use YUITest instead, the procedure is almost the same:
 
     <!-- YUITest and dependencies -->
     <script type="text/javascript" src="assets/yahoo-dom-event/yahoo-dom-event.js"></script>
@@ -87,18 +86,18 @@ same:
             teardown: function() {
             },
 
-            testAdd: function() { with(this) {
-                var result = this.calc.add(2, 3);
-                Assert.that(result, equalTo(5));
+            // In YUITest, the assertion method is Assert.that(), not assertThat()!
+            // JsHamcrest tries not to screw with the conventions adopted by the
+            // unit test framework in use, making the integration feel less
+            // intrusive and more natural
 
-                // In YUITest, the assertion method is Assert.that(), not assertThat()!
-                // JsHamcrest tries not to screw with the conventions adopted by the
-                // unit test framework being used, making the integration look less
-                // intrusive and more natural
+            testAdd: function() { with(this) {
+                var result = calc.add(2, 3);
+                Assert.that(result, equalTo(5));
             }},
             
             testSub: function() { with(this) {
-                var result = this.calc.sub(2, 3);
+                var result = calc.sub(2, 3);
                 Assert.that(result, equalTo(-1));
             }}
         });
@@ -125,9 +124,9 @@ The API documentation will be available inside the 'doc/api' directory.
 Thanks to...
 ------------
 
+    * Hamcrest:   <http://code.google.com/p/hamcrest/>
     * JsUnitTest: <http://jsunittest.com/>
     * YUITest:    <http://developer.yahoo.com/yui/yuitest/>
-    * Hamcrest:   <http://code.google.com/p/hamcrest/>
 
 
 Credits
