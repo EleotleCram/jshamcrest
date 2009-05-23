@@ -1,13 +1,13 @@
-jsunittest-hamcrest
--------------------
+JsHamcrest
+----------
 
-    http://github.com/danielfm/jsunittest-hamcrest/tree/master
+    http://github.com/danielfm/jshamcrest/tree/master
 
 
-JsUnitTest-Hamcrest is a port of Hamcrest to JsUnitTest. Hamcrest provides a
-library of matcher objects (also known as constraints or predicates) allowing
-'match' rules to be defined declaratively. JsUnitTest provides a one-file
-JavaScript test suite.
+JsHamcrest is a JavaScript port of Hamcrest, which provides a library of
+matcher objects (also known as constraints or predicates) allowing 'match'
+rules to be defined declaratively. JsHamcrest integrates out of the box
+with JsUnitTest and YUITest (more to come).
 
 This is an open source project licenced under the terms of the Lesser General
 Public License v3.0 and sponsored by Destaquenet Technology Solutions, a
@@ -17,14 +17,20 @@ brazilian software development and consultancy startup.
 Usage
 -----
 
-In order to use JsUnitTest-Hamcrest, you have to download and import the
-JsUnitTest script in your HTML page:
+In order to use JsHamcrest, you have to chooose a supported JavaScript unit
+test framework. For example, to use it with JsUnitTest, download and import
+the sUnitTest script in your HTML page:
 
-<script src="jsunittest.js" type="text/javascript"></script>
-<script src="jsunittest-hamcrest.js" type="text/javascript"></script>
+    <script src="jsunittest.js" type="text/javascript"></script>
+    <script src="jshamcrest.js" type="text/javascript"></script>
+    
+    <!-- Don't forget to activate JsUnitTest integration! -->
+    <script type="text/javascript">
+        JsHamcrest.Integration.JsUnitTest();
+    </script>
 
-That's it, now (almost) all the Hamcrest goodies are available to your
-JsUnitTest Testcase, for example:
+
+That's it! Here goes a simple usage example:
 
     new Test.Unit.Runner({
         setup: function() {
@@ -36,12 +42,12 @@ JsUnitTest Testcase, for example:
 
         testAdd: function() { with(this) {
             var result = this.calc.add(2, 3);
-            assertThat(result, is(equalTo(5)));
+            assertThat(result, equalTo(5));
         }},
         
         testSub: function() { with(this) {
             var result = this.calc.sub(2, 3);
-            assertThat(result, is(lessThanOrEqualTo(0)));
+            assertThat(result, equalTo(-1));
         }},
         
         // use your imagination!
@@ -49,7 +55,6 @@ JsUnitTest Testcase, for example:
         
     }, {'testLog':'myLog'});
 
-Very easy, isn't it?
 
 
 Downloading
@@ -58,15 +63,15 @@ Downloading
 Visit the following URL to download the latest version of JsUnitTest-Hamcrest
 and its API documentation:
 
-    http://github.com/danielfm/jsunittest-hamcrest/downloads
+    http://github.com/danielfm/jshamcrest/downloads
 
 
 Building
 --------
 
-To build JsUnitTest-Hamcrest, you have to install Apache Ant in your machine
-if you don't have it already. Visit the following URL to download Ant and get
-further instructions on how to install it in your system:
+To build JsHamcrest, you have to install Apache Ant in your machine if you
+don't have it already. Visit the following URL to download Ant and get further
+instructions on how to install it in your system:
 
     http://ant.apache.org/
 
@@ -82,7 +87,8 @@ Thanks to...
 ------------
 
     * JsUnitTest: <http://jsunittest.com/>
-    * Hamcrest: <http://code.google.com/p/hamcrest/>
+    * YUITest:    <http://developer.yahoo.com/yui/yuitest/>
+    * Hamcrest:   <http://code.google.com/p/hamcrest/>
 
 
 Credits
