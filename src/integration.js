@@ -10,18 +10,26 @@
 JsHamcrest.Integration = {
 
     /**
+     * Copy all assertion matchers to the given object.
+     * @param {object} target Target object.
+     */
+    _copyMatchers: function(target) {
+        var source = JsHamcrest.Matchers;
+        for (method in source) {
+            if (!(method in target)) {
+                target[method] = source[method];
+            }
+        }
+    },
+
+    /**
      * JsUnitTest integration.
      */
     JsUnitTest: function() {
-        var source = JsHamcrest.Matchers;
         var target = JsUnitTest.Unit.Testcase.prototype;
 
-        // Add assertions to test case
-        for (method in source) {
-            target[method] = source[method];
-        }
+        JsHamcrest.Integration._copyMatchers(target);
 
-        // Add assertion method
         target.assertThat = function (actual, matcher, message) {
             var self = this;
             var pass = function() {
@@ -40,42 +48,32 @@ JsHamcrest.Integration = {
      * YUITest (Yahoo UI) integration.
      */
     YUITest: function() {
-        var source = JsHamcrest.Matchers;
-        var target = YAHOO.tool.TestCase.prototype;
+        var target = window;
 
-        // Add assertions to test case
-        for (method in source) {
-            target[method] = source[method];
-        }
-
-        // Add assertion method
+        JsHamcrest.Integration._copyMatchers(target);
         target.Assert = YAHOO.util.Assert;
 
-        var pass = function() {
-        };
+        YAHOO.util.Assert.that = function(actual, matcher, message) {
+            var pass = function() {
+            };
 
-        var fail = function() {
-        };
-        YAHOO.util.Assert.that = JsHamcrest.assertThat;
+            var fail = function(message) {
+                YAHOO.util.Assert.fail(message);
+            };
 
-        // Dumb testCase.pass() implementation
-        target.Assert.pass = function() { };
+            return JsHamcrest.assertThat(actual, matcher, message, pass, fail);
+        };
     },
 
     /**
      * QUnit (JQuery) integration.
      */
     QUnit: function() {
-
-        var source = JsHamcrest.Matchers;
         var target = window;
 
-        // Add assertions to test case
-        for (method in source) {
-            target[method] = source[method];
-        }
+        JsHamcrest.Integration._copyMatchers(target);
 
-        // Add assertion method
+        // Copy assertion method
         target.assertThat = function(actual, matcher, message) {
             var pass = function(message) {
                 QUnit.ok(true, message);

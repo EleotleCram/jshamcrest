@@ -119,15 +119,15 @@ framework and plug JsHamcrest to it. Some examples:
             // unit test framework in use, making the integration feel less
             // intrusive and more natural.
 
-            testAdd: function() { with(this) {
-                var result = calc.add(2, 3);
+            testAdd: function() {
+                var result = this.calc.add(2, 3);
                 Assert.that(result, equalTo(5));
-            }},
+            },
             
-            testSub: function() { with(this) {
-                var result = calc.sub(2, 3);
+            testSub: function() {
+                var result = this.calc.sub(2, 3);
                 Assert.that(result, equalTo(-1));
-            }},
+            },
 
             // More tests here...
         });
