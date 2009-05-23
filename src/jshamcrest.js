@@ -1,9 +1,8 @@
 /*
- * JsUnitTest-Hamcrest v@VERSION
- * http://github.com/danielfm/jsunittest-hamcrest/tree/master
+ * JsHamcrest v@VERSION
+ * http://github.com/danielfm/jshamcrest/tree/master
  *
- * Plug-in to JsUnitTest that adds a collection of useful matchers for building
- * test expressions.
+ * Hamcrest port to JavaScript.
  *
  * Copyright (c) 2009 Daniel Fernandes Martins
  * Licensed under the BSD license.
@@ -47,16 +46,20 @@ JsHamcrest = {
      * @param {object} actual Actual value under test.
      * @param {object} matcher Matcher to assert the correctness of the actual
      * value.
-     * @param {string} message Message that describes the assertion, if necessary.
+     * @param {string} message Message that describes the assertion, if
+     * necessary.
+     * @param {function} pass Function to be called when the assertion
+     * succeeds.
+     * @param {function} fail Function to be called when the assertion fails.
      * @return {JsHamcrest.Description} Test result description.
      */
-    assertThat: function(actual, matcher, message) {
+    assertThat: function(actual, matcher, message, pass, fail) {
         var description = new JsHamcrest.Description();
         var matchers = JsHamcrest.Matchers;
 
         // Actual value must be any value considered non-null by JavaScript
         if (matcher == null) {
-            matcher = matchers.ok();
+            matcher = matchers.truth();
         }
 
         // Creates a 'equalTo' matcher if 'matcher' is not a valid matcher
@@ -66,15 +69,17 @@ JsHamcrest = {
 
         if (!matcher.matches(actual)) {
             if (message) {
-                description.append(message);
+                description.append(message).append('.');
             }
             description.append('\nExpected: ');
             matcher.describeTo(description);
             description.append('\n     got: ').appendLiteral(actual).append('\n');
-            this.fail(description.get());
+            fail(description.get());
         } else {
-            description.append('Success');
-            this.pass();
+            if (message) {
+                description.append(message).append(': ');
+            }
+            pass(description.append('Success').get());
         }
         return description;
     },

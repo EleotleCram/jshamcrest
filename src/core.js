@@ -13,22 +13,22 @@ JsHamcrest.Matchers = {};
  * engine. Ex: <p>
  *
  * <pre>
- * assertThat(10, ok());
- * assertThat({}, ok());
- * assertThat(0, not(ok()));
- * assertThat('', not(ok()));
+ * assertThat(10, truth());
+ * assertThat({}, truth());
+ * assertThat(0, not(truth()));
+ * assertThat('', not(truth()));
  * </pre>
  *
- * @return {JsHamcrest.SimpleMatcher} 'ok' matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'truth' matcher.
  */
-JsHamcrest.Matchers.ok = function() {
+JsHamcrest.Matchers.truth = function() {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             return actual;
         },
 
         describeTo: function(description) {
-            description.append('true');
+            description.append('truth');
         }
     });
 };

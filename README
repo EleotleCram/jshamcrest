@@ -7,7 +7,7 @@ JsHamcrest
 JsHamcrest is a JavaScript port of Hamcrest, which provides a library of
 matcher objects (also known as constraints or predicates) allowing 'match'
 rules to be defined declaratively. JsHamcrest integrates out of the box
-with JsUnitTest and YUITest (more to come).
+with JsUnitTest, QUnit and YUITest.
 
 This is an open source project licenced under the terms of the Lesser General
 Public License v3.0 and sponsored by Destaquenet Technology Solutions, a
@@ -26,43 +26,69 @@ and its API documentation:
 Usage
 -----
 
-In order to use JsHamcrest, you have to chooose a supported JavaScript unit
-test framework. For example, to use it with JsUnitTest, download and import
-JsUnitTest scripts in your HTML page:
+In order to use JsHamcrest with a supported JavaScript unit test framework,
+just follow the usual installation/configuration instructions of the chosen
+framework and plug JsHamcrest to it. Some examples:
 
-    <!-- JsUnitTest -->
-    <script src="jsunittest.js" type="text/javascript"></script>
+- JsUnitTest
+
+    <!-- JsUnitTest and dependencies -->
+    <script type="text/javascript" src="jsunittest.js"></script>
     
     <!-- Don't forget to activate JsUnitTest integration -->
-    <script src="jshamcrest.js" type="text/javascript"></script>
+    <script type="text/javascript" src="jshamcrest.js"></script>
     <script type="text/javascript">
         JsHamcrest.Integration.JsUnitTest();
     </script>
 
+    <!-- Some code... -->
 
-That's it! Here goes a simple usage example:
+    <script type="text/javascript">
+        new Test.Unit.Runner({
+            setup: function() {
+                this.calc = new MyCalculator();
+            },
 
-    new Test.Unit.Runner({
-        setup: function() {
-            this.calc = new MyCalculator();
-        },
+            teardown: function() {
+            },
 
-        teardown: function() {
-        },
+            testAdd: function() { with(this) {
+                var result = calc.add(2, 3);
+                assertThat(result, equalTo(5));
+            }},
 
-        testAdd: function() { with(this) {
-            var result = calc.add(2, 3);
-            assertThat(result, equalTo(5));
-        }},
-        
-        testSub: function() { with(this) {
-            var result = calc.sub(2, 3);
-            assertThat(result, equalTo(-1));
-        }}
-    }, {'testLog':'myLog'});
+            // More tests here...
+        }, {'testLog':'myLog'});
+    </script>
 
 
-If you want to use YUITest instead, the procedure is almost the same:
+- QUnit
+
+    <!-- QUnit and dependencies -->
+    <script type="text/javascript" src="jquery.js"></script>
+
+    <!-- Don't forget to activate QUnit integration -->
+    <script type="text/javascript" src="jshamcrest.js"></script>
+    <script>
+        JsHamcrest.Integration.QUnit();
+        $(document).ready(function(){
+            var calc = new MyCalculator();
+
+            test("Calculator should add two numbers", function() {
+                var result = calc.add(2, 3);
+                assertThat(result, equalTo(5));
+            });
+
+            // More tests here...
+        });
+    </script>
+
+    <!-- Some code... -->
+
+    <script type="text/javascript" src="testrunner.js"></script>
+
+
+- YUITest
 
     <!-- YUITest and dependencies -->
     <script type="text/javascript" src="assets/yahoo-dom-event/yahoo-dom-event.js"></script>
@@ -74,6 +100,8 @@ If you want to use YUITest instead, the procedure is almost the same:
     <script type="text/javascript">
         JsHamcrest.Integration.YUITest();
     </script>
+
+    <!-- Some code... -->
 
     <script type="text/javascript">
         CalculatorTestCase = new YAHOO.tool.TestCase({
@@ -89,7 +117,7 @@ If you want to use YUITest instead, the procedure is almost the same:
             // In YUITest, the assertion method is Assert.that(), not assertThat()!
             // JsHamcrest tries not to screw with the conventions adopted by the
             // unit test framework in use, making the integration feel less
-            // intrusive and more natural
+            // intrusive and more natural.
 
             testAdd: function() { with(this) {
                 var result = calc.add(2, 3);
@@ -99,7 +127,9 @@ If you want to use YUITest instead, the procedure is almost the same:
             testSub: function() { with(this) {
                 var result = calc.sub(2, 3);
                 Assert.that(result, equalTo(-1));
-            }}
+            }},
+
+            // More tests here...
         });
     </script>
 
