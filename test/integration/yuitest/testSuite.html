@@ -43,8 +43,6 @@
             },
 
             testPop : function () {
-                var Assert = YAHOO.util.Assert;
-
                 var value = this.data.pop();
 
                 Assert.that(this.data, hasSize(4));
@@ -52,8 +50,6 @@
             },
 
             testPush : function () {
-                var Assert = YAHOO.util.Assert;
-
                 this.data.push(5);
 
                 Assert.that(this.data, hasSize(6));
