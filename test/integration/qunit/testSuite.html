@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <script type="text/javascript" src="assets/jquery.js"></script>
+    <link rel="stylesheet" href="assets/testsuite.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../../../build/jshamcrest.js"></script>
+    
+    <title>JsHamcrest - QUnit Integration Test</title>
+
+    <script type="text/javascript">
+        JsHamcrest.Integration.QUnit();
+
+        $(document).ready(function(){
+
+            test("a basic test example", function() {
+                assertThat(5, between(0).and(10), "This test is fine");
+
+                var value = "hello";
+                assertThat("hello", equalTo(value), "We expect value to be hello" );
+            });
+
+        module("First");
+
+        test("first test within module", function() {
+            assertThat(true, equalTo(true), "Another fine test");
+            assertThat(true, not(nil()), "All pass");
+        });
+
+        test("second test within module", function() {
+            assertThat(true, both(bool()).and(equalTo(true)), "All pass");
+        });
+
+        module("Second");
+
+        test("some other test", function() {
+            expect(2);
+            assertThat(5, not(odd()), "We expect this test to fail");
+            assertThat(5, number());
+        });
+  });
+  </script>
+  
+</head>
+<body>
+    <h1>JsHamcrest - QUnit Integration Test</h1>
+    <h2 id="banner"></h2>
+    <h2 id="userAgent"></h2>
+    <ol id="tests"></ol>
+    <div id="main"></div>
+    <script type="text/javascript" src="assets/testrunner.js"></script>
+</body>
+</html>
+

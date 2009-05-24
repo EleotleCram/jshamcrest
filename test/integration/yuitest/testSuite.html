@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>JsHamcrest - YUITest Integration Test</title>
+
+    <style type="text/css">
+        body {
+        	margin:0;
+        	padding:0;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="assets/logger/assets/skins/sam/logger.css" />
+    <link rel="stylesheet" type="text/css" href="assets/yuitest/assets/skins/sam/yuitest.css" />
+    <script type="text/javascript" src="assets/yahoo-dom-event.js"></script>
+
+    <script type="text/javascript" src="assets/logger/logger-min.js"></script>
+    <script type="text/javascript" src="assets/yuitest/yuitest-min.js"></script>
+    <script type="text/javascript" src="../../../build/jshamcrest.js"></script>
+</head>
+
+<body class=" yui-skin-sam">
+
+    <h1>JsHamcrest - YUITest Integration Test</h1>
+
+    <div id="testLogger"></div>
+    
+    <script type="text/javascript">
+        JsHamcrest.Integration.YUITest();
+
+        YAHOO.namespace("example.yuitest");
+
+        YAHOO.example.yuitest.ArrayTestCase = new YAHOO.tool.TestCase({
+            name : "Array Tests",
+
+            setUp : function () {
+                this.data = [0,1,2,3,4]
+            },
+
+            tearDown : function () {
+                delete this.data;
+            },
+
+            testPop : function () {
+                var Assert = YAHOO.util.Assert;
+
+                var value = this.data.pop();
+
+                Assert.that(this.data, hasSize(4));
+                Assert.that(value, equalTo(4));
+            },
+
+            testPush : function () {
+                var Assert = YAHOO.util.Assert;
+
+                this.data.push(5);
+
+                Assert.that(this.data, hasSize(6));
+                Assert.that(this.data[5], equalTo(5));
+            },
+
+            testSplice : function () {
+                this.data.splice(2, 1, 6, 7);
+
+                Assert.that(this.data, hasSize(6));
+                Assert.that(this.data[2], equalTo(6));
+                Assert.that(this.data[3], equalTo(7));
+            },
+
+            testEmptiness: function() {
+                Assert.that(this.data, not(empty()));
+            },
+
+            testFalseAssertion: function() {
+                Assert.that(this.data, is(empty()), "We expect this test to fail");
+            }
+        });    
+
+        YAHOO.example.yuitest.ExampleSuite = new YAHOO.tool.TestSuite("Test suite");
+        YAHOO.example.yuitest.ExampleSuite.add(YAHOO.example.yuitest.ArrayTestCase);
+
+        YAHOO.util.Event.onDOMReady(function (){
+            var logger = new YAHOO.tool.TestLogger("testLogger");
+            YAHOO.tool.TestRunner.add(YAHOO.example.yuitest.ExampleSuite);
+            YAHOO.tool.TestRunner.run();
+        });
+    </script>
+</body>
+</html>
+
