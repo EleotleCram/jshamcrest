@@ -1,8 +1,9 @@
 # Vim swap file
 **.swp
 
-# Build directory
+# Build/dist directory
 build/**
+dist/**
 
 # Doc directory
 doc/**

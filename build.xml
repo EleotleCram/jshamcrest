@@ -1,5 +1,8 @@
-<project name="JsHamcrest" default="build" basedir=".">
+<project name="JsHamcrest" default="basic" basedir=".">
     <property file="build.properties"/>
+
+    <property name="DIST_V" value="${BUILD_DIR}/${NAME_V}.js"/>
+    <property name="DIST_PACK_V" value="${BUILD_DIR}/${NAME_V}-minified.js"/>
 
     <taskdef resource="net/sf/antcontrib/antcontrib.properties">
         <classpath>
@@ -31,10 +34,11 @@
 
     <target name="clean">
         <delete dir="${BUILD_DIR}"/>
+        <delete dir="${DIST_DIR}"/>
     </target>
 
-    <target name="build" depends="clean" description="Main build target, concatenates source files and replaces special tokens">
-        <property name="DIST" value="${BUILD_DIR}/jshamcrest.js"/>
+    <target name="basic" description="Creates the basic script file">
+        <property name="DIST" value="${BUILD_DIR}/${NAME}.js"/>
         <echo message="Creating ${DIST}" />
         <mkdir dir="${BUILD_DIR}" />
         <concat destfile="${DIST}">
@@ -46,18 +50,18 @@
             <fileset dir="${SRC_DIR}" includes="collection.js"/>
             <fileset dir="${SRC_DIR}" includes="integration.js"/>
         </concat>
-
         <replaceregexp match="@VERSION" replace="${VERSION}" flags="g" byline="true" file="${DIST}"/>
         <replaceregexp match="@DATE" replace="${DATE}" file="${DIST}"/>
         <replaceregexp match="@REV" replace="${REV}" file="${DIST}"/>
+        <copy file="${DIST}" tofile="${DIST_V}"/>
+        <echo message="Basic version created at ${DIST}"/>
     </target>
     
-    <target name="test" depends="build" description="Run the test suite using Rhino">
+    <target name="test" depends="basic" description="Run the test suite using Rhino">
         <echo message="Running test suite"/>
         <java jar="${LIB_DIR}/js.jar" dir="test" fork="true" resultproperty="exitCode">
             <arg value="testSuite.js"/>
         </java>
-
         <fail message="Test Suite failed">
             <condition>
                 <not>
@@ -67,18 +71,19 @@
         </fail>
     </target>
     
-    <target name="pack" depends="build" description="Remove all comments and whitespace and compress">
-        <property name="DIST_PACK" value="${BUILD_DIR}/jshamcrest_minified.js"/>
+    <target name="pack" depends="basic" description="Remove all comments and whitespace and compress">
+        <property name="DIST_PACK" value="${BUILD_DIR}/${NAME}-minified.js"/>
         <echo message="Packing ${DIST}"/>
         <java jar="${APP_DIR}/yuicompressor.jar" fork="true">
             <arg value="-o"/>
             <arg value="${DIST_PACK}"/>
             <arg value="${DIST}"/>
         </java>
+        <copy file="${DIST_PACK}" tofile="${DIST_PACK_V}"/>
         <echo message="Packed version created at ${DIST_PACK}"/>
     </target>
 
-    <target name="doc" depends="build" description="Generate API documentation">
+    <target name="doc" depends="basic" description="Generate API documentation">
         <echo message="Creating API docs"/>
         <jsdoctoolkit jsdochome="${APP_DIR}/jsdoc-toolkit/" template="outline" outputdir="${API_DIR}">
             <source file="${SRC_DIR}/jshamcrest.js"/>
@@ -92,7 +97,22 @@
         <echo message="API docs created at ${API_DIR}"/>
     </target>
 
-    <target name="all" depends="test,pack,doc">
+    <target name="build" depends="test,doc" description="Performs the build">
         <echo message="Build complete."/>
+    </target>
+
+    <target name="dist" depends="pack,doc" description="Generates files for distribution">
+        <property name="API_DOC_V" value="${DIST_DIR}/${NAME_V}-api-doc"/>
+        <mkdir dir="${DIST_DIR}"/>
+        <copy file="${DIST_V}" todir="${DIST_DIR}"/>
+        <copy file="${DIST_PACK_V}" todir="${DIST_DIR}"/>
+        <copy todir="${API_DOC_V}">
+            <fileset dir="${API_DIR}"/>
+        </copy>
+        <zip destfile="${API_DOC_V}.zip">
+            <zipfileset dir="${API_DIR}" prefix="${NAME_V}-api-doc"/>
+        </zip>
+        <delete dir="${API_DOC_V}"/>
+        <echo message="Created files for distribution at ${DIST_DIR}"/>
     </target>
 </project>

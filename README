@@ -145,10 +145,7 @@ download Ant and get further instructions on how to install it in your system:
 
 After that, execute the following command line to perform the complete build:
 
-    $ ant all
-
-Doing this, the .js files built will be available inside the 'build' directory.
-The API documentation will be available inside the 'doc/api' directory.
+    $ ant build
 
 
 Thanks to...
