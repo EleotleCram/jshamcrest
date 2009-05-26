@@ -43,12 +43,12 @@ JsHamcrest.Matchers.hasItem = function(matcher) {
 };
 
 /**
- * The actual value should be an array and it must contain at least one value
- * that matches each given value or matcher to be sucessful. Ex: <p>
+ * The actual value should be an array and the given values or matchers must
+ * match at least one item to be sucessful. Ex: <p>
  *
  * <pre>
  * assertThat([1,2,3], hasItems(2, 3));
- * assertThat([1,2,3], hasItems(greaterThanOrEqualTo(2)));
+ * assertThat([1,2,3], hasItems(greaterThan(2)));
  * </pre>
  *
  * @param {object...} arguments Values or matchers.

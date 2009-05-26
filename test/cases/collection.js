@@ -38,7 +38,7 @@ new TestRunner({
     }},
 
     testHasItemsWithNoMatchingValues: function() { with(this) {
-        assert(!hasItems(lessThan(0)).matches(array));
+        assert(hasItems(lessThan(2)).matches(array));
         assert(!hasItems(equalTo([4])).matches(array));
     }},
 

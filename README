@@ -36,7 +36,43 @@ supported framework can be found in the API documentation
 Usage
 -----
 
-TODO
+Here goes a list containing a subset of all available assertion matchers.
+Please read the API documentation to see all matchers and instructions on how
+to use them:
+
+- Core matchers:
+    assertThat(10, is(equalTo(10)), "10 == 10");
+    assertThat(10, not(equalTo(20)), "10 != 20");
+    assertThat(myObj, anything(), "myObj should by anything, we don't care");
+    assertThat(myObj, nil(), "myObj == null");
+    assertThat(myObject, sameAs(anotherObj), "myObject === anotherObject");
+    assertThat(myFunction, raises('MyException'), "myFunction should raise an exception");
+    assertThat(10, both(greaterThan(5)).and(lessThan(20)), "10 > 5 && 10 < 20");
+    assertThat(10, either(lessThan(20)).or(greaterThan(50)), "10 < 20 || 10 > 50");
+
+- Numbers:
+    assertThat(10, greaterThan(5), "10 > 5");
+    assertThat(10, greaterThanOrEqualTo(5), "10 >= 5");
+    assertThat(5, lessThan(10), "5 < 10");
+    assertThat(5, lessThanOrEqualTo(10), "5 <= 10");
+    assertThat(Math.sqrt(-1), notANumber(), "isNaN(Math.sqrt(-1))");
+    assertThat(5, between(4).and(7), "5 >= 4 && 5 <= 7");
+
+- Text:
+    assertThat('str', equalIgnoringCase('Str'), "Compare 'str' and 'Str' ignoring case");
+    assertThat('string', containsString('tri'), "'tri' should be a substring of 'string'");
+    assertThat('string', startsWith('str'), "'string' should start with 'str'");
+    assertThat('string', endsWith('ring'), "'string' should end with 'ring'");
+    assertThat('0xa4f2c', matches(/\b0[xX][0-9a-fA-F]+\b/), "String should match an hexadecimal number");
+
+- Object:
+    assertThat(myObj, hasMember('name'), "myObj have a property/function called 'name'");
+    assertThat(myObj, instanceOf(Array), "myObj instanceof Array");
+
+- Collection:
+    assertThat([1,2,3], hasItems(2, 3), "Array should have items == 2 and 3");
+    assertThat([1,2,3], hasItems(greaterThan(2)), "Array should have at least one item > 2");
+    assertThat([1,2,3], hasSize(lessThan(5)), "Array size should be < 5");
 
 
 Building

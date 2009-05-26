@@ -119,7 +119,7 @@ JsHamcrest.Matchers.equalTo = function(expected) {
  * Useless always-match matcher. Ex: <p>
  *
  * <pre>
- * assertThat(myObj, is(anything())); // I don't actually care about myObj
+ * assertThat(myObj, anything()); // I don't actually care about myObj
  * </pre>
  *
  * @return {JsHamcrest.SimpleMatcher} 'anything' matcher.
@@ -270,10 +270,10 @@ JsHamcrest.Matchers.either = function(matcher) {
  * operator (short-circuiting). Ex: <p>
  *
  * <pre>
- * assertThat(5, allOf([equalTo(0), lessThan(10)]));
- * assertThat(5, allOf([0, lessThan(10)]));
- * assertThat(5, allOf(equalTo(0), lessThan(10)));
- * assertThat(5, allOf(0, lessThan(10)));
+ * assertThat(5, allOf([greaterThan(0), lessThan(10)]));
+ * assertThat(5, allOf([5, lessThan(10)]));
+ * assertThat(5, allOf(greaterThan(0), lessThan(10)));
+ * assertThat(5, allOf(5, lessThan(10)));
  * </pre>
  *
  * @param {array} arguments List of delegate matchers.
