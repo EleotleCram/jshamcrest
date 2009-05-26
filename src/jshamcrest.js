@@ -48,12 +48,12 @@ JsHamcrest = {
      * value.
      * @param {string} message Message that describes the assertion, if
      * necessary.
-     * @param {function} pass Function to be called when the assertion
-     * succeeds.
      * @param {function} fail Function to be called when the assertion fails.
      * @return {JsHamcrest.Description} Test result description.
+     * @param {function} pass Function to be called when the assertion
+     * succeeds.
      */
-    assertThat: function(actual, matcher, message, pass, fail) {
+    assertThat: function(actual, matcher, message, fail, pass) {
         var description = new JsHamcrest.Description();
         var matchers = JsHamcrest.Matchers;
 
@@ -69,17 +69,21 @@ JsHamcrest = {
 
         if (!matcher.matches(actual)) {
             if (message) {
-                description.append(message).append('.');
+                description.append(message).append('. ');
             }
-            description.append('\nExpected: ');
+            description.append('Expected ');
             matcher.describeTo(description);
-            description.append('\n     got: ').appendLiteral(actual).append('\n');
+            description.append(' but was ').appendLiteral(actual);
             fail(description.get());
         } else {
             if (message) {
                 description.append(message).append(': ');
             }
-            pass(description.append('Success').get());
+            description.append('Success');
+
+            if (pass) {
+                pass(description.get());
+            }
         }
         return description;
     },
