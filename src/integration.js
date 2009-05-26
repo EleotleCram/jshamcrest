@@ -58,48 +58,47 @@ JsHamcrest.Integration = {
      * <pre>
      *     CalculatorTest = TestCase("CalculatorTest");
      *
-     *     CalculatorTest.prototype.setUp = function() {
-     *         this.calc = new MyCalculator();
-     *     };
-     *
      *     CalculatorTest.prototype.testAdd = function() {
-     *         var result = this.calc.add(2, 3);
-     *         assertThat(result, equalTo(5));
+     *         var calc = new MyCalculator();
+     *         assertThat(calc.add(2,3), equalTo(5));
      *     };
      * </pre>
+     *
+     * @param {object} params Configuration object.
+     * @param {object} [params.scope=window] Copies all test matcher functions
+     * to the given scope.
      */
-    JsTestDriver: function() {
-        var target = window;
+    JsTestDriver: function(params) {
+        params = params ? params : {};
+        var target = params.scope || window;
 
         JsHamcrest.Integration._copyMatchers(target);
 
         /**
-         * Assertion method exposed to JsUnitTest.
+         * Function called when an assertion fails.
+         * @ignore
+         */
+        var _fail = function(message) {
+            var exc = new Error(message);
+            exc.name = 'AssertError';
+
+            // Removes all jshamcrest-related entries from error stack
+            var stack = exc.stack.split('\n');
+            var newStack = '';
+            for (var i = 0; i < stack.length; i++) {
+                if (!/jshamcrest*\.js\:/i.test(stack[i])) {
+                    newStack += stack[i] + '\n';
+                }
+            }
+            exc.stack = newStack;
+            throw exc;
+        };
+
+        /**
+         * Assertion method exposed to JsTestDriver.
          * @ignore
          */
         target.assertThat = function (actual, matcher, message) {
-            var self = this;
-
-            /**
-             * Function called when an assertion fails.
-             * @ignore
-             */
-            var _fail = function(message) {
-                var exc = new Error(message);
-                exc.name = 'AssertError';
-
-                // Removes all jshamcrest-related entries from error stack
-                var stack = exc.stack.split('\n');
-                var newStack = '';
-                for (var i = 0; i < stack.length; i++) {
-                    if (!/jshamcrest*\.js\:/i.test(stack[i])) {
-                        newStack += stack[i] + '\n';
-                    }
-                }
-                exc.stack = newStack;
-                throw exc;
-            };
-
             return JsHamcrest.assertThat(actual, matcher, message, _fail);
         };
     },
@@ -124,24 +123,28 @@ JsHamcrest.Integration = {
      *     &lt;script type="text/javascript"&gt;
      *         new Test.Unit.Runner({
      *             setup: function() {
-     *                 this.calc = new MyCalculator();
      *             },
      *
      *             tearDown: function() {
      *             },
      *
      *             testAdd: function() { with(this) {
-     *                 var result = calc.add(2, 3);
-     *                 assertThat(result, equalTo(5));
+     *                 var calc = new MyCalculator();
+     *                 assertThat(calc.add(2,3), equalTo(5));
      *             }},
      *
      *             // More tests here...
      *         }, {'testLog':'myLog'});
      *     &lt;/script&gt;
      * </pre>
+     *
+     * @param {object} params Configuration object.
+     * @param {object} [params.scope=Testcase.prototype] Copies all test
+     * matcher functions to the given scope.
      */
-    JsUnitTest: function() {
-        var target = JsUnitTest.Unit.Testcase.prototype;
+    JsUnitTest: function(params) {
+        params = params ? params : {};
+        var target = params.scope || JsUnitTest.Unit.Testcase.prototype;
 
         JsHamcrest.Integration._copyMatchers(target);
 
@@ -195,8 +198,7 @@ JsHamcrest.Integration = {
      *         CalculatorTestCase = new YAHOO.tool.TestCase({
      *             name: "Calculator test case",
      *
-     *             setup: function() {
-     *                 this.calc = new MyCalculator();
+     *             setUp: function() {
      *             },
      *
      *             teardown: function() {
@@ -208,35 +210,39 @@ JsHamcrest.Integration = {
      *             // intrusive and more natural.
      *
      *             testAdd: function() {
-     *                 var result = this.calc.add(2, 3);
-     *                 Assert.that(result, equalTo(5));
+     *                 var calc = new MyCalculator();
+     *                 Assert.that(calc.add(2,3), equalTo(5));
      *             },
      *
      *             // More tests here...
      *         });
      *     &lt;/script&gt;
      * </pre>
+     *
+     * @param {object} params Configuration object.
+     * @param {object} [params.scope=window] Copies all test matcher functions
+     * to the given scope.
      */
-    YUITest: function() {
-        var target = window;
+    YUITest: function(params) {
+        params = params ? params : {};
+        var target = params.scope || window;
 
         JsHamcrest.Integration._copyMatchers(target);
         target.Assert = YAHOO.util.Assert;
+
+        /**
+         * Function called when an assertion fails.
+         * @ignore
+         */
+        var fail = function(message) {
+            YAHOO.util.Assert.fail(message);
+        };
 
         /**
          * Assertion method exposed to YUITest.
          * @ignore
          */
         YAHOO.util.Assert.that = function(actual, matcher, message) {
-
-            /**
-             * Function called when an assertion fails.
-             * @ignore
-             */
-            var fail = function(message) {
-                YAHOO.util.Assert.fail(message);
-            };
-
             return JsHamcrest.assertThat(actual, matcher, message, fail);
         };
     },
@@ -256,11 +262,9 @@ JsHamcrest.Integration = {
      *         JsHamcrest.Integration.QUnit();
      *
      *         $(document).ready(function(){
-     *             var calc = new MyCalculator();
-     *
      *             test("Calculator should add two numbers", function() {
-     *                 var result = calc.add(2, 3);
-     *                 assertThat(result, equalTo(5));
+     *                 var calc = new MyCalculator();
+     *                 assertThat(calc.add(2,3), equalTo(5));
      *             });
      *
      *             // More tests here...
@@ -272,35 +276,94 @@ JsHamcrest.Integration = {
      *     &lt;!-- QUnit and dependencies --&gt;
      *     &lt;script type="text/javascript" src="testrunner.js"&gt;&lt;/script&gt;
      * </pre>
+     *
+     * @param {object} params Configuration object.
+     * @param {object} [params.scope=window] Copies all test matcher functions
+     * to the given scope.
      */
-    QUnit: function() {
-        var target = window;
+    QUnit: function(params) {
+        params = params ? params : {};
+        var target = params.scope || window;
 
         JsHamcrest.Integration._copyMatchers(target);
+
+        /**
+         * Function called when an assertion executes successfully.
+         * @ignore
+         */
+        var pass = function(message) {
+            QUnit.ok(true, message);
+        };
+
+        /**
+         * Function called when an assertion fails.
+         * @ignore
+         */
+        var fail = function(message) {
+            QUnit.ok(false, message);
+        };
 
         /**
          * Assertion method exposed to QUnit.
          * @ignore
          */
         target.assertThat = function(actual, matcher, message) {
-
-            /**
-             * Function called when an assertion executes successfully.
-             * @ignore
-             */
-            var pass = function(message) {
-                QUnit.ok(true, message);
-            };
-
-            /**
-             * Function called when an assertion fails.
-             * @ignore
-             */
-            var fail = function(message) {
-                QUnit.ok(false, message);
-            };
-
             return JsHamcrest.assertThat(actual, matcher, message, fail, pass);
+        };
+    },
+
+    /**
+     * JsUnity integration. To plug JsHamcrest to JsUnity, follow JsUnity
+     * installation and configuration instructions and then edit the test
+     * suite file as follows: <p>
+     *
+     * <pre>
+     *     // Some test suite
+     *     function CalculatorTestSuite() {
+     *         function testA() {
+     *             var calc = new MyCalculator();
+     *             assertThat(calc.add(2,3), equalTo(5));
+     *         }
+     *
+     *         // More tests here...
+     *     }
+     *
+     *     // Don't forget to activate the JsUnity integration
+     *     JsHamcrest.Integration.JsUnity();
+     *
+     *     var results = jsUnity.run(CalculatorTestSuite);
+     * </pre>
+     *
+     * @param {object} params Configuration object.
+     * @param {object} [params.scope=jsUnity.env.defaultScope] Copies all test
+     * matcher functions to the given scope.
+     * @param {object} [params.attachAssertions=false] Whether JsHamcrest
+     * should also copy JsUnity's assertion functions to the given scope.
+     */
+    JsUnity: function(params) {
+        params = params ? params : {};
+        var target = params.scope || jsUnity.env.defaultScope;
+        var assertions = params.attachAssertions || false;
+
+        JsHamcrest.Integration._copyMatchers(target);
+        if (assertions) {
+            jsUnity.attachAssertions(target);
+        }
+
+        /**
+         * Function called when an assertion fails.
+         * @ignore
+         */
+        var fail = function(message) {
+            throw message;
+        };
+
+        /**
+         * Assertion method exposed to JsUnity.
+         * @ignore
+         */
+        target.assertThat = function(actual, matcher, message) {
+            return JsHamcrest.assertThat(actual, matcher, message, fail);
         };
     }
 };

@@ -260,15 +260,15 @@ JsHamcrest = {
          */
         this.appendLiteral = function(literal) {
             if (literal === undefined) {
-                this.append('<undefined>');
+                this.append('undefined');
             } else if (literal === null) {
-                this.append('<null>');
+                this.append('null');
             } else if (literal instanceof Array) {
                 this.appendValueList('[', ', ', ']', literal);
             } else if (typeof literal == 'string') {
                 this.append('"' + literal + '"');
             } else if (literal instanceof Function) {
-                this.append('<Function>');
+                this.append('Function');
             } else {
                 this.append(literal);
             }

@@ -83,7 +83,7 @@ new TestRunner({
             }
         };
         var value = [obj, '1', 2, null, undefined, [], function() { }];
-        var expected = '[Object, "1", 2, <null>, <undefined>, [], <Function>]';
+        var expected = '[Object, "1", 2, null, undefined, [], Function]';
 
         description.appendLiteral(value);
         assertEqual(expected, description.get());
@@ -104,6 +104,6 @@ new TestRunner({
 
     testDescriptionAppendValueList: function() { with(this) {
         description.appendValueList('[', '-', ']', [1,'a',null,undefined]);
-        assertEqual('[1-"a"-<null>-<undefined>]', description.get());
+        assertEqual('[1-"a"-null-undefined]', description.get());
     }}
 }, {'logger':testLogger, 'testLog': 'mainLog'});
