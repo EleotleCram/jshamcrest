@@ -23,14 +23,20 @@ and its API documentation:
     http://github.com/danielfm/jshamcrest/downloads
 
 
-Usage
------
+Installation
+------------
 
 In order to use JsHamcrest with a supported JavaScript unit test framework,
 just follow the usual installation/configuration instructions of the chosen
 framework and plug JsHamcrest to it. Configuration instructions for each
 supported framework can be found in the API documentation
 (JsHamcrest.Integration namespace).
+
+
+Usage
+-----
+
+TODO
 
 
 Building
