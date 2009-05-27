@@ -12,32 +12,15 @@
         JsHamcrest.Integration.QUnit();
 
         $(document).ready(function(){
+            module("Integration");
 
-            test("a basic test example", function() {
-                assertThat(5, between(0).and(10), "This test is fine");
-
-                var value = "hello";
-                assertThat("hello", equalTo(value), "We expect value to be hello" );
+            test("a successful assertion", function() {
+                assertThat(5, between(0).and(10), "This assertion must succeed");
             });
 
-        module("First");
-
-        test("first test within module", function() {
-            assertThat(true, equalTo(true), "Another fine test");
-            assertThat(true, not(nil()), "All pass");
-        });
-
-        test("second test within module", function() {
-            assertThat(true, both(bool()).and(equalTo(true)), "All pass");
-        });
-
-        module("Second");
-
-        test("some other test", function() {
-            expect(2);
-            assertThat(5, not(odd()), "We expect this test to fail");
-            assertThat(5, number());
-        });
+            test("a failed assertion", function() {
+                assertThat([], not(empty()), "This assertion must fail");
+            });
   });
   </script>
   
