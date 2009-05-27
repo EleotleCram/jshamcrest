@@ -313,7 +313,7 @@ JsHamcrest.Integration = {
     },
 
     /**
-     * JsUnity integration. To plug JsHamcrest to JsUnity, follow JsUnity
+     * jsUnity integration. To plug JsHamcrest to jsUnity, follow jsUnity
      * installation and configuration instructions and then edit the test
      * suite file as follows: <p>
      *
@@ -328,8 +328,8 @@ JsHamcrest.Integration = {
      *         // More tests here...
      *     }
      *
-     *     // Don't forget to activate the JsUnity integration
-     *     JsHamcrest.Integration.JsUnity();
+     *     // Don't forget to activate the jsUnity integration
+     *     JsHamcrest.Integration.jsUnity();
      *
      *     var results = jsUnity.run(CalculatorTestSuite);
      * </pre>
@@ -338,9 +338,9 @@ JsHamcrest.Integration = {
      * @param {object} [params.scope=jsUnity.env.defaultScope] Copies all test
      * matcher functions to the given scope.
      * @param {object} [params.attachAssertions=false] Whether JsHamcrest
-     * should also copy JsUnity's assertion functions to the given scope.
+     * should also copy jsUnity's assertion functions to the given scope.
      */
-    JsUnity: function(params) {
+    jsUnity: function(params) {
         params = params ? params : {};
         var target = params.scope || jsUnity.env.defaultScope;
         var assertions = params.attachAssertions || false;
@@ -359,7 +359,7 @@ JsHamcrest.Integration = {
         };
 
         /**
-         * Assertion method exposed to JsUnity.
+         * Assertion method exposed to jsUnity.
          * @ignore
          */
         target.assertThat = function(actual, matcher, message) {

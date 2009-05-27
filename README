@@ -7,7 +7,8 @@ JsHamcrest
 JsHamcrest is a JavaScript port of Hamcrest, which provides a library of
 matcher objects (also known as constraints or predicates) allowing 'match'
 rules to be defined declaratively. JsHamcrest integrates out of the box
-with JsTestDriver, JsUnitTest, QUnit and YUITest (and there's more to come!).
+with JsTestDriver, JsUnitTest, JsUnity, QUnit and YUITest (and there's more
+to come!).
 
 This is an open source project licenced under the terms of the Lesser General
 Public License v3.0 and sponsored by Destaquenet Technology Solutions, a
@@ -92,9 +93,12 @@ After that, execute the following command line to perform the complete build:
 Thanks to...
 ------------
 
-    * Hamcrest:   <http://code.google.com/p/hamcrest/>
-    * JsUnitTest: <http://jsunittest.com/>
-    * YUITest:    <http://developer.yahoo.com/yui/yuitest/>
+    * Hamcrest:    <http://code.google.com/p/hamcrest/>
+    * JsTestDriver <http://code.google.com/p/js-test-driver/>
+    * JsUnitTest:  <http://jsunittest.com/>
+    * jsUnity:     <http://jsunity.com/>
+    * QUnit:       <http://docs.jquery.com/QUnit>
+    * YUITest:     <http://developer.yahoo.com/yui/yuitest/>
 
 
 Credits
