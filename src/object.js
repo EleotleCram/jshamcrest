@@ -120,7 +120,7 @@ JsHamcrest.Matchers.object = function() {
  * <pre>
  * assertThat("text", string());
  * assertThat(10, not(string()));
- * <pre>
+ * </pre>
  *
  * @return {JsHamcrest.SimpleMatcher} 'string' matcher.
  */
@@ -150,7 +150,7 @@ JsHamcrest.Matchers.number = function() {
  * assertThat(true, bool());
  * assertThat(false, bool());
  * assertThat("text" not(bool()));
- * <pre>
+ * </pre>
  *
  * @return {JsHamcrest.SimpleMatcher} 'bool' matcher.
  */
