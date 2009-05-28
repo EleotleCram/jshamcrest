@@ -67,5 +67,14 @@ new TestRunner({
         assert(range.matches(10));
         assert(!range.matches(4));
         assert(!range.matches(11));
+    }},
+
+    testCloseTo: function() { with(this) {
+        var close = JsHamcrest.Matchers.closeTo(1.0, 0.5);
+        assert(close.matches(1.0));
+        assert(close.matches(0.5));
+        assert(close.matches(1.5));
+        assert(!close.matches(2.0));
+        assert(!close.matches(0.0));
     }}
 }, {'logger':testLogger, 'testLog': 'numberLog'});

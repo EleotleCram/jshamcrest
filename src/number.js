@@ -173,6 +173,39 @@ JsHamcrest.Matchers.between = function(number) {
 };
 
 /**
+ * Asserts that the actual number is close to the given number, that is, if
+ * the actual number is equal to a number within some range of acceptable error.
+ * Ex: <p>
+ *
+ * <pre>
+ * assertThat(0.5, closeTo(1.0, 0.5));
+ * assertThat(1.0, closeTo(1.0, 0.5));
+ * assertThat(1.5, closeTo(1.0, 0.5));
+ * assertThat(2.0, not(closeTo(1.0, 0.5)));
+ * </pre>
+ *
+ * @param {number} number Number.
+ * @param {number} [delta=0] Acceptable difference range.
+ * @return {JsHamcrest.SimpleMatcher} 'closeTo' matcher.
+ */
+JsHamcrest.Matchers.closeTo = function(number, delta) {
+    if (!delta) {
+        delta = 0;
+    }
+
+    return new JsHamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return (Math.abs(actual - number) - delta) <= 0;
+        },
+
+        describeTo: function(description) {
+            description.append('number within ')
+                  .appendLiteral(delta).append(' of ').appendLiteral(number);
+        }
+    });
+};
+
+/**
  * Creates a number range matcher builder.
  * @class Matcher builder that provides an easy way to create matchers for
  * number ranges.

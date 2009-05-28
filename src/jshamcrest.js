@@ -71,9 +71,12 @@ JsHamcrest = {
             if (message) {
                 description.append(message).append('. ');
             }
+
             description.append('Expected ');
             matcher.describeTo(description);
-            description.append(' but was ').appendLiteral(actual);
+            description.append(' but was ');
+            matcher.describeValueTo(actual, description);
+
             fail(description.get());
         } else {
             if (message) {
@@ -134,6 +137,9 @@ JsHamcrest = {
      * @param {function} params.matches Matcher logic.
      * @param {function} params.describeTo Self description logic. This
      * function is used to create textual descriptions from matcher objects.
+     * @param {function} [params.describeValueTo] This function is used to
+     * describe the actual value of a test assertion. If not provided the
+     * actual value will be described as a literal.
      */
     SimpleMatcher: function(params) {
         params = params || {};
@@ -152,6 +158,11 @@ JsHamcrest = {
          * @param {object} descriptor Descriptor.
          */
         this.describeTo = params.describeTo;
+
+        // Replace the function to describe the actual value
+        if (params.describeValueTo) {
+            this.describeValueTo = params.describeValueTo;
+        }
     },
 
     /**
@@ -318,6 +329,20 @@ JsHamcrest = {
         };
     }
 };
+
+
+/**
+ * Describes the actual value to the given descriptor.
+ * This method is optional and, if it's not present,
+ * the actual value will be described as a JavaScript
+ * literal.
+ * @param {object} actual Actual value.
+ * @param {object} descriptor Descriptor.
+ */
+JsHamcrest.SimpleMatcher.prototype.describeValueTo = function(actual, description) {
+    description.appendLiteral(actual);
+};
+
 
 // CombinableMatcher is a specialization of SimpleMatcher
 JsHamcrest.CombinableMatcher.prototype =
