@@ -76,7 +76,6 @@ JsHamcrest = {
             matcher.describeTo(description);
             description.append(' but was ');
             matcher.describeValueTo(actual, description);
-
             fail(description.get());
         } else {
             if (message) {
