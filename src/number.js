@@ -238,10 +238,16 @@ JsHamcrest.RangeMatcherBuilder = function(params) {
             lesser = end;
         }
 
-        return new JsHamcrest.Matchers.allOf(
-            JsHamcrest.Matchers.greaterThanOrEqualTo(lesser),
-            JsHamcrest.Matchers.lessThanOrEqualTo(greater)
-        );
+        return new JsHamcrest.SimpleMatcher({
+            matches: function(actual) {
+                return actual >= lesser && actual <= greater;
+            },
+
+            describeTo: function(description) {
+                description.append('between ').appendLiteral(lesser)
+                      .append(' and ').appendLiteral(greater);
+            }
+        });
     }
 };
 

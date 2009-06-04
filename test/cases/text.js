@@ -54,7 +54,6 @@ new TestRunner({
         assert(emailAddress().matches('user@domain.com'));
         assert(emailAddress().matches('user.name@domain.com.uk'));
         assert(emailAddress().matches('user.name+tag@domain.com'));
-        assert(emailAddress().matches('user@127.0.0.1');
         assert(!emailAddress().matches('domain'));
         assert(!emailAddress().matches('domain.com'));
         assert(!emailAddress().matches('user@domain'));
