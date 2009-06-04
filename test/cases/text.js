@@ -47,5 +47,17 @@ new TestRunner({
         assert(!matches(regex).matches(''));
         assert(!matches(regex).matches('0x'));
         assert(!matches(regex).matches('0x4head'));
+    }},
+
+    testEmailAddress: function() { with(this) {
+        var emailAddress = JsHamcrest.Matchers.emailAddress;
+        assert(emailAddress().matches('user@domain.com'));
+        assert(emailAddress().matches('user.name@domain.com.uk'));
+        assert(emailAddress().matches('user.name+tag@domain.com'));
+        assert(emailAddress().matches('user@127.0.0.1');
+        assert(!emailAddress().matches('domain'));
+        assert(!emailAddress().matches('domain.com'));
+        assert(!emailAddress().matches('user@domain'));
+        assert(!emailAddress().matches('user&name@domain.com'));
     }}
 }, {'logger':testLogger, 'testLog': 'textLog'});

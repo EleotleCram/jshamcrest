@@ -113,3 +113,28 @@ JsHamcrest.Matchers.matches = function(regex) {
     });
 };
 
+/**
+ * Asserts that the actual value looks like an email address. Ex: <p>
+ *
+ * <pre>
+ * assertThat('user@domain.com', emailAddress());
+ * </pre>
+ *
+ * <b>Notice: this matcher is not fully compliant with RFC2822 due to its
+ * complexity.</b>
+ *
+ * @return {JsHamcrest.SimpleMatcher} 'emailAddress' matcher.
+ */
+JsHamcrest.Matchers.emailAddress = function() {
+    var regex = /^([a-z0-9_\.\-\+])+\@(([a-z0-9\-])+\.)+([a-z0-9]{2,4})+$/i;
+
+    return new JsHamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return regex.test(actual);
+        },
+
+        describeTo: function(description) {
+            description.append('email address');
+        }
+    });
+};
