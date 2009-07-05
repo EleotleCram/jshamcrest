@@ -90,7 +90,7 @@ JsHamcrest.Matchers.not = function(matcher) {
 };
 
 /**
- * The actual number must be equal to the given number to be successful.
+ * The actual value must be equal to the given value to be successful.
  * Ex: <p>
  *
  * <pre>
@@ -119,7 +119,8 @@ JsHamcrest.Matchers.equalTo = function(expected) {
  * Useless always-match matcher. Ex: <p>
  *
  * <pre>
- * assertThat(myObj, anything()); // I don't actually care about myObj
+ * assertThat(myObj, anything());
+ * assertThat(null, anything());
  * </pre>
  *
  * @return {JsHamcrest.SimpleMatcher} 'anything' matcher.

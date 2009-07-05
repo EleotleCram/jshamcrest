@@ -185,6 +185,17 @@ new TestRunner({
         assert(!allOf([lessThan(5), 10]).matches(10));
     }},
 
+    testAllOfShortCircuiting: function() { with(this) {
+        var count = 0;
+        var matcher = new JsHamcrest.SimpleMatcher({
+            matches: function(actual) {
+                return count++ < 1;
+            }
+        });
+        assert(!allOf(matcher, matcher, matcher).matches());
+        assertEqual(2, count);
+    }},
+
     testAnyOfWithValues: function() { with(this) {
         assert(anyOf('10').matches(10));
         assert(anyOf(['10']).matches(10));
@@ -205,5 +216,16 @@ new TestRunner({
         assert(anyOf([lessThan(5), '10']).matches(10));
         assert(!anyOf(12, lessThan(5)).matches(10));
         assert(!anyOf([greaterThan(10), '12']).matches(10));
+    }},
+
+    testAnyOfShortCircuiting: function() { with(this) {
+        var count = 0;
+        var matcher = new JsHamcrest.SimpleMatcher({
+            matches: function(actual) {
+                return count++ < 1;
+            }
+        });
+        assert(anyOf(matcher, matcher, matcher).matches());
+        assertEqual(1, count);
     }}
 }, {'logger':testLogger, 'testLog': 'coreLog'});
