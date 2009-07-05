@@ -27,8 +27,8 @@ JsHamcrest = {
 
     /**
      * Assert method that is capable of handling matchers. If the given matcher
-     * fails, this method registers a failed/error'd assertion within the current
-     * TestCase object. Ex: <p>
+     * fails, this method registers a failed/error'd assertion with the unit
+     * test framework being used. Ex: <p>
      *
      * <pre>
      * // Asserts that something is equal to x
@@ -49,9 +49,9 @@ JsHamcrest = {
      * @param {string} message Message that describes the assertion, if
      * necessary.
      * @param {function} fail Function to be called when the assertion fails.
-     * @return {JsHamcrest.Description} Test result description.
      * @param {function} pass Function to be called when the assertion
      * succeeds.
+     * @return {JsHamcrest.Description} Test result description.
      */
     assertThat: function(actual, matcher, message, fail, pass) {
         var description = new JsHamcrest.Description();
@@ -91,19 +91,19 @@ JsHamcrest = {
     },
 
     /**
-     * Returns if the given object is a matcher.
+     * Returns whether the given object is a matcher.
      * @param {object} obj Object.
-     * @return {boolean} If the given object is a matcher.
+     * @return {boolean} Whether the given object is a matcher.
      */
     isMatcher: function(obj) {
         return obj instanceof JsHamcrest.SimpleMatcher;
     },
 
     /**
-     * Returns if the given arrays are equivalent.
+     * Returns whether the given arrays are equivalent.
      * @param {array} array Array.
      * @param {array} anotherArray Another array.
-     * @return {booelan} If the given arrays are equivalent.
+     * @return {booelan} Whether the given arrays are equivalent.
      */
     isArraysEqual: function(array, anotherArray) {
         if (array instanceof Array || anotherArray instanceof Array) {
