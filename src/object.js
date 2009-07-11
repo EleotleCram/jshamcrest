@@ -2,6 +2,7 @@
  * @fileOverview Provides object-related matchers.
  */
 
+
 /**
  * Asserts that the actual object contains the given member (variable or
  * function). Ex: <p>
@@ -71,7 +72,7 @@ JsHamcrest.Matchers.instanceOf = function(clazz) {
         },
 
         describeTo: function(description) {
-            var className = clazz.name ? clazz.name : 'something else';
+            var className = clazz.name ? clazz.name : 'a class';
             description.append('instance of ').append(className);
         }
     });
@@ -171,3 +172,4 @@ JsHamcrest.Matchers.bool = function() {
 JsHamcrest.Matchers.func = function() {
     return new JsHamcrest.Matchers.typeOf('function');
 };
+

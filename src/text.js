@@ -120,7 +120,7 @@ JsHamcrest.Matchers.matches = function(regex) {
  * assertThat('user@domain.com', emailAddress());
  * </pre>
  *
- * <b>Notice: this matcher is not fully compliant with RFC2822 due to its
+ * <b>Note: this matcher is not fully compliant with RFC2822 due to its
  * complexity.</b>
  *
  * @return {JsHamcrest.SimpleMatcher} 'emailAddress' matcher.
@@ -138,3 +138,4 @@ JsHamcrest.Matchers.emailAddress = function() {
         }
     });
 };
+
