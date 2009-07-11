@@ -67,22 +67,18 @@ JsHamcrest = {
             matcher = matchers.equalTo(matcher);
         }
 
-        if (!matcher.matches(actual)) {
-            if (message) {
-                description.append(message).append('. ');
-            }
+        if (message) {
+            description.append(message).append('. ');
+        }
+        description.append('Expected ');
+        matcher.describeTo(description);
 
-            description.append('Expected ');
-            matcher.describeTo(description);
+        if (!matcher.matches(actual)) {
             description.append(' but was ');
             matcher.describeValueTo(actual, description);
             fail(description.get());
         } else {
-            if (message) {
-                description.append(message).append(': ');
-            }
-            description.append('Success');
-
+            description.append(': Success');
             if (pass) {
                 pass(description.get());
             }

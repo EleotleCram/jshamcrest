@@ -156,6 +156,14 @@ JsHamcrest.Matchers.hasSize = function(matcher) {
 
         describeTo: function(description) {
             description.append('has size ').appendDescriptionOf(matcher);
+        },
+
+        describeValueTo: function(actual, description) {
+            if (actual instanceof Array) {
+                description.append(actual.length);
+            } else {
+                description.appendLiteral(actual);
+            }
         }
     });
 };
