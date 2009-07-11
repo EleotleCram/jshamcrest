@@ -73,6 +73,7 @@ to use them:
 - Collection:
     assertThat([1,2,3], hasItems(2, 3), "Array should have items == 2 and 3");
     assertThat([1,2,3], hasItems(greaterThan(2)), "Array should have at least one item > 2");
+    assertThat([1,2,3], everyItem(greaterThan(0)), "Array should have only items greater than 0");
     assertThat([1,2,3], hasSize(lessThan(5)), "Array size should be < 5");
 
 

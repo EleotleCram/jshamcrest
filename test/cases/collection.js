@@ -75,5 +75,21 @@ new TestRunner({
 
     testHasInvalidSizeWithMatcher: function() { with(this) {
         assert(!hasSize(lessThan(4)).matches(array));
+    }},
+
+    testEveryItemWithValue: function() { with(this) {
+        assert(everyItem(1).matches([1, '1']));
+    }},
+
+    testEveryItemWithMatcher: function() { with(this) {
+        assert(everyItem(greaterThan(0)).matches([1, 2, 3, 4]));
+    }},
+
+    testEveryItemWithInvalidValue: function() { with(this) {
+        assert(!everyItem(0).matches([0, 1]));
+    }},
+
+    testEveryItemWithInvalidMatcher: function() { with(this) {
+        assert(!everyItem(greaterThan(0)).matches([0, 1, 2, 3, 4]));
     }}
 }, {'logger':testLogger, 'testLog': 'collectionLog'});

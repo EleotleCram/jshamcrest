@@ -63,6 +63,44 @@ JsHamcrest.Matchers.hasItems = function() {
 };
 
 /**
+ * The actual value should be an array and the given value or matcher must
+ * match all items to be successful. Ex: <p>
+ *
+ * <pre>
+ * assertThat([1,2,3], everyItem(greaterThan(0)));
+ * </pre>
+ *
+ * @param {matcher} matcher Value or matcher.
+ * @return {JsHamcrest.SimpleMatcher} 'everyItem' matcher.
+ */
+JsHamcrest.Matchers.everyItem = function(matcher) {
+    // Uses 'equalTo' matcher if the given object is not a matcher
+    if (!JsHamcrest.isMatcher(matcher)) {
+        matcher = JsHamcrest.Matchers.equalTo(matcher);
+    }
+
+    return new JsHamcrest.SimpleMatcher({
+        matches: function(actual) {
+            // Should be an array
+            if (!(actual instanceof Array)) {
+                return false;
+            }
+
+            for (var i = 0; i < actual.length; i++) {
+                if (!matcher.matches(actual[i])) {
+                    return false;
+                }
+            }
+            return true;
+        },
+
+        describeTo: function(description) {
+            description.append('every item ').appendDescriptionOf(matcher);
+        }
+    });
+};
+
+/**
  * The given array must contain the actual value to be successful. Ex: <p>
  * 
  * <pre>
