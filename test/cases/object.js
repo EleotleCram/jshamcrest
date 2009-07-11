@@ -47,19 +47,19 @@ new TestRunner({
     }},
 
     testNumber: function() { with(this) {
-        assertThat(number().matches(10));
-        assertThat(number().matches(10.0));
-        assertThat(!number().matches('text'));
+        assert(number().matches(10));
+        assert(number().matches(10.0));
+        assert(!number().matches('text'));
     }},
 
     testBool: function() { with(this) {
-        assertThat(bool().matches(true));
-        assertThat(bool().matches(false));
-        assertThat(!bool().matches('text'));
+        assert(bool().matches(true));
+        assert(bool().matches(false));
+        assert(!bool().matches('text'));
     }},
 
     testFunc: function() { with(this) {
-        assertThat(func().matches(function() { }));
-        assertThat(!func().matches({}));
+        assert(func().matches(function() { }));
+        assert(!func().matches({}));
     }}
 }, {'logger':testLogger, 'testLog': 'objectLog'});
