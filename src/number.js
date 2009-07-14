@@ -248,6 +248,6 @@ JsHamcrest.RangeMatcherBuilder = function(params) {
                       .append(' and ').appendLiteral(greater);
             }
         });
-    }
+    };
 };
 

@@ -1,27 +1,89 @@
 /**
- * @fileOverview Methods to allow integration to major JavaScript testing
- * frameworks.
+ * @fileOverview Methods to allow integration to major JavaScript frameworks.
  */
 
 /**
- * Methods to integrate JsHamcrest to major JavaScript testing frameworks.
+ * Methods to integrate JsHamcrest to major JavaScript frameworks.
  * @namespace
+ * @class
  */
-JsHamcrest.Integration = {
+JsHamcrest.Integration = function() {
 
     /**
-     * Copy all assertion matchers to the given object.
-     * @param {object} target Target object.
+     * Assert method that is capable of handling matchers. If the given matcher
+     * fails, this method registers a failed/error'd assertion with the unit
+     * test framework being used. Ex: <p>
+     *
+     * <pre>
+     * // Asserts that something is equal to x
+     * assertThat(something, equalTo(x));
+     * assertThat(something, equalTo(x), "Some description text");
+     *
+     * // Same here
+     * assertThat(something, x);
+     * assertThat(something, x, "Some description text");
+     *
+     * // Asserts that something evaluates to some value considered truth
+     * assertThat(something);
+     * </pre>
+     *
+     * @param {object} actual Actual value under test.
+     * @param {object} matcher Matcher to assert the correctness of the actual
+     * value.
+     * @param {string} message Message that describes the assertion, if
+     * necessary.
+     * @param {function} fail Function to be called when the assertion fails.
+     * @param {function} pass Function to be called when the assertion
+     * succeeds.
+     * @return {JsHamcrest.Description} Test result description.
      * @private
      */
-    _copyMatchers: function(target) {
-        var source = JsHamcrest.Matchers;
+    function assertThat(actual, matcher, message, fail, pass) {
+        var description = new JsHamcrest.Description();
+        var matchers = JsHamcrest.Matchers;
+
+        // Actual value must be any value considered non-null by JavaScript
+        if (matcher == null) {
+            matcher = matchers.truth();
+        }
+
+        // Creates a 'equalTo' matcher if 'matcher' is not a valid matcher
+        if (!JsHamcrest.isMatcher(matcher)) {
+            matcher = matchers.equalTo(matcher);
+        }
+
+        if (message) {
+            description.append(message).append('. ');
+        }
+
+        description.append('Expected ');
+        matcher.describeTo(description);
+
+        if (!matcher.matches(actual)) {
+            description.append(' but was ');
+            matcher.describeValueTo(actual, description);
+            fail(description.get());
+        } else {
+            description.append(': Success');
+            if (pass) {
+                pass(description.get());
+            }
+        }
+        return description;
+    }
+
+    /**
+     * Copy all members of an object to another.
+     * @param {object} source Source object.
+     * @param {object} target Target object.
+     */
+    this.copyMembers = function(source, target) {
         for (method in source) {
             if (!(method in target)) {
                 target[method] = source[method];
             }
         }
-    },
+    };
 
     /**
      * JsTestDriver integration. To plug JsHamcrest to JsTestDriver, follow
@@ -68,11 +130,11 @@ JsHamcrest.Integration = {
      * @param {object} [params.scope=window] Copies all test matcher functions
      * to the given scope.
      */
-    JsTestDriver: function(params) {
+    this.JsTestDriver = function(params) {
         params = params ? params : {};
         var target = params.scope || window;
 
-        JsHamcrest.Integration._copyMatchers(target);
+        this.copyMembers(JsHamcrest.Matchers, target);
 
         /**
          * Function called when an assertion fails.
@@ -99,9 +161,9 @@ JsHamcrest.Integration = {
          * @ignore
          */
         target.assertThat = function (actual, matcher, message) {
-            return JsHamcrest.assertThat(actual, matcher, message, _fail);
+            return assertThat(actual, matcher, message, _fail);
         };
-    },
+    };
 
     /**
      * JsUnitTest integration. To plug JsHamcrest to JsUnitTest, follow
@@ -142,11 +204,11 @@ JsHamcrest.Integration = {
      * @param {object} [params.scope=Testcase.prototype] Copies all test
      * matcher functions to the given scope.
      */
-    JsUnitTest: function(params) {
+    this.JsUnitTest = function(params) {
         params = params ? params : {};
         var target = params.scope || JsUnitTest.Unit.Testcase.prototype;
 
-        JsHamcrest.Integration._copyMatchers(target);
+        this.copyMembers(JsHamcrest.Matchers, target);
 
         /**
          * Assertion method exposed to JsUnitTest.
@@ -171,9 +233,9 @@ JsHamcrest.Integration = {
                 self.fail(message);
             };
 
-            return JsHamcrest.assertThat(actual, matcher, message, fail, pass);
+            return assertThat(actual, matcher, message, fail, pass);
         };
-    },
+    };
 
     /**
      * YUITest (Yahoo UI) integration. To plug JsHamcrest to YUITest, follow
@@ -223,11 +285,11 @@ JsHamcrest.Integration = {
      * @param {object} [params.scope=window] Copies all test matcher functions
      * to the given scope.
      */
-    YUITest: function(params) {
+    this.YUITest = function(params) {
         params = params ? params : {};
         var target = params.scope || window;
 
-        JsHamcrest.Integration._copyMatchers(target);
+        this.copyMembers(JsHamcrest.Matchers, target);
         target.Assert = YAHOO.util.Assert;
 
         /**
@@ -243,9 +305,9 @@ JsHamcrest.Integration = {
          * @ignore
          */
         YAHOO.util.Assert.that = function(actual, matcher, message) {
-            return JsHamcrest.assertThat(actual, matcher, message, fail);
+            return assertThat(actual, matcher, message, fail);
         };
-    },
+    };
 
     /**
      * QUnit (JQuery) integration. To plug JsHamcrest to QUnit, follow QUnit
@@ -281,11 +343,11 @@ JsHamcrest.Integration = {
      * @param {object} [params.scope=window] Copies all test matcher functions
      * to the given scope.
      */
-    QUnit: function(params) {
+    this.QUnit = function(params) {
         params = params ? params : {};
         var target = params.scope || window;
 
-        JsHamcrest.Integration._copyMatchers(target);
+        this.copyMembers(JsHamcrest.Matchers, target);
 
         /**
          * Function called when an assertion executes successfully.
@@ -308,9 +370,9 @@ JsHamcrest.Integration = {
          * @ignore
          */
         target.assertThat = function(actual, matcher, message) {
-            return JsHamcrest.assertThat(actual, matcher, message, fail, pass);
+            return assertThat(actual, matcher, message, fail, pass);
         };
-    },
+    };
 
     /**
      * jsUnity integration. To plug JsHamcrest to jsUnity, follow jsUnity
@@ -340,12 +402,12 @@ JsHamcrest.Integration = {
      * @param {object} [params.attachAssertions=false] Whether JsHamcrest
      * should also copy jsUnity's assertion functions to the given scope.
      */
-    jsUnity: function(params) {
+    this.jsUnity = function(params) {
         params = params ? params : {};
         var target = params.scope || jsUnity.env.defaultScope;
         var assertions = params.attachAssertions || false;
 
-        JsHamcrest.Integration._copyMatchers(target);
+        this.copyMembers(JsHamcrest.Matchers, target);
         if (assertions) {
             jsUnity.attachAssertions(target);
         }
@@ -363,8 +425,11 @@ JsHamcrest.Integration = {
          * @ignore
          */
         target.assertThat = function(actual, matcher, message) {
-            return JsHamcrest.assertThat(actual, matcher, message, fail);
+            return assertThat(actual, matcher, message, fail);
         };
-    }
+    };
+    
+    return this;
 };
+JsHamcrest.Integration = new JsHamcrest.Integration();
 

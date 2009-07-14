@@ -1,8 +1,8 @@
 /*
  * JsHamcrest v@VERSION
- * http://github.com/danielfm/jshamcrest/tree/master
+ * http://jshamcrest.destaquenet.com
  *
- * Hamcrest port to JavaScript.
+ * Library of matcher objects for JavaScript.
  *
  * Copyright (c) 2009 Daniel Fernandes Martins
  * Licensed under the BSD license.
@@ -20,71 +20,11 @@
  * @namespace
  */
 JsHamcrest = {
+
     /**
      * Library version.
      */
     version: '@VERSION',
-
-    /**
-     * Assert method that is capable of handling matchers. If the given matcher
-     * fails, this method registers a failed/error'd assertion with the unit
-     * test framework being used. Ex: <p>
-     *
-     * <pre>
-     * // Asserts that something is equal to x
-     * assertThat(something, equalTo(x));
-     * assertThat(something, equalTo(x), "Some description text");
-     *
-     * // Same here
-     * assertThat(something, x);
-     * assertThat(something, x, "Some description text");
-     *
-     * // Asserts that something evaluates to some value considered truth
-     * assertThat(something);
-     * </pre>
-     *
-     * @param {object} actual Actual value under test.
-     * @param {object} matcher Matcher to assert the correctness of the actual
-     * value.
-     * @param {string} message Message that describes the assertion, if
-     * necessary.
-     * @param {function} fail Function to be called when the assertion fails.
-     * @param {function} pass Function to be called when the assertion
-     * succeeds.
-     * @return {JsHamcrest.Description} Test result description.
-     */
-    assertThat: function(actual, matcher, message, fail, pass) {
-        var description = new JsHamcrest.Description();
-        var matchers = JsHamcrest.Matchers;
-
-        // Actual value must be any value considered non-null by JavaScript
-        if (matcher == null) {
-            matcher = matchers.truth();
-        }
-
-        // Creates a 'equalTo' matcher if 'matcher' is not a valid matcher
-        if (!JsHamcrest.isMatcher(matcher)) {
-            matcher = matchers.equalTo(matcher);
-        }
-
-        if (message) {
-            description.append(message).append('. ');
-        }
-        description.append('Expected ');
-        matcher.describeTo(description);
-
-        if (!matcher.matches(actual)) {
-            description.append(' but was ');
-            matcher.describeValueTo(actual, description);
-            fail(description.get());
-        } else {
-            description.append(': Success');
-            if (pass) {
-                pass(description.get());
-            }
-        }
-        return description;
-    },
 
     /**
      * Returns whether the given object is a matcher.
@@ -230,7 +170,7 @@ JsHamcrest = {
          */
         this.get = function() {
             return value;
-        }
+        };
 
         /**
          * Appends the description a self describing object to this
@@ -279,7 +219,7 @@ JsHamcrest = {
                 this.append(literal);
             }
             return this;
-        }
+        };
 
         /**
          * Appends a list of values to this description.
