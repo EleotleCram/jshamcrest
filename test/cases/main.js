@@ -67,13 +67,19 @@ new TestRunner({
 
     testDescriptionAppend: function() { with(this) {
         description.append();
-        assert(!description.get());
-
-        description.append('text');
-        assertEqual('text', description.get());
+        assertEqual('', description.get());
 
         description.append(null);
-        assertEqual('text', description.get());
+        assertEqual('', description.get());
+
+        description.append(0);
+        assertEqual('0', description.get());
+
+        description.append('text');
+        assertEqual('0text', description.get());
+
+        description.append(null);
+        assertEqual('0text', description.get());
     }},
 
     testDescriptionAppendLiteral: function() { with(this) {

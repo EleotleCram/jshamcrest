@@ -126,7 +126,7 @@ JsHamcrest.Matchers.notANumber = function() {
 JsHamcrest.Matchers.even = function() {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual % 2 == 0;
+            return actual % 2 === 0;
         },
 
         describeTo: function(description) {
@@ -147,7 +147,7 @@ JsHamcrest.Matchers.even = function() {
 JsHamcrest.Matchers.odd = function() {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual % 2 != 0;
+            return actual % 2 !== 0;
         },
 
         describeTo: function(description) {

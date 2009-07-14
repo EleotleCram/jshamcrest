@@ -221,7 +221,7 @@ JsHamcrest.Matchers.raises = function(exceptionName) {
             description.append('raises ').append(exceptionName);
         }
     });
-}
+};
 
 /**
  * Creates a combinable matcher where the actual value must match all matchers

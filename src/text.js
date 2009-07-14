@@ -60,7 +60,7 @@ JsHamcrest.Matchers.containsString = function(str) {
 JsHamcrest.Matchers.startsWith = function(str) {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual.indexOf(str) == 0;
+            return actual.indexOf(str) === 0;
         },
 
         describeTo: function(description) {

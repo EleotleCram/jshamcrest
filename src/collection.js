@@ -160,7 +160,7 @@ JsHamcrest.Matchers.oneOf = JsHamcrest.Matchers.isIn;
 JsHamcrest.Matchers.empty = function() {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual instanceof Array && actual.length == 0;
+            return actual instanceof Array && actual.length === 0;
         },
 
         describeTo: function(description) {

@@ -78,7 +78,7 @@ JsHamcrest.Integration = function() {
      * @param {object} target Target object.
      */
     this.copyMembers = function(source, target) {
-        for (method in source) {
+        for (var method in source) {
             if (!(method in target)) {
                 target[method] = source[method];
             }
