@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+		
+		<title>JsHamcrest Reference - JsHamcrest.CombinableMatcher</title>
+
+        <script type="text/javascript" src="../jproton.js"></script>
+        <script type="text/javascript" src="../ui.js"></script>
+        <script type="text/javascript" src="../sh.js"></script>
+		<link rel=stylesheet href="../sh.css" type="text/css">
+		<link rel=stylesheet href="../default.css" type="text/css">
+	</head>
+
+	<body>
+		<div id="main-wrapper">
+			<div id="main">
+<!-- ============================== classes index ============================ -->
+				<div id="index" class="fixed">
+					<div id="index-wrapper">
+	<div class="header">
+	  <div id="index-close" title="Hide outline">&nbsp;</div>
+	  <div id="index-title">Project Outline</div>
+	</div>
+	<div id="index-menu"><a href="../index.html">Class Index</a>
+	| <a href="../files.html">File Index</a></div>
+	
+	<div id="index-content">
+		
+		<div class="classList">
+			
+			<div class="section">
+				<div title='Global namespace.' class='itemName namespace'>
+				<div class='method-toggler'>&nbsp;</div><span class='icon'><i><a href="../symbols/_global_.html">_global_</a></i></span></div><div class='sectionItems'></div></div>
+			
+			<div class="section">
+				<div title='Main namespace.' class='itemName namespace'>
+				<div class='method-toggler'>&nbsp;</div><span class='icon'><a href="../symbols/JsHamcrest.html">JsHamcrest</a></span></div><div class='sectionItems'><div class='sectionItem classProperty'><b class='icon' title='Library version.'><a href="../symbols/JsHamcrest.html#.version">version</a></b></div><div class='sectionItem classProperty'><b class='icon' title='Built-in matchers.'><a href="../symbols/JsHamcrest.Matchers.html">Matchers</a></b></div><div class='sectionItem classProperty'><b class='icon' title='Methods to integrate JsHamcrest to major JavaScript testing frameworks.'><a href="../symbols/JsHamcrest.Integration.html">Integration</a></b></div><div class='sectionItem classMethod'><b class='icon' title='Assert method that is capable of handling matchers.'><a href="../symbols/JsHamcrest.html#.assertThat">assertThat</a></b><span class='signature'>(<span title="(object) Actual value under test.">actual</span>, <span title="(object) Matcher to assert the correctness of the actual value.">matcher</span>, <span title="(string) Message that describes the assertion, if necessary.">message</span>, <span title="(function) Function to be called when the assertion fails.">fail</span>, <span title="(function) Function to be called when the assertion succeeds.">pass</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Returns whether the given object is a matcher.'><a href="../symbols/JsHamcrest.html#.isMatcher">isMatcher</a></b><span class='signature'>(<span title="(object) Object.">obj</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Returns whether the given arrays are equivalent.'><a href="../symbols/JsHamcrest.html#.isArraysEqual">isArraysEqual</a></b><span class='signature'>(<span title="(array) Array.">array</span>, <span title="(array) Another array.">anotherArray</span>)</span></div></div></div>
+			
+			<div class="section">
+				<div title='Creates a combinable matcher.' class='itemName'>
+				<div class='method-toggler'>&nbsp;</div><span class='icon'><a href="../symbols/JsHamcrest.CombinableMatcher.html">JsHamcrest.CombinableMatcher</a></span></div><div class='sectionItems'><div class='sectionItem classMethod'><b class='icon' title='Wraps this matcher with the given one in such a way that both matchers must match the actual value to be successful.'><a href="../symbols/JsHamcrest.CombinableMatcher.html#and">and</a></b><span class='signature'>(<span title="(object) Another matcher.">anotherMatcher</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Wraps this matcher with the given one in such a way that at least one of the matchers must match the actual value to be successful.'><a href="../symbols/JsHamcrest.CombinableMatcher.html#or">or</a></b><span class='signature'>(<span title="(object) Another matcher.">anotherMatcher</span>)</span></div></div></div>
+			
+			<div class="section">
+				<div title='Creates a description.' class='itemName'>
+				<div class='method-toggler'>&nbsp;</div><span class='icon'><a href="../symbols/JsHamcrest.Description.html">JsHamcrest.Description</a></span></div><div class='sectionItems'><div class='sectionItem classMethod'><b class='icon' title='Gets the current content of this description.'><a href="../symbols/JsHamcrest.Description.html#get">get</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Appends the description a self describing object to this description.'><a href="../symbols/JsHamcrest.Description.html#appendDescriptionOf">appendDescriptionOf</a></b><span class='signature'>(<span title="(object) Any object that have a <code>describeTo</code> method that accepts a description object as argument.">selfDescribing</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Appends a text to this description.'><a href="../symbols/JsHamcrest.Description.html#append">append</a></b><span class='signature'>(<span title="(string) Text to append.">text</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Appends a JavaScript language's literals to this description.'><a href="../symbols/JsHamcrest.Description.html#appendLiteral">appendLiteral</a></b><span class='signature'>(<span title="(object) Literal to append.">literal</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Appends a list of values to this description.'><a href="../symbols/JsHamcrest.Description.html#appendValueList">appendValueList</a></b><span class='signature'>(<span title="(string) Start string.">start</span>, <span title="(string) Separator string.">separator</span>, <span title="(string) End string.">end</span>, <span title="(array) List of values.">list</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Appends a list of self describing objects to this description.'><a href="../symbols/JsHamcrest.Description.html#appendList">appendList</a></b><span class='signature'>(<span title="(string) Start string.">start</span>, <span title="(string) Separator string.">separator</span>, <span title="(string) End string.">end</span>, <span title="(array) List of self describing objects.">list</span>)</span></div></div></div>
+			
+			<div class="section">
+				<div title='Methods to integrate JsHamcrest to major JavaScript testing frameworks.' class='itemName namespace'>
+				<div class='method-toggler'>&nbsp;</div><span class='icon'><a href="../symbols/JsHamcrest.Integration.html">JsHamcrest.Integration</a></span></div><div class='sectionItems'><div class='sectionItem classMethod'><b class='icon' title='JsTestDriver integration.'><a href="../symbols/JsHamcrest.Integration.html#.JsTestDriver">JsTestDriver</a></b><span class='signature'>(<span title="(object) Configuration object.">params</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='JsUnitTest integration.'><a href="../symbols/JsHamcrest.Integration.html#.JsUnitTest">JsUnitTest</a></b><span class='signature'>(<span title="(object) Configuration object.">params</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='YUITest (Yahoo UI) integration.'><a href="../symbols/JsHamcrest.Integration.html#.YUITest">YUITest</a></b><span class='signature'>(<span title="(object) Configuration object.">params</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='QUnit (JQuery) integration.'><a href="../symbols/JsHamcrest.Integration.html#.QUnit">QUnit</a></b><span class='signature'>(<span title="(object) Configuration object.">params</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='jsUnity integration.'><a href="../symbols/JsHamcrest.Integration.html#.jsUnity">jsUnity</a></b><span class='signature'>(<span title="(object) Configuration object.">params</span>)</span></div></div></div>
+			
+			<div class="section">
+				<div title='Built-in matchers.' class='itemName namespace'>
+				<div class='method-toggler'>&nbsp;</div><span class='icon'><a href="../symbols/JsHamcrest.Matchers.html">JsHamcrest.Matchers</a></span></div><div class='sectionItems'><div class='sectionItem classMethod'><b class='icon' title='The actual value must be any value considered truth by the JavaScript engine.'><a href="../symbols/JsHamcrest.Matchers.html#.truth">truth</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Delegate-only matcher frequently used to improve readability.'><a href="../symbols/JsHamcrest.Matchers.html#.is">is</a></b><span class='signature'>(<span title="(object) Delegate matcher.">matcher</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='The delegate matcher must not match to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.not">not</a></b><span class='signature'>(<span title="(object) Delegate matcher.">matcher</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='The actual value must be equal to the given value to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.equalTo">equalTo</a></b><span class='signature'>(<span title="(object) value.">expected</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Useless always-match matcher.'><a href="../symbols/JsHamcrest.Matchers.html#.anything">anything</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='The actual value must be null (or undefined) to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.nil">nil</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='The actual value must be the same as the given value to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.sameAs">sameAs</a></b><span class='signature'>(<span title="(object) Expected object.">expected</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='The actual value is a function and, when invoked, it should thrown an exception with the given name to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.raises">raises</a></b><span class='signature'>(<span title="(string) Name of the expected exception.">exceptionName</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Creates a combinable matcher where the actual value must match all matchers to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.both">both</a></b><span class='signature'>(<span title="(object) Matcher that should be turn into a combinable matcher.">matcher</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Creates a combinable matcher where the actual value must match at least one matcher to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.either">either</a></b><span class='signature'>(<span title="(object) Matcher that should be turn into a combinable matcher.">matcher</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='All the given values or matchers should match the actual value to be sucessful.'><a href="../symbols/JsHamcrest.Matchers.html#.allOf">allOf</a></b><span class='signature'>(<span title="(array) List of delegate matchers.">arguments</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='At least one of the given matchers should match the actual value to be sucessful.'><a href="../symbols/JsHamcrest.Matchers.html#.anyOf">anyOf</a></b><span class='signature'>(<span title="(array) List of delegate matchers.">arguments</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual number is greater than the given threshold.'><a href="../symbols/JsHamcrest.Matchers.html#.greaterThan">greaterThan</a></b><span class='signature'>(<span title="(number) Threshold number.">threshold</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual number is greater than or equal to the given threshold.'><a href="../symbols/JsHamcrest.Matchers.html#.greaterThanOrEqualTo">greaterThanOrEqualTo</a></b><span class='signature'>(<span title="(number) Threshold number.">threshold</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual number is less than the given threshold.'><a href="../symbols/JsHamcrest.Matchers.html#.lessThan">lessThan</a></b><span class='signature'>(<span title="(number) Threshold number.">threshold</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual number is less than or equal to the given threshold.'><a href="../symbols/JsHamcrest.Matchers.html#.lessThanOrEqualTo">lessThanOrEqualTo</a></b><span class='signature'>(<span title="(number) Threshold number.">threshold</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value is not a number.'><a href="../symbols/JsHamcrest.Matchers.html#.notANumber">notANumber</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value is even.'><a href="../symbols/JsHamcrest.Matchers.html#.even">even</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value is odd.'><a href="../symbols/JsHamcrest.Matchers.html#.odd">odd</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual number is between a given inclusive range.'><a href="../symbols/JsHamcrest.Matchers.html#.between">between</a></b><span class='signature'>(<span title="(number) Range start.">number</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual number is close to the given number, that is, if the actual number is equal to a number within some range of acceptable error.'><a href="../symbols/JsHamcrest.Matchers.html#.closeTo">closeTo</a></b><span class='signature'>(<span title="(number) Number.">number</span>, <span title="(number) Acceptable difference range.">delta</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the two strings are equals, ignoring case.'><a href="../symbols/JsHamcrest.Matchers.html#.equalIgnoringCase">equalIgnoringCase</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value have a substring equals to the given string.'><a href="../symbols/JsHamcrest.Matchers.html#.containsString">containsString</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value starts with the given string.'><a href="../symbols/JsHamcrest.Matchers.html#.startsWith">startsWith</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value ends with the given string.'><a href="../symbols/JsHamcrest.Matchers.html#.endsWith">endsWith</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value matches the given regular expression.'><a href="../symbols/JsHamcrest.Matchers.html#.matches">matches</a></b><span class='signature'>(<span title="(RegExp) Regular expression literal.">regex</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value looks like an email address.'><a href="../symbols/JsHamcrest.Matchers.html#.emailAddress">emailAddress</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual object contains the given member (variable or function).'><a href="../symbols/JsHamcrest.Matchers.html#.hasMember">hasMember</a></b><span class='signature'>(<span title="(string) Member name.">memberName</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual object contains the given function.'><a href="../symbols/JsHamcrest.Matchers.html#.hasFunction">hasFunction</a></b><span class='signature'>(<span title="(string) Property name.">property</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual object is instance of the given class.'><a href="../symbols/JsHamcrest.Matchers.html#.instanceOf">instanceOf</a></b><span class='signature'>(<span title="(function) Constructor function.">clazz</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual object is of the specified type.'><a href="../symbols/JsHamcrest.Matchers.html#.typeOf">typeOf</a></b><span class='signature'>(<span title="(function) Type name.">typeName</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value is an object.'><a href="../symbols/JsHamcrest.Matchers.html#.object">object</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value is a string.'><a href="../symbols/JsHamcrest.Matchers.html#.string">string</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value is a number.'><a href="../symbols/JsHamcrest.Matchers.html#.number">number</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual value is a boolean.'><a href="../symbols/JsHamcrest.Matchers.html#.bool">bool</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='Asserts that the actual object is a function.'><a href="../symbols/JsHamcrest.Matchers.html#.func">func</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='The actual value should be an array and it must contain at least one value that matches the given value or matcher to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.hasItem">hasItem</a></b><span class='signature'>(<span title="(array) Number or matcher.">matcher</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='The actual value should be an array and the given values or matchers must match at least one item to be sucessful.'><a href="../symbols/JsHamcrest.Matchers.html#.hasItems">hasItems</a></b><span class='signature'>(<span title="(object...) Values or matchers.">arguments</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='The actual value should be an array and the given value or matcher must match all items to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.everyItem">everyItem</a></b><span class='signature'>(<span title="(matcher) Value or matcher.">matcher</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='The given array must contain the actual value to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.isIn">isIn</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='The given array must contain the actual value to be successful.'><a href="../symbols/JsHamcrest.Matchers.html#.oneOf">oneOf</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='The actual value should be an array and it must be empty to be sucessful.'><a href="../symbols/JsHamcrest.Matchers.html#.empty">empty</a></b><span class='signature'>()</span></div><div class='sectionItem classMethod'><b class='icon' title='The actual value should be an array and its size must match the given value or matcher to be sucessful.'><a href="../symbols/JsHamcrest.Matchers.html#.hasSize">hasSize</a></b><span class='signature'>(<span title="(object) Number or matcher.">matcher</span>)</span></div></div></div>
+			
+			<div class="section">
+				<div title='Creates a number range matcher builder.' class='itemName'>
+				<div class='method-toggler'>&nbsp;</div><span class='icon'><a href="../symbols/JsHamcrest.RangeMatcherBuilder.html">JsHamcrest.RangeMatcherBuilder</a></span></div><div class='sectionItems'><div class='sectionItem classMethod'><b class='icon' title='Finishes to build the range matcher.'><a href="../symbols/JsHamcrest.RangeMatcherBuilder.html#and">and</a></b><span class='signature'>(<span title="(number) Range end.">end</span>)</span></div></div></div>
+			
+			<div class="section">
+				<div title='Creates a simple matcher.' class='itemName'>
+				<div class='method-toggler'>&nbsp;</div><span class='icon'><a href="../symbols/JsHamcrest.SimpleMatcher.html">JsHamcrest.SimpleMatcher</a></span></div><div class='sectionItems'><div class='sectionItem classMethod'><b class='icon' title='Checks if this matcher matches the actual value.'><a href="../symbols/JsHamcrest.SimpleMatcher.html#matches">matches</a></b><span class='signature'>(<span title="(object) Actual value.">actual</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Describes this matcher's tasks to the given descriptor.'><a href="../symbols/JsHamcrest.SimpleMatcher.html#describeTo">describeTo</a></b><span class='signature'>(<span title="(object) Descriptor.">descriptor</span>)</span></div><div class='sectionItem classMethod'><b class='icon' title='Describes the actual value to the given descriptor.'><a href="../symbols/JsHamcrest.SimpleMatcher.html#describeValueTo">describeValueTo</a></b><span class='signature'>(<span title="(object) Actual value.">actual</span>, <span title="(object) Descriptor.">descriptor</span>)</span></div></div></div>
+			
+		</div>
+	</div>
+</div>
+	
+
+				</div>
+				<div id="index-toggler" class="fixed">&laquo;</div>
+
+<!-- ============================== header ================================= -->	
+				<!-- begin static/header.html -->
+				<div class="header">
+  JsHamcrest - Library of matcher objects for JavaScript
+</div>
+
+				<!-- end static/header.html -->
+		
+				<div id="content">
+<!-- ============================== class title ============================ -->
+					<h1 class="classTitle">
+						Class JsHamcrest.CombinableMatcher
+					</h1>
+		
+<!-- ============================== class summary ========================== -->			
+<!-- 
+					
+-->
+					<div class="full-description">
+						<p>Matcher that provides an easy way to wrap several matchers into
+one.</p>
+					</div>
+					
+						<p class="fileName itemName"><i>Defined in: </i> <span class="icon"><a href="../symbols/src/src_jshamcrest.js.html">jshamcrest.js</a>.</span></p>
+					
+		
+<!-- ============================== constructor summary ==================== -->			
+					
+					<div class="summary section">
+						<div class="sectionTitle">Constructor Summary</div>
+						<div class="sectionItems">
+							<div class="sectionItem">
+								<div class="itemName">
+								  <!--
+									<div class="module-filter">&nbsp;</div>
+									-->
+									<b class="icon">new <a href="../symbols/JsHamcrest.CombinableMatcher.html#constructor">JsHamcrest.CombinableMatcher</a></b>
+									<span class='signature'>(<span title="(object) Configuration object.">params</span>)</span>
+									<span class='description'>Creates a combinable matcher.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+		
+<!-- ============================== properties summary ===================== -->
+					
+		
+<!-- ============================== methods summary ======================== -->
+					
+						
+						
+						<div class="summary section">
+							<div class="sectionTitle">Method Summary</div>
+							<div class="sectionItems">
+							
+								<div class="sectionItem classMethod">
+								  <!--
+									<div class="module-filter">&nbsp;</div>
+									-->
+									<b class="icon" title="Wraps this matcher with the given one in such a way that both matchers must match the actual value to be successful."><a href="../symbols/JsHamcrest.CombinableMatcher.html#and">and</a></b><span class='signature'>(<span title="(object) Another matcher.">anotherMatcher</span>)</span>
+									<span class='description'>Wraps this matcher with the given one in such a way that both matchers must match the actual value to be successful.</span>
+								</div>
+							
+								<div class="sectionItem classMethod">
+								  <!--
+									<div class="module-filter">&nbsp;</div>
+									-->
+									<b class="icon" title="Wraps this matcher with the given one in such a way that at least one of the matchers must match the actual value to be successful."><a href="../symbols/JsHamcrest.CombinableMatcher.html#or">or</a></b><span class='signature'>(<span title="(object) Another matcher.">anotherMatcher</span>)</span>
+									<span class='description'>Wraps this matcher with the given one in such a way that at least one of the matchers must match the actual value to be successful.</span>
+								</div>
+							
+							</div>
+						</div>
+						
+					
+		
+<!-- ============================== constructor details ==================== -->		
+					
+					<div class="section details">
+						<div class="sectionTitle">
+							Constructor Detail
+						</div>
+						<div class="sectionItems">
+							<div class="sectionItem classItem itemName">
+								<div class="details"><a name="constructor"> </a>
+									
+									<div class="icon">
+										new <b>JsHamcrest.CombinableMatcher</b>(<span title="(object) Configuration object.">params</span>)
+									</div>
+									
+									<div class="full-description">
+										Creates a combinable matcher.
+										
+									</div>
+									
+									
+									<pre class="prettyprint"></pre>
+									
+									
+									
+										
+											<dl class="detailList">
+											<dt class="heading">Parameters:</dt>
+											
+												<dt>
+													<span class="light">{object}</span>  <b>params</b>
+													
+												</dt>
+													<dd>Configuration object.</dd>
+											
+												<dt>
+													<span class="light">{function}</span>  <b>params.matches</b>
+													
+												</dt>
+													<dd>Matcher logic.</dd>
+											
+												<dt>
+													<span class="light">{function}</span>  <b>params.describeTo</b>
+													
+												</dt>
+													<dd>Self description logic. This
+function is used to create textual descriptions from matcher objects.</dd>
+											
+											</dl>
+										
+										
+										
+										
+										
+										
+										
+					
+								</div>
+							</div>
+						</div>
+					</div>
+					
+		
+<!-- ============================== field details ========================== -->		
+					
+		
+<!-- ============================== method details ========================= -->		
+					
+					<div class="details section">
+						<div class="sectionTitle">
+							Method Detail
+						</div>
+						<div class="sectionItems">
+							
+							
+								<div class='sectionItem classMethod '>
+									<a name="and"> </a>
+									<div class="itemTitle icon">
+										and<span class="signature">(<span title="(object) Another matcher.">anotherMatcher</span>)</span>
+										<span class="light" title="returns JsHamcrest.CombinableMatcher">: <a href="../symbols/JsHamcrest.CombinableMatcher.html">JsHamcrest.CombinableMatcher</a></span>
+									</div>
+									<div class="full-description">
+										Wraps this matcher with the given one in such a way that both
+matchers must match the actual value to be successful.
+										
+										
+									
+										
+										<pre class="prettyprint"></pre>
+										
+									</div>
+									
+									
+										<div class="heading">Parameters:</div>
+										<table class="methodItem"><tbody>
+										
+											<tr>
+												<td class="methodItemType">
+												  <span class="light">{object}</span> 
+												</td>
+												<td class="methodItemName">
+												  <b>anotherMatcher</b>
+												</td>
+												<td class="methodItemDesc">
+											    Another matcher.
+												</td>
+											</tr>
+										
+										</tbody></table>
+									
+									
+									
+									
+									
+										<div class="heading">Returns:</div>
+										<table class="methodItem"><tbody>
+										
+											<tr>
+												<td class="methodItemType">
+													<span class="light">{<a href="../symbols/JsHamcrest.CombinableMatcher.html">JsHamcrest.CombinableMatcher</a>}</span> 
+												</td>
+												<td class="methodItemDesc">
+													Combinable matcher.
+												</td>
+											</tr>
+										
+										</tbody></table>
+									
+									
+									
+				
+								</div>
+							
+							
+								<div class='sectionItem classMethod '>
+									<a name="or"> </a>
+									<div class="itemTitle icon">
+										or<span class="signature">(<span title="(object) Another matcher.">anotherMatcher</span>)</span>
+										<span class="light" title="returns JsHamcrest.CombinableMatcher">: <a href="../symbols/JsHamcrest.CombinableMatcher.html">JsHamcrest.CombinableMatcher</a></span>
+									</div>
+									<div class="full-description">
+										Wraps this matcher with the given one in such a way that at least
+one of the matchers must match the actual value to be successful.
+										
+										
+									
+										
+										<pre class="prettyprint"></pre>
+										
+									</div>
+									
+									
+										<div class="heading">Parameters:</div>
+										<table class="methodItem"><tbody>
+										
+											<tr>
+												<td class="methodItemType">
+												  <span class="light">{object}</span> 
+												</td>
+												<td class="methodItemName">
+												  <b>anotherMatcher</b>
+												</td>
+												<td class="methodItemDesc">
+											    Another matcher.
+												</td>
+											</tr>
+										
+										</tbody></table>
+									
+									
+									
+									
+									
+										<div class="heading">Returns:</div>
+										<table class="methodItem"><tbody>
+										
+											<tr>
+												<td class="methodItemType">
+													<span class="light">{<a href="../symbols/JsHamcrest.CombinableMatcher.html">JsHamcrest.CombinableMatcher</a>}</span> 
+												</td>
+												<td class="methodItemDesc">
+													Combinable matcher.
+												</td>
+											</tr>
+										
+										</tbody></table>
+									
+									
+									
+				
+								</div>
+							
+						</div>
+					</div>
+					
+					
+				</div>
+				
+<!-- ============================== footer ================================= -->
+				<div class="fineprint" style="clear:both">
+                    Destaquenet Technology Solutions
+					&copy; 2009<br/>
+					Last updated: Tue Jul 14 2009 17:10:59 GMT-0300 (BRT)
+				</div>
+				
+			</div>
+		</div>
+		
+	</body>
+</html>

@@ -85,15 +85,7 @@
 
     <target name="doc" depends="basic" description="Generate API documentation">
         <echo message="Creating API docs"/>
-        <jsdoctoolkit jsdochome="${APP_DIR}/jsdoc-toolkit/" template="outline" outputdir="${API_DIR}">
-            <source file="${SRC_DIR}/jshamcrest.js"/>
-            <source file="${SRC_DIR}/core.js"/>
-            <source file="${SRC_DIR}/number.js"/>
-            <source file="${SRC_DIR}/text.js"/>
-            <source file="${SRC_DIR}/object.js"/>
-            <source file="${SRC_DIR}/collection.js"/>
-            <source file="${SRC_DIR}/integration.js"/>
-        </jsdoctoolkit>
+        <jsdoctoolkit jsdochome="${APP_DIR}/jsdoc-toolkit/" config="docs/config.json"/>
         <echo message="API docs created at ${API_DIR}"/>
     </target>
 
