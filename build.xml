@@ -85,7 +85,7 @@
 
     <target name="doc" depends="basic" description="Generate API documentation">
         <echo message="Creating API docs"/>
-        <jsdoctoolkit jsdochome="${APP_DIR}/jsdoc-toolkit/" config="docs/config.json"/>
+        <jsdoctoolkit jsdochome="${APP_DIR}/jsdoc-toolkit/" config="doc.config"/>
         <echo message="API docs created at ${API_DIR}"/>
     </target>
 
