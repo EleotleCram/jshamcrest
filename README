@@ -1,18 +1,17 @@
 JsHamcrest
 ----------
 
-    http://github.com/danielfm/jshamcrest/tree/master
+    http://jshamcrest.destaquenet.com/
 
 
-JsHamcrest is a JavaScript port of Hamcrest, which provides a library of
-matcher objects (also known as constraints or predicates) allowing 'match'
-rules to be defined declaratively. JsHamcrest integrates out of the box
-with JsTestDriver, JsUnitTest, JsUnity, QUnit and YUITest (and there's more
-to come!).
+JsHamcrest is a JavaScript version of Hamcrest, which provides a library of
+matcher objects (also known as constraints or predicates) allowing “match”
+rules to be defined declaratively. Typical scenarios include testing
+frameworks, mocking libraries, UI validation rules and object querying.
 
-This is an open source project licenced under the terms of the Lesser General
-Public License v3.0 and sponsored by Destaquenet Technology Solutions, a
-brazilian software development and consultancy startup.
+This is an open source project licenced under the terms of the BSD License
+and sponsored by Destaquenet Technology Solutions, a brazilian software
+development and consultancy startup.
 
 
 Downloading
@@ -22,59 +21,6 @@ Visit the following URL to download the latest stable version of JsHamcrest
 and its API documentation:
 
     http://github.com/danielfm/jshamcrest/downloads
-
-
-Installation
-------------
-
-In order to use JsHamcrest with a supported JavaScript unit test framework,
-just follow the usual installation/configuration instructions of the chosen
-framework and plug JsHamcrest to it. Configuration instructions for each
-supported framework can be found in the API documentation
-(JsHamcrest.Integration namespace).
-
-
-Usage
------
-
-Here goes a list containing a subset of all available assertion matchers.
-Please read the API documentation to see all matchers and instructions on how
-to use them:
-
-- Core matchers:
-    assertThat(10, is(equalTo(10)), "10 == 10");
-    assertThat(10, not(equalTo(20)), "10 != 20");
-    assertThat(myObj, anything(), "myObj should by anything, we don't care");
-    assertThat(myObj, nil(), "myObj == null");
-    assertThat(myObject, sameAs(anotherObj), "myObject === anotherObject");
-    assertThat(myFunction, raises('MyException'), "myFunction should raise an exception");
-    assertThat(10, both(greaterThan(5)).and(lessThan(20)), "10 > 5 && 10 < 20");
-    assertThat(10, either(lessThan(20)).or(greaterThan(50)), "10 < 20 || 10 > 50");
-
-- Numbers:
-    assertThat(10, greaterThan(5), "10 > 5");
-    assertThat(10, greaterThanOrEqualTo(5), "10 >= 5");
-    assertThat(5, lessThan(10), "5 < 10");
-    assertThat(5, lessThanOrEqualTo(10), "5 <= 10");
-    assertThat(Math.sqrt(-1), notANumber(), "isNaN(Math.sqrt(-1))");
-    assertThat(5, between(4).and(7), "5 >= 4 && 5 <= 7");
-
-- Text:
-    assertThat('str', equalIgnoringCase('Str'), "Compare 'str' and 'Str' ignoring case");
-    assertThat('string', containsString('tri'), "'tri' should be a substring of 'string'");
-    assertThat('string', startsWith('str'), "'string' should start with 'str'");
-    assertThat('string', endsWith('ring'), "'string' should end with 'ring'");
-    assertThat('0xa4f2c', matches(/\b0[xX][0-9a-fA-F]+\b/), "String should match an hexadecimal number");
-
-- Object:
-    assertThat(myObj, hasMember('name'), "myObj have a property/function called 'name'");
-    assertThat(myObj, instanceOf(Array), "myObj instanceof Array");
-
-- Collection:
-    assertThat([1,2,3], hasItems(2, 3), "Array should have items == 2 and 3");
-    assertThat([1,2,3], hasItems(greaterThan(2)), "Array should have at least one item > 2");
-    assertThat([1,2,3], everyItem(greaterThan(0)), "Array should have only items greater than 0");
-    assertThat([1,2,3], hasSize(lessThan(5)), "Array size should be < 5");
 
 
 Building
@@ -89,24 +35,6 @@ download Ant and get further instructions on how to install it in your system:
 After that, execute the following command line to perform the complete build:
 
     $ ant build
-
-
-Thanks to...
-------------
-
-    * Hamcrest:    <http://code.google.com/p/hamcrest/>
-    * JsTestDriver <http://code.google.com/p/js-test-driver/>
-    * JsUnitTest:  <http://jsunittest.com/>
-    * jsUnity:     <http://jsunity.com/>
-    * QUnit:       <http://docs.jquery.com/QUnit>
-    * YUITest:     <http://developer.yahoo.com/yui/yuitest/>
-
-
-Credits
--------
-
-    Author:  Daniel Fernandes Martins <daniel@destaquenet.com>
-    Company: Destaquenet Technology Solutions <http://www.destaquenet.com/>
 
 
 --EOF
