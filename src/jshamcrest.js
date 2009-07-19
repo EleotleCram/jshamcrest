@@ -281,4 +281,5 @@ JsHamcrest.SimpleMatcher.prototype.describeValueTo = function(actual, descriptio
 
 // CombinableMatcher is a specialization of SimpleMatcher
 JsHamcrest.CombinableMatcher.prototype = new JsHamcrest.SimpleMatcher();
+JsHamcrest.CombinableMatcher.prototype.constructor = JsHamcrest.CombinableMatcher;
 
