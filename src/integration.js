@@ -427,6 +427,60 @@ JsHamcrest.Integration = function() {
         target.assertThat = function(actual, matcher, message) {
             return assertThat(actual, matcher, message, fail);
         };
+    },
+
+    /**
+     * Screw.Unit integration. To plug JsHamcrest to Screw.Unit, follow
+     * Screw.Unit installation and configuration instructions and then edit the
+     * spec_helper.js file to include:
+     *
+     * <pre>
+     *     JsHamcrest.Integration.screwunit();
+     * </pre>
+     *
+     * You can then use JsHamcrest in the test suite as follows: <p>
+     *
+     * <pre>
+     *     // Some test suite
+     *     Screw.Unit(function() {
+     *       describe("MyCalculator", function() {
+     *         var calc;
+     *         before(function() { calc = new MyCalculator() });
+     *
+     *         it("should add two numbers", function() {
+     *           assertThat(calc.add(2,3), equalTo(5));
+     *         }
+     *
+     *         // More tests here...
+     *       }
+     *     }
+     * </pre>
+     *
+     * @param {object} params Configuration object.
+     * @param {object} [params.scope=Screw.Matchers] Copies all test
+     * matcher functions to the given scope.
+     */
+    this.screwunit = function(params) {
+        params = params ? params : {};
+        var target = params.scope || Screw.Matchers;
+
+        this.copyMembers(JsHamcrest.Matchers, target);
+
+        /**
+         * Function called when an assertion fails.
+         * @ignore
+         */
+        var fail = function(message) {
+            throw message;
+        };
+
+        /**
+         * Assertion method exposed to jsUnity.
+         * @ignore
+         */
+        target.assertThat = function(actual, matcher, message) {
+            return assertThat(actual, matcher, message, fail);
+        };
     };
     
     return this;
