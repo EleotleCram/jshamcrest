@@ -11,13 +11,13 @@
  * assertThat([1,2,3], hasItem(equalTo(3)));
  * </pre>
  *
- * @param {array} matcher Number or matcher.
+ * @param {array} matcherOrValue Matcher or expected value.
  * @return {JsHamcrest.SimpleMatcher} 'hasItem' matcher.
  */
-JsHamcrest.Matchers.hasItem = function(matcher) {
+JsHamcrest.Matchers.hasItem = function(matcherOrValue) {
     // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsHamcrest.isMatcher(matcher)) {
-        matcher = JsHamcrest.Matchers.equalTo(matcher);
+    if (!JsHamcrest.isMatcher(matcherOrValue)) {
+        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
     }
 
     return new JsHamcrest.SimpleMatcher({
@@ -28,7 +28,7 @@ JsHamcrest.Matchers.hasItem = function(matcher) {
             }
 
             for (var i = 0; i < actual.length; i++) {
-                if (matcher.matches(actual[i])) {
+                if (matcherOrValue.matches(actual[i])) {
                     return true;
                 }
             }
@@ -37,7 +37,7 @@ JsHamcrest.Matchers.hasItem = function(matcher) {
 
         describeTo: function(description) {
             description.append('array contains item ')
-                    .appendDescriptionOf(matcher);
+                    .appendDescriptionOf(matcherOrValue);
         }
     });
 };
@@ -70,13 +70,13 @@ JsHamcrest.Matchers.hasItems = function() {
  * assertThat([1,2,3], everyItem(greaterThan(0)));
  * </pre>
  *
- * @param {matcher} matcher Value or matcher.
+ * @param {matcher} matcherOrValue Matcher or expected value.
  * @return {JsHamcrest.SimpleMatcher} 'everyItem' matcher.
  */
-JsHamcrest.Matchers.everyItem = function(matcher) {
+JsHamcrest.Matchers.everyItem = function(matcherOrValue) {
     // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsHamcrest.isMatcher(matcher)) {
-        matcher = JsHamcrest.Matchers.equalTo(matcher);
+    if (!JsHamcrest.isMatcher(matcherOrValue)) {
+        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
     }
 
     return new JsHamcrest.SimpleMatcher({
@@ -87,7 +87,7 @@ JsHamcrest.Matchers.everyItem = function(matcher) {
             }
 
             for (var i = 0; i < actual.length; i++) {
-                if (!matcher.matches(actual[i])) {
+                if (!matcherOrValue.matches(actual[i])) {
                     return false;
                 }
             }
@@ -95,7 +95,8 @@ JsHamcrest.Matchers.everyItem = function(matcher) {
         },
 
         describeTo: function(description) {
-            description.append('every item ').appendDescriptionOf(matcher);
+            description.append('every item ')
+                .appendDescriptionOf(matcherOrValue);
         }
     });
 };
@@ -178,22 +179,23 @@ JsHamcrest.Matchers.empty = function() {
  * assertThat([1,2,3], hasSize(lessThan(5)));
  * </pre>
  *
- * @param {object} matcher Number or matcher.
+ * @param {object} matcherOrValue Matcher or expected size.
  * @return {JsHamcrest.SimpleMatcher} 'hasSize' matcher.
  */
-JsHamcrest.Matchers.hasSize = function(matcher) {
+JsHamcrest.Matchers.hasSize = function(matcherOrValue) {
     // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsHamcrest.isMatcher(matcher)) {
-        matcher = JsHamcrest.Matchers.equalTo(matcher);
+    if (!JsHamcrest.isMatcher(matcherOrValue)) {
+        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
     }
 
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual instanceof Array && matcher.matches(actual.length);
+            return actual instanceof Array &&
+                matcherOrValue.matches(actual.length);
         },
 
         describeTo: function(description) {
-            description.append('has size ').appendDescriptionOf(matcher);
+            description.append('has size ').appendDescriptionOf(matcherOrValue);
         },
 
         describeValueTo: function(actual, description) {

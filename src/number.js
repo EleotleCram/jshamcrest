@@ -3,92 +3,94 @@
  */
 
 /**
- * Asserts that the actual number is greater than the given threshold. Ex: <p>
+ * Asserts that the actual number is greater than the given expected number.
+ * Ex: <p>
  *
  * <pre>
  * assertThat(10, greaterThan(5));
  * </pre>
  *
- * @param {number} threshold Threshold number.
+ * @param {number} expected Expected number.
  * @return {JsHamcrest.SimpleMatcher} 'greaterThan' matcher.
  */
-JsHamcrest.Matchers.greaterThan = function(threshold) {
+JsHamcrest.Matchers.greaterThan = function(expected) {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual > threshold;
+            return actual > expected;
         },
 
         describeTo: function(description) {
-            description.append('greater than ').appendLiteral(threshold);
+            description.append('greater than ').appendLiteral(expected);
         }
     });
 };
 
 /**
  * Asserts that the actual number is greater than or equal to the given
- * threshold. Ex: <p>
+ * expected number. Ex: <p>
  *
  * <pre>
  * assertThat(10, greaterThanOrEqualTo(5));
  * </pre>
  *
- * @param {number} threshold Threshold number.
+ * @param {number} expected Expected number.
  * @return {JsHamcrest.SimpleMatcher} 'greaterThanOrEqualTo' matcher.
  */
-JsHamcrest.Matchers.greaterThanOrEqualTo = function(threshold) {
+JsHamcrest.Matchers.greaterThanOrEqualTo = function(expected) {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual >= threshold;
+            return actual >= expected;
         },
 
         describeTo: function(description) {
             description.append('greater than or equal to ')
-                    .appendLiteral(threshold);
+                    .appendLiteral(expected);
         }
     });
 };
 
 /**
- * Asserts that the actual number is less than the given threshold. Ex: <p>
+ * Asserts that the actual number is less than the given expected number.
+ * Ex: <p>
  *
  * <pre>
  * assertThat(5, lessThan(10));
  * </pre>
  *
- * @param {number} threshold Threshold number.
+ * @param {number} expected Expected number.
  * @return {JsHamcrest.SimpleMatcher} 'lessThan' matcher.
  */
-JsHamcrest.Matchers.lessThan = function(threshold) {
+JsHamcrest.Matchers.lessThan = function(expected) {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual < threshold;
+            return actual < expected;
         },
 
         describeTo: function(description) {
-            description.append('less than ').appendLiteral(threshold);
+            description.append('less than ').appendLiteral(expected);
         }
     });
 };
 
 /**
- * Asserts that the actual number is less than or equal to the given threshold.
- * Ex: <p>
+ * Asserts that the actual number is less than or equal to the given expected
+ * number. Ex: <p>
  *
  * <pre>
  * assertThat(5, lessThanOrEqualTo(10));
  * </pre>
  *
- * @param {number} threshold Threshold number.
+ * @param {number} expected Expected number.
  * @return {JsHamcrest.SimpleMatcher} 'lessThanOrEqualTo' matcher.
  */
-JsHamcrest.Matchers.lessThanOrEqualTo = function(threshold) {
+JsHamcrest.Matchers.lessThanOrEqualTo = function(expected) {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual <= threshold;
+            return actual <= expected;
         },
 
         describeTo: function(description) {
-            description.append('less than or equal to ').append(threshold);
+            description.append('less than or equal to ').append(expected);
         }
     });
 };
@@ -163,12 +165,12 @@ JsHamcrest.Matchers.odd = function() {
  * assertThat(5, between(4).and(7));
  * </pre>
  *
- * @param {number} number Range start.
+ * @param {number} start Range start.
  * @return {JsHamcrest.RangeMatcherBuilder} 'between' matcher.
  */
-JsHamcrest.Matchers.between = function(number) {
+JsHamcrest.Matchers.between = function(start) {
     return new JsHamcrest.RangeMatcherBuilder({
-        start: number
+        start: start
     });
 };
 

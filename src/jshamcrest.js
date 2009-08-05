@@ -72,9 +72,9 @@ JsHamcrest = {
      * @param {function} params.matches Matcher logic.
      * @param {function} params.describeTo Self description logic. This
      * function is used to create textual descriptions from matcher objects.
-     * @param {function} [params.describeValueTo] This function is used to
-     * describe the actual value of a test assertion. If not provided the
-     * actual value will be described as a literal.
+     * @param {function} [params.describeValueTo=Function] This function is
+     * used to describe the actual value of a test assertion. If not provided
+     * the actual value will be described as a JavaScript literal.
      */
     SimpleMatcher: function(params) {
         params = params || {};
