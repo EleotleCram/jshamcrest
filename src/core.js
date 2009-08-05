@@ -41,22 +41,22 @@ JsHamcrest.Matchers.truth = function() {
  * assertThat(10, is(equalTo(10)));
  * </pre>
  *
- * @param {object} matcher Delegate matcher.
+ * @param {object} matcherOrValue Delegate matcher or expected value.
  * @return {JsHamcrest.SimpleMatcher} 'is' matcher.
  */
-JsHamcrest.Matchers.is = function(matcher) {
+JsHamcrest.Matchers.is = function(matcherOrValue) {
     // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsHamcrest.isMatcher(matcher)) {
-        matcher = JsHamcrest.Matchers.equalTo(matcher);
+    if (!JsHamcrest.isMatcher(matcherOrValue)) {
+        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
     }
 
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return matcher.matches(actual);
+            return matcherOrValue.matches(actual);
         },
 
         describeTo: function(description) {
-            description.append('is ').appendDescriptionOf(matcher);
+            description.append('is ').appendDescriptionOf(matcherOrValue);
         }
     });
 };
@@ -69,22 +69,22 @@ JsHamcrest.Matchers.is = function(matcher) {
  * assertThat(10, not(equalTo(20)));
  * </pre>
  *
- * @param {object} matcher Delegate matcher.
+ * @param {object} matcher Delegate matcher or expected value.
  * @return {JsHamcrest.SimpleMatcher} 'not' matcher.
  */
-JsHamcrest.Matchers.not = function(matcher) {
+JsHamcrest.Matchers.not = function(matcherOrValue) {
     // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsHamcrest.isMatcher(matcher)) {
-        matcher = JsHamcrest.Matchers.equalTo(matcher);
+    if (!JsHamcrest.isMatcher(matcherOrValue)) {
+        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
     }
 
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return !matcher.matches(actual);
+            return !matcherOrValue.matches(actual);
         },
 
         describeTo: function(description) {
-            description.append('not ').appendDescriptionOf(matcher);
+            description.append('not ').appendDescriptionOf(matcherOrValue);
         }
     });
 };
@@ -231,15 +231,20 @@ JsHamcrest.Matchers.raises = function(exceptionName) {
  * assertThat(10, both(greaterThan(5)).and(lessThan(20)));
  * </pre>
  *
- * @param {object} matcher Matcher that should be turn into a combinable
- * matcher.
+ * @param {object} matcherOrValue Matcher or expected value that should be turn
+ * into a combinable matcher.
  * @return {JsHamcrest.CombinableMatcher} 'both' matcher.
  */
-JsHamcrest.Matchers.both = function(matcher) {
+JsHamcrest.Matchers.both = function(matcherOrValue) {
+    // Uses 'equalTo' matcher if the given object is not a matcher
+    if (!JsHamcrest.isMatcher(matcherOrValue)) {
+        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
+    }
+
     return new JsHamcrest.CombinableMatcher({
-        matches: matcher.matches,
+        matches: matcherOrValue.matches,
         describeTo: function(description) {
-            description.append('both ').appendDescriptionOf(matcher);
+            description.append('both ').appendDescriptionOf(matcherOrValue);
         }
     });
 };
@@ -252,15 +257,20 @@ JsHamcrest.Matchers.both = function(matcher) {
  * assertThat(10, either(lessThan(20)).or(greaterThan(50)));
  * </pre>
  *
- * @param {object} matcher Matcher that should be turn into a combinable
- * matcher.
+ * @param {object} matcherOrValue Matcher or expected value that should be turn
+ * into a combinable matcher.
  * @return {JsHamcrest.CombinableMatcher} 'either' matcher.
  */
-JsHamcrest.Matchers.either = function(matcher) {
+JsHamcrest.Matchers.either = function(matcherOrValue) {
+    // Uses 'equalTo' matcher if the given object is not a matcher
+    if (!JsHamcrest.isMatcher(matcherOrValue)) {
+        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
+    }
+
     return new JsHamcrest.CombinableMatcher({
-        matches: matcher.matches,
+        matches: matcherOrValue.matches,
         describeTo: function(description) {
-            description.append('either ').appendDescriptionOf(matcher);
+            description.append('either ').appendDescriptionOf(matcherOrValue);
         }
     });
 };

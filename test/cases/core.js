@@ -70,16 +70,39 @@ new TestRunner({
         });
     }},
 
-    testBoth: function() { with(this) {
+    testBothWithValues: function() { with(this) {
+        assert(both('10').and(10).matches(10));
+        assert(!both(5).and(10).matches(10));
+    }},
+
+    testBothWithMatchers: function() { with(this) {
         assert(both(greaterThan(5)).and(even()).matches(10));
         assert(!both(odd()).and(greaterThan(5)).matches(10));
         assert(!both(greaterThan(5)).and(odd()).matches(10));
     }},
 
-    testEither: function() { with(this) {
+    testBothWithValuesAndMatchers: function() { with(this) {
+        assert(both('10').and(even()).matches(10));
+        assert(both(even()).and(10).matches('10'));
+    }},
+
+    testEitherWithValues: function() { with(this) {
+        assert(either(5).or('10').matches(10));
+        assert(either('10').or(5).matches(10));
+        assert(!either(20).or(5).matches(10));
+    }},
+
+    testEitherWithMatchers: function() { with(this) {
         assert(either(even()).or(greaterThan(0)).matches(10));
         assert(either(even()).or(greaterThan(20)).matches(10));
         assert(!either(greaterThan(20)).or(odd()).matches(10));
+    }},
+
+    testEitherWithValuesAndMatchers: function() { with(this) {
+        assert(either(even()).or('10').matches(10));
+        assert(either(10).or(odd()).matches(10));
+        assert(either(even()).or(20).matches(10));
+        assert(!either(odd()).or('20').matches(10));
     }},
 
     testAllOfWithValues: function() { with(this) {
