@@ -224,6 +224,38 @@ JsHamcrest.Matchers.raises = function(exceptionName) {
 };
 
 /**
+ * The actual value is a function and, when invoked, it should raise any
+ * exception to be successful. Ex: <p>
+ *
+ * <pre>
+ * var myFunction = function() {
+ *   // Do something dangerous...
+ *   throw 'Some unexpected error';
+ * }
+ *
+ * assertThat(myFunction, raisesAnything());
+ * </pre>
+ *
+ * @return {JsHamcrest.SimpleMatcher} 'raisesAnything' matcher
+ */
+JsHamcrest.Matchers.raisesAnything = function() {
+    return new JsHamcrest.SimpleMatcher({
+        matches: function(actualFunction) {
+            try {
+                actualFunction();
+            } catch (e) {
+                return true;
+            }
+            return false;
+        },
+
+        describeTo: function(description) {
+            description.append('raises anything');
+        }
+    });
+};
+
+/**
  * Creates a combinable matcher where the actual value must match all matchers
  * to be successful. Ex: <p>
  *

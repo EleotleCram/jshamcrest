@@ -61,13 +61,28 @@ new TestRunner({
             throw new Error();
         };
 
-        assert(raises('Exception').matches(errorMethod));
         assert(!raises('Exception').matches(method));
-
+        assert(raises('Exception').matches(errorMethod));
         assert(raises('Error').matches(anotherErrorMethod));
+
+        // Should propagate the exception if it's not the expected one
         assertRaise('Error', function() {
             raises('Exception').matches(anotherErrorMethod);
         });
+    }},
+
+    testRaisesAnything: function() { with(this) {
+        function method() { };
+        function errorMethod() {
+            throw 'Exception';
+        };
+        function anotherErrorMethod() {
+            throw new Error();
+        };
+
+        assert(!raisesAnything().matches(method));
+        assert(raisesAnything().matches(errorMethod));
+        assert(raisesAnything().matches(anotherErrorMethod));
     }},
 
     testBothWithValues: function() { with(this) {
