@@ -104,7 +104,7 @@ JsHamcrest.Matchers.equalTo = function(expected) {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
             if (expected instanceof Array || actual instanceof Array) {
-                return JsHamcrest.isArraysEqual(expected, actual);
+                return JsHamcrest.areArraysEqual(expected, actual);
             }
             return actual == expected;
         },

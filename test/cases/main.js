@@ -22,17 +22,17 @@ new TestRunner({
         assert(!JsHamcrest.isMatcher({}));
     }},
 
-    testIsArrayEqual: function() { with(this) {
-        var isArraysEqual = JsHamcrest.isArraysEqual;
-        assert(!isArraysEqual([], {}));
-        assert(!isArraysEqual([1,2], [1]));
-        assert(!isArraysEqual([1,[2,3]], [1,['2',2]]));
+    testAreArraysEqual: function() { with(this) {
+        var areArraysEqual = JsHamcrest.areArraysEqual;
+        assert(!areArraysEqual([], {}));
+        assert(!areArraysEqual([1,2], [1]));
+        assert(!areArraysEqual([1,[2,3]], [1,['2',2]]));
 
-        assert(isArraysEqual());
-        assert(isArraysEqual(null, undefined));
-        assert(isArraysEqual([], []));
-        assert(isArraysEqual([1,'2'], ['1',2]));
-        assert(isArraysEqual(['1',[2,3]], [1,['2','3']]));
+        assert(areArraysEqual());
+        assert(areArraysEqual(null, undefined));
+        assert(areArraysEqual([], []));
+        assert(areArraysEqual([1,'2'], ['1',2]));
+        assert(areArraysEqual(['1',[2,3]], [1,['2','3']]));
     }},
 
     testCreateSimpleMatcher: function() { with(this) {

@@ -41,7 +41,7 @@ JsHamcrest = {
      * @param {array} anotherArray Another array.
      * @return {booelan} Whether the given arrays are equivalent.
      */
-    isArraysEqual: function(array, anotherArray) {
+    areArraysEqual: function(array, anotherArray) {
         if (array instanceof Array || anotherArray instanceof Array) {
             if (array.length != anotherArray.length) {
                 return false;
@@ -52,7 +52,7 @@ JsHamcrest = {
                 var b = anotherArray[i];
 
                 if (a instanceof Array || b instanceof Array) {
-                    return JsHamcrest.isArraysEqual(a, b);
+                    return JsHamcrest.areArraysEqual(a, b);
                 } else if (a != b) {
                     return false;
                 }
