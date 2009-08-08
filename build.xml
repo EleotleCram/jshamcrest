@@ -54,7 +54,7 @@
         <replaceregexp match="@DATE" replace="${DATE}" file="${DIST}"/>
         <replaceregexp match="@REV" replace="${REV}" file="${DIST}"/>
         <copy file="${DIST}" tofile="${DIST_V}"/>
-        <echo message="Files created at ${DIST}"/>
+        <echo message="Files created at ${BUILD_DIR}"/>
     </target>
     
     <target name="test" depends="basic" description="Runs the test suite.">
@@ -80,7 +80,7 @@
             <arg value="${DIST}"/>
         </java>
         <copy file="${DIST_PACK}" tofile="${DIST_PACK_V}"/>
-        <echo message="Files created at ${DIST_PACK}"/>
+        <echo message="Files created at ${BUILD_DIR}"/>
     </target>
 
     <target name="doc" depends="basic" description="Generates the API documentation.">
