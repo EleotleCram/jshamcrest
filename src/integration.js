@@ -28,8 +28,8 @@ JsHamcrest.Integration = function() {
      * </pre>
      *
      * @param {object} actual Actual value under test.
-     * @param {object} matcher Matcher to assert the correctness of the actual
-     * value.
+     * @param {JsHamcrest.SimpleMatcher} matcher Matcher to assert the
+     * correctness of the actual value.
      * @param {string} message Message that describes the assertion, if
      * necessary.
      * @param {function} fail Function to be called when the assertion fails.

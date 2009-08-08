@@ -9,6 +9,33 @@
 JsHamcrest.Matchers = {};
 
 /**
+ * Returns those items of the array for which matcher.matches(item) is
+ * true. Ex: <p>
+ *
+ * <pre>
+ * var numbers = [0,1,2,3,4,5,6];
+ * var result = filter(numbers, both(greaterThan(0)).and(even()));
+ * assertThat(result, is([2,4,6]));
+ * </pre>
+ *
+ * @param {Array} array Array.
+ * @param {JsHamcrest.SimpleMatcher} matcher Matcher
+ */
+JsHamcrest.Matchers.filter = function(array, matcher) {
+    if (!(array instanceof Array) || !(matcher instanceof JsHamcrest.SimpleMatcher)) {
+        return array;
+    }
+
+    var result = [];
+    for (var i = 0; i < array.length; i++) {
+        if (matcher.matches(array[i])) {
+            result.push(array[i]);
+        }
+    }
+    return result;
+};
+
+/**
  * The actual value must be any value considered truth by the JavaScript
  * engine. Ex: <p>
  *
