@@ -32,12 +32,12 @@
         <regexp pattern="Date:\W+(.*)"/>
     </propertyregex>
 
-    <target name="clean">
+    <target name="clean" description="Deletes build output directories.">
         <delete dir="${BUILD_DIR}"/>
         <delete dir="${DIST_DIR}"/>
     </target>
 
-    <target name="basic" description="Creates the basic script file">
+    <target name="basic" description="Assembles the JavaScript file.">
         <property name="DIST" value="${BUILD_DIR}/${NAME}.js"/>
         <echo message="Creating ${DIST}" />
         <mkdir dir="${BUILD_DIR}" />
@@ -54,10 +54,10 @@
         <replaceregexp match="@DATE" replace="${DATE}" file="${DIST}"/>
         <replaceregexp match="@REV" replace="${REV}" file="${DIST}"/>
         <copy file="${DIST}" tofile="${DIST_V}"/>
-        <echo message="Basic version created at ${DIST}"/>
+        <echo message="Files created at ${DIST}"/>
     </target>
     
-    <target name="test" depends="basic" description="Run the test suite using Rhino">
+    <target name="test" depends="basic" description="Runs the test suite.">
         <echo message="Running test suite"/>
         <java jar="${LIB_DIR}/js.jar" dir="test" fork="true" resultproperty="exitCode">
             <arg value="testSuite.js"/>
@@ -71,7 +71,7 @@
         </fail>
     </target>
     
-    <target name="pack" depends="basic" description="Remove all comments and whitespace and compress">
+    <target name="pack" depends="basic" description="Generates a compressed version of the JavaScript file.">
         <property name="DIST_PACK" value="${BUILD_DIR}/${NAME}-minified.js"/>
         <echo message="Packing ${DIST}"/>
         <java jar="${APP_DIR}/yuicompressor.jar" fork="true">
@@ -80,20 +80,20 @@
             <arg value="${DIST}"/>
         </java>
         <copy file="${DIST_PACK}" tofile="${DIST_PACK_V}"/>
-        <echo message="Packed version created at ${DIST_PACK}"/>
+        <echo message="Files created at ${DIST_PACK}"/>
     </target>
 
-    <target name="doc" depends="basic" description="Generate API documentation">
+    <target name="doc" depends="basic" description="Generates the API documentation.">
         <echo message="Creating API docs"/>
         <jsdoctoolkit jsdochome="${APP_DIR}/jsdoc-toolkit/" config="doc.config"/>
-        <echo message="API docs created at ${API_DIR}"/>
+        <echo message="Files created at ${API_DIR}"/>
     </target>
 
-    <target name="build" depends="test,doc" description="Performs the build">
-        <echo message="Build complete."/>
+    <target name="build" depends="test,doc" description="Performs the build.">
+        <echo message="Build complete"/>
     </target>
 
-    <target name="dist" depends="pack,doc" description="Generates files for distribution">
+    <target name="dist" depends="pack,doc" description="Creates packages for distribution.">
         <property name="API_DOC_V" value="${DIST_DIR}/${NAME_V}-api-doc"/>
         <mkdir dir="${DIST_DIR}"/>
         <copy file="${DIST_V}" todir="${DIST_DIR}"/>
@@ -105,6 +105,6 @@
             <zipfileset dir="${API_DIR}" prefix="${NAME_V}-api-doc"/>
         </zip>
         <delete dir="${API_DOC_V}"/>
-        <echo message="Created files for distribution at ${DIST_DIR}"/>
+        <echo message="Files created at ${DIST_DIR}"/>
     </target>
 </project>
