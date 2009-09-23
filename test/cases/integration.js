@@ -14,7 +14,7 @@ var logFailures = function(self, func) {
     return {result: result, failCount: failCount};
 };
 
-new TestRunner({
+new Test.Unit.Runner({
     name: 'Integration',
 
     setup: function() { with(this) {
@@ -88,4 +88,4 @@ new TestRunner({
         assertEqual(1, data.failCount);
         assertEqual('Expected truth but was 0', data.result.get());
     }}
-}, {'logger':testLogger, 'testLog': 'integrationLog'});
+}, {'testLog': 'integrationLog'});

@@ -1,4 +1,4 @@
-new TestRunner({
+new Test.Unit.Runner({
     name: 'Object matchers',
 
     setup: function() { with(this) {
@@ -62,4 +62,4 @@ new TestRunner({
         assert(func().matches(function() { }));
         assert(!func().matches({}));
     }}
-}, {'logger':testLogger, 'testLog': 'objectLog'});
+}, {'testLog': 'objectLog'});

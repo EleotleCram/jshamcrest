@@ -5,5 +5,5 @@
 build/**
 dist/**
 
-# Doc directory
-doc/**
+# Documentation build directory
+doc/_build/**

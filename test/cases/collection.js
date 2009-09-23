@@ -1,4 +1,4 @@
-new TestRunner({
+new Test.Unit.Runner({
     name: 'Collection matchers',
 
     setup: function() { with(this) {
@@ -92,4 +92,4 @@ new TestRunner({
     testEveryItemWithInvalidMatcher: function() { with(this) {
         assert(!everyItem(greaterThan(0)).matches([0, 1, 2, 3, 4]));
     }}
-}, {'logger':testLogger, 'testLog': 'collectionLog'});
+}, {'testLog': 'collectionLog'});

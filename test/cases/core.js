@@ -1,4 +1,4 @@
-new TestRunner({
+new Test.Unit.Runner({
     name: 'Core matchers',
 
     setup: function() { with(this) {
@@ -209,4 +209,4 @@ new TestRunner({
         assert(anyOf(matcher, matcher, matcher).matches());
         assertEqual(1, count);
     }}
-}, {'logger':testLogger, 'testLog': 'coreLog'});
+}, {'testLog': 'coreLog'});

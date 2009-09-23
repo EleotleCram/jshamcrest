@@ -1,4 +1,4 @@
-new TestRunner({
+new Test.Unit.Runner({
     name: 'Core abstractions',
 
     setup: function() { with(this) {
@@ -112,4 +112,4 @@ new TestRunner({
         description.appendValueList('[', '-', ']', [1,'a',null,undefined]);
         assertEqual('[1-"a"-null-undefined]', description.get());
     }}
-}, {'logger':testLogger, 'testLog': 'mainLog'});
+}, {'testLog': 'mainLog'});

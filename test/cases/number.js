@@ -1,4 +1,4 @@
-new TestRunner({
+new Test.Unit.Runner({
     name: 'Number matchers',
 
     setup: function() { with(this) {
@@ -77,4 +77,4 @@ new TestRunner({
         assert(!close.matches(2.0));
         assert(!close.matches(0.0));
     }}
-}, {'logger':testLogger, 'testLog': 'numberLog'});
+}, {'testLog': 'numberLog'});
