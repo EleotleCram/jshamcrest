@@ -77,9 +77,10 @@ def replace_tokens():
 def build():
     """Builds the final script and writes it to the disk.
     """
+    content = config.src_content.readlines()
     for name in [config.project, config.full_name]:
         output = file('%s/%s.js' % (config.build_dir, name), 'w')
-        output.writelines(config.src_content.readlines())
+        output.writelines(content)
 
 @depends(build)
 def test():
