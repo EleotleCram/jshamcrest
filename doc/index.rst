@@ -1,20 +1,61 @@
-.. JsHamcrest documentation master file, created by
-   sphinx-quickstart on Mon Sep 21 23:03:59 2009.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+JsHamcrest --- Library of matcher objects for JavaScript
+========================================================
 
-Welcome to JsHamcrest's documentation!
-======================================
+JsHamcrest is a JavaScript framework heavily inspired by `Hamcrest`_, providing
+a large library of matcher objects (also known as constraints or predicates)
+allowing “match” rules to be defined declaratively. Typical scenarios include
+testing frameworks, mocking libraries, UI validation rules and object querying.
 
-Contents:
+This is an open source project licenced under the terms of The
+`BSD License`_ and sponsored by `Destaquenet Technology Solutions`_, a
+brazilian software development and consultancy startup.
+
+  .. seealso::
+     `PDF version <http://jshamcrest.destaquenet.com/jshamcrest.pdf>`_ of
+     this documentation.
+
+
+Download the latest version
+---------------------------
+
+Choose your compression level:
+
+* `Production <http://jshamcrest.destaquenet.com/jshamcrest.js>`_ -- Minified code, hard to debug
+* `Development <http://jshamcrest.destaquenet.com/jshamcrest-min.js>`_ -- Uncompressed code, easy to debug
+
+
+Documentation contents
+----------------------
 
 .. toctree::
    :maxdepth: 2
 
+   getting_started
+   integrating
+   extending
+   modules/index
+   getting_involved
+   changelog
+
+
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
 
+
+Contact information
+-------------------
+
+  :Author: Daniel Fernandes Martins <daniel@destaquenet.com>
+  :Company: `Destaquenet Technology Solutions`_
+
+
+..
+
+
+.. _BSD License: http://www.opensource.org/licenses/bsd-license.php
+.. _Hamcrest: http://http://code.google.com/p/hamcrest
+.. _Destaquenet Technology Solutions: http://www.destaquenet.com/

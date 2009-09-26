@@ -1,0 +1,4 @@
+``JsHamcrest.Integration`` namespace
+====================================
+
+TODO.
