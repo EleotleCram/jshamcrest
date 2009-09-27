@@ -91,11 +91,23 @@ def test():
     local('$(web_browser) test/testSuite.html &')
 
 @depends(build)
+def doc_html():
+    """Builds the HTML documentation.
+    """
+    local('cd $(doc_dir); make clean; make html')
+
+@depends(build)
+def doc_pdf():
+    """Builds the PDF documentation."
+    """
+    local('cd $(doc_dir); make clean; make latex')
+    local('cd $(doc_dir)/_build/latex; make all-pdf')
+
+@depends(doc_html, doc_pdf)
 def doc():
     """Builds the documentation both in HTML and PDF.
     """
-    local('cd $(doc_dir); make clean; make html; make latex')
-    local('cd $(doc_dir)/_build/latex; make all-pdf')
+    pass
 
 @depends(build)
 def pack():
