@@ -117,6 +117,27 @@ JsHamcrest.Matchers.notANumber = function() {
 };
 
 /**
+ * Asserts that the actual value is divisible by the given number. Ex: <p>
+ *
+ * <pre>
+ * assertThat(121, divisibleBy(11));
+ * </pre>
+ *
+ * @return {JsHamcrest.SimpleMatcher} 'divisibleBy' matcher.
+ */
+JsHamcrest.Matchers.divisibleBy = function(divisor) {
+    return new JsHamcrest.SimpleMatcher({
+        matches: function(actual) {
+            return actual % divisor === 0;
+        },
+
+        describeTo: function(description) {
+            description.append('divisible by ').appendLiteral(divisor);
+        }
+    });
+};
+
+/**
  * Asserts that the actual value is even. Ex: <p>
  *
  * <pre>

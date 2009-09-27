@@ -43,6 +43,14 @@ new TestRunner({
         assert(!notANumber().matches(50));
     }},
 
+    testDivisibleBy: function() { with(this) {
+        var divisibleBy = JsHamcrest.Matchers.divisibleBy;
+        assert(divisibleBy(3).matches(27));
+        assert(divisibleBy(3).matches(-15));
+        assert(!divisibleBy(2).matches(27));
+        assert(!divisibleBy(2).matches(-15));
+    }},
+
     testEven: function() { with(this) {
         var even = JsHamcrest.Matchers.even;
         assert(even().matches(-2));
