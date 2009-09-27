@@ -1,4 +1,6 @@
-``JsHamcrest.Integration`` namespace
-====================================
+:mod:`JsHamcrest.Integration` namespace
+=======================================
 
-TODO.
+.. module:: JsHamcrest.Integration
+   :synopsis: Functions to allow easy integration with other libraries.
+.. moduleauthor:: Daniel Martins <daniel@destaquenet.com>

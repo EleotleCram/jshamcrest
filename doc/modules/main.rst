@@ -1,4 +1,6 @@
-``JsHamcrest`` namespace
-========================
+:mod:`JsHamcrest` namespace
+===========================
 
-TODO.
+.. module:: JsHamcrest
+   :synopsis: Main namespace, along with core abstractions.
+.. moduleauthor:: Daniel Martins <daniel@destaquenet.com>

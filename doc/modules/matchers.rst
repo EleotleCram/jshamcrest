@@ -1,4 +1,6 @@
-``JsHamcrest.Matchers`` namespace
-=================================
+:mod:`JsHamcrest.Matchers` namespace
+====================================
 
-TODO.
+.. module:: JsHamcrest.Matchers
+   :synopsis: Common matcher objects.
+.. moduleauthor:: Daniel Martins <daniel@destaquenet.com>
