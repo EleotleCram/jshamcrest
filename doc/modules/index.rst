@@ -6,6 +6,6 @@ TODO.
 .. toctree::
    :maxdepth: 2
 
-   main
+   jshamcrest
    matchers
    integration
