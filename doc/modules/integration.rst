@@ -1,5 +1,5 @@
-:mod:`JsHamcrest.Integration` namespace
-=======================================
+:mod:`JsHamcrest.Integration` --- Third-Party Integration Utilities
+===================================================================
 
 .. module:: JsHamcrest.Integration
    :synopsis: Functions to allow easy integration with other libraries.
