@@ -143,20 +143,20 @@ Provides the main namespace, along with core abstractions.
                          described as a JavaScript literal.
 
 
-.. function:: SimpleMatcher.describeTo(descriptor)
+.. function:: SimpleMatcher.describeTo(description)
 
-   Describes this matcher's tasks to the given *descriptor*.
+   Describes this matcher's tasks to the given *description*.
 
-   :arg descriptor: Instance of :class:`JsHamcrest.Description`.
+   :arg description: Instance of :class:`JsHamcrest.Description`.
    :returns:        Nothing.
 
 
-.. function:: SimpleMatcher.describeValueTo(actual, descriptor)
+.. function:: SimpleMatcher.describeValueTo(actual, description)
 
-   Describes the *actual* value to the given *descriptor*.
+   Describes the *actual* value to the given *description*.
 
    :arg actual:     Actual value to be described.
-   :arg descriptor: Instance of :class:`JsHamcrest.Descriptor`.
+   :arg description: Instance of :class:`JsHamcrest.Description`.
    :returns:        Nothing.
 
 

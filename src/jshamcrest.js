@@ -167,7 +167,7 @@ JsHamcrest = {
 
 
 /**
- * Describes the actual value to the given descriptor. This method is optional
+ * Describes the actual value to the given description. This method is optional
  * and, if it's not present, the actual value will be described as a JavaScript
  * literal.
  */
