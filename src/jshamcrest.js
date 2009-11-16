@@ -122,6 +122,7 @@ JsHamcrest = {
         };
 
         this.appendLiteral = function(literal) {
+            var undefined;
             if (literal === undefined) {
                 this.append('undefined');
             } else if (literal === null) {

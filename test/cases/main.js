@@ -83,6 +83,7 @@ new Test.Unit.Runner({
     }},
 
     testDescriptionAppendLiteral: function() { with(this) {
+        var undefined;
         var obj = {
             toString: function() {
                 return 'Object';
