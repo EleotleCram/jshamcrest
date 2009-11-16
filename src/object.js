@@ -17,9 +17,9 @@
 JsHamcrest.Matchers.hasMember = function(memberName) {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            try {
+            if (actual) {
                 return memberName in actual;
-            } catch (e) { }
+            }
             return false;
         },
 
@@ -42,10 +42,10 @@ JsHamcrest.Matchers.hasMember = function(memberName) {
 JsHamcrest.Matchers.hasFunction = function(functionName) {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            try {
+            if (actual) {
                 return functionName in actual && 
                         actual[functionName] instanceof Function;
-            } catch (e) { }
+            }
             return false;
         },
 
