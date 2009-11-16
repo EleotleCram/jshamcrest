@@ -5,8 +5,8 @@ The first thing to do is download the JsHamcrest source file. You can find the
 download links at the :ref:`previous <doc_index>` page.
 
 
-Learning By Example
--------------------
+Setting Up The First Example
+----------------------------
 
 To be able to use JsHamcrest, all you have to do is link the source file from
 within your HTML file. For example, create a new file with the following
@@ -29,13 +29,13 @@ content and open it on your web browser of choice:
     </html>
 
 
-Don't forget to change the line 4 to make it point to your actual JsHamcrest
+Don't forget to change the 4th line to make it point to your actual JsHamcrest
 source file. If an alert message "true" pops up when you open the page, then
 congratulations!
 
 
 JsHamcrest Outside The Web Browser
-``````````````````````````````````
+----------------------------------
 
 Since JsHamcrest doesn't depend on any browser-specific JavaScript features
 (like :attr:`document`, :attr:`window`, and so on), you should be able to use
@@ -53,7 +53,7 @@ a `Java`_-based JavaScript interpreter/compiler developed by `Mozilla`_::
 
 
 Understanding The Code
-----------------------
+``````````````````````
 
 On the previous example, you saw the :meth:`odd` function, which returns a
 *matcher object* that checks whether the given number is odd. In other words,
@@ -85,3 +85,4 @@ It's not that hard after all, huh?
 .. _Rhino: http://www.mozilla.org/rhino/
 .. _Java: http://java.sun.com/
 .. _Mozilla: http://www.mozilla.org/
+

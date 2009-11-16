@@ -1,4 +1,0 @@
-Extending JsHamcrest
-====================
-
-TODO.

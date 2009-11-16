@@ -6,6 +6,8 @@
 .. moduleauthor:: Daniel Martins <daniel@destaquenet.com>
 
 
+Provides the main namespace, along with core abstractions.
+
 .. function:: areArraysEqual(array, anotherArray)
 
    Returns whether the given arrays are equivalent.
@@ -31,7 +33,7 @@
 :class:`JsHamcrest.CombinableMatcher` Class
 -------------------------------------------
 
-.. class:: CombinableMatcher({matches, describeTo[, describeValueTo]})
+.. class:: CombinableMatcher({matches, describeTo, describeValueTo})
 
    Extends :class:`JsHamcrest.SimpleMatcher`. Defines a composite matcher, that
    is, a matcher that wraps several matchers into one. 
@@ -112,7 +114,7 @@
 :class:`JsHamcrest.SimpleMatcher` Class
 ---------------------------------------
 
-.. class:: SimpleMatcher({matches, describeTo[, describeValueTo]})
+.. class:: SimpleMatcher({matches, describeTo, describeValueTo})
 
    Extends :class:`Object`. Defines a matcher that relies on the external
    functions provided by the caller in order to shape the current matching
@@ -164,3 +166,4 @@
 
    :arg actual: Actual value.
    :returns:    True if the matcher matches the actual value; false otherwise.
+

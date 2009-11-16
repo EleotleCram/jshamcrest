@@ -5,7 +5,7 @@ JsHamcrest --- Library of matcher objects for JavaScript
 
 JsHamcrest is a JavaScript library heavily inspired by `Hamcrest`_. It provides
 a *large* library of matcher objects (also known as constraints or predicates)
-allowing “match” rules to be defined declaratively. Typical scenarios include
+allowing â€œmatchâ€ rules to be defined declaratively. Typical scenarios include
 testing frameworks, mocking libraries, UI validation rules and object querying.
 
 This is an open source project licenced under the terms of The
@@ -22,8 +22,8 @@ Download the latest version
 
 Choose your compression level:
 
-* `Production <http://jshamcrest.destaquenet.com/jshamcrest.js>`_ -- Minified code, hard to debug
-* `Development <http://jshamcrest.destaquenet.com/jshamcrest-min.js>`_ -- Uncompressed code, easy to debug
+* `Production <http://jshamcrest.destaquenet.com/jshamcrest-min.js>`_ -- Minified code, hard to debug
+* `Development <http://jshamcrest.destaquenet.com/jshamcrest.js>`_ -- Uncompressed code, easy to debug
 
 
 Documentation contents
@@ -33,8 +33,7 @@ Documentation contents
    :maxdepth: 2
 
    getting_started
-   integrating
-   extending
+   usage
    modules/index
    getting_involved
    changelog
@@ -55,9 +54,7 @@ Contact information
   :Company: `Destaquenet Technology Solutions`_
 
 
-..
-
-
 .. _BSD License: http://www.opensource.org/licenses/bsd-license.php
 .. _Hamcrest: http://http://code.google.com/p/hamcrest
 .. _Destaquenet Technology Solutions: http://www.destaquenet.com/
+
