@@ -12,12 +12,21 @@
  */
  
 JsHamcrest = {
+    /**
+     * Library version.
+     */
     version: '@VERSION',
 
+    /**
+     * Returns whether the given object is a matcher.
+     */
     isMatcher: function(obj) {
         return obj instanceof JsHamcrest.SimpleMatcher;
     },
 
+    /**
+     * Returns whether the given arrays are equivalent.
+     */
     areArraysEqual: function(array, anotherArray) {
         if (array instanceof Array || anotherArray instanceof Array) {
             if (array.length != anotherArray.length) {
@@ -40,11 +49,14 @@ JsHamcrest = {
         }
     },
 
+    /**
+     * Builds a matcher object that uses external functions provided by the
+     * caller in order to define the current matching logic.
+     */
     SimpleMatcher: function(params) {
         params = params || {};
 
         this.matches = params.matches;
-
         this.describeTo = params.describeTo;
 
         // Replace the function to describe the actual value
@@ -53,6 +65,9 @@ JsHamcrest = {
         }
     },
 
+    /**
+     * Matcher that provides an easy way to wrap several matchers into one.
+     */
     CombinableMatcher: function(params) {
         // Call superclass' constructor
         JsHamcrest.SimpleMatcher.apply(this, arguments);
@@ -82,6 +97,9 @@ JsHamcrest = {
         };
     },
 
+    /**
+     * Class that builds assertion error messages.
+     */
     Description: function() {
         var value = '';
 
@@ -147,6 +165,11 @@ JsHamcrest = {
 };
 
 
+/**
+ * Describes the actual value to the given descriptor. This method is optional
+ * and, if it's not present, the actual value will be described as a JavaScript
+ * literal.
+ */
 JsHamcrest.SimpleMatcher.prototype.describeValueTo = function(actual, description) {
     description.appendLiteral(actual);
 };
