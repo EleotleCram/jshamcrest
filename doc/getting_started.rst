@@ -2,15 +2,15 @@ Getting Started
 ===============
 
 The first thing to do is download the JsHamcrest source file. You can find the
-download links at the :ref:`previous <doc_index>` page.
+download links at the :ref:`index <doc_index>` page.
 
 
 Setting Up The First Example
 ----------------------------
 
-To be able to use JsHamcrest, all you have to do is link the source file from
-within your HTML file. For example, create a new file with the following
-content and open it on your web browser of choice:
+To be able to use JsHamcrest inside the browser, all you have to do is link the
+source file from within your HTML file. For example, create a new file with the
+following content and open it on your web browser of choice:
 
 .. code-block:: html
 
