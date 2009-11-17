@@ -17,7 +17,7 @@ As with any open source project, there are several ways you can help:
   know about this project.
 
 Your participation is much appreciated. Keep up with JsHamcrest development on
-`Github <http://github.com/danielfm/jshamcrest/tree/master>`_.
+`GitHub <http://github.com/danielfm/jshamcrest/tree/master>`_.
 
 
 How do I join the team?

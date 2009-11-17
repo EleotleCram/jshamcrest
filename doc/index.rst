@@ -26,6 +26,8 @@ Choose your compression level:
 * `Development <http://jshamcrest.destaquenet.com/jshamcrest.js>`_ -- Uncompressed code, easy to debug
 
 
+JsHamcrest source code is proudly hosted by `GitHub`_.
+
 Documentation contents
 ----------------------
 
@@ -34,6 +36,7 @@ Documentation contents
 
    getting_started
    usage
+   custom_matcher
    modules/index
    getting_involved
    changelog
@@ -57,4 +60,4 @@ Contact information
 .. _BSD License: http://www.opensource.org/licenses/bsd-license.php
 .. _Hamcrest: http://http://code.google.com/p/hamcrest
 .. _Destaquenet Technology Solutions: http://www.destaquenet.com/
-
+.. _GitHub: http://github.com/danielfm/jshamcrest/tree/master
