@@ -34,13 +34,15 @@ env.doc_dir = 'doc'
 
 # Source code
 env.src_dir   = 'src'
-env.src_files = ('jshamcrest',
-                 'core',
-                 'number',
-                 'text',
-                 'object',
-                 'collection',
-                 'integration',)
+env.src_files = (
+    'jshamcrest',
+    'core',
+    'number',
+    'text',
+    'object',
+    'collection',
+    'integration',
+)
 
 # Remote server
 env.fab_hosts = ('destaquenet.com',)
