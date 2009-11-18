@@ -1,3 +1,5 @@
+.. _module_matchers:
+
 :mod:`JsHamcrest.Matchers` --- Built-in Matchers
 ================================================
 
