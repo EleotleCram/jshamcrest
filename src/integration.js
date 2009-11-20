@@ -4,43 +4,6 @@
 JsHamcrest.Integration = new (function() {
 
     /**
-     * Generic assert function.
-     */
-    function assertThat(actual, matcher, message, fail, pass) {
-        var description = new JsHamcrest.Description();
-        var matchers = JsHamcrest.Matchers;
-
-        // Actual value must be any value considered non-null by JavaScript
-        if (matcher == null) {
-            matcher = matchers.truth();
-        }
-
-        // Creates a 'equalTo' matcher if 'matcher' is not a valid matcher
-        if (!JsHamcrest.isMatcher(matcher)) {
-            matcher = matchers.equalTo(matcher);
-        }
-
-        if (message) {
-            description.append(message).append('. ');
-        }
-
-        description.append('Expected ');
-        matcher.describeTo(description);
-
-        if (!matcher.matches(actual)) {
-            description.append(' but was ');
-            matcher.describeValueTo(actual, description);
-            fail(description.get());
-        } else {
-            description.append(': Success');
-            if (pass) {
-                pass(description.get());
-            }
-        }
-        return description;
-    }
-
-    /**
      * Copies all members of an object to another.
      */
     this.copyMembers = function(source, target) {
@@ -59,9 +22,10 @@ JsHamcrest.Integration = new (function() {
         var target = params.scope || window;
 
         this.copyMembers(JsHamcrest.Matchers, target);
+        this.copyMembers(JsHamcrest.Operators, target);
 
         // Function called when an assertion fails.
-        var _fail = function(message) {
+        function fail(message) {
             var exc = new Error(message);
             exc.name = 'AssertError';
 
@@ -79,7 +43,10 @@ JsHamcrest.Integration = new (function() {
 
         // Assertion method exposed to JsTestDriver.
         target.assertThat = function (actual, matcher, message) {
-            return assertThat(actual, matcher, message, _fail);
+            return JsHamcrest.Operators.assert(actual, matcher, {
+                message: message,
+                fail: fail
+            });
         };
     };
 
@@ -91,22 +58,21 @@ JsHamcrest.Integration = new (function() {
         var target = params.scope || JsUnitTest.Unit.Testcase.prototype;
 
         this.copyMembers(JsHamcrest.Matchers, target);
+        this.copyMembers(JsHamcrest.Operators, target);
 
         // Assertion method exposed to JsUnitTest.
         target.assertThat = function (actual, matcher, message) {
             var self = this;
 
-            // Function called when an assertion executes successfully.
-            var pass = function() {
-                self.pass();
-            };
-
-            // Function called when an assertion fails.
-            var fail = function(message) {
-                self.fail(message);
-            };
-
-            return assertThat(actual, matcher, message, fail, pass);
+            return JsHamcrest.Operators.assert(actual, matcher, {
+                message: message,
+                fail: function(message) {
+                    self.fail(message);
+                },
+                pass: function() {
+                    self.pass();
+                }
+            });
         };
     };
 
@@ -118,16 +84,18 @@ JsHamcrest.Integration = new (function() {
         var target = params.scope || window;
 
         this.copyMembers(JsHamcrest.Matchers, target);
-        target.Assert = YAHOO.util.Assert;
+        this.copyMembers(JsHamcrest.Operators, target);
 
-        // Function called when an assertion fails.
-        var fail = function(message) {
-            YAHOO.util.Assert.fail(message);
-        };
+        target.Assert = YAHOO.util.Assert;
 
         // Assertion method exposed to YUITest.
         YAHOO.util.Assert.that = function(actual, matcher, message) {
-            return assertThat(actual, matcher, message, fail);
+            return JsHamcrest.Operators.assert(actual, matcher, {
+                message: message,
+                fail: function(message) {
+                    YAHOO.util.Assert.fail(message);
+                }
+            });
         };
     };
 
@@ -139,20 +107,19 @@ JsHamcrest.Integration = new (function() {
         var target = params.scope || window;
 
         this.copyMembers(JsHamcrest.Matchers, target);
-
-        // Function called when an assertion executes successfully.
-        var pass = function(message) {
-            QUnit.ok(true, message);
-        };
-
-        // Function called when an assertion fails.
-        var fail = function(message) {
-            QUnit.ok(false, message);
-        };
+        this.copyMembers(JsHamcrest.Operators, target);
 
         // Assertion method exposed to QUnit.
         target.assertThat = function(actual, matcher, message) {
-            return assertThat(actual, matcher, message, fail, pass);
+            return JsHamcrest.Operators.assert(actual, matcher, {
+                message: message,
+                fail: function(message) {
+                    QUnit.ok(false, message);
+                },
+                pass: function(message) {
+                    QUnit.ok(true, message);
+                }
+            });
         };
     };
 
@@ -165,18 +132,20 @@ JsHamcrest.Integration = new (function() {
         var assertions = params.attachAssertions || false;
 
         this.copyMembers(JsHamcrest.Matchers, target);
+        this.copyMembers(JsHamcrest.Operators, target);
+
         if (assertions) {
             jsUnity.attachAssertions(target);
         }
 
-        // Function called when an assertion fails.
-        var fail = function(message) {
-            throw message;
-        };
-
         // Assertion method exposed to jsUnity.
         target.assertThat = function(actual, matcher, message) {
-            return assertThat(actual, matcher, message, fail);
+            return JsHamcrest.Operators.assert(actual, matcher, {
+                message: message,
+                fail: function(message) {
+                    throw message;
+                }
+            });
         };
     },
 
@@ -188,15 +157,16 @@ JsHamcrest.Integration = new (function() {
         var target = params.scope || Screw.Matchers;
 
         this.copyMembers(JsHamcrest.Matchers, target);
-
-        // Function called when an assertion fails.
-        var fail = function(message) {
-            throw message;
-        };
+        this.copyMembers(JsHamcrest.Operators, target);
 
         // Assertion method exposed to jsUnity.
         target.assertThat = function(actual, matcher, message) {
-            return assertThat(actual, matcher, message, fail);
+            return JsHamcrest.Operators.assert(actual, matcher, {
+                message: message,
+                fail: function(message) {
+                    throw message;
+                }
+            });
         };
     };
     

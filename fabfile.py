@@ -41,6 +41,7 @@ env.src_files = (
     'text',
     'object',
     'collection',
+    'operator',
     'integration',
 )
 
