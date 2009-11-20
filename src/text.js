@@ -1,16 +1,5 @@
 /**
- * @fileOverview Provides string-related matchers.
- */
-
-/**
- * Asserts that the two strings are equals, ignoring case. Ex: <p>
- *
- * <pre>
- * assertThat('str', equalIgnoringCase('Str'));
- * </pre>
- *
- * @param {string} String.
- * @return {JsHamcrest.SimpleMatcher} 'equalIgnoringCase' matcher.
+ * The actual string must be equal to the given string, ignoring case.
  */
 JsHamcrest.Matchers.equalIgnoringCase = function(str) {
     return new JsHamcrest.SimpleMatcher({
@@ -25,15 +14,7 @@ JsHamcrest.Matchers.equalIgnoringCase = function(str) {
 };
 
 /**
- * Asserts that the actual value have a substring equals to the given string.
- * Ex: <p>
- *
- * <pre>
- * assertThat('string', containsString('tri'));
- * </pre>
- *
- * @param {string} String.
- * @return {JsHamcrest.SimpleMatcher} 'containsString' matcher.
+ * The actual string must have a substring equals to the given string.
  */
 JsHamcrest.Matchers.containsString = function(str) {
     return new JsHamcrest.SimpleMatcher({
@@ -48,14 +29,7 @@ JsHamcrest.Matchers.containsString = function(str) {
 };
 
 /**
- * Asserts that the actual value starts with the given string. Ex: <p>
- *
- * <pre>
- * assertThat('string', startsWith('str'));
- * </pre>
- *
- * @param {string} String.
- * @return {JsHamcrest.SimpleMatcher} 'startsWith' matcher.
+ * The actual string must start with the given string.
  */
 JsHamcrest.Matchers.startsWith = function(str) {
     return new JsHamcrest.SimpleMatcher({
@@ -70,14 +44,7 @@ JsHamcrest.Matchers.startsWith = function(str) {
 };
 
 /**
- * Asserts that the actual value ends with the given string. Ex: <p>
- *
- * <pre>
- * assertThat('string', endsWith('ring'));
- * </pre>
- *
- * @param {string} String.
- * @return {JsHamcrest.SimpleMatcher} 'endsWith' matcher.
+ * The actual string must end with the given string.
  */
 JsHamcrest.Matchers.endsWith = function(str) {
     return new JsHamcrest.SimpleMatcher({
@@ -92,14 +59,7 @@ JsHamcrest.Matchers.endsWith = function(str) {
 };
 
 /**
- * Asserts that the actual value matches the given regular expression. Ex: <p>
- *
- * <pre>
- * assertThat('0xa4f2c', matches(/\b0[xX][0-9a-fA-F]+\b/));
- * </pre>
- *
- * @param {RegExp} regex Regular expression literal.
- * @return {JsHamcrest.SimpleMatcher} 'matches' matcher.
+ * The actual string must match the given regular expression.
  */
 JsHamcrest.Matchers.matches = function(regex) {
     return new JsHamcrest.SimpleMatcher({
@@ -114,16 +74,7 @@ JsHamcrest.Matchers.matches = function(regex) {
 };
 
 /**
- * Asserts that the actual value looks like an email address. Ex: <p>
- *
- * <pre>
- * assertThat('user@domain.com', emailAddress());
- * </pre>
- *
- * <b>Note: this matcher is not fully compliant with RFC2822 due to its
- * complexity.</b>
- *
- * @return {JsHamcrest.SimpleMatcher} 'emailAddress' matcher.
+ * The actual string must look like an e-mail address.
  */
 JsHamcrest.Matchers.emailAddress = function() {
     var regex = /^([a-z0-9_\.\-\+])+\@(([a-z0-9\-])+\.)+([a-z0-9]{2,4})+$/i;

@@ -483,7 +483,66 @@ Object Matchers
 Text Matchers
 -------------
 
-TODO.
+.. function:: containsString(str)
+
+   The actual string must have a substring equals to the given string::
+
+       assertThat('string', containsString('tri'));
+
+   :param str: Substring.
+   :returns:   Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: emailAddress()
+
+   The actual string must look like an e-mail address::
+
+       assertThat('user@domain.com', emailAddress());
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+   .. warning::
+      This matcher is not fully compliant with RFC2822 due to its complexity.
+
+
+.. function:: endsWith(str)
+
+   The actual string must end with the given string::
+
+       assertThat('string', endsWith('ring'));
+
+   :param str: String.
+   :returns:   Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: equalIgnoringCase(str)
+
+   The actual string must be equal to the given string, ignoring case::
+
+       assertThat('str', equalIgnoringCase('Str'));
+
+   :param str: String.
+   :returns:   Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: matches(regex)
+
+   The actual string must match the given regular expression::
+
+       assertThat('0xa4f2c', matches(/\b0[xX][0-9a-fA-F]+\b/));
+
+   :arg regex: Regular expression.
+   :returns:   Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: startsWith()
+
+   The actual string must start with the given string::
+
+       assertThat('string', startsWith('str'));
+
+   :param str: String.
+   :returns:   Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
 .. seealso::
