@@ -79,7 +79,7 @@ To make things easier, try to read each statement backwards. For instance:
 It's not that hard after all, huh?
 
 .. seealso::
-   :mod:`JsHamcrest.Matchers` namespace.
+   :mod:`JsHamcrest.Matchers` namespace for the complete list of matchers.
 
 
 .. _Rhino: http://www.mozilla.org/rhino/

@@ -4,7 +4,7 @@
 ================================================
 
 .. module:: JsHamcrest.Matchers
-   :synopsis: Common matcher objects.
+   :synopsis: Built-in matcher library.
 .. moduleauthor:: Daniel Martins <daniel@destaquenet.com>
 
 
@@ -74,6 +74,7 @@ Collection Matchers
                         value.
    :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
 
+
 .. function:: isIn(arguments...)
 
    The given array or arguments must contain the actual value::
@@ -83,6 +84,7 @@ Collection Matchers
 
    :arg arguments...: Array or list of values.
    :returns:          Instance of :class:`JsHamcrest.SimpleMatcher`.
+
 
 .. function:: oneOf()
 

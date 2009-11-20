@@ -51,8 +51,8 @@ Okay, let's put that matcher to use::
 Do I Need Custom Matchers?
 ``````````````````````````
 
-But wouldn't it be simpler if we just use the :meth:`JsHamcrest.Matcher.equalTo`
-matcher? Let's see an example::
+But wouldn't it be simpler if we just use the
+:meth:`JsHamcrest.Matchers.equalTo` matcher? Let's see an example::
 
     // Expected equal to 42 but was 10
     assertThat(10, equalTo(42));
@@ -72,7 +72,7 @@ Composing Matchers
 You can use your custom matchers together with the built-in ones to compose even
 more interesting match rules. For example, if you want to match when a number
 *is not* the answer to life, the universe, and everything, just wrap your custom
-matcher with a :meth:`JsHamcrest.Matcher.not` matcher and you're done::
+matcher with a :meth:`JsHamcrest.Matchers.not` matcher and you're done::
 
     // Output: Expected not the answer to life, the universe, and everything: Success
     assertThat(10, not(theAnswerToLifeTheUniverseAndEverything()));

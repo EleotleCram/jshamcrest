@@ -8,4 +8,5 @@ TODO.
 
    jshamcrest
    matchers
+   operator
    integration
