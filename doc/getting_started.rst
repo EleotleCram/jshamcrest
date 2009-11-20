@@ -85,4 +85,3 @@ It's not that hard after all, huh?
 .. _Rhino: http://www.mozilla.org/rhino/
 .. _Java: http://java.sun.com/
 .. _Mozilla: http://www.mozilla.org/
-

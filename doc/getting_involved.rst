@@ -32,4 +32,3 @@ and the community as it is with proven technical ability. Being unhelpful to
 other users, or obviously looking to become a committer for bragging rights and
 nothing else is frowned upon, as is asking to be made a committer without having
 contributed sufficiently to be invited.
-

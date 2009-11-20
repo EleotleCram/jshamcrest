@@ -42,4 +42,3 @@ Here you can track our progress:
 **Version 0.1** *(April 21, 2009)*
 
 * First public release;
-
