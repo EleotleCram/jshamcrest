@@ -1,8 +1,4 @@
 /**
- * @fileOverview Provides number-related matchers.
- */
-
-/**
  * The actual number must be greater than the expected number.
  */
 JsHamcrest.Matchers.greaterThan = function(expected) {
@@ -64,13 +60,7 @@ JsHamcrest.Matchers.lessThanOrEqualTo = function(expected) {
 };
 
 /**
- * Asserts that the actual value is not a number. Ex: <p>
- *
- * <pre>
- * assertThat(Math.sqrt(-1), notANumber());
- * </pre>
- *
- * @return {JsHamcrest.SimpleMatcher} 'notANumber' matcher.
+ * The actual value must not be a number.
  */
 JsHamcrest.Matchers.notANumber = function() {
     return new JsHamcrest.SimpleMatcher({
