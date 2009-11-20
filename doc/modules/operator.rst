@@ -9,6 +9,29 @@
 Provides utilitary functions on top of matchers.
 
 
+List Processing
+---------------
+
+.. function:: filter(array, matcherOrValue)
+
+   Returns those items of the array for which the given matcher or value
+   matches::
+
+       var filtered = filter([0,1,2,3,4,5,6], even());
+       assertThat(filtered, equalTo([0,2,4,6]));
+
+       var filtered = filter([0,1,2,'1',0], 1);
+       assertThat(filtered, equalTo([1,'1']));
+
+   :arg array:          Array of items to be filtered.
+   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
+                        value.
+   :returns:            Filtered array.
+
+
+Unit Testing
+------------
+
 .. function:: assert(actualValue, matcherOrValue[, {fail, pass, message}])
 
    Generic assert function to be used for easy integration with testing
@@ -50,18 +73,6 @@ Provides utilitary functions on top of matchers.
                         (success or failure/error) can be accessed through the
                         :attr:`passed` attribute.
 
-.. function:: filter(array, matcherOrValue)
 
-   Returns those items of the array for which the given matcher or value
-   matches::
-
-       var filtered = filter([0,1,2,3,4,5,6], even());
-       assertThat(filtered, equalTo([0,2,4,6]));
-
-       var filtered = filter([0,1,2,'1',0], 1);
-       assertThat(filtered, equalTo([1,'1']));
-
-   :arg array:          Array of items to be filtered.
-   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
-                        value.
-   :returns:            Filtered array.
+.. seealso::
+   :ref:`apiref`

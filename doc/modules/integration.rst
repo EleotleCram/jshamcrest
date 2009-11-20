@@ -40,7 +40,11 @@ JsTestDriver -- Remote JavaScript Console
           it::
 
               JsHamcrest.Integration.JsTestDriver();
-              JsHamcrest.Integration.JsTestDriver({scope:window}); // Same as above
+
+              // Same as above
+              JsHamcrest.Integration.JsTestDriver({
+                  scope:window
+              });
               
 
        3. Finally, edit the ``jsTestDriver.conf`` file as follows::
@@ -83,6 +87,11 @@ JsUnitTest -- JavaScript Unit Testing Framework
        <script type="text/javascript" src="jshamcrest.js"></script>
        <script type="text/javascript">
            JsHamcrest.Integration.JsUnitTest();
+
+           // Same as above
+           JsHamcrest.Integration.JsUnitTest({
+               scope: JsUnitTest.Unit.Testcase.prototype
+           });
        </script>
 
        <script type="text/javascript">
@@ -103,7 +112,7 @@ JsUnitTest -- JavaScript Unit Testing Framework
    Integrates JsHamcrest with JsUnitTest. The following code is an example on
    how to set up your project:
    
-   :arg scope: *(Optional, default=Testcase.prototype)* Copies
+   :arg scope: *(Optional, default=JsUnitTest.Unit.Testcase.prototype)* Copies
                all test matcher functions to the given scope.
    :returns:   Nothing.
 
@@ -131,6 +140,13 @@ jsUnity -- Lightweight JavaScript Testing Framework
 
            // Activate the jsUnity integration
            JsHamcrest.Integration.jsUnity();
+
+           // Same as above
+           JsHamcrest.Integration.jsUnity({
+               scope: jsUnity.env.defaultScope,
+               attachAssertions: false
+           }); 
+
            var results = jsUnity.run(CalculatorTestSuite);
        </script>
 
@@ -157,6 +173,11 @@ QUnit -- JavaScript Test Suite
        <script type="text/javascript" src="jshamcrest.js"></script>
        <script type="text/javascript">
            JsHamcrest.Integration.QUnit();
+
+           // Same as above
+           JsHamcrest.Integration.QUnit({
+               scope: window
+           });
 
            $(document).ready(function(){
                test("Calculator should add two numbers", function() {
@@ -197,6 +218,11 @@ screw-unit -- JavaScript BDD Framework
        <script type="text/javascript">
            JsHamcrest.Integration.screwunit();
 
+           // Same as above
+           JsHamcrest.Integration.screwunit({
+               scope: Screw.Matchers
+           });
+
            Screw.Unit(function() {
                describe('Using JsHamcrest assertions in Screw.Unit', function() {
                    it('should succeed', function() {
@@ -232,6 +258,11 @@ YUITest -- JavaScript Unit Testing Framework
        <script type="text/javascript" src="jshamcrest.js"></script>
        <script type="text/javascript">
            JsHamcrest.Integration.YUITest();
+
+           // Same as above
+           JsHamcrest.Integration.YUITest({
+               scope: window
+           });
        </script>
 
        <script type="text/javascript">
@@ -256,10 +287,13 @@ YUITest -- JavaScript Unit Testing Framework
    :returns:   Nothing.
 
 
+.. seealso::
+   :ref:`apiref`
+
+
 .. _JsTestDriver: http://code.google.com/p/js-test-driver/
 .. _JsUnitTest: http://jsunittest.com/
 .. _jsUnity: http://jsunity.com/
 .. _QUnit: http://docs.jquery.com/QUnit
 .. _screw-unit: http://github.com/nathansobo/screw-unit
 .. _YUITest: http://developer.yahoo.com/yui/yuitest/
-

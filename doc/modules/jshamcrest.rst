@@ -46,6 +46,24 @@ Provides the main namespace, along with core abstractions.
                          described as a JavaScript literal.
 
 
+.. function:: CombinableMatcher.and(matcherOrValue)
+
+   Wraps this matcher and the given matcher using :meth:`JsHamcrest.Matchers.allOf`.
+
+   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
+                        value.
+   :returns:            Instance of :class:`JsHamcrest.CombinableMatcher`.
+
+
+.. function:: CombinableMatcher.or(matcherOrValue)
+
+   Wraps this matcher and the given matcher using :meth:`JsHamcrest.Matchers.anyOf`.
+
+   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
+                        value.
+   :returns:            Instance of :class:`JsHamcrest.CombinableMatcher`.
+
+
 :class:`JsHamcrest.Description` Class
 -------------------------------------
 
@@ -167,3 +185,6 @@ Provides the main namespace, along with core abstractions.
    :arg actual: Actual value.
    :returns:    True if the matcher matches the actual value; false otherwise.
 
+
+.. seealso::
+   :ref:`apiref`
