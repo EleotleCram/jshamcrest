@@ -24,6 +24,7 @@ JsHamcrest.Operators.filter = function(array, matcherOrValue) {
  * Generic assert function.
  */
 JsHamcrest.Operators.assert = function(actualValue, matcherOrValue, options) {
+    var options = options ? options : {};
     var description = new JsHamcrest.Description();
 
     if (matcherOrValue == null) {
@@ -40,6 +41,7 @@ JsHamcrest.Operators.assert = function(actualValue, matcherOrValue, options) {
     matcherOrValue.describeTo(description);
 
     if (!matcherOrValue.matches(actualValue)) {
+        description.passed = false;
         description.append(' but was ');
         matcherOrValue.describeValueTo(actualValue, description);
         if (options.fail) {
@@ -47,6 +49,7 @@ JsHamcrest.Operators.assert = function(actualValue, matcherOrValue, options) {
         }
     } else {
         description.append(': Success');
+        description.passed = true;
         if (options.pass) {
             options.pass(description.get());
         }

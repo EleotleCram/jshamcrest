@@ -31,7 +31,10 @@ Provides utilitary functions on top of matchers.
        }
 
        // ... you'll be able to leverage the power of JsHamcrest in your test cases
-       iAssertThat(50, between(0).and(100));
+       result = iAssertThat(50, between(0).and(100));
+
+       result.passed // Output: true
+       result.get()  // Output: "50 between 0 and 100: Success"
 
    :arg actualValue:    Actual value.
    :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
@@ -43,7 +46,9 @@ Provides utilitary functions on top of matchers.
    :arg message:        *(Optional)* Text that describes the assertion on an
                         even higher level.
    :returns:            Instance of :class:`JsHamcrest.Description` with the
-                        assertion result.
+                        assertion description. Also, the result of the assertion
+                        (success or failure/error) can be accessed through the
+                        :attr:`passed` attribute.
 
 .. function:: filter(array, matcherOrValue)
 
