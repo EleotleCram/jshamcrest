@@ -23,18 +23,13 @@ JsHamcrest.Operators.filter = function(array, matcherOrValue) {
 /**
  * Generic assert function.
  */
-JsHamcrest.Operators.assert = function(actual, matcher, options) {
+JsHamcrest.Operators.assert = function(actualValue, matcherOrValue, options) {
     var description = new JsHamcrest.Description();
-    var matchers = JsHamcrest.Matchers;
 
-    // Actual value must be any value considered non-null by JavaScript
-    if (matcher == null) {
-        matcher = matchers.truth();
-    }
-
-    // Creates a 'equalTo' matcher if 'matcher' is not a valid matcher
-    if (!JsHamcrest.isMatcher(matcher)) {
-        matcher = matchers.equalTo(matcher);
+    if (matcherOrValue == null) {
+        matcherOrValue = JsHamcrest.Matchers.truth();
+    } else if (!JsHamcrest.isMatcher(matcherOrValue)) {
+        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
     }
 
     if (options.message) {
@@ -42,11 +37,11 @@ JsHamcrest.Operators.assert = function(actual, matcher, options) {
     }
 
     description.append('Expected ');
-    matcher.describeTo(description);
+    matcherOrValue.describeTo(description);
 
-    if (!matcher.matches(actual)) {
+    if (!matcherOrValue.matches(actualValue)) {
         description.append(' but was ');
-        matcher.describeValueTo(actual, description);
+        matcherOrValue.describeValueTo(actualValue, description);
         if (options.fail) {
             options.fail(description.get());
         }
