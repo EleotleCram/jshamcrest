@@ -264,7 +264,108 @@ Core Matchers
 Number Matchers
 ---------------
 
-TODO.
+.. function:: between(start)
+
+   The actual number must be between the given range (inclusive)::
+
+       assertThat(5, between(4).and(7));
+
+   :arg start: Range start.
+   :returns:   Builder object with an :meth:`end` method, which returns a
+               :class:`JsHamcrest.SimpleMatcher` instance and thus should be
+               called to finish the matcher creation.
+
+
+.. function:: closeTo(number[, delta])
+
+   The actual number must be close enough to the given number, that is, the
+   actual number is equal to a number within some range of acceptable error::
+
+       assertThat(0.5, closeTo(1.0, 0.5));
+       assertThat(1.0, closeTo(1.0, 0.5));
+       assertThat(1.5, closeTo(1.0, 0.5));
+       assertThat(2.0, not(closeTo(1.0, 0.5)));
+
+   :arg number: Expected number.
+   :arg delta:  *(Optional, default=0)* Expected difference delta.
+   :returns:    Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: even()
+
+   The actual number must be even::
+
+       assertThat(4, even());
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: greaterThan(expected)
+
+   The actual number must be greater than the expected number::
+
+       assertThat(10, greaterThan(5));
+
+   :arg expected: Expected number.
+   :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: greaterThanOrEqualTo(expected)
+
+   The actual number must be greater than or equal to the expected number::
+
+       assertThat(10, greaterThanOrEqualTo(5));
+
+   :arg expected: Expected number.
+   :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: lessThan(expected)
+
+   The actual number must be less than the expected number::
+
+       assertThat(5, lessThan(10));
+
+   :arg expected: Expected number.
+   :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: lesThanOrEqualTo(expected)
+
+   The actual number must be less than or equal to the expected number::
+
+       assertThat(5, lessThanOrEqualTo(10));
+
+   :arg expected: Expected number.
+   :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: notANumber()
+
+   The actual value must not be a number::
+
+       assertThat(Math.sqrt(-1), notANumber());
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: odd()
+
+   The actual number must be odd::
+
+       assertThat(5, odd());
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: zero()
+
+   The actual number must be zero::
+
+       assertThat(0, zero());
+       assertThat('0', not(zero()));
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
 Object Matchers
