@@ -94,8 +94,172 @@ Collection Matchers
 Core Matchers
 -------------
 
-TODO.
+.. function:: allOf(matchersOrValues...)
 
+   All the given matchers or values must match the actual value. This matcher
+   behaves pretty much like the JavaScript ``&&`` (and) operator::
+
+       assertThat(5, allOf([greaterThan(0), lessThan(10)]));
+       assertThat(5, allOf([5, lessThan(10)]));
+       assertThat(5, allOf(greaterThan(0), lessThan(10)));
+       assertThat(5, allOf(5, lessThan(10)));
+
+   :arg matchersOrValues: Instances of :class:`JsHamcrest.SimpleMatcher` and/or
+                          values.
+   :returns:              Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: anyOf(matchersOrValues)
+
+   At least one of the given matchers should match the actual value. This
+   matcher behaves pretty much like the || (or) operator::
+
+       assertThat(5, anyOf(even(), greaterThan(2)));
+
+   :arg matchersOrValues: Instances of :class:`JsHamcrest.SimpleMatcher` and/or
+                          values.
+   :returns:              Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: anything()
+
+   Useless always-match matcher::
+
+       assertThat('string', anything());
+       assertThat(null, anything());
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: both(matcherOrValue)
+
+   Combinable matcher where the actual value must match both of the given
+   matchers or values::
+
+       assertThat(10, both(greaterThan(5)).and(even()));
+
+   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
+                        value.
+   :returns:            Instance of :class:`JsHamcrest.CombinableMatcher`.
+
+
+.. function:: either(matcherOrValue)
+
+   Combinable matcher where the actual value must match at least one of the
+   given matchers::
+
+       assertThat(10, either(greaterThan(50)).or(even()));
+
+   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
+                        value.
+   :returns:            Instance of :class:`JsHamcrest.CombinableMatcher`.
+
+
+.. function:: equalTo(expected)
+
+   The actual value must be equal to the given value::
+
+       assertThat('10', equalTo(10));
+
+   :arg expected: Expected value.
+   :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: is(matcherOrValue)
+
+   Delegate-only matcher frequently used to improve readability::
+
+       assertThat('10', is(10));
+       assertThat('10', is(equalTo(10)));
+
+   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a 
+                        value.
+   :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: nil()
+
+   The actual value must be null (or undefined)::
+
+       var undef;
+       assertThat(undef, nil());
+       assertThat(null, nil());
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: not(matcherOrValue)
+
+   The actual value must not match the given matcher or value::
+
+       assertThat(10, not(20));
+       assertThat(10, not(equalTo(20)));
+
+   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a 
+                        value.
+   :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: raises(exceptionName)
+
+   The actual value is a function and, when invoked, it should thrown an
+   exception with the given name::
+
+       var MyException = function(message) {
+           this.name = 'MyException';
+           this.message = message;
+       };
+
+       var myFunction = function() {
+           // Do something dangerous...
+           throw new MyException('Unexpected error');
+       };
+ 
+       assertThat(myFunction, raises('MyException'));
+
+   :arg exceptionName: Name of the expected exception.
+   :returns:           Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: raisesAnything()
+
+   The actual value is a function and, when invoked, it should raise any
+   exception::
+
+       var myFunction = function() {
+           // Do something dangerous...
+           throw 'Some unexpected error';
+       };
+
+       assertThat(myFunction, raisesAnything());
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: sameAs(expected)
+
+   The actual value must be the same as the given value::
+
+       var number = 10, anotherNumber = number;
+       assertThat(number, sameAs(anotherNumber));
+
+   :arg expected: Expected value.
+   :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: truth()
+
+   The actual value must be any value considered truth by the JavaScript engine::
+
+       var undef;
+       assertThat(10, truth());
+       assertThat({}, truth());
+       assertThat(0, not(truth()));
+       assertThat('', not(truth()));
+       assertThat(null, not(truth()));
+       assertThat(undef, not(truth()));
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 Number Matchers
 ---------------
@@ -114,3 +278,6 @@ Text Matchers
 
 TODO.
 
+
+.. seealso::
+   :ref:`apiref`

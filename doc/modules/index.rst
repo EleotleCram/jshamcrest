@@ -1,7 +1,9 @@
+.. _apiref:
+
 JsHamcrest API Reference
 ========================
 
-TODO.
+JsHamcrest namespace overview.
 
 .. toctree::
    :maxdepth: 2
