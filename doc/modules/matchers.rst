@@ -261,6 +261,7 @@ Core Matchers
 
    :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
 
+
 Number Matchers
 ---------------
 
@@ -371,7 +372,112 @@ Number Matchers
 Object Matchers
 ---------------
 
-TODO.
+.. function:: bool()
+
+   The actual value must be a boolean::
+
+       assertThat(true, bool());
+       assertThat(false, bool());
+       assertThat("text" not(bool()));
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: func()
+
+   The actual value must be a function::
+
+       assertThat(function() {}, func());
+       assertThat("text", not(func()));
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: hasFunction(functionName)
+
+   The actual value has a function with the given name::
+
+       var greeter = {
+           sayHello: function(name) {
+               alert('Hello, ' + name);
+           }
+       };
+       
+       assertThat(greeter, hasFunction('sayHello'));
+
+   :arg functionName: Function name.
+   :returns:          Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: hasMember(memberName)
+
+   The actual value has an attribute with the given name::
+
+       var greeter = {
+           marco: 'polo',
+           sayHello: function(name) {
+               alert('Hello, ' + name);
+           }
+       };
+       
+       assertThat(greeter, hasMember('marco'));
+       assertThat(greeter, hasMember('sayHello'));
+
+   :arg memberName: Member name.
+   :returns:        Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: isInstanceOf(clazz)
+
+   The actual value must be an instance of the given class::
+
+       assertThat([], instanceOf(Array));
+
+   :arg clazz: Constructor function.
+   :returns:   Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: number()
+
+   The actual value must be a number::
+
+       assertThat(10, number());
+       assertThat('10', not(number()));
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: object()
+
+   The actual value must be an object::
+
+       assertThat({}, object());
+       assertThat(10, not(object()));
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: string()
+
+   The actual value must be an string::
+
+       assertThat('10', string());
+       assertThat(10, not(string());
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: typeOf(typeName)
+
+   The actual value must be an instance of the given type::
+
+       assertThat(10, typeOf('number'));
+       assertThat({}, typeOf('object'));
+       assertThat('10', typeOf('string');
+       assertThat(function(){}, typeOf('function'));
+
+   :arg typeName: Name of the type.
+   :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
 Text Matchers
