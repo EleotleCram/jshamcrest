@@ -13,7 +13,7 @@ This is an open source project licenced under the terms of The
 brazilian software development and consultancy startup.
 
   .. seealso::
-     `PDF version <http://jshamcrest.destaquenet.com/jshamcrest.pdf>`_ of
+     `PDF version <JsHamcrest.pdf>`_ of
      this documentation.
 
 
@@ -22,8 +22,8 @@ Download the latest version
 
 Choose your compression level:
 
-* `Production <http://jshamcrest.destaquenet.com/jshamcrest-min.js>`_ -- Minified code, hard to debug
-* `Development <http://jshamcrest.destaquenet.com/jshamcrest.js>`_ -- Uncompressed code, easy to debug
+* `Production <jshamcrest-min.js>`_ -- Minified code, hard to debug
+* `Development <jshamcrest.js>`_ -- Uncompressed code, easy to debug
 
 
 JsHamcrest source code is proudly hosted by `GitHub`_.

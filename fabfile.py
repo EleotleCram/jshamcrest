@@ -30,7 +30,12 @@ env.test_dir    = 'test'
 env.web_browser = 'firefox'
 
 # Documentation
-env.doc_dir = 'doc'
+env.doc_dir      = 'doc'
+env.doc_build    = '%s/_build' % env.doc_dir
+env.doc_dir_html = '%s/html'  % env.doc_build
+env.doc_dir_pdf  = '%s/latex' % env.doc_build
+env.doc_pdf      = '%s/JsHamcrest.pdf' % env.doc_dir_pdf
+env.doc_remote   = '/home/destaquenet/public_html'
 
 # Source code
 env.src_dir   = 'src'
@@ -70,6 +75,14 @@ def build():
     file(env.js, 'w').writelines(content)
     local('cp %s %s' % (env.js, env.js_version))
         
+@runs_once
+def pack():
+    """Creates a minified version of the final script using the Google Closure
+    Compiler service.
+    """
+    build()
+    local('python lib/closure_compiler_cli.py -f %s > %s' % (env.js, env.js_min))
+    local('cp %s %s' % (env.js_min, env.js_min_version))
 
 def test():
     """Opens the test suite on a web browser.
@@ -96,7 +109,7 @@ def doc_pdf():
     """
     doc_clean()
     local('cd %s; make latex' % env.doc_dir)
-    local('cd %s/_build/latex; make all-pdf' % env.doc_dir)
+    local('cd %s; make all-pdf' % env.doc_dir_pdf)
 
 def doc():
     """Builds the documentation both in HTML and PDF.
@@ -105,13 +118,24 @@ def doc():
     doc_html()
     doc_pdf()
 
-def pack():
-    """Creates a minified version of the final script using the Google Closure
-    Compiler service.
+def zip_doc():
+    """Creates a zip file with the complete documentation.
     """
-    build()
-    local('python lib/closure_compiler_cli.py -f %s > %s' % (env.js, env.js_min))
-    local('cp %s %s' % (env.js_min, env.js_min_version))
+    pack()
+    doc()
+    local('cp %s %s' % (env.doc_pdf, env.doc_dir_html))
+    local('cp %s %s' % (env.js, env.doc_dir_html))
+    local('cp %s %s' % (env.js_min, env.doc_dir_html))
+    local('cd %s; cp -R html %s; zip -r9 %s.zip %s' %
+            ((env.doc_build,) + (env.project,) * 3))
+
+def deploy():
+    """Deploys the website.
+    """
+    zip_doc()
+    put('%s/%s.zip' % (env.doc_build, env.project), env.doc_remote)
+    run('cd %s; rm -R %s; unzip %s.zip; rm %s.zip' %
+            ((env.doc_remote,) + (env.project,) * 3))
 
 def _set_revision_info():
     """Reads information about the latest revision.
