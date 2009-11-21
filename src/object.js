@@ -99,6 +99,6 @@ JsHamcrest.Matchers.bool = function() {
  * The actual value must be a function.
  */
 JsHamcrest.Matchers.func = function() {
-    return new JsHamcrest.Matchers.instance of Function;
+    return new JsHamcrest.Matchers.instanceOf(Function);
 };
 
