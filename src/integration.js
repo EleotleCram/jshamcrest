@@ -1,28 +1,32 @@
 /**
  * Integration utilities.
  */
-JsHamcrest.Integration = new (function() {
+JsHamcrest.Integration = {
 
     /**
      * Copies all members of an object to another.
      */
-    this.copyMembers = function(source, target) {
-        for (var method in source) {
-            if (!(method in target)) {
-                target[method] = source[method];
+    copyMembers: function(source, target) {
+        if (!source) {
+            JsHamcrest.Integration.copyMembers(JsHamcrest.Matchers, target);
+            JsHamcrest.Integration.copyMembers(JsHamcrest.Operators, target);
+        } else {
+            for (var method in source) {
+                if (!(method in target)) {
+                    target[method] = source[method];
+                }
             }
         }
-    };
+    },
 
     /**
      * JsTestDriver integration.
      */
-    this.JsTestDriver = function(params) {
+    JsTestDriver: function(params) {
         params = params ? params : {};
         var target = params.scope || window;
 
-        this.copyMembers(JsHamcrest.Matchers, target);
-        this.copyMembers(JsHamcrest.Operators, target);
+        this.copyMembers(null, target);
 
         // Function called when an assertion fails.
         function fail(message) {
@@ -48,12 +52,12 @@ JsHamcrest.Integration = new (function() {
                 fail: fail
             });
         };
-    };
+    },
 
     /**
      * JsUnitTest integration.
      */
-    this.JsUnitTest = function(params) {
+    JsUnitTest: function(params) {
         params = params ? params : {};
         var target = params.scope || JsUnitTest.Unit.Testcase.prototype;
 
@@ -74,12 +78,12 @@ JsHamcrest.Integration = new (function() {
                 }
             });
         };
-    };
+    },
 
     /**
      * YUITest (Yahoo UI) integration.
      */
-    this.YUITest = function(params) {
+    YUITest: function(params) {
         params = params ? params : {};
         var target = params.scope || window;
 
@@ -97,14 +101,14 @@ JsHamcrest.Integration = new (function() {
                 }
             });
         };
-    };
+    },
 
     /**
      * QUnit (JQuery) integration.
      */
-    this.QUnit = function(params) {
+    QUnit: function(params) {
         params = params ? params : {};
-        var target = params.scope || window;
+        var target = params.scope || this;
 
         this.copyMembers(JsHamcrest.Matchers, target);
         this.copyMembers(JsHamcrest.Operators, target);
@@ -121,12 +125,12 @@ JsHamcrest.Integration = new (function() {
                 }
             });
         };
-    };
+    },
 
     /**
      * jsUnity integration.
      */
-    this.jsUnity = function(params) {
+    jsUnity: function(params) {
         params = params ? params : {};
         var target = params.scope || jsUnity.env.defaultScope;
         var assertions = params.attachAssertions || false;
@@ -152,7 +156,7 @@ JsHamcrest.Integration = new (function() {
     /**
      * Screw.Unit integration.
      */
-    this.screwunit = function(params) {
+    screwunit: function(params) {
         params = params ? params : {};
         var target = params.scope || Screw.Matchers;
 
@@ -168,8 +172,6 @@ JsHamcrest.Integration = new (function() {
                 }
             });
         };
-    };
-    
-    return this;
-})();
+    }
+};
 
