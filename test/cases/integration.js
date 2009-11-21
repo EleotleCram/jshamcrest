@@ -23,6 +23,31 @@ new Test.Unit.Runner({
     teardown: function() { with(this) {
     }},
 
+    testCopyDefaultMembers: function() { with(this) {
+        var dst = {a:1};
+        JsHamcrest.Integration.copyMembers(null, dst);
+        assertEqual(1, dst.a);
+        assert(dst.equalTo instanceof Function);
+        assert(dst.filter instanceof Function);
+    }},
+
+    testCopyExistentMembers: function() { with(this) {
+        var src = {a:1, b:2, c:3}, dst = {a:2};
+        JsHamcrest.Integration.copyMembers(src, dst);
+        assertEqual(dst.a, 2);
+        assertEqual(dst.b, 2);
+        assertEqual(dst.c, 3);
+    }},
+
+    testCopyMembers: function() { with(this) {
+        var src = {b:2, c:3}, dst = {a:1};
+        
+        JsHamcrest.Integration.copyMembers(src, dst);
+        assertEqual(dst.a, 1);
+        assertEqual(dst.b, 2);
+        assertEqual(dst.c, 3);
+    }},
+
     testAssertThatWithSuccessfulMatcherAndNoMessage: function() { with(this) {
         var description = assertThat(10, greaterThan(0));
         assertEqual('Expected greater than 0: Success', description.get());
