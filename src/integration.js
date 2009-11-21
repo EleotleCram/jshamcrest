@@ -61,8 +61,7 @@ JsHamcrest.Integration = {
         params = params ? params : {};
         var target = params.scope || JsUnitTest.Unit.Testcase.prototype;
 
-        this.copyMembers(JsHamcrest.Matchers, target);
-        this.copyMembers(JsHamcrest.Operators, target);
+        this.copyMembers(null, target);
 
         // Assertion method exposed to JsUnitTest.
         target.assertThat = function (actual, matcher, message) {
@@ -87,8 +86,7 @@ JsHamcrest.Integration = {
         params = params ? params : {};
         var target = params.scope || window;
 
-        this.copyMembers(JsHamcrest.Matchers, target);
-        this.copyMembers(JsHamcrest.Operators, target);
+        this.copyMembers(null, target);
 
         target.Assert = YAHOO.util.Assert;
 
@@ -108,10 +106,9 @@ JsHamcrest.Integration = {
      */
     QUnit: function(params) {
         params = params ? params : {};
-        var target = params.scope || this;
+        var target = params.scope || window;
 
-        this.copyMembers(JsHamcrest.Matchers, target);
-        this.copyMembers(JsHamcrest.Operators, target);
+        this.copyMembers(null, target);
 
         // Assertion method exposed to QUnit.
         target.assertThat = function(actual, matcher, message) {
@@ -135,8 +132,7 @@ JsHamcrest.Integration = {
         var target = params.scope || jsUnity.env.defaultScope;
         var assertions = params.attachAssertions || false;
 
-        this.copyMembers(JsHamcrest.Matchers, target);
-        this.copyMembers(JsHamcrest.Operators, target);
+        this.copyMembers(null, target);
 
         if (assertions) {
             jsUnity.attachAssertions(target);
@@ -160,8 +156,7 @@ JsHamcrest.Integration = {
         params = params ? params : {};
         var target = params.scope || Screw.Matchers;
 
-        this.copyMembers(JsHamcrest.Matchers, target);
-        this.copyMembers(JsHamcrest.Operators, target);
+        this.copyMembers(null, target);
 
         // Assertion method exposed to jsUnity.
         target.assertThat = function(actual, matcher, message) {
