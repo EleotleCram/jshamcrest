@@ -1,3 +1,5 @@
+.. _getting_involved:
+
 Getting Involved
 ================
 
@@ -20,15 +22,25 @@ Your participation is much appreciated. Keep up with JsHamcrest development on
 `GitHub <http://github.com/danielfm/jshamcrest/tree/master>`_.
 
 
-How do I join the team?
+How Do I Join The Team?
 -----------------------
 
-JsHamcrest is a very mature project and it's probably not going to get lots of
-new features. But those that the developers notice participating to a high
-extent will be invited to join the team as a committer.
+JsHamcrest is a mature project and it's probably not going to get lots of new
+features. But those that the developers notice participating to a high extent
+will be invited to join the team as a committer.
 
 This is as much based on personality and ability to work with other developers
 and the community as it is with proven technical ability. Being unhelpful to
 other users, or obviously looking to become a committer for bragging rights and
 nothing else is frowned upon, as is asking to be made a committer without having
 contributed sufficiently to be invited.
+
+
+Contact Information
+-------------------
+
+  :Author: Daniel Fernandes Martins <daniel@destaquenet.com>
+  :Company: `Destaquenet Technology Solutions`_
+
+
+.. _Destaquenet Technology Solutions: http://www.destaquenet.com/

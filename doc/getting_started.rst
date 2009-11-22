@@ -65,7 +65,7 @@ equivalent.
 
 Now try to figure out what the following matchers do::
 
-    // Make JsHamcrest matchers globally accessible, don't worry about this for now
+    // Make JsHamcrest matchers globally accessible
     JsHamcrest.Integration.copyMembers(this);
 
     equalTo('10').matches(10);       // Expected: true

@@ -6,7 +6,11 @@ Here you can track our progress:
 
 **Version 0.6** *(Mon dd, yyyy)*
 
-* TODO.
+* Build script rewritten from scratch with `Python <http://python.org/>`_;
+* Documentation rewritten from scratch with `Sphinx <http://sphinx.pocoo.org/>`_;
+* Added a couple of new matchers;
+* New :mod:`JsHamcrest.Operators` namespace;
+* Several improvements and fixes;
 
 
 **Version 0.5.2** *(Jul 19, 2009)*

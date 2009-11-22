@@ -1,3 +1,5 @@
+.. _custom_matchers:
+
 Writing Custom Matchers
 =======================
 
