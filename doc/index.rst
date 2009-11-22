@@ -53,6 +53,6 @@ Indices And Tables
 
 
 .. _BSD License: http://www.opensource.org/licenses/bsd-license.php
-.. _Hamcrest: http://http://code.google.com/p/hamcrest
+.. _Hamcrest: http://code.google.com/p/hamcrest
 .. _Destaquenet Technology Solutions: http://www.destaquenet.com/
 .. _GitHub: http://github.com/danielfm/jshamcrest/tree/master
