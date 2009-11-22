@@ -56,3 +56,4 @@ JsHamcrest.Operators.assert = function(actualValue, matcherOrValue, options) {
     }
     return description;
 };
+
