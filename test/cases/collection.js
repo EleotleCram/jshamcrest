@@ -63,18 +63,28 @@ new Test.Unit.Runner({
 
     testHasSizeWithValue: function() { with(this) {
         assert(hasSize(4).matches(array));
+        assert(hasSize(6).matches('string'));
     }},
 
     testHasSizeWithMatcher: function() { with(this) {
         assert(hasSize(greaterThan(3)).matches(array));
+        assert(hasSize(greaterThan(3)).matches('string'));
+        assert(hasSize(0).matches(function(){}));
     }},
 
     testHasInvalidSizeWithValue: function() { with(this) {
         assert(!hasSize(3).matches(array));
+        assert(!hasSize(3).matches('string'));
     }},
 
     testHasInvalidSizeWithMatcher: function() { with(this) {
         assert(!hasSize(lessThan(4)).matches(array));
+        assert(!hasSize(lessThan(4)).matches('string'));
+    }},
+
+    testHasSizeWithInvalidValue: function() { with(this) {
+        assert(!hasSize(0).matches({}));
+        assert(!hasSize(0).matches(10));
     }},
 
     testEveryItemWithValue: function() { with(this) {

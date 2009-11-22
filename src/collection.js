@@ -122,8 +122,7 @@ JsHamcrest.Matchers.empty = function() {
 };
 
 /**
- * The actual value should be an array and its size must match the given value
- * or matcher.
+ * The length of the actual value value must match the given value or matcher.
  */
 JsHamcrest.Matchers.hasSize = function(matcherOrValue) {
     // Uses 'equalTo' matcher if the given object is not a matcher
@@ -133,8 +132,7 @@ JsHamcrest.Matchers.hasSize = function(matcherOrValue) {
 
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return actual instanceof Array &&
-                matcherOrValue.matches(actual.length);
+            return matcherOrValue.matches(actual.length);
         },
 
         describeTo: function(description) {
@@ -142,11 +140,7 @@ JsHamcrest.Matchers.hasSize = function(matcherOrValue) {
         },
 
         describeValueTo: function(actual, description) {
-            if (actual instanceof Array) {
-                description.append(actual.length);
-            } else {
-                description.appendLiteral(actual);
-            }
+            description.append(actual.length);
         }
     });
 };
