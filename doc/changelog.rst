@@ -4,6 +4,11 @@ Changelog
 Like any other piece of software, JsHamcrest is evolving at each release.
 Here you can track our progress:
 
+**Version 0.6** *(Mon dd, yyyy)*
+
+* TODO.
+
+
 **Version 0.5.2** *(Jul 19, 2009)*
 
 * JSLint fixes;
@@ -12,8 +17,8 @@ Here you can track our progress:
 
 **Version 0.5.1** *(Jul 11, 2009)*
 
-* Added a new function to matchers that provides a better way to describe the
-  actual value;
+* Added a new function to :class:`JsHamcrest.SimpleMatcher` that provides a
+  better way to describe the actual value;
 * Added a couple of new matchers;
 * Improvements on test code;
 
@@ -35,7 +40,8 @@ Here you can track our progress:
 
 * Fixed small API documentation issues;
 * Download page link in README;
-* :meth:`assertThat()` method now accepts a string that describes the assertion;
+* :meth:`JsHamcrest.Operators.assert()` function now accepts a string that
+  describes the assertion;
 * Refactoring to allow easy integration with JavaScript testing frameworks;
 
 
