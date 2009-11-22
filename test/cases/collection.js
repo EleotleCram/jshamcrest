@@ -57,8 +57,10 @@ new Test.Unit.Runner({
     }},
 
     testEmpty: function() { with(this) {
-        assert(not(empty()).matches(array));
+        assert(empty().matches(''));
+        assert(!empty().matches('string'));
         assert(empty().matches([]));
+        assert(!empty().matches(array));
     }},
 
     testHasSizeWithValue: function() { with(this) {
