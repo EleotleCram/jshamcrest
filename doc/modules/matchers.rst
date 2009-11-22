@@ -16,9 +16,10 @@ Collection Matchers
 
 .. function:: empty()
 
-   The actual value should be an array and it must be empty::
+   The length of the actual value must be zero::
 
        assertThat([], empty());
+       assertThat('', empty());
 
    :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
 
@@ -64,11 +65,12 @@ Collection Matchers
 
 .. function:: hasSize(matcherOrValue)
 
-   The actual value should be an array and its size must match the given matcher
-   or value::
+   The length of the actual value value must match the given value or matcher::
 
        assertThat([1,2,3], hasSize(3));
        assertThat([1,2,3], hasSize(lessThan(5)));
+       assertThat('string', hasSize(6));
+       assertThat('string', hasSize(greaterThan(3)));
 
    :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
                         value.

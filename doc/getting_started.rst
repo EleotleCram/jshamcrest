@@ -20,8 +20,8 @@ following content and open it on your web browser of choice:
         <script type="text/javascript" src="path/to/jshamcrest.js"></script>
 
         <script type="text/javascript">
-            var isOdd = JsHamcrest.Matchers.odd();
-            alert(isOdd.matches(11)); // Expected: true
+            var odd = JsHamcrest.Matchers.odd();
+            alert(odd.matches(11)); // Expected: true
         </script>
     </header>
     <body>
@@ -45,28 +45,29 @@ The snippet below shows how to reproduce the previous example using `Rhino`_,
 a `Java`_-based JavaScript interpreter/compiler developed by `Mozilla`_::
 
     js> load('path/to/jshamcrest.js')
-    js> var isOdd = JsHamcrest.Matchers.odd()
-    js> isOdd.matches(11)
+    js> var odd = JsHamcrest.Matchers.odd()
+    js> odd.matches(11)
     true
-    js> isOdd.matches(10)
+    js> odd.matches(10)
     false
 
 
 Understanding The Code
 ``````````````````````
 
-On the previous example, you saw the :meth:`odd` function, which returns a
-*matcher object* that checks whether the given number is odd. In other words,
-a *matcher* is an object that determines whether two things are equivalent.
+On the previous example, you saw the :meth:`JsHamcrest.Matchers.odd` function,
+which returns a *matcher object* that checks whether the given number is odd.
+In other words, a *matcher* is an object that determines whether two things are
+equivalent.
 
 Now try to figure out what the following matchers do::
 
     // Make JsHamcrest matchers globally accessible, don't worry about this for now
-    JsHamcrest.Integration.copyMembers(JsHamcrest.Matchers, this);
+    JsHamcrest.Integration.copyMembers(this);
 
-    alert(equalTo('10').matches(10));       // Expected: true
-    alert(between(5).and(10).matches(7));   // Expected: true
-    alert(greaterThan(Math.PI).matches(4)); // Expected: true
+    equalTo('10').matches(10);       // Expected: true
+    between(5).and(10).matches(7);   // Expected: true
+    greaterThan(Math.PI).matches(4); // Expected: true
 
 
 To make things easier, try to read each statement backwards. For instance:

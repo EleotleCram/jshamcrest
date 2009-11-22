@@ -7,11 +7,11 @@ every time you feel the need for something more suitable to the problem you
 have in hand.
 
 
-A Trivial Example
------------------
+A Basic Example
+---------------
 
 To introduce you to this topic, we are going to implement a new matcher whose
-task is just to tell if the actual number is the answer to life, the universe,
+task is just say whether the actual number is the answer to life, the universe,
 and everything. This is not a very useful matcher, but it shows everything you
 need to create a basic matcher::
 
@@ -28,24 +28,17 @@ need to create a basic matcher::
     };
 
 
-.. note::
-   Another great way to learn how to implement new matchers is to look at the
-   :ref:`existing ones  <module_matchers>`.
-
-
 As you can see, a matcher is nothing more than a function that returns a
 :class:`JsHamcrest.SimpleMatcher` object . All this particular matcher does is
 test whether the actual number is equal to 42.
 
 Okay, let's put that matcher to use::
 
-    // Let's suppose you are using JsHamcrest with some unit testing framework
-
-    // Expected the answer to life, the universe, and everything but was 10
-    assertThat(10, theAnswerToLifeTheUniverseAndEverything());
-
-    // Expected the answer to life, the universe, and everything: Success
+    // Output: Expected the answer to life, the universe, and everything: Success
     assertThat(42, theAnswerToLifeTheUniverseAndEverything());
+
+    // Output: Expected the answer to life, the universe, and everything but was 10
+    assertThat(10, theAnswerToLifeTheUniverseAndEverything());
 
 
 Do I Need Custom Matchers?
@@ -54,11 +47,11 @@ Do I Need Custom Matchers?
 But wouldn't it be simpler if we just use the
 :meth:`JsHamcrest.Matchers.equalTo` matcher? Let's see an example::
 
-    // Expected equal to 42 but was 10
-    assertThat(10, equalTo(42));
-
-    // Expected equal to 42: Success
+    // Output: Expected equal to 42: Success
     assertThat(42, equalTo(42));
+
+    // Output: Expected equal to 42 but was 10
+    assertThat(10, equalTo(42));
 
 
 At the end, the result is the same. The only downside though is that we lose
@@ -84,13 +77,101 @@ matcher with a :meth:`JsHamcrest.Matchers.not` matcher and you're done::
 That way you get the best of both worlds.
 
 
-A More Complex Example
-----------------------
+Learning By Example
+-------------------
 
-TODO.
+Another great way to learn how to implement new matchers is to look at the
+:ref:`existing ones  <module_matchers>`. There's plenty of examples, of various
+levels of complexity.
+
+For instance, take a look at the source code of the
+:meth:`JsHamcrest.Matchers.hasSize` matcher::
+
+    JsHamcrest.Matchers.hasSize = function(matcherOrValue) {
+        // Uses 'equalTo' matcher if the given object is not a matcher
+        if (!JsHamcrest.isMatcher(matcherOrValue)) {
+            matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
+        }
+
+        return new JsHamcrest.SimpleMatcher({
+            matches: function(actual) {
+                return actual instanceof Array &&
+                    matcherOrValue.matches(actual.length);
+            },
+
+            describeTo: function(description) {
+                description.append('has size ').appendDescriptionOf(matcherOrValue);
+            },
+
+            describeValueTo: function(actual, description) {
+                if (actual instanceof Array) {
+                    description.append(actual.length);
+                } else {
+                    description.appendLiteral(actual);
+                }
+            }
+        });
+    };
+
+
+This matcher is prepared to use either matchers or numbers as the expected
+array size::
+
+       assertThat([1,2,3], hasSize(3));
+       assertThat([1,2,3], hasSize(lessThan(5)));
 
 
 Distributing Your Custom Set Of Matchers
 ----------------------------------------
 
-TODO.
+Let's suppose you have a couple of custom matchers you want to distribute to
+your friends::
+
+    // filename: power_matchers.js
+
+    PowerMatchers = {
+        divisibleBy: function(divisor) {
+            // ...
+        },
+
+        hasSize: function(valueOrMatcher) {
+            // ...
+        }
+    };
+
+
+All you need to do is call :meth:`JsHamcrest.Integration.installMatchers` at the
+end of your script::
+
+    // filename: power_matchers.js
+
+    PowerMatchers = {
+        // ...
+    };
+
+    JsHamcrest.Integration.installMatchers(PowerMatchers);
+
+
+That's it. To plug your new matcher library, just link your script after
+JsHamcrest itself:
+
+.. code-block:: html
+
+    <html>
+    <header>
+        <title>Page title</title>
+        <script type="text/javascript" src="path/to/jshamcrest.js"></script>
+        <script type="text/javascript" src="path/to/power_matchers.js"></script>
+
+        <script type="text/javascript">
+            // Displays the assertion descriptions using web browser's alert() function
+            JsHamcrest.Integration.WebBrowser();
+
+            // There you go
+            assertThat(21, divisibleBy(3));
+            assertThat([1,2,3], hasSize(greaterThan(1)));
+        </script>
+    </header>
+    <body>
+    </body>
+    </html>
