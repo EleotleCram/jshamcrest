@@ -25,7 +25,7 @@ new Test.Unit.Runner({
 
     testCopyDefaultMembers: function() { with(this) {
         var dst = {a:1};
-        JsHamcrest.Integration.copyMembers(null, dst);
+        JsHamcrest.Integration.copyMembers(dst);
         assertEqual(1, dst.a);
         assert(dst.equalTo instanceof Function);
         assert(dst.filter instanceof Function);

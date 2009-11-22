@@ -9,13 +9,32 @@
 Provides functions to make it easy to integrate JsHamcrest with other popular
 JavaScript frameworks.
 
-.. function:: copyMembers(source, target)
+.. function:: copyMembers([source,] target)
 
    Copies all members of an object to another.
 
-   :arg source: Source object.
+   :arg source: *(Optional)* Source object. If not provided, this function will
+                copy all members of :mod:`JsHamcrest.Matchers` and
+                :mod:`JsHamcrest.Operators` to *target*.
    :arg target: Target object.
    :returns:    Nothing.
+
+
+.. function:: installMatchers(matchersNamespace)
+
+   Copies all members of *matchersNamespace* to :mod:`JsHamcrest.Matchers`.
+
+   :arg matchersName: Namespace that contains the matchers to be installed.
+   :returns:          Nothing.
+
+
+.. function:: installOperators(operatorsNamespace)
+
+   Copies all members of *operatorsNamespace* to :mod:`JsHamcrest.Operators`.
+
+   :arg operatorsNamespace: Namespace that contains the operators to be
+                            installed.
+   :returns:                Nothing.
 
 
 Unit Testing Frameworks
@@ -23,8 +42,49 @@ Unit Testing Frameworks
 
 JsHamcrest is perfect to enhance your JavaScript testing code.
 
+Dummy Functions For Easy Prototyping
+````````````````````````````````````
+
+.. highlight:: html
+
+.. function:: WebBrowser()
+
+   Uses the web browser's :meth:`alert()` function to display the assertion
+   results. Great for quick prototyping::
+
+       <!-- Activate dummy integration -->
+       <script type="text/javascript" src="jshamcrest.js"></script>
+       <script type="text/javascript">
+           JsHamcrest.Integration.WebBrowser();
+
+           var calc = new MyCalculator();
+           assertThat(calc.add(2,3), equalTo(5));
+       </script>
+
+   :returns: Nothing.
+
+
+.. highlight:: javascript
+
+.. function:: Rhino()
+
+   Uses the Rhino's :meth:`print()` function to display the assertion results.
+   Great for quick prototyping::
+
+       js> load('jshamcrest.js')
+       js> JsHamcrest.Integration.Rhino();
+       js>
+       js> var calc = new MyCalculator();
+       js> assertThat(calc.add(2,3), equalTo(5));
+       [SUCCESS] Expected equal to 5: Success
+
+   :returns: Nothing.
+
+
 JsTestDriver -- Remote JavaScript Console
 `````````````````````````````````````````
+
+.. highlight:: javascript
 
 .. function:: JsTestDriver({scope})
 
@@ -43,7 +103,7 @@ JsTestDriver -- Remote JavaScript Console
 
               // Same as above
               JsHamcrest.Integration.JsTestDriver({
-                  scope:window
+                  scope:this
               });
               
 
@@ -58,15 +118,15 @@ JsTestDriver -- Remote JavaScript Console
 
    That's it. Your test cases should now have access to JsHamcrest functions::
 
-       CalculatorTest = TestCase("CalculatorTest");
+       CalculatorTest = TestCase('CalculatorTest');
 
        CalculatorTest.prototype.testAdd = function() {
            var calc = new MyCalculator();
            assertThat(calc.add(2,3), equalTo(5));
        };
 
-   :arg scope: *(Optional, default=window)* Copies all test matcher functions
-               to the given scope.
+   :arg scope: *(Optional, default=this)* Copies all matchers to the given
+               scope.
    :returns:   Nothing.
 
 
@@ -113,12 +173,14 @@ JsUnitTest -- JavaScript Unit Testing Framework
    how to set up your project:
    
    :arg scope: *(Optional, default=JsUnitTest.Unit.Testcase.prototype)* Copies
-               all test matcher functions to the given scope.
+               all matchers to the given scope.
    :returns:   Nothing.
 
 
 jsUnity -- Lightweight JavaScript Testing Framework
 ```````````````````````````````````````````````````
+
+.. highlight:: html
 
 .. function:: jsUnity({scope, attachAssertions})
 
@@ -151,7 +213,7 @@ jsUnity -- Lightweight JavaScript Testing Framework
        </script>
 
    :arg scope:            *(Optional, default=jsUnity.env.defaultScope)* Copies
-                          all test matcher functions to the given scope.
+                          all matchers to the given scope.
    :arg attachAssertions: *(Optional, default=false)* Whether JsHamcrest should
                           also copy jsUnity's assertion functions to the given
                           scope.
@@ -160,6 +222,8 @@ jsUnity -- Lightweight JavaScript Testing Framework
 
 QUnit -- JavaScript Test Suite
 ``````````````````````````````
+
+.. highlight:: html
 
 .. function:: QUnit({scope})
 
@@ -176,11 +240,11 @@ QUnit -- JavaScript Test Suite
 
            // Same as above
            JsHamcrest.Integration.QUnit({
-               scope: window
+               scope: this
            });
 
            $(document).ready(function(){
-               test("Calculator should add two numbers", function() {
+               test('Calculator should add two numbers', function() {
                    var calc = new MyCalculator();
                    assertThat(calc.add(2,3), equalTo(5));
                });
@@ -190,13 +254,15 @@ QUnit -- JavaScript Test Suite
        <!-- QUnit and dependencies -->
        <script type="text/javascript" src="testrunner.js"></script>
 
-   :arg scope: *(Optional, default=window)* Copies all test matcher functions
-               to the given scope.
+   :arg scope: *(Optional, default=this)* Copies all matchers to the given
+               scope.
    :returns:   Nothing.
 
 
 screw-unit -- JavaScript BDD Framework
 ``````````````````````````````````````
+
+.. highlight:: html
 
 .. function:: screwunit({scope})
 
@@ -236,13 +302,15 @@ screw-unit -- JavaScript BDD Framework
            });
        </script>
 
-   :arg scope: *(Optional, default=Screw.Matchers)* Copies all test matcher
-               functions to the given scope.
+   :arg scope: *(Optional, default=Screw.Matchers)* Copies all matchers to the
+               given scope.
    :returns:   Nothing.
 
 
 YUITest -- JavaScript Unit Testing Framework
 ````````````````````````````````````````````
+
+.. highlight:: html
 
 .. function:: YUITest({scope})
 
@@ -261,13 +329,13 @@ YUITest -- JavaScript Unit Testing Framework
 
            // Same as above
            JsHamcrest.Integration.YUITest({
-               scope: window
+               scope: this
            });
        </script>
 
        <script type="text/javascript">
            CalculatorTestCase = new YAHOO.tool.TestCase({
-               name: "Calculator test case",
+               name: 'Calculator test case',
 
                setUp: function() {
                },
@@ -282,8 +350,8 @@ YUITest -- JavaScript Unit Testing Framework
            });
        </script>
 
-   :arg scope: *(Optional, default=window)* Copies all test matcher functions
-               to the given scope.
+   :arg scope: *(Optional, default=this)* Copies all matchers to the given
+               scope.
    :returns:   Nothing.
 
 
