@@ -1,4 +1,4 @@
-new TestRunner({
+new Test.Unit.Runner({
     name: 'Number matchers',
 
     setup: function() { with(this) {
@@ -84,5 +84,12 @@ new TestRunner({
         assert(close.matches(1.5));
         assert(!close.matches(2.0));
         assert(!close.matches(0.0));
+    }},
+
+    testZero: function() { with(this) {
+        var zero = JsHamcrest.Matchers.zero();
+        assert(zero.matches(0));
+        assert(!zero.matches('0'));
+        assert(!zero.matches(null));
     }}
-}, {'logger':testLogger, 'testLog': 'numberLog'});
+}, {'testLog': 'numberLog'});

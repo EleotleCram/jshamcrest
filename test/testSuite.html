@@ -10,17 +10,11 @@
   <link rel="stylesheet" href="assets/jsunittest/unittest.css" type="text/css" />
 
   <!-- JsHamcrest -->
-  <script src="../build/jshamcrest.js" type="text/javascript"></script>
+  <script src="../build/jshamcrest-min.js" type="text/javascript"></script>
 
   <script type="text/javascript">
     // Integrate JsHamcrest to JsUnitTest
     JsHamcrest.Integration.JsUnitTest();
-
-    // Test runner implementation to be used by this test suite
-    var TestRunner = Test.Unit.Runner;
-
-    // A valid 'testLogger' is only needed when running test cases with Rhino
-    var testLogger = {};
   </script>
 </head>
 <body>
@@ -30,7 +24,7 @@
   <div id="header">
     <h1>JsHamcrest Test Suite</h1>
     <p>
-      This file tests <strong>jshamcrest.js</strong>.
+      This file tests <strong>jshamcrest-min.js</strong>.
     </p>
   </div>
 
@@ -52,6 +46,9 @@
   <h2>Text matchers</h2>
   <div id="textLog"></div>
 
+  <h2>Matcher operators</h2>
+  <div id="operatorLog"></div>
+
   <h2>Integration</h2>
   <div id="integrationLog"></div>
 
@@ -66,6 +63,7 @@
 <script src="cases/number.js" type="text/javascript"></script>
 <script src="cases/object.js" type="text/javascript"></script>
 <script src="cases/text.js" type="text/javascript"></script>
+<script src="cases/operator.js" type="text/javascript"></script>
 <script src="cases/integration.js" type="text/javascript"></script>
 
 </body>

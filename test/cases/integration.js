@@ -14,13 +14,38 @@ var logFailures = function(self, func) {
     return {result: result, failCount: failCount};
 };
 
-new TestRunner({
+new Test.Unit.Runner({
     name: 'Integration',
 
     setup: function() { with(this) {
     }},
 
     teardown: function() { with(this) {
+    }},
+
+    testCopyDefaultMembers: function() { with(this) {
+        var dst = {a:1};
+        JsHamcrest.Integration.copyMembers(dst);
+        assertEqual(1, dst.a);
+        assert(dst.equalTo instanceof Function);
+        assert(dst.filter instanceof Function);
+    }},
+
+    testCopyExistentMembers: function() { with(this) {
+        var src = {a:1, b:2, c:3}, dst = {a:2};
+        JsHamcrest.Integration.copyMembers(src, dst);
+        assertEqual(dst.a, 2);
+        assertEqual(dst.b, 2);
+        assertEqual(dst.c, 3);
+    }},
+
+    testCopyMembers: function() { with(this) {
+        var src = {b:2, c:3}, dst = {a:1};
+        
+        JsHamcrest.Integration.copyMembers(src, dst);
+        assertEqual(dst.a, 1);
+        assertEqual(dst.b, 2);
+        assertEqual(dst.c, 3);
     }},
 
     testAssertThatWithSuccessfulMatcherAndNoMessage: function() { with(this) {
@@ -88,4 +113,4 @@ new TestRunner({
         assertEqual(1, data.failCount);
         assertEqual('Expected truth but was 0', data.result.get());
     }}
-}, {'logger':testLogger, 'testLog': 'integrationLog'});
+}, {'testLog': 'integrationLog'});

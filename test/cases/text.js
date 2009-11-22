@@ -1,4 +1,4 @@
-new TestRunner({
+new Test.Unit.Runner({
     name: 'Text matchers',
 
     setup: function() { with(this) {
@@ -59,4 +59,4 @@ new TestRunner({
         assert(!emailAddress().matches('user@domain'));
         assert(!emailAddress().matches('user&name@domain.com'));
     }}
-}, {'logger':testLogger, 'testLog': 'textLog'});
+}, {'testLog': 'textLog'});

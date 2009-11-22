@@ -1,4 +1,4 @@
-new TestRunner({
+new Test.Unit.Runner({
     name: 'Collection matchers',
 
     setup: function() { with(this) {
@@ -57,24 +57,36 @@ new TestRunner({
     }},
 
     testEmpty: function() { with(this) {
-        assert(not(empty()).matches(array));
+        assert(empty().matches(''));
+        assert(!empty().matches('string'));
         assert(empty().matches([]));
+        assert(!empty().matches(array));
     }},
 
     testHasSizeWithValue: function() { with(this) {
         assert(hasSize(4).matches(array));
+        assert(hasSize(6).matches('string'));
     }},
 
     testHasSizeWithMatcher: function() { with(this) {
         assert(hasSize(greaterThan(3)).matches(array));
+        assert(hasSize(greaterThan(3)).matches('string'));
+        assert(hasSize(0).matches(function(){}));
     }},
 
     testHasInvalidSizeWithValue: function() { with(this) {
         assert(!hasSize(3).matches(array));
+        assert(!hasSize(3).matches('string'));
     }},
 
     testHasInvalidSizeWithMatcher: function() { with(this) {
         assert(!hasSize(lessThan(4)).matches(array));
+        assert(!hasSize(lessThan(4)).matches('string'));
+    }},
+
+    testHasSizeWithInvalidValue: function() { with(this) {
+        assert(!hasSize(0).matches({}));
+        assert(!hasSize(0).matches(10));
     }},
 
     testEveryItemWithValue: function() { with(this) {
@@ -92,4 +104,4 @@ new TestRunner({
     testEveryItemWithInvalidMatcher: function() { with(this) {
         assert(!everyItem(greaterThan(0)).matches([0, 1, 2, 3, 4]));
     }}
-}, {'logger':testLogger, 'testLog': 'collectionLog'});
+}, {'testLog': 'collectionLog'});

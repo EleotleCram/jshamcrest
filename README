@@ -1,40 +1,27 @@
 JsHamcrest
 ----------
 
-    http://jshamcrest.destaquenet.com/
-
-
-JsHamcrest is a JavaScript version of Hamcrest, which provides a library of
-matcher objects (also known as constraints or predicates) allowing “match”
-rules to be defined declaratively. Typical scenarios include testing
-frameworks, mocking libraries, UI validation rules and object querying.
+JsHamcrest is a JavaScript library heavily inspired by Hamcrest. It provides
+a large library of matcher objects (also known as constraints or predicates)
+allowing “match” rules to be defined declaratively. Typical scenarios include
+testing frameworks, mocking libraries, UI validation rules and object querying.
 
 This is an open source project licenced under the terms of the BSD License
 and sponsored by Destaquenet Technology Solutions, a brazilian software
 development and consultancy startup.
 
 
-Downloading
------------
+Installation and Usage
+----------------------
 
-Visit the following URL to download the latest stable version of JsHamcrest
-and its API documentation:
+To learn everything about JsHamcrest, take a look at the the complete
+documentation at:
 
-    http://github.com/danielfm/jshamcrest/downloads
-
-
-Building
---------
-
-If you want to build JsHamcrest yourself, you have to install Apache Ant in
-your machine if you don't have it already. Visit the following URL to
-download Ant and get further instructions on how to install it in your system:
-
-    http://ant.apache.org/
-
-After that, execute the following command line to perform the complete build:
-
-    $ ant build
+    http://jshamcrest.destaquenet.com/
 
 
---EOF
+Credits
+-------
+
+    Author:  Daniel Fernandes Martins <daniel@destaquenet.com>
+    Company: Destaquenet Technology Solutions <http://www.destaquenet.com/>

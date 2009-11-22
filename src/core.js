@@ -1,52 +1,8 @@
-/**
- * @fileOverview Provides core matchers.
- */
-
-/**
- * Built-in matchers.
- * @namespace
- */
 JsHamcrest.Matchers = {};
 
 /**
- * Returns those items of the array for which matcher.matches(item) is
- * true. Ex: <p>
- *
- * <pre>
- * var numbers = [0,1,2,3,4,5,6];
- * var result = filter(numbers, both(greaterThan(0)).and(even()));
- * assertThat(result, is([2,4,6]));
- * </pre>
- *
- * @param {Array} array Array.
- * @param {JsHamcrest.SimpleMatcher} matcher Matcher
- */
-JsHamcrest.Matchers.filter = function(array, matcher) {
-    if (!(array instanceof Array) || !(matcher instanceof JsHamcrest.SimpleMatcher)) {
-        return array;
-    }
-
-    var result = [];
-    for (var i = 0; i < array.length; i++) {
-        if (matcher.matches(array[i])) {
-            result.push(array[i]);
-        }
-    }
-    return result;
-};
-
-/**
  * The actual value must be any value considered truth by the JavaScript
- * engine. Ex: <p>
- *
- * <pre>
- * assertThat(10, truth());
- * assertThat({}, truth());
- * assertThat(0, not(truth()));
- * assertThat('', not(truth()));
- * </pre>
- *
- * @return {JsHamcrest.SimpleMatcher} 'truth' matcher.
+ * engine.
  */
 JsHamcrest.Matchers.truth = function() {
     return new JsHamcrest.SimpleMatcher({
@@ -61,15 +17,7 @@ JsHamcrest.Matchers.truth = function() {
 };
 
 /**
- * Delegate-only matcher frequently used to improve readability. Ex: <p>
- *
- * <pre>
- * assertThat(10, is(10));
- * assertThat(10, is(equalTo(10)));
- * </pre>
- *
- * @param {object} matcherOrValue Delegate matcher or expected value.
- * @return {JsHamcrest.SimpleMatcher} 'is' matcher.
+ * Delegate-only matcher frequently used to improve readability.
  */
 JsHamcrest.Matchers.is = function(matcherOrValue) {
     // Uses 'equalTo' matcher if the given object is not a matcher
@@ -89,15 +37,7 @@ JsHamcrest.Matchers.is = function(matcherOrValue) {
 };
 
 /**
- * The delegate matcher must not match to be successful. Ex: <p>
- *
- * <pre>
- * assertThat(10, not(20));
- * assertThat(10, not(equalTo(20)));
- * </pre>
- *
- * @param {object} matcher Delegate matcher or expected value.
- * @return {JsHamcrest.SimpleMatcher} 'not' matcher.
+ * The actual value must not match the given matcher or value.
  */
 JsHamcrest.Matchers.not = function(matcherOrValue) {
     // Uses 'equalTo' matcher if the given object is not a matcher
@@ -117,15 +57,7 @@ JsHamcrest.Matchers.not = function(matcherOrValue) {
 };
 
 /**
- * The actual value must be equal to the given value to be successful.
- * Ex: <p>
- *
- * <pre>
- * assertThat(10, equalTo('10'));
- * </pre>
- *
- * @param {object} expected value.
- * @return {JsHamcrest.SimpleMatcher} 'equalTo' matcher.
+ * The actual value must be equal to the given value.
  */
 JsHamcrest.Matchers.equalTo = function(expected) {
     return new JsHamcrest.SimpleMatcher({
@@ -143,14 +75,7 @@ JsHamcrest.Matchers.equalTo = function(expected) {
 };
 
 /**
- * Useless always-match matcher. Ex: <p>
- *
- * <pre>
- * assertThat(myObj, anything());
- * assertThat(null, anything());
- * </pre>
- *
- * @return {JsHamcrest.SimpleMatcher} 'anything' matcher.
+ * Useless always-match matcher.
  */
 JsHamcrest.Matchers.anything = function() {
     return new JsHamcrest.SimpleMatcher({
@@ -165,13 +90,7 @@ JsHamcrest.Matchers.anything = function() {
 };
 
 /**
- * The actual value must be null (or undefined) to be successful. Ex: <p>
- *
- * <pre>
- * assertThat(myObj, nil()); // myObj should be null or undefined
- * </pre>
- *
- * @return {JsHamcrest.SimpleMatcher} 'nil' matcher.
+ * The actual value must be null (or undefined).
  */
 JsHamcrest.Matchers.nil = function() {
     return new JsHamcrest.SimpleMatcher({
@@ -186,15 +105,7 @@ JsHamcrest.Matchers.nil = function() {
 };
 
 /**
- * The actual value must be the same as the given value to be successful.
- * Ex: <p>
- *
- * <pre>
- * assertThat(myObject, sameAs(anotherObj));
- * </pre>
- *
- * @param {object} expected Expected object.
- * @return {JsHamcrest.SimpleMatcher} 'sameAs' matcher.
+ * The actual value must be the same as the given value.
  */
 JsHamcrest.Matchers.sameAs = function(expected) {
     return new JsHamcrest.SimpleMatcher({
@@ -210,24 +121,7 @@ JsHamcrest.Matchers.sameAs = function(expected) {
 
 /**
  * The actual value is a function and, when invoked, it should thrown an
- * exception with the given name to be successful. Ex: <p>
- *
- * <pre>
- * var MyException = function(message) {
- *   this.name = 'MyException';
- *   this.message = message;
- * };
- * 
- * var myFunction = function() {
- *   // Do something dangerous...
- *   throw new MyException('Unexpected error');
- * }
- *
- * assertThat(myFunction, raises('MyException'));
- * </pre>
- *
- * @param {string} exceptionName Name of the expected exception.
- * @return {JsHamcrest.SimpleMatcher} 'raises' matcher
+ * exception with the given name.
  */
 JsHamcrest.Matchers.raises = function(exceptionName) {
     return new JsHamcrest.SimpleMatcher({
@@ -252,18 +146,7 @@ JsHamcrest.Matchers.raises = function(exceptionName) {
 
 /**
  * The actual value is a function and, when invoked, it should raise any
- * exception to be successful. Ex: <p>
- *
- * <pre>
- * var myFunction = function() {
- *   // Do something dangerous...
- *   throw 'Some unexpected error';
- * }
- *
- * assertThat(myFunction, raisesAnything());
- * </pre>
- *
- * @return {JsHamcrest.SimpleMatcher} 'raisesAnything' matcher
+ * exception.
  */
 JsHamcrest.Matchers.raisesAnything = function() {
     return new JsHamcrest.SimpleMatcher({
@@ -283,16 +166,8 @@ JsHamcrest.Matchers.raisesAnything = function() {
 };
 
 /**
- * Creates a combinable matcher where the actual value must match all matchers
- * to be successful. Ex: <p>
- *
- * <pre>
- * assertThat(10, both(greaterThan(5)).and(lessThan(20)));
- * </pre>
- *
- * @param {object} matcherOrValue Matcher or expected value that should be turn
- * into a combinable matcher.
- * @return {JsHamcrest.CombinableMatcher} 'both' matcher.
+ * Combinable matcher where the actual value must match both of the given
+ * matchers.
  */
 JsHamcrest.Matchers.both = function(matcherOrValue) {
     // Uses 'equalTo' matcher if the given object is not a matcher
@@ -309,16 +184,8 @@ JsHamcrest.Matchers.both = function(matcherOrValue) {
 };
 
 /**
- * Creates a combinable matcher where the actual value must match at least one
- * matcher to be successful. Ex: <p>
- *
- * <pre>
- * assertThat(10, either(lessThan(20)).or(greaterThan(50)));
- * </pre>
- *
- * @param {object} matcherOrValue Matcher or expected value that should be turn
- * into a combinable matcher.
- * @return {JsHamcrest.CombinableMatcher} 'either' matcher.
+ * Combinable matcher where the actual value must match at least one of the
+ * given matchers.
  */
 JsHamcrest.Matchers.either = function(matcherOrValue) {
     // Uses 'equalTo' matcher if the given object is not a matcher
@@ -336,18 +203,7 @@ JsHamcrest.Matchers.either = function(matcherOrValue) {
 
 /**
  * All the given values or matchers should match the actual value to be
- * sucessful. This matcher behaves pretty much like the JavaScript &&
- * operator (short-circuiting). Ex: <p>
- *
- * <pre>
- * assertThat(5, allOf([greaterThan(0), lessThan(10)]));
- * assertThat(5, allOf([5, lessThan(10)]));
- * assertThat(5, allOf(greaterThan(0), lessThan(10)));
- * assertThat(5, allOf(5, lessThan(10)));
- * </pre>
- *
- * @param {array} arguments List of delegate matchers.
- * @return {JsHamcrest.SimpleMatcher} 'allOf' matcher.
+ * sucessful. This matcher behaves pretty much like the && operator.
  */
 JsHamcrest.Matchers.allOf = function() {
     var args = arguments;
@@ -375,16 +231,8 @@ JsHamcrest.Matchers.allOf = function() {
 };
 
 /**
- * At least one of the given matchers should match the actual value to be
- * sucessful. This matcher behaves pretty much like the JavaScript ||
- * operator (short-circuiting). Ex: <p>
- *
- * <pre>
- * assertThat(5, not(anyOf(lessThan(0), greaterThan(100))));
- * </pre>
- *
- * @param {array} arguments List of delegate matchers.
- * @return {JsHamcrest.SimpleMatcher} 'anyOf' matcher.
+ * At least one of the given matchers should match the actual value. This
+ * matcher behaves pretty much like the || (or) operator.
  */
 JsHamcrest.Matchers.anyOf = function() {
     var args = arguments;

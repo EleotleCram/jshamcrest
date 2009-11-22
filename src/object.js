@@ -1,25 +1,12 @@
 /**
- * @fileOverview Provides object-related matchers.
- */
-
-
-/**
- * Asserts that the actual object contains the given member (variable or
- * function). Ex: <p>
- *
- * <pre>
- * assertThat(myObj, hasMember('name'));
- * </pre>
- *
- * @param {string} memberName Member name.
- * @return {JsHamcrest.SimpleMatcher} 'hasMember' matcher.
+ * The actual value has a member with the given name.
  */
 JsHamcrest.Matchers.hasMember = function(memberName) {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            try {
+            if (actual) {
                 return memberName in actual;
-            } catch (e) { }
+            }
             return false;
         },
 
@@ -30,22 +17,15 @@ JsHamcrest.Matchers.hasMember = function(memberName) {
 };
 
 /**
- * Asserts that the actual object contains the given function. Ex: <p>
- *
- * <pre>
- * assertThat(myObj, hasFunction('getName'));
- * </pre>
- *
- * @param {string} property Property name.
- * @return {JsHamcrest.SimpleMatcher} 'hasFunction' matcher.
+ * The actual value has a function with the given name.
  */
 JsHamcrest.Matchers.hasFunction = function(functionName) {
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            try {
-                return functionName in actual && 
+            if (actual) {
+                return functionName in actual &&
                         actual[functionName] instanceof Function;
-            } catch (e) { }
+            }
             return false;
         },
 
@@ -56,14 +36,7 @@ JsHamcrest.Matchers.hasFunction = function(functionName) {
 };
 
 /**
- * Asserts that the actual object is instance of the given class. Ex: <p>
- *
- * <pre>
- * assertThat(myObj, instanceOf(Array));
- * </pre>
- *
- * @param {function} clazz Constructor function.
- * @return {JsHamcrest.SimpleMatcher} 'instanceOf' matcher.
+ * The actual value must be an instance of the given class.
  */
 JsHamcrest.Matchers.instanceOf = function(clazz) {
     return new JsHamcrest.SimpleMatcher({
@@ -79,14 +52,7 @@ JsHamcrest.Matchers.instanceOf = function(clazz) {
 };
 
 /**
- * Asserts that the actual object is of the specified type. Ex: <p>
- *
- * <pre>
- * assertThat("text", typeOf("string"));
- * </pre>
- *
- * @param {function} typeName Type name.
- * @return {JsHamcrest.SimpleMatcher} 'instanceOf' matcher.
+ * The actual value must be an instance of the given type.
  */
 JsHamcrest.Matchers.typeOf = function(typeName) {
     return new JsHamcrest.SimpleMatcher({
@@ -102,74 +68,37 @@ JsHamcrest.Matchers.typeOf = function(typeName) {
 };
 
 /**
- * Asserts that the actual value is an object. Ex: <p>
- *
- * <pre>
- * assertThat({}, object());
- * assertThat(10, not(object()));
- * </pre>
- *
- * @return {JsHamcrest.SimpleMatcher} 'object' matcher.
+ * The actual value must be an object.
  */
 JsHamcrest.Matchers.object = function() {
     return new JsHamcrest.Matchers.instanceOf(Object);
 };
 
 /**
- * Asserts that the actual value is a string. Ex: <p>
- *
- * <pre>
- * assertThat("text", string());
- * assertThat(10, not(string()));
- * </pre>
- *
- * @return {JsHamcrest.SimpleMatcher} 'string' matcher.
+ * The actual value must be a string.
  */
 JsHamcrest.Matchers.string = function() {
     return new JsHamcrest.Matchers.typeOf('string');
 };
 
 /**
- * Asserts that the actual value is a number. Ex: <p>
- *
- * <pre>
- * assertThat(10, number());
- * assertThat(10.0, number());
- * assertThat("text", not(number()));
- * </pre>
- *
- * @return {JsHamcrest.SimpleMatcher} 'number' matcher.
+ * The actual value must be a number.
  */
 JsHamcrest.Matchers.number = function() {
     return new JsHamcrest.Matchers.typeOf('number');
 };
 
 /**
- * Asserts that the actual value is a boolean. Ex: <p>
- *
- * <pre>
- * assertThat(true, bool());
- * assertThat(false, bool());
- * assertThat("text" not(bool()));
- * </pre>
- *
- * @return {JsHamcrest.SimpleMatcher} 'bool' matcher.
+ * The actual value must be a boolean.
  */
 JsHamcrest.Matchers.bool = function() {
     return new JsHamcrest.Matchers.typeOf('boolean');
 };
 
 /**
- * Asserts that the actual object is a function. Ex: <p>
- *
- * <pre>
- * assertThat(function() {}, func());
- * assertThat("text", not(func()));
- * </pre>
- *
- * @return {JsHamcrest.SimpleMatcher} 'func' matcher.
+ * The actual value must be a function.
  */
 JsHamcrest.Matchers.func = function() {
-    return new JsHamcrest.Matchers.typeOf('function');
+    return new JsHamcrest.Matchers.instanceOf(Function);
 };
 
