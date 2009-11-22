@@ -10,7 +10,7 @@ Provides the main namespace, along with core abstractions.
 
 .. function:: areArraysEqual(array, anotherArray)
 
-   Returns whether the given arrays are equivalent.
+   Returns whether the arrays *array* and *anotherArray* are equivalent.
 
    :arg array:        An array.
    :arg anotherArray: Another array.
@@ -74,7 +74,7 @@ Provides the main namespace, along with core abstractions.
 
 .. function:: Description.append(text)
 
-   Appends a text to this description.
+   Appends *text* to this description.
 
    :arg text: Text to append to this description.
    :returns:  this.
@@ -82,7 +82,7 @@ Provides the main namespace, along with core abstractions.
 
 .. function:: Description.appendDescriptionOf(selfDescribingObject)
 
-   Appends the description a *self describing object* to this description.
+   Appends the description of a *self describing object* to this description.
 
    :arg selfDescribingObject: Any object that have a :meth:`describeTo` function
                               that accepts a :class:`JsHamcrest.Description`
@@ -92,13 +92,14 @@ Provides the main namespace, along with core abstractions.
 
 .. function:: Description.appendList(start, separator, end, list)
 
-   Appends a list of self describing objects to this description.
+   Appends the description of several *self describing objects* to this
+   description.
 
    :arg start:     Start string.
    :arg separator: Separator string.
    :arg end:       End string.
-   :arg list:      List of self describing objects. These objects must have a
-                   :meth:`describeTo` function that accepts a
+   :arg list:      Array of *self describing objects*. These objects must have
+                   a :meth:`describeTo` function that accepts a
                    :class:`JsHamcrest.Description` object as argument.
    :returns:       this.
 
@@ -113,12 +114,12 @@ Provides the main namespace, along with core abstractions.
 
 .. function:: Description.appendValueList(start, separator, end, list)
 
-   Appends a list of values to this description.
+   Appends an array of values to this description.
 
    :arg start:     Start string.
    :arg separator: Separator string.
    :arg end:       End string.
-   :arg list:      List of values to be described to this description.
+   :arg list:      Array of values to be described to this description.
    :returns:       this.
 
 
@@ -163,7 +164,7 @@ Provides the main namespace, along with core abstractions.
 
 .. function:: SimpleMatcher.describeTo(description)
 
-   Describes this matcher's tasks to the given *description*.
+   Describes this matcher's tasks to *description*.
 
    :arg description: Instance of :class:`JsHamcrest.Description`.
    :returns:        Nothing.
@@ -171,7 +172,7 @@ Provides the main namespace, along with core abstractions.
 
 .. function:: SimpleMatcher.describeValueTo(actual, description)
 
-   Describes the *actual* value to the given *description*.
+   Describes *actual* to *description*.
 
    :arg actual:     Actual value to be described.
    :arg description: Instance of :class:`JsHamcrest.Description`.
@@ -180,7 +181,7 @@ Provides the main namespace, along with core abstractions.
 
 .. function:: SimpleMatcher.matches(actual)
 
-   Checks if this matcher matches the *actual* value.
+   Checks if this matcher matches *actual*.
 
    :arg actual: Actual value.
    :returns:    True if the matcher matches the actual value; false otherwise.

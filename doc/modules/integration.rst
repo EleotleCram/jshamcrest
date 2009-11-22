@@ -137,8 +137,9 @@ JsUnitTest -- JavaScript Unit Testing Framework
 
 .. function:: JsUnitTest({scope})
 
-   Integrates JsHamcrest with `JsUnitTest`_. The following code is an example on
-   how to set up your project::
+   Integrates JsHamcrest with `JsUnitTest`_.
+
+   The following code is an example on how to set up your project::
 
        <!-- JsUnitTest and dependencies -->
        <script type="text/javascript" src="jsunittest.js"></script>
@@ -169,9 +170,6 @@ JsUnitTest -- JavaScript Unit Testing Framework
            }, {'testLog':'myLog'});
        </script>
 
-   Integrates JsHamcrest with JsUnitTest. The following code is an example on
-   how to set up your project:
-   
    :arg scope: *(Optional, default=JsUnitTest.Unit.Testcase.prototype)* Copies
                all matchers to the given scope.
    :returns:   Nothing.
@@ -184,8 +182,9 @@ jsUnity -- Lightweight JavaScript Testing Framework
 
 .. function:: jsUnity({scope, attachAssertions})
 
-   Integrates JsHamcrest with `jsUnity`_. The following code is an example on
-   how to set up your project::
+   Integrates JsHamcrest with `jsUnity`_.
+
+   The following code is an example on how to set up your project::
 
        <!-- jsUnity and dependencies -->
        <script type="text/javascript" src="jsunity.js"></script>
@@ -227,8 +226,9 @@ QUnit -- JavaScript Test Suite
 
 .. function:: QUnit({scope})
 
-   Integrates JsHamcrest with `QUnit`_. The following code is an example on how
-   to set up your project::
+   Integrates JsHamcrest with `QUnit`_.
+
+   The following code is an example on how to set up your project::
 
        <!-- QUnit and dependencies -->
        <script type="text/javascript" src="jquery.js"></script>
@@ -266,8 +266,9 @@ screw-unit -- JavaScript BDD Framework
 
 .. function:: screwunit({scope})
 
-   Integrates JsHamcrest with `screw-unit`_. The following code is an example on
-   how to set up your project::
+   Integrates JsHamcrest with `screw-unit`_.
+
+   The following code is an example on how to set up your project::
 
        <!-- screw-unit and dependencies -->
        <script type="text/javascript" src="jquery-1.2.6.js"></script>
@@ -314,8 +315,9 @@ YUITest -- JavaScript Unit Testing Framework
 
 .. function:: YUITest({scope})
 
-   Integrates JsHamcrest with `YUITest`_. The following code is an example on
-   how to set up your project::
+   Integrates JsHamcrest with `YUITest`_.
+
+   The following code is an example on how to set up your project::
 
        <!-- YUITest and dependencies -->
        <script type="text/javascript" src="yahoo-dom-event/yahoo-dom-event.js"></script>

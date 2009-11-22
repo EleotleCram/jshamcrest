@@ -14,8 +14,7 @@ List Processing
 
 .. function:: filter(array, matcherOrValue)
 
-   Returns those items of the array for which the given matcher or value
-   matches::
+   Returns those items of *array* for which *matcherOrValue* matches::
 
        var filtered = filter([0,1,2,3,4,5,6], even());
        assertThat(filtered, equalTo([0,2,4,6]));
@@ -37,7 +36,7 @@ Unit Testing
    Generic assert function to be used for easy integration with testing
    frameworks. Usage example::
 
-       // After add the following method to your testing framework...
+       // Add the following method to your testing framework...
 
        function iAssertThat(actualValue, matcherOrValue, message) {
            return JsHamcrest.Operators.assert(actualValue, matcherOrValue, {
@@ -53,7 +52,7 @@ Unit Testing
            });
        }
 
-       // ... you'll be able to leverage the power of JsHamcrest in your test cases
+       // ...and then you'll be able to leverage the power of JsHamcrest in your test cases
        result = iAssertThat(50, between(0).and(100));
 
        result.passed // Output: true

@@ -133,22 +133,22 @@ JsHamcrest.Matchers.between = function(start) {
 };
 
 /**
- * The actual number must be close enough to the given number, that is, the
- * actual number is equal to a number within some range of acceptable error.
+ * The actual number must be close enough to *expected*, that is, the actual
+ *  number is equal to a value within some range of acceptable error.
  */
-JsHamcrest.Matchers.closeTo = function(number, delta) {
+JsHamcrest.Matchers.closeTo = function(expected, delta) {
     if (!delta) {
         delta = 0;
     }
 
     return new JsHamcrest.SimpleMatcher({
         matches: function(actual) {
-            return (Math.abs(actual - number) - delta) <= 0;
+            return (Math.abs(actual - expected) - delta) <= 0;
         },
 
         describeTo: function(description) {
             description.append('number within ')
-                  .appendLiteral(delta).append(' of ').appendLiteral(number);
+                  .appendLiteral(delta).append(' of ').appendLiteral(expected);
         }
     });
 };

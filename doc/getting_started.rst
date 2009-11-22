@@ -29,9 +29,12 @@ following content and open it on your web browser of choice:
     </html>
 
 
-Don't forget to change the 4th line to make it point to your actual JsHamcrest
-source file. If an alert message "true" pops up when you open the page, then
+If an alert message "true" pops up when you open the page, then
 congratulations!
+
+.. note::
+   Don't forget to change the 4th line to make it point to your actual
+   JsHamcrest source file. 
 
 
 JsHamcrest Outside The Web Browser

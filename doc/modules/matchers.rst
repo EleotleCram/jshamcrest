@@ -26,8 +26,8 @@ Collection Matchers
 
 .. function:: everyItem(matcherOrValue)
 
-   The actual value should be an array and the given matcher or value must
-   match all items::
+   The actual value should be an array and *matcherOrValue* must match all
+   items::
 
        assertThat([1,2,3], everyItem(greaterThan(0)));
        assertThat([1,'1'], everyItem(1));
@@ -40,7 +40,7 @@ Collection Matchers
 .. function:: hasItem(matcherOrValue)
 
    The actual value should be an array and it must contain at least one value
-   that matches the given matcher or value::
+   that matches *matcherOrValue*::
 
        assertThat([1,2,3], hasItem(equalTo(3)));
        assertThat([1,2,3], hasItem(3));
@@ -52,8 +52,8 @@ Collection Matchers
 
 .. function:: hasItems(MatchersOrValues...)
 
-   The actual value should be an array and the given matchers or values must
-   match at least one item::
+   The actual value should be an array and *matchersOrValues* must match at
+   least one item::
 
        assertThat([1,2,3], hasItems(2,3));
        assertThat([1,2,3], hasItems(greaterThan(2)));
@@ -65,7 +65,7 @@ Collection Matchers
 
 .. function:: hasSize(matcherOrValue)
 
-   The length of the actual value value must match the given value or matcher::
+   The length of the actual value value must match *matcherOrValue*::
 
        assertThat([1,2,3], hasSize(3));
        assertThat([1,2,3], hasSize(lessThan(5)));
@@ -77,15 +77,15 @@ Collection Matchers
    :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
-.. function:: isIn(arguments...)
+.. function:: isIn(item...)
 
    The given array or arguments must contain the actual value::
 
        assertThat(1, isIn([1,2,3]));
        assertThat(1, isIn(1,2,3));
 
-   :arg arguments...: Array or list of values.
-   :returns:          Instance of :class:`JsHamcrest.SimpleMatcher`.
+   :arg item...: Array or list of values.
+   :returns:     Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
 .. function:: oneOf()
@@ -98,8 +98,8 @@ Core Matchers
 
 .. function:: allOf(matchersOrValues...)
 
-   All the given matchers or values must match the actual value. This matcher
-   behaves pretty much like the JavaScript ``&&`` (and) operator::
+   All *matchesOrValues* must match the actual value. This matcher behaves
+   pretty much like the JavaScript ``&&`` (and) operator::
 
        assertThat(5, allOf([greaterThan(0), lessThan(10)]));
        assertThat(5, allOf([5, lessThan(10)]));
@@ -113,9 +113,10 @@ Core Matchers
 
 .. function:: anyOf(matchersOrValues)
 
-   At least one of the given matchers should match the actual value. This
-   matcher behaves pretty much like the || (or) operator::
+   At least one of the *matchersOrValues* should match the actual value. This
+   matcher behaves pretty much like the ``||`` (or) operator::
 
+       assertThat(5, anyOf([even(), greaterThan(2)]));
        assertThat(5, anyOf(even(), greaterThan(2)));
 
    :arg matchersOrValues: Instances of :class:`JsHamcrest.SimpleMatcher` and/or
@@ -135,8 +136,8 @@ Core Matchers
 
 .. function:: both(matcherOrValue)
 
-   Combinable matcher where the actual value must match both of the given
-   matchers or values::
+   Combinable matcher where the actual value must match all the given matchers
+   or values::
 
        assertThat(10, both(greaterThan(5)).and(even()));
 
@@ -148,7 +149,7 @@ Core Matchers
 .. function:: either(matcherOrValue)
 
    Combinable matcher where the actual value must match at least one of the
-   given matchers::
+   given matchers or values::
 
        assertThat(10, either(greaterThan(50)).or(even()));
 
@@ -159,7 +160,7 @@ Core Matchers
 
 .. function:: equalTo(expected)
 
-   The actual value must be equal to the given value::
+   The actual value must be equal to *expected*::
 
        assertThat('10', equalTo(10));
 
@@ -181,7 +182,7 @@ Core Matchers
 
 .. function:: nil()
 
-   The actual value must be null (or undefined)::
+   The actual value must be ``null`` or ``undefined``::
 
        var undef;
        assertThat(undef, nil());
@@ -192,7 +193,7 @@ Core Matchers
 
 .. function:: not(matcherOrValue)
 
-   The actual value must not match the given matcher or value::
+   The actual value must not match *matcherOrValue*::
 
        assertThat(10, not(20));
        assertThat(10, not(equalTo(20)));
@@ -240,7 +241,7 @@ Core Matchers
 
 .. function:: sameAs(expected)
 
-   The actual value must be the same as the given value::
+   The actual value must be the same as *expected*::
 
        var number = 10, anotherNumber = number;
        assertThat(number, sameAs(anotherNumber));
@@ -279,19 +280,19 @@ Number Matchers
                called to finish the matcher creation.
 
 
-.. function:: closeTo(number[, delta])
+.. function:: closeTo(expected[, delta])
 
-   The actual number must be close enough to the given number, that is, the
-   actual number is equal to a number within some range of acceptable error::
+   The actual number must be close enough to *expected*, that is, the actual
+   number is equal to a value within some range of acceptable error::
 
        assertThat(0.5, closeTo(1.0, 0.5));
        assertThat(1.0, closeTo(1.0, 0.5));
        assertThat(1.5, closeTo(1.0, 0.5));
        assertThat(2.0, not(closeTo(1.0, 0.5)));
 
-   :arg number: Expected number.
-   :arg delta:  *(Optional, default=0)* Expected difference delta.
-   :returns:    Instance of :class:`JsHamcrest.SimpleMatcher`.
+   :arg expected: Expected number.
+   :arg delta:    *(Optional, default=0)* Expected difference delta.
+   :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
 .. function:: even()
@@ -305,7 +306,7 @@ Number Matchers
 
 .. function:: greaterThan(expected)
 
-   The actual number must be greater than the expected number::
+   The actual number must be greater than *expected*::
 
        assertThat(10, greaterThan(5));
 
@@ -315,7 +316,7 @@ Number Matchers
 
 .. function:: greaterThanOrEqualTo(expected)
 
-   The actual number must be greater than or equal to the expected number::
+   The actual number must be greater than or equal to *expected*::
 
        assertThat(10, greaterThanOrEqualTo(5));
 
@@ -325,7 +326,7 @@ Number Matchers
 
 .. function:: lessThan(expected)
 
-   The actual number must be less than the expected number::
+   The actual number must be less than *expected*::
 
        assertThat(5, lessThan(10));
 
@@ -335,7 +336,7 @@ Number Matchers
 
 .. function:: lesThanOrEqualTo(expected)
 
-   The actual number must be less than or equal to the expected number::
+   The actual number must be less than or equal to *expected*::
 
        assertThat(5, lessThanOrEqualTo(10));
 
@@ -431,7 +432,7 @@ Object Matchers
 
 .. function:: isInstanceOf(clazz)
 
-   The actual value must be an instance of the given class::
+   The actual value must be an instance of *clazz*::
 
        assertThat([], instanceOf(Array));
 
@@ -471,7 +472,7 @@ Object Matchers
 
 .. function:: typeOf(typeName)
 
-   The actual value must be an instance of the given type::
+   The actual value must be of the given type::
 
        assertThat(10, typeOf('number'));
        assertThat({}, typeOf('object'));
@@ -487,7 +488,7 @@ Text Matchers
 
 .. function:: containsString(str)
 
-   The actual string must have a substring equals to the given string::
+   The actual string must have a substring equals to *str*::
 
        assertThat('string', containsString('tri'));
 
@@ -509,7 +510,7 @@ Text Matchers
 
 .. function:: endsWith(str)
 
-   The actual string must end with the given string::
+   The actual string must end with *str*::
 
        assertThat('string', endsWith('ring'));
 
@@ -519,7 +520,7 @@ Text Matchers
 
 .. function:: equalIgnoringCase(str)
 
-   The actual string must be equal to the given string, ignoring case::
+   The actual string must be equal to *str*, ignoring case::
 
        assertThat('str', equalIgnoringCase('Str'));
 
@@ -529,7 +530,7 @@ Text Matchers
 
 .. function:: matches(regex)
 
-   The actual string must match the given regular expression::
+   The actual string must match *regex*::
 
        assertThat('0xa4f2c', matches(/\b0[xX][0-9a-fA-F]+\b/));
 
@@ -537,9 +538,9 @@ Text Matchers
    :returns:   Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
-.. function:: startsWith()
+.. function:: startsWith(str)
 
-   The actual string must start with the given string::
+   The actual string must start with *str*::
 
        assertThat('string', startsWith('str'));
 

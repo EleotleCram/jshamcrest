@@ -45,7 +45,7 @@ Do I Need Custom Matchers?
 ``````````````````````````
 
 But wouldn't it be simpler if we just use the
-:meth:`JsHamcrest.Matchers.equalTo` matcher? Let's see an example::
+:meth:`JsHamcrest.Matchers.equalTo` matcher instead? Let's see an example::
 
     // Output: Expected equal to 42: Success
     assertThat(42, equalTo(42));
@@ -95,8 +95,7 @@ For instance, take a look at the source code of the
 
         return new JsHamcrest.SimpleMatcher({
             matches: function(actual) {
-                return actual instanceof Array &&
-                    matcherOrValue.matches(actual.length);
+                return matcherOrValue.matches(actual.length);
             },
 
             describeTo: function(description) {
@@ -104,11 +103,7 @@ For instance, take a look at the source code of the
             },
 
             describeValueTo: function(actual, description) {
-                if (actual instanceof Array) {
-                    description.append(actual.length);
-                } else {
-                    description.appendLiteral(actual);
-                }
+                description.append(actual.length);
             }
         });
     };
@@ -125,7 +120,7 @@ Distributing Your Custom Set Of Matchers
 ----------------------------------------
 
 Let's suppose you have a couple of custom matchers you want to distribute to
-your friends::
+some people::
 
     // filename: power_matchers.js
 
@@ -141,7 +136,7 @@ your friends::
 
 
 All you need to do is call :meth:`JsHamcrest.Integration.installMatchers` at the
-end of your script::
+end of your script, passing the namespace of your matchers as argument::
 
     // filename: power_matchers.js
 
@@ -167,7 +162,6 @@ JsHamcrest itself:
             // Displays the assertion descriptions using web browser's alert() function
             JsHamcrest.Integration.WebBrowser();
 
-            // There you go
             assertThat(21, divisibleBy(3));
             assertThat([1,2,3], hasSize(greaterThan(1)));
         </script>
