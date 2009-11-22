@@ -51,7 +51,7 @@ env.src_files = (
 )
 
 # Remote server
-env.fab_hosts = ('destaquenet.com',)
+env.hosts = ('destaquenet.com',)
 
 # Constants
 _PATTERN_COMMIT_HASH = re.compile('commit\W+([0-9a-f]+)')

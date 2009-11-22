@@ -4,7 +4,7 @@ Changelog
 Like any other piece of software, JsHamcrest is evolving at each release.
 Here you can track our progress:
 
-**Version 0.6** *(Sun 22, 2009)*
+**Version 0.6** *(Nov 22, 2009)*
 
 * Build script rewritten from scratch with `Python <http://python.org/>`_;
 * Documentation rewritten from scratch with `Sphinx <http://sphinx.pocoo.org/>`_;
