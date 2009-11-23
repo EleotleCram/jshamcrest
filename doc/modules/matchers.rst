@@ -295,6 +295,16 @@ Number Matchers
    :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
+.. function:: divisibleBy(divisor)
+
+   The actual value must be divisible by *divisor*::
+
+       assertThat(21, divisibleBy(3));
+
+   :arg divisor: Divisor.
+   :returns:     Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
 .. function:: even()
 
    The actual number must be even::
