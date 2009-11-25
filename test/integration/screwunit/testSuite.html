@@ -15,19 +15,19 @@
     <script type="text/javascript" src="../../../build/jshamcrest-min.js"></script>
 
     <script type="text/javascript">
-JsHamcrest.Integration.screwunit();
+      JsHamcrest.Integration.screwunit();
 
-Screw.Unit(function() {
-  describe('Using JsHamcrest assertions in Screw.Unit', function() {
-    it('should succeed', function() {
-    	assertThat(5, between(0).and(10), 'This assertion must succeed');
-    });
+      Screw.Unit(function() {
+        describe('Using JsHamcrest assertions in Screw.Unit', function() {
+          it('should succeed', function() {
+          	assertThat(5, between(0).and(10), 'This assertion must succeed');
+          });
 
-    it('should fail', function() {
-    	assertThat([], not(empty()), 'This assertion must fail');
-    });
-  });
-});
+          it('should fail', function() {
+          	assertThat([], not(empty()), 'This assertion must fail');
+          });
+        });
+      });
     </script>
   </head>
   <body>
