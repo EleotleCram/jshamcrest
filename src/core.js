@@ -5,118 +5,118 @@ JsHamcrest.Matchers = {};
  * engine.
  */
 JsHamcrest.Matchers.truth = function() {
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actual) {
-            return actual;
-        },
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actual) {
+      return actual;
+    },
 
-        describeTo: function(description) {
-            description.append('truth');
-        }
-    });
+    describeTo: function(description) {
+      description.append('truth');
+    }
+  });
 };
 
 /**
  * Delegate-only matcher frequently used to improve readability.
  */
 JsHamcrest.Matchers.is = function(matcherOrValue) {
-    // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsHamcrest.isMatcher(matcherOrValue)) {
-        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
+  // Uses 'equalTo' matcher if the given object is not a matcher
+  if (!JsHamcrest.isMatcher(matcherOrValue)) {
+    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
+  }
+
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actual) {
+      return matcherOrValue.matches(actual);
+    },
+
+    describeTo: function(description) {
+      description.append('is ').appendDescriptionOf(matcherOrValue);
     }
-
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actual) {
-            return matcherOrValue.matches(actual);
-        },
-
-        describeTo: function(description) {
-            description.append('is ').appendDescriptionOf(matcherOrValue);
-        }
-    });
+  });
 };
 
 /**
  * The actual value must not match the given matcher or value.
  */
 JsHamcrest.Matchers.not = function(matcherOrValue) {
-    // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsHamcrest.isMatcher(matcherOrValue)) {
-        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
+  // Uses 'equalTo' matcher if the given object is not a matcher
+  if (!JsHamcrest.isMatcher(matcherOrValue)) {
+    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
+  }
+
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actual) {
+      return !matcherOrValue.matches(actual);
+    },
+
+    describeTo: function(description) {
+      description.append('not ').appendDescriptionOf(matcherOrValue);
     }
-
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actual) {
-            return !matcherOrValue.matches(actual);
-        },
-
-        describeTo: function(description) {
-            description.append('not ').appendDescriptionOf(matcherOrValue);
-        }
-    });
+  });
 };
 
 /**
  * The actual value must be equal to the given value.
  */
 JsHamcrest.Matchers.equalTo = function(expected) {
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actual) {
-            if (expected instanceof Array || actual instanceof Array) {
-                return JsHamcrest.areArraysEqual(expected, actual);
-            }
-            return actual == expected;
-        },
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actual) {
+      if (expected instanceof Array || actual instanceof Array) {
+        return JsHamcrest.areArraysEqual(expected, actual);
+      }
+      return actual == expected;
+    },
 
-        describeTo: function(description) {
-            description.append('equal to ').appendLiteral(expected);
-        }
-    });
+    describeTo: function(description) {
+      description.append('equal to ').appendLiteral(expected);
+    }
+  });
 };
 
 /**
  * Useless always-match matcher.
  */
 JsHamcrest.Matchers.anything = function() {
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actual) {
-            return true;
-        },
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actual) {
+      return true;
+    },
 
-        describeTo: function(description) {
-            description.append('anything');
-        }
-    });
+    describeTo: function(description) {
+      description.append('anything');
+    }
+  });
 };
 
 /**
  * The actual value must be null (or undefined).
  */
 JsHamcrest.Matchers.nil = function() {
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actual) {
-            return actual == null;
-        },
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actual) {
+      return actual == null;
+    },
 
-        describeTo: function(description) {
-            description.appendLiteral(null);
-        }
-    });
+    describeTo: function(description) {
+      description.appendLiteral(null);
+    }
+  });
 };
 
 /**
  * The actual value must be the same as the given value.
  */
 JsHamcrest.Matchers.sameAs = function(expected) {
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actual) {
-            return actual === expected;
-        },
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actual) {
+      return actual === expected;
+    },
 
-        describeTo: function(description) {
-            description.append('same as ').appendLiteral(expected);
-        }
-    });
+    describeTo: function(description) {
+      description.append('same as ').appendLiteral(expected);
+    }
+  });
 };
 
 /**
@@ -124,24 +124,24 @@ JsHamcrest.Matchers.sameAs = function(expected) {
  * exception with the given name.
  */
 JsHamcrest.Matchers.raises = function(exceptionName) {
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actualFunction) {
-            try {
-                actualFunction();
-            } catch (e) {
-                if (e.name == exceptionName) {
-                    return true;
-                } else {
-                    throw e;
-                }
-            }
-            return false;
-        },
-
-        describeTo: function(description) {
-            description.append('raises ').append(exceptionName);
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actualFunction) {
+      try {
+        actualFunction();
+      } catch (e) {
+        if (e.name == exceptionName) {
+          return true;
+        } else {
+          throw e;
         }
-    });
+      }
+      return false;
+    },
+
+    describeTo: function(description) {
+      description.append('raises ').append(exceptionName);
+    }
+  });
 };
 
 /**
@@ -149,20 +149,20 @@ JsHamcrest.Matchers.raises = function(exceptionName) {
  * exception.
  */
 JsHamcrest.Matchers.raisesAnything = function() {
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actualFunction) {
-            try {
-                actualFunction();
-            } catch (e) {
-                return true;
-            }
-            return false;
-        },
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actualFunction) {
+      try {
+        actualFunction();
+      } catch (e) {
+        return true;
+      }
+      return false;
+    },
 
-        describeTo: function(description) {
-            description.append('raises anything');
-        }
-    });
+    describeTo: function(description) {
+      description.append('raises anything');
+    }
+  });
 };
 
 /**
@@ -170,17 +170,17 @@ JsHamcrest.Matchers.raisesAnything = function() {
  * matchers.
  */
 JsHamcrest.Matchers.both = function(matcherOrValue) {
-    // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsHamcrest.isMatcher(matcherOrValue)) {
-        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
-    }
+  // Uses 'equalTo' matcher if the given object is not a matcher
+  if (!JsHamcrest.isMatcher(matcherOrValue)) {
+    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
+  }
 
-    return new JsHamcrest.CombinableMatcher({
-        matches: matcherOrValue.matches,
-        describeTo: function(description) {
-            description.append('both ').appendDescriptionOf(matcherOrValue);
-        }
-    });
+  return new JsHamcrest.CombinableMatcher({
+    matches: matcherOrValue.matches,
+    describeTo: function(description) {
+      description.append('both ').appendDescriptionOf(matcherOrValue);
+    }
+  });
 };
 
 /**
@@ -188,17 +188,17 @@ JsHamcrest.Matchers.both = function(matcherOrValue) {
  * given matchers.
  */
 JsHamcrest.Matchers.either = function(matcherOrValue) {
-    // Uses 'equalTo' matcher if the given object is not a matcher
-    if (!JsHamcrest.isMatcher(matcherOrValue)) {
-        matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
-    }
+  // Uses 'equalTo' matcher if the given object is not a matcher
+  if (!JsHamcrest.isMatcher(matcherOrValue)) {
+    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
+  }
 
-    return new JsHamcrest.CombinableMatcher({
-        matches: matcherOrValue.matches,
-        describeTo: function(description) {
-            description.append('either ').appendDescriptionOf(matcherOrValue);
-        }
-    });
+  return new JsHamcrest.CombinableMatcher({
+    matches: matcherOrValue.matches,
+    describeTo: function(description) {
+      description.append('either ').appendDescriptionOf(matcherOrValue);
+    }
+  });
 };
 
 /**
@@ -206,28 +206,28 @@ JsHamcrest.Matchers.either = function(matcherOrValue) {
  * sucessful. This matcher behaves pretty much like the && operator.
  */
 JsHamcrest.Matchers.allOf = function() {
-    var args = arguments;
-    if (args[0] instanceof Array) {
-        args = args[0];
-    }
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actual) {
-            for (var i = 0; i < args.length; i++) {
-                var matcher = args[i];
-                if (!JsHamcrest.isMatcher(matcher)) {
-                    matcher = JsHamcrest.Matchers.equalTo(matcher);
-                }
-                if (!matcher.matches(actual)) {
-                    return false;
-                }
-            }
-            return true;
-        },
-
-        describeTo: function(description) {
-            description.appendList('(', ' and ', ')', args);
+  var args = arguments;
+  if (args[0] instanceof Array) {
+    args = args[0];
+  }
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actual) {
+      for (var i = 0; i < args.length; i++) {
+        var matcher = args[i];
+        if (!JsHamcrest.isMatcher(matcher)) {
+          matcher = JsHamcrest.Matchers.equalTo(matcher);
         }
-    });
+        if (!matcher.matches(actual)) {
+          return false;
+        }
+      }
+      return true;
+    },
+
+    describeTo: function(description) {
+      description.appendList('(', ' and ', ')', args);
+    }
+  });
 };
 
 /**
@@ -235,27 +235,27 @@ JsHamcrest.Matchers.allOf = function() {
  * matcher behaves pretty much like the || (or) operator.
  */
 JsHamcrest.Matchers.anyOf = function() {
-    var args = arguments;
-    if (args[0] instanceof Array) {
-        args = args[0];
-    }
-    return new JsHamcrest.SimpleMatcher({
-        matches: function(actual) {
-            for (var i = 0; i < args.length; i++) {
-                var matcher = args[i];
-                if (!JsHamcrest.isMatcher(matcher)) {
-                    matcher = JsHamcrest.Matchers.equalTo(matcher);
-                }
-                if (matcher.matches(actual)) {
-                    return true;
-                }
-            }
-            return false;
-        },
-
-        describeTo: function(description) {
-            description.appendList('(', ' or ', ')', args);
+  var args = arguments;
+  if (args[0] instanceof Array) {
+    args = args[0];
+  }
+  return new JsHamcrest.SimpleMatcher({
+    matches: function(actual) {
+      for (var i = 0; i < args.length; i++) {
+        var matcher = args[i];
+        if (!JsHamcrest.isMatcher(matcher)) {
+          matcher = JsHamcrest.Matchers.equalTo(matcher);
         }
-    });
+        if (matcher.matches(actual)) {
+          return true;
+        }
+      }
+      return false;
+    },
+
+    describeTo: function(description) {
+      description.appendList('(', ' or ', ')', args);
+    }
+  });
 };
 
