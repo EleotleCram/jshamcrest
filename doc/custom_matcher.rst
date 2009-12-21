@@ -127,11 +127,11 @@ some people::
     // filename: power_matchers.js
 
     PowerMatchers = {
-        divisibleBy: function(divisor) {
+        rocks: function() {
             // ...
         },
 
-        hasSize: function(valueOrMatcher) {
+        sucks: function() {
             // ...
         }
     };
@@ -164,8 +164,10 @@ JsHamcrest itself:
             // Displays the assertion descriptions using web browser's alert() function
             JsHamcrest.Integration.WebBrowser();
 
-            assertThat(21, divisibleBy(3));
-            assertThat([1,2,3], hasSize(greaterThan(1)));
+            var obj1 = {...}, obj2 = {...};
+
+            assertThat(obj1, rocks());
+            assertThat(obj2, sucks());
         </script>
     </header>
     <body>
