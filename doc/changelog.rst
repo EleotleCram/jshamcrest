@@ -4,6 +4,12 @@ Changelog
 Like any other piece of software, JsHamcrest is evolving at each release.
 Here you can track our progress:
 
+**Version 0.6.1** *(Dec 22, 2009)*
+
+* Fixed the code that removes useless stacktrace entries when using JsHamcrest
+  with js-test-driver;
+
+
 **Version 0.6** *(Nov 22, 2009)*
 
 * Build script rewritten from scratch with `Python <http://python.org/>`_;

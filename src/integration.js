@@ -98,10 +98,11 @@ JsHamcrest.Integration = (function() {
         exc.name = 'AssertError';
 
         // Removes all jshamcrest-related entries from error stack
+        var re = new RegExp('jshamcrest.*\.js\:', 'i');
         var stack = exc.stack.split('\n');
         var newStack = '';
         for (var i = 0; i < stack.length; i++) {
-          if (!/jshamcrest*\.js\:/i.test(stack[i])) {
+          if (!re.test(stack[i])) {
             newStack += stack[i] + '\n';
           }
         }
