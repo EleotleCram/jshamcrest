@@ -24,7 +24,7 @@ JsHamcrest.Operators.filter = function(array, matcherOrValue) {
  * Generic assert function.
  */
 JsHamcrest.Operators.assert = function(actualValue, matcherOrValue, options) {
-  var options = options ? options : {};
+  options = options ? options : {};
   var description = new JsHamcrest.Description();
 
   if (matcherOrValue == null) {

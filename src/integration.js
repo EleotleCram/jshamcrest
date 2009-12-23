@@ -108,7 +108,7 @@ JsHamcrest.Integration = (function() {
         }
         exc.stack = newStack;
         throw exc;
-      };
+      }
 
       // Assertion method exposed to JsTestDriver.
       target.assertThat = function (actual, matcher, message) {
