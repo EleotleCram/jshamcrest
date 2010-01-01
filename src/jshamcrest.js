@@ -4,7 +4,7 @@
  *
  * Library of matcher objects for JavaScript.
  *
- * Copyright (c) 2009 Daniel Fernandes Martins
+ * Copyright (c) 2009-2010 Daniel Fernandes Martins
  * Licensed under the BSD license.
  *
  * Revision: @REV
