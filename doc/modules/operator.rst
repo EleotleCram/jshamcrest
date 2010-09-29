@@ -73,5 +73,23 @@ Unit Testing
                         :attr:`passed` attribute.
 
 
+.. function:: callTo(func[, arg...])
+
+   Returns a zero-args function that calls the function *func* with the given
+   *args*::
+
+       var func = callTo(parseInt, "2");
+       assertThat(func(), sameAs(2));
+
+   This is specially useful when used along with :meth:`JsHamcrest.Matchers.raises`
+   or :meth:`JsHamcrest.Matchers.raisesAnything`::
+
+       assertThat(callTo(myFunc, arg1, arg2), raisesAnything());
+
+   :arg func: Function to delegate calls to.
+   :arg arg:  Optional arguments to *func*.
+   :returns:  Function that delegates calls to *func*.
+
+
 .. seealso::
    :ref:`apiref`

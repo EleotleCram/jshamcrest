@@ -138,5 +138,15 @@ new Test.Unit.Runner({
     assert(!passed);
     assert(message.indexOf('With message') >= 0)
     assert(!result.passed);
-  }}
+  }},
+
+  testCallToWithNoArgs: function() { with(this) {
+    var fn = callTo(parseInt);
+    assert(isNaN(fn()));
+  }},
+
+  testCallToWithArgs: function() { with(this) {
+    var fn = callTo(parseInt, "2");
+    assertIdentical(fn(), 2);
+  }},
 }, {'testLog': 'operatorLog'});

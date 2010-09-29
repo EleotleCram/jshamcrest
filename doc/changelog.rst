@@ -4,6 +4,12 @@ Changelog
 Like any other piece of software, JsHamcrest is evolving at each release.
 Here you can track our progress:
 
+**Version 0.6.2** *(Sep 29, 2010)*
+
+* Added :meth:`JsHamcrest.Operators.callTo()` function, which makes
+  :meth:`JsHamcrest.Matchers.raises()` and 
+  :meth:`JsHamcrest.Matchers.raisesAnything()` easier to use.
+
 **Version 0.6.1** *(Dec 22, 2009)*
 
 * Fixed the code that removes useless stacktrace entries when using JsHamcrest

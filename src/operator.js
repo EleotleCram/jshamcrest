@@ -57,3 +57,14 @@ JsHamcrest.Operators.assert = function(actualValue, matcherOrValue, options) {
   return description;
 };
 
+/**
+ * Delegate function, useful when used along with raises() and raisesAnything().
+ */
+JsHamcrest.Operators.callTo = function() {
+  var func = [].shift.call(arguments);
+  var args = arguments;
+  return function() {
+    return func.apply(this, args);
+  };
+}
+
