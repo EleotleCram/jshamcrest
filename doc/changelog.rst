@@ -4,7 +4,7 @@ Changelog
 Like any other piece of software, JsHamcrest is evolving at each release.
 Here you can track our progress:
 
-**Version 0.6.2** *(Sep 29, 2010)*
+**Version 0.6.2** *(Sep 30, 2010)*
 
 * Added :meth:`JsHamcrest.Operators.callTo()` function, which makes
   :meth:`JsHamcrest.Matchers.raises()` and 
