@@ -148,5 +148,5 @@ new Test.Unit.Runner({
   testCallToWithArgs: function() { with(this) {
     var fn = callTo(parseInt, "2");
     assertIdentical(fn(), 2);
-  }},
+  }}
 }, {'testLog': 'operatorLog'});
