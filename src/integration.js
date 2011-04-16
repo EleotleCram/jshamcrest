@@ -227,7 +227,27 @@ JsHamcrest.Integration = (function() {
 
       JsHamcrest.Integration.copyMembers(target);
 
-      // Assertion method exposed to jsUnity.
+      // Assertion method exposed to Screw.Unit.
+      target.assertThat = function(actual, matcher, message) {
+        return JsHamcrest.Operators.assert(actual, matcher, {
+          message: message,
+          fail: function(message) {
+            throw message;
+          }
+        });
+      };
+    },
+
+    /**
+     * Jasmine integration.
+     */
+    jasmine: function(params) {
+      params = params ? params : {};
+      var target = params.scope || self;
+
+      JsHamcrest.Integration.copyMembers(target);
+
+      // Assertion method exposed to Jasmine.
       target.assertThat = function(actual, matcher, message) {
         return JsHamcrest.Operators.assert(actual, matcher, {
           message: message,
