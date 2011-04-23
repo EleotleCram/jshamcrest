@@ -4,11 +4,17 @@ Changelog
 Like any other piece of software, JsHamcrest is evolving at each release.
 Here you can track our progress:
 
+**Version 0.6.3** *(Apr 23, 2011)*
+
+* Integration with Jasmine;
+
+
 **Version 0.6.2** *(Sep 30, 2010)*
 
 * Added :meth:`JsHamcrest.Operators.callTo()` function, which makes
   :meth:`JsHamcrest.Matchers.raises()` and 
   :meth:`JsHamcrest.Matchers.raisesAnything()` easier to use.
+
 
 **Version 0.6.1** *(Dec 22, 2009)*
 
@@ -51,6 +57,7 @@ Here you can track our progress:
 * Improvements on integration code;
 * Added some integration tests;
 * Documentation improvements;
+
 
 **Version 0.2** *(May 22, 2009)*
 
