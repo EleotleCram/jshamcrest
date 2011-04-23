@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="assets/jasmine-1.0.2/jasmine.css">
     <script type="text/javascript" src="assets/jasmine-1.0.2/jasmine.js"></script>
     <script type="text/javascript" src="assets/jasmine-1.0.2/jasmine-html.js"></script>
+    <script type="text/javascript" src="assets/jasmine.console_reporter.js"></script>
 
     <script type="text/javascript" src="../../../build/jshamcrest-min.js"></script>
 
@@ -17,6 +18,11 @@
           assertThat(5, between(0).and(10), 'This assertion must succeed');
         });
 
+        it('should succeed', function() {
+	  expect(5).toEqual(4);
+//	  expect(5).between(0).and(10);
+        });
+
         it('should fail', function() {
           assertThat([], not(empty()), 'This assertion must fail');
         });
@@ -25,6 +31,7 @@
   </head>
   <body>
     <script type="text/javascript">
+      jasmine.getEnv().addReporter(new jasmine.ConsoleReporter());
       jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
       jasmine.getEnv().execute();
     </script>

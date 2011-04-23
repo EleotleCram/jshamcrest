@@ -252,7 +252,14 @@ JsHamcrest.Integration = (function() {
         return JsHamcrest.Operators.assert(actual, matcher, {
           message: message,
           fail: function(message) {
-            throw message;
+            jasmine.getEnv().currentSpec.addMatcherResult(
+              new jasmine.ExpectationResult({passed:false, message:message})
+            );
+          },
+          pass: function(message) {
+            jasmine.getEnv().currentSpec.addMatcherResult(
+              new jasmine.ExpectationResult({passed:true, message:message})
+            );
           }
         });
       };
