@@ -1,5 +1,5 @@
 :mod:`JsHamcrest.Operators` --- Matcher Operators
-================================================
+=================================================
 
 .. module:: JsHamcrest.Operators
    :synopsis: Operator functions for matchers.
