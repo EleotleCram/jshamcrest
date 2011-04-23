@@ -81,6 +81,55 @@ Dummy Functions For Easy Prototyping
    :returns: Nothing.
 
 
+Jasmine -- BDD for your JavaScript
+``````````````````````````````````
+
+.. highlight:: html
+
+.. function:: jasmine({scope})
+
+   Integrates JsHamcrest with `Jasmine`_.
+
+   The following code is an example on how to set up your project::
+
+       <!-- Jasmine dependencies -->
+       <link rel="stylesheet" type="text/css" href="jasmine.css">
+       <script type="text/javascript" src="jasmine.js"></script>
+       <script type="text/javascript" src="jasmine-html.js"></script>
+
+       <!-- Activate Jasmine integration -->
+       <script type="text/javascript" src="jshamcrest.js"></script>
+       <script type="text/javascript">
+           JsHamcrest.Integration.jasmine();
+
+           // Same as above
+           JsHamcrest.Integration.jasmine({
+               scope: this
+           });
+
+           describe('Calculator', function() {
+               var calc;
+
+               beforeEach(function() {
+                   calc = new MyCalculator();
+               });
+
+               it('should add two numbers', function() {
+                   assertThat(calc.add(2,3), equalTo(5));
+               });
+           });
+       </script>
+
+       <script type="text/javascript">
+          jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+          jasmine.getEnv().execute();
+       </script>
+
+   :arg scope: *(Optional, default=this)* Copies all matchers to the given
+               scope.
+   :returns:   Nothing.
+
+
 JsTestDriver -- Remote JavaScript Console
 `````````````````````````````````````````
 
@@ -361,6 +410,7 @@ YUITest -- JavaScript Unit Testing Framework
    :ref:`apiref`
 
 
+.. _Jasmine: http://pivotal.github.com/jasmine/
 .. _JsTestDriver: http://code.google.com/p/js-test-driver/
 .. _JsUnitTest: http://jsunittest.com/
 .. _jsUnity: http://jsunity.com/
