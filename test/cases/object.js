@@ -13,6 +13,11 @@ new Test.Unit.Runner({
       assert(hasMember('matches').matches(hasMember()));
       assert(!hasMember('somethingElse').matches([]));
       assert(!hasMember('somethingElse').matches(null));
+      assert(hasMember('key').matches({key: 1}));
+      assert(hasMember('key', 'value').matches({key: 'value'}));
+      assert(hasMember('key', equalTo('value')).matches({key: 'value'}));
+      assert(!hasMember('key', 'value').matches({key: 1}));
+      assert(!hasMember('key', greaterThan(1)).matches({key: 1}));
     }},
 
     testHasFunction: function() { with(this) {

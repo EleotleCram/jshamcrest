@@ -1,17 +1,25 @@
 /**
  * The actual value has a member with the given name.
  */
-JsHamcrest.Matchers.hasMember = function(memberName) {
+JsHamcrest.Matchers.hasMember = function(memberName, matcherOrValue) {
+  var undefined;
+  if (matcherOrValue === undefined) {
+    matcherOrValue = JsHamcrest.Matchers.anything();
+  } else if (!JsHamcrest.isMatcher(matcherOrValue)) {
+    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
+  }
+
   return new JsHamcrest.SimpleMatcher({
     matches: function(actual) {
-      if (actual) {
-        return memberName in actual;
+      if (actual && memberName in actual) {
+        return matcherOrValue.matches(actual[memberName]);
       }
       return false;
     },
 
     describeTo: function(description) {
-      description.append('has member ').appendLiteral(memberName);
+      description.append('has member ').appendLiteral(memberName)
+        .append(' (').appendDescriptionOf(matcherOrValue).append(')');
     }
   });
 };
