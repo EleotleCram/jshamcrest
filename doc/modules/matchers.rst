@@ -422,7 +422,7 @@ Object Matchers
    :returns:          Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
-.. function:: hasMember(memberName)
+.. function:: hasMember(memberName[, matcherOrValue])
 
    The actual value has an attribute with the given name::
 
@@ -436,8 +436,13 @@ Object Matchers
        assertThat(greeter, hasMember('marco'));
        assertThat(greeter, hasMember('sayHello'));
 
-   :arg memberName: Member name.
-   :returns:        Instance of :class:`JsHamcrest.SimpleMatcher`.
+   It's also possible to match the member's value if necessary::
+
+       assertThat(greeter, hasMember('marco', equalTo('polo')));
+
+   :arg memberName:     Member name.
+   :arg matcherOrValue: Matcher used to match the member's value.
+   :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
 .. function:: isInstanceOf(clazz)
