@@ -4,10 +4,17 @@ Changelog
 Like any other piece of software, JsHamcrest is evolving at each release.
 Here you can track our progress:
 
-**Version 0.6.4** (May 25, 2011)*
+**Version 0.6.5** *(Jun 20, 2011)*
+
+* Description of the Function literal now includes function name when
+  available;
+
+
+**Version 0.6.4** *(May 25, 2011)*
 
 * Updated ``hasMember`` matcher to make it possible to also match considering
   the member's value;
+
 
 **Version 0.6.3** *(Apr 23, 2011)*
 

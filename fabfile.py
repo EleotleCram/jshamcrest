@@ -11,7 +11,7 @@ from fabric.api import *
 
 # Project
 env.project   = 'jshamcrest'
-env.version   = '0.6.4'
+env.version   = '0.6.5'
 env.full_name = '%s-%s' % (env.project, env.version)
 
 # Build output
