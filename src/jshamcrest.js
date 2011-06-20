@@ -132,7 +132,7 @@ JsHamcrest = {
       } else if (typeof literal == 'string') {
         this.append('"' + literal + '"');
       } else if (literal instanceof Function) {
-        this.append('Function');
+        this.append('Function' + (literal.name ? ' ' + literal.name : ''));
       } else {
         this.append(literal);
       }

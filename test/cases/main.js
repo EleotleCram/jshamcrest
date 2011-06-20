@@ -89,8 +89,8 @@ new Test.Unit.Runner({
         return 'Object';
       }
     };
-    var value = [obj, '1', 2, null, undefined, [], function() { }];
-    var expected = '[Object, "1", 2, null, undefined, [], Function]';
+    var value = [obj, '1', 2, null, undefined, [], function() { }, function foo() { }];
+    var expected = '[Object, "1", 2, null, undefined, [], Function, Function foo]';
 
     description.appendLiteral(value);
     assertEqual(expected, description.get());
