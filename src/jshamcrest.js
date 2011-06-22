@@ -38,7 +38,9 @@ JsHamcrest = {
         var b = anotherArray[i];
 
         if (a instanceof Array || b instanceof Array) {
-          return JsHamcrest.areArraysEqual(a, b);
+          if(!JsHamcrest.areArraysEqual(a, b)) {
+            return false;
+          }
         } else if (a != b) {
           return false;
         }
