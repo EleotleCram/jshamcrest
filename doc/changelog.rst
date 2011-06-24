@@ -4,6 +4,11 @@ Changelog
 Like any other piece of software, JsHamcrest is evolving at each release.
 Here you can track our progress:
 
+**Version 0.6.6** *(Jun 23, 2011)*
+
+* Fixed broken logic of :meth:`JsHamcrest.areArraysEqual` function;
+
+
 **Version 0.6.5** *(Jun 20, 2011)*
 
 * Description of the Function literal now includes function name when
