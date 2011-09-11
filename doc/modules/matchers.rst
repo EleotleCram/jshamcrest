@@ -71,6 +71,7 @@ Collection Matchers
        assertThat([1,2,3], hasSize(lessThan(5)));
        assertThat('string', hasSize(6));
        assertThat('string', hasSize(greaterThan(3)));
+       assertThat({a:1, b:2}, hasSize(equalTo(2)));
 
    :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
                         value.
