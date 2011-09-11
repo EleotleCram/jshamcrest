@@ -71,21 +71,23 @@ new Test.Unit.Runner({
   testHasSizeWithMatcher: function() { with(this) {
     assert(hasSize(greaterThan(3)).matches(array));
     assert(hasSize(greaterThan(3)).matches('string'));
-    assert(hasSize(0).matches(function(){}));
+    assert(hasSize(zero()).matches(function(){}));
+    assert(hasSize(greaterThan(3)).matches({a:1, b:2, c:3, d:4}));
   }},
 
   testHasInvalidSizeWithValue: function() { with(this) {
     assert(!hasSize(3).matches(array));
     assert(!hasSize(3).matches('string'));
+    assert(!hasSize(3).matches({}));
   }},
 
   testHasInvalidSizeWithMatcher: function() { with(this) {
     assert(!hasSize(lessThan(4)).matches(array));
     assert(!hasSize(lessThan(4)).matches('string'));
+    assert(!hasSize(lessThan(4)).matches({a:1, b:2, c:3, d:4}));
   }},
 
   testHasSizeWithInvalidValue: function() { with(this) {
-    assert(!hasSize(0).matches({}));
     assert(!hasSize(0).matches(10));
   }},
 

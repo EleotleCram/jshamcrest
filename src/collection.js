@@ -130,9 +130,19 @@ JsHamcrest.Matchers.hasSize = function(matcherOrValue) {
     matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
   }
 
+  var getSize = function(actual) {
+    var size = actual.length;
+    if (size === undefined && typeof actual === 'object') {
+      size = 0;
+      for (var key in actual)
+        size++;
+    }
+    return size;
+  };
+
   return new JsHamcrest.SimpleMatcher({
     matches: function(actual) {
-      return matcherOrValue.matches(actual.length);
+      return matcherOrValue.matches(getSize(actual));
     },
 
     describeTo: function(description) {
@@ -140,7 +150,7 @@ JsHamcrest.Matchers.hasSize = function(matcherOrValue) {
     },
 
     describeValueTo: function(actual, description) {
-      description.append(actual.length);
+      description.append(getSize(actual));
     }
   });
 };
