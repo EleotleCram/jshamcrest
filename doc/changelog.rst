@@ -4,6 +4,12 @@ Changelog
 Like any other piece of software, JsHamcrest is evolving at each release.
 Here you can track our progress:
 
+**Version 0.6.7** *(Sep 11, 2011)*
+
+* Updated :meth:`JsHamcrest.Matchers.hasSize` function to make it work with
+  objects;
+
+
 **Version 0.6.6** *(Jun 23, 2011)*
 
 * Fixed broken logic of :meth:`JsHamcrest.areArraysEqual` function;
