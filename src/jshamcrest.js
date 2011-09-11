@@ -11,7 +11,7 @@
  * Date:     @DATE
  */
  
-JsHamcrest = {
+var JsHamcrest = {
   /**
    * Library version.
    */
