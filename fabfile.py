@@ -105,7 +105,7 @@ def doc_html():
     local('cd %s; make html' % env.doc_dir)
 
 def doc_pdf():
-    """Builds the PDF documentation."
+    """Builds the PDF documentation.
     """
     doc_clean()
     local('cd %s; make latex' % env.doc_dir)
