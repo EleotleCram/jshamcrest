@@ -345,7 +345,7 @@ Number Matchers
    :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
-.. function:: lesThanOrEqualTo(expected)
+.. function:: lessThanOrEqualTo(expected)
 
    The actual number must be less than or equal to *expected*::
 
@@ -446,7 +446,7 @@ Object Matchers
    :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
-.. function:: isInstanceOf(clazz)
+.. function:: instanceOf(clazz)
 
    The actual value must be an instance of *clazz*::
 
