@@ -121,6 +121,7 @@ def make_site():
     local('cp %s %s' % (env.doc_pdf, env.doc_dir_html))
     local('cp %s %s' % (env.js, env.doc_dir_html))
     local('cp %s %s' % (env.js_min, env.doc_dir_html))
+    local('cd %s ; touch .nojekyll' % env.doc_dir_html)
 
 def deploy():
     """Deploys the documentation.
