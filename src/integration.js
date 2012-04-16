@@ -129,7 +129,7 @@ JsHamcrest.Integration = (function() {
      
     Nodeunit: function(params) {
       params = params ? params : {};
-      var target = params.scope || self;
+      var target = params.scope || global;
         
       JsHamcrest.Integration.copyMembers(target);
         
