@@ -182,3 +182,4 @@ JsHamcrest.SimpleMatcher.prototype.describeValueTo = function(actual, descriptio
 JsHamcrest.CombinableMatcher.prototype = new JsHamcrest.SimpleMatcher();
 JsHamcrest.CombinableMatcher.prototype.constructor = JsHamcrest.CombinableMatcher;
 
+if (typeof exports !== "undefined") exports.JsHamcrest = JsHamcrest;
