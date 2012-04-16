@@ -122,6 +122,29 @@ JsHamcrest.Integration = (function() {
         });
       };
     },
+    
+    /**
+     * NodeUnit (Node.js Unit Testing) integration.
+     */
+     
+    Nodeunit: function(params) {
+      params = params ? params : {};
+      var target = params.scope || self;
+        
+      JsHamcrest.Integration.copyMembers(target);
+        
+      target.assertThat = function(actual, matcher, message, test) {
+        return JsHamcrest.Operators.assert(actual, matcher, {
+          message: message,
+          fail: function(message) {
+            test.ok(false, message);
+          },
+          pass: function(message) {
+            test.ok(true, message);
+          }
+        });
+      };
+    },
 
     /**
      * JsUnitTest integration.
