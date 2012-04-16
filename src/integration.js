@@ -290,3 +290,4 @@ JsHamcrest.Integration = (function() {
   };
 })();
 
+if (typeof exports !== "undefined") exports.JsHamcrest = JsHamcrest;
