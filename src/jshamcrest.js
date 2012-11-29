@@ -10,12 +10,24 @@
  * Revision: @REV
  * Date:     @DATE
  */
- 
+
 var JsHamcrest = {
   /**
    * Library version.
    */
   version: '@VERSION',
+
+  /**
+   * Delegate function, useful when used to create a matcher that has a value-equalTo semantic
+   */
+  EqualTo: function (func) {
+    return function (matcherOrValue) {
+      if (!JsHamcrest.isMatcher(matcherOrValue)) {
+        return func(JsHamcrest.Matchers.equalTo(matcherOrValue));
+      }
+      return func(matcherOrValue);
+    };
+  },
 
   /**
    * Returns whether the given object is a matcher.

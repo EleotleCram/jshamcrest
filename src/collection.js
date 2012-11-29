@@ -2,12 +2,7 @@
  * The actual value should be an array and it must contain at least one value
  * that matches the given value or matcher.
  */
-JsHamcrest.Matchers.hasItem = function(matcherOrValue) {
-  // Uses 'equalTo' matcher if the given object is not a matcher
-  if (!JsHamcrest.isMatcher(matcherOrValue)) {
-    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
-  }
-
+JsHamcrest.Matchers.hasItem = JsHamcrest.EqualTo(function(matcher) {
   return new JsHamcrest.SimpleMatcher({
     matches: function(actual) {
       // Should be an array
@@ -16,7 +11,7 @@ JsHamcrest.Matchers.hasItem = function(matcherOrValue) {
       }
 
       for (var i = 0; i < actual.length; i++) {
-        if (matcherOrValue.matches(actual[i])) {
+        if (matcher.matches(actual[i])) {
           return true;
         }
       }
@@ -25,10 +20,10 @@ JsHamcrest.Matchers.hasItem = function(matcherOrValue) {
 
     describeTo: function(description) {
       description.append('array contains item ')
-          .appendDescriptionOf(matcherOrValue);
+          .appendDescriptionOf(matcher);
       }
   });
-};
+});
 
 /**
  * The actual value should be an array and the given values or matchers must
@@ -46,12 +41,7 @@ JsHamcrest.Matchers.hasItems = function() {
  * The actual value should be an array and the given value or matcher must
  * match all items.
  */
-JsHamcrest.Matchers.everyItem = function(matcherOrValue) {
-  // Uses 'equalTo' matcher if the given object is not a matcher
-  if (!JsHamcrest.isMatcher(matcherOrValue)) {
-    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
-  }
-
+JsHamcrest.Matchers.everyItem = JsHamcrest.EqualTo(function(matcher) {
   return new JsHamcrest.SimpleMatcher({
     matches: function(actual) {
       // Should be an array
@@ -60,7 +50,7 @@ JsHamcrest.Matchers.everyItem = function(matcherOrValue) {
       }
 
       for (var i = 0; i < actual.length; i++) {
-        if (!matcherOrValue.matches(actual[i])) {
+        if (!matcher.matches(actual[i])) {
           return false;
         }
       }
@@ -69,10 +59,10 @@ JsHamcrest.Matchers.everyItem = function(matcherOrValue) {
 
     describeTo: function(description) {
       description.append('every item ')
-          .appendDescriptionOf(matcherOrValue);
+          .appendDescriptionOf(matcher);
     }
   });
-};
+});
 
 /**
  * The given array must contain the actual value.
@@ -124,12 +114,7 @@ JsHamcrest.Matchers.empty = function() {
 /**
  * The length of the actual value value must match the given value or matcher.
  */
-JsHamcrest.Matchers.hasSize = function(matcherOrValue) {
-  // Uses 'equalTo' matcher if the given object is not a matcher
-  if (!JsHamcrest.isMatcher(matcherOrValue)) {
-    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
-  }
-
+JsHamcrest.Matchers.hasSize = JsHamcrest.EqualTo(function(matcher) {
   var getSize = function(actual) {
     var size = actual.length;
     if (size === undefined && typeof actual === 'object') {
@@ -142,16 +127,16 @@ JsHamcrest.Matchers.hasSize = function(matcherOrValue) {
 
   return new JsHamcrest.SimpleMatcher({
     matches: function(actual) {
-      return matcherOrValue.matches(getSize(actual));
+      return matcher.matches(getSize(actual));
     },
 
     describeTo: function(description) {
-      description.append('has size ').appendDescriptionOf(matcherOrValue);
+      description.append('has size ').appendDescriptionOf(matcher);
     },
 
     describeValueTo: function(actual, description) {
       description.append(getSize(actual));
     }
   });
-};
+});
 
