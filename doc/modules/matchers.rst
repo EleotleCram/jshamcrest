@@ -266,6 +266,32 @@ Core Matchers
    :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
+.. function:: equivalentMap(expected)
+
+   The actual value must be equivalent to *expected*. This works for maps
+   with nested arrays and maps::
+
+       var firstMap = {"key" : 1, "key2" : "String"};
+       var equivMap = {"key" : 1, "key2" : "String"};
+
+       assertThat(firstMap, equivalentMap(equivMap));
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: equivalentArray(expected)
+
+   The actual value must be equivalent to *expected*. This works for arrays
+   with nested arrays and maps::
+
+       var firstArray = [ 1, "String"];
+       var equivArray = [ 1, "String"];
+
+       assertThat(firstArray, equivalentArray(equivArray));
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
 Number Matchers
 ---------------
 

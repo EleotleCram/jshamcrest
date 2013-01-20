@@ -140,3 +140,39 @@ JsHamcrest.Matchers.hasSize = JsHamcrest.EqualTo(function(matcher) {
   });
 });
 
+JsHamcrest.Matchers.equivalentMap = function(expected) {
+    return new JsHamcrest.SimpleMatcher({
+        matches: function(actual)
+        {
+            if(JsHamcrest.retreiveEntityMatcherFunction(actual) === JsHamcrest.areMapsEquivalent &&
+                    JsHamcrest.retreiveEntityMatcherFunction(expected) === JsHamcrest.areMapsEquivalent)
+            {
+                return JsHamcrest.areMapsEquivalent(expected, actual);
+            }
+           
+            return false; //The passed in objects aren't maps.
+        },
+
+        describeTo: function(description) {
+            description.append('map equivalent to ').appendLiteral(expected);
+        }
+    });
+};
+
+JsHamcrest.Matchers.equivalentArray = function(expected) {
+    return new JsHamcrest.SimpleMatcher({
+        matches: function(actual)
+        {
+            if (expected instanceof Array && actual instanceof Array)
+            {
+                return JsHamcrest.areArraysEquivalent(expected, actual);
+            }
+           
+            return false; //The passed in objects aren't Arrays.
+        },
+
+        describeTo: function(description) {
+            description.append('array equivalent to ').appendLiteral(expected);
+        }
+    });
+};
