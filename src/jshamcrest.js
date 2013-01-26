@@ -1,10 +1,10 @@
 /*
  * JsHamcrest v@VERSION
- * http://jshamcrest.destaquenet.com
+ * http://danielfm.github.com/jshamcrest/
  *
  * Library of matcher objects for JavaScript.
  *
- * Copyright (c) 2009-2010 Daniel Fernandes Martins
+ * Copyright (c) 2009-2013 Daniel Fernandes Martins
  * Licensed under the BSD license.
  *
  * Revision: @REV
@@ -62,13 +62,13 @@ var JsHamcrest = {
       return array == anotherArray;
     }
   },
-  
+
   /**
    * Returns whether the given Arrays are equivalent. This will return true if the objects
    * inside the Arrays are equivalent i.e. they dont have to be the same object reference.
    * Two objects with the same key value pairs will be equivalent eventhough they are not
    * the same object.
-   * 
+   *
    * @param {type} expected A map of expected values.
    * @param {type} actual A map of the actual values.
    * @returns {Boolean} A Boolean signifing if the two Arrays are equivalent, true if they are.
@@ -79,27 +79,27 @@ var JsHamcrest = {
     {
         return false;
     }
-   
+
     for (var i = 0; i < expected.length; i++)
     {
         var a = expected[i];
         var b = actual[i];
-       
+
         if(JsHamcrest.areTwoEntitiesEquivalent(a, b) === false)
         {
             return false;
         }
     }
-   
+
     return true;
   },
-  
+
   /**
    * Returns whether the given maps are equivalent. This will return true if the objects
    * inside the maps are equivalent i.e. they dont have to be the same object reference.
    * Two objects with the same key value pairs will be equivalent eventhough they are not
    * the same object.
-   * 
+   *
    * @param {type} expected A map of expected values.
    * @param {type} actual A map of the actual values.
    * @returns {Boolean} A Boolean signifing if the two maps are equivalent, true if they are.
@@ -112,10 +112,10 @@ var JsHamcrest = {
     {
         return true;
     }
-   
+
     return false;
   },
-  
+
   simpleMapCompare: function(firstMap, secondMap)
   {
     for(var item in firstMap)
@@ -125,7 +125,7 @@ var JsHamcrest = {
             if(!JsHamcrest.areTwoEntitiesEquivalent(firstMap[item], secondMap[item])) return false;
         }
     }
-   
+
     return true;
   },
 
@@ -133,18 +133,18 @@ var JsHamcrest = {
   {
     var expectedsMatcher = JsHamcrest.retreiveEntityMatcherFunction(expected);
     var actualsMatcher = JsHamcrest.retreiveEntityMatcherFunction(actual);
-   
+
     if(expectedsMatcher === actualsMatcher && expectedsMatcher(expected, actual))
     {
         return true;
     }
-   
+
     return false;
   },
-  
+
   /**
    * Returns the function that would be used to compare the entity with an entity of the same type.
-   *  
+   *
    * @param {type} entity A JavaScript entity, this method will try and figure out what type.
    */
   retreiveEntityMatcherFunction: function(entity) {
@@ -175,7 +175,7 @@ var JsHamcrest = {
 
   /**
    * Simple comparator functions.
-   * 
+   *
    * @param {type} expected The Object that is expected to be present.
    * @param {type} actual The Object that is actually present.
    */
@@ -198,7 +198,7 @@ var JsHamcrest = {
   areEntitiesNull: function(expected, actual) { return expected === actual; },
 
   areEntitiesStrictlyEquals: function(expected, actual) { return expected === actual; },
-  
+
   /**
    * Builds a matcher object that uses external functions provided by the
    * caller in order to define the current matching logic.
