@@ -4,6 +4,16 @@ Changelog
 Like any other piece of software, JsHamcrest is evolving at each release.
 Here you can track our progress:
 
+**Version 0.7.0** *(Jan 26, 2013)*
+
+* Added matchers :meth:`JsHamcrest.Matchers.equivalentMap` and :meth:`JsHamcrest.Matchers.equivalentArray`
+
+
+**Version 0.6.8** *(Nov 30, 2012)*
+
+* Added Node.js support;
+
+
 **Version 0.6.7** *(Sep 11, 2011)*
 
 * Updated :meth:`JsHamcrest.Matchers.hasSize` function to make it work with
