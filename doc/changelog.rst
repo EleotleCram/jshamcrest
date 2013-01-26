@@ -6,7 +6,7 @@ Here you can track our progress:
 
 **Version 0.7.0** *(Jan 26, 2013)*
 
-* Added matchers :meth:`JsHamcrest.Matchers.equivalentMap` and :meth:`JsHamcrest.Matchers.equivalentArray`
+* Added matchers :meth:`JsHamcrest.Matchers.equivalentMap` and :meth:`JsHamcrest.Matchers.equivalentArray`;
 
 
 **Version 0.6.8** *(Nov 30, 2012)*
