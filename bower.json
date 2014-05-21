@@ -6,6 +6,7 @@
     "Daniel Martins <daniel.tritone@gmail.com>"
   ],
   "description": "Library of matcher objects for JavaScript, based on the ideas behind Hamcrest.",
+  "main": "build/jshamcrest.js"
   "keywords": [
     "matchers",
     "testing"
