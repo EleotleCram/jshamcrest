@@ -65,13 +65,13 @@ var JsHamcrest = {
 
   /**
    * Returns whether the given Arrays are equivalent. This will return true if the objects
-   * inside the Arrays are equivalent i.e. they dont have to be the same object reference.
-   * Two objects with the same key value pairs will be equivalent eventhough they are not
+   * inside the Arrays are equivalent i.e. they don't have to be the same object reference.
+   * Two objects with the same key value pairs will be equivalent even though they are not
    * the same object.
    *
    * @param {type} expected A map of expected values.
    * @param {type} actual A map of the actual values.
-   * @returns {Boolean} A Boolean signifing if the two Arrays are equivalent, true if they are.
+   * @returns {Boolean} A Boolean signifying if the two Arrays are equivalent, true if they are.
    */
   areArraysEquivalent: function(expected, actual)
   {
@@ -96,13 +96,13 @@ var JsHamcrest = {
 
   /**
    * Returns whether the given maps are equivalent. This will return true if the objects
-   * inside the maps are equivalent i.e. they dont have to be the same object reference.
-   * Two objects with the same key value pairs will be equivalent eventhough they are not
+   * inside the maps are equivalent i.e. they don't have to be the same object reference.
+   * Two objects with the same key value pairs will be equivalent even though they are not
    * the same object.
    *
    * @param {type} expected A map of expected values.
    * @param {type} actual A map of the actual values.
-   * @returns {Boolean} A Boolean signifing if the two maps are equivalent, true if they are.
+   * @returns {Boolean} A Boolean signifying if the two maps are equivalent, true if they are.
    */
   areMapsEquivalent: function(expected, actual)
   {

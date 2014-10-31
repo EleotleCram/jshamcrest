@@ -183,7 +183,7 @@ JsHamcrest.Matchers.either = JsHamcrest.EqualTo(function(matcher) {
 
 /**
  * All the given values or matchers should match the actual value to be
- * sucessful. This matcher behaves pretty much like the && operator.
+ * successful. This matcher behaves pretty much like the && operator.
  */
 JsHamcrest.Matchers.allOf = function() {
   var args = arguments;
