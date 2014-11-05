@@ -97,7 +97,7 @@ JsHamcrest.Matchers.isIn = function() {
 JsHamcrest.Matchers.oneOf = JsHamcrest.Matchers.isIn;
 
 /**
- * The actual value should be an array and it must be empty to be sucessful.
+ * The actual value should be an array and it must be empty to be successful.
  */
 JsHamcrest.Matchers.empty = function() {
   return new JsHamcrest.SimpleMatcher({
@@ -149,7 +149,7 @@ JsHamcrest.Matchers.equivalentMap = function(expected) {
             {
                 return JsHamcrest.areMapsEquivalent(expected, actual);
             }
-           
+
             return false; //The passed in objects aren't maps.
         },
 
@@ -167,7 +167,7 @@ JsHamcrest.Matchers.equivalentArray = function(expected) {
             {
                 return JsHamcrest.areArraysEquivalent(expected, actual);
             }
-           
+
             return false; //The passed in objects aren't Arrays.
         },
 

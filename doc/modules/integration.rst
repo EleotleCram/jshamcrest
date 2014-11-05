@@ -68,7 +68,7 @@ Dummy Functions For Easy Prototyping
 
 .. function:: Rhino()
 
-   Uses the Rhino's :meth:`print()` function to display the assertion results.
+   Uses Rhino's :meth:`print()` function to display the assertion results.
    Great for quick prototyping::
 
        js> load('jshamcrest.js')
@@ -139,7 +139,7 @@ JsTestDriver -- Remote JavaScript Console
 
    Integrates JsHamcrest with `JsTestDriver`_. Instructions on how to set up
    your project:
-   
+
        1. Let's assume your project root directory have a ``lib``
           directory to keep your project's dependencies. In this case, copy
           the ``jshamcrest.js`` file to that directory;
@@ -154,7 +154,7 @@ JsTestDriver -- Remote JavaScript Console
               JsHamcrest.Integration.JsTestDriver({
                   scope:this
               });
-              
+
 
        3. Finally, edit the ``jsTestDriver.conf`` file as follows::
 
@@ -255,7 +255,7 @@ jsUnity -- Lightweight JavaScript Testing Framework
            JsHamcrest.Integration.jsUnity({
                scope: jsUnity.env.defaultScope,
                attachAssertions: false
-           }); 
+           });
 
            var results = jsUnity.run(CalculatorTestSuite);
        </script>
