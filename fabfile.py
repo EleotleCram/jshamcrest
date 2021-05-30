@@ -11,7 +11,7 @@ from fabric.api import *
 
 # Project
 env.project   = 'jshamcrest'
-env.version   = '0.6.4'
+env.version   = '0.7.0'
 env.full_name = '%s-%s' % (env.project, env.version)
 
 # Build output
@@ -30,12 +30,12 @@ env.test_dir    = 'test'
 env.web_browser = 'firefox'
 
 # Documentation
+env.tmp_dir      = '/tmp/%s' % env.project
 env.doc_dir      = 'doc'
 env.doc_build    = '%s/_build' % env.doc_dir
 env.doc_dir_html = '%s/html'  % env.doc_build
 env.doc_dir_pdf  = '%s/latex' % env.doc_build
 env.doc_pdf      = '%s/JsHamcrest.pdf' % env.doc_dir_pdf
-env.doc_remote   = '/home/destaquenet/public_html'
 
 # Source code
 env.src_dir   = 'src'
@@ -74,7 +74,7 @@ def build():
     content = env.src_content.readlines()
     file(env.js, 'w').writelines(content)
     local('cp %s %s' % (env.js, env.js_version))
-        
+
 @runs_once
 def pack():
     """Creates a minified version of the final script using the Google Closure
@@ -105,37 +105,33 @@ def doc_html():
     local('cd %s; make html' % env.doc_dir)
 
 def doc_pdf():
-    """Builds the PDF documentation."
+    """Builds the PDF documentation.
     """
     doc_clean()
     local('cd %s; make latex' % env.doc_dir)
     local('cd %s; make all-pdf' % env.doc_dir_pdf)
 
-def doc():
+def make_site():
     """Builds the documentation both in HTML and PDF.
     """
     doc_clean()
     doc_html()
     doc_pdf()
-
-def zip_doc():
-    """Creates a zip file with the complete documentation.
-    """
     pack()
-    doc()
     local('cp %s %s' % (env.doc_pdf, env.doc_dir_html))
     local('cp %s %s' % (env.js, env.doc_dir_html))
     local('cp %s %s' % (env.js_min, env.doc_dir_html))
-    local('cd %s; cp -R html %s; zip -r9 %s.zip %s' %
-            ((env.doc_build,) + (env.project,) * 3))
+    local('cd %s ; touch .nojekyll' % env.doc_dir_html)
 
 def deploy():
-    """Deploys the website.
+    """Deploys the documentation.
     """
-    zip_doc()
-    put('%s/%s.zip' % (env.doc_build, env.project), env.doc_remote)
-    run('cd %s; rm -R %s; unzip %s.zip; rm %s.zip' %
-            ((env.doc_remote,) + (env.project,) * 3))
+    make_site()
+    local('rm -fR %s ; mkdir -p %s' % (env.tmp_dir, env.tmp_dir))
+    local('cp -R %s/* %s' % (env.doc_dir_html, env.tmp_dir))
+    local('git checkout gh-pages')
+    local('cp -R %s/* .' % env.tmp_dir)
+    local('git add . ; git commit -m "Updated documentation."')
 
 def _set_revision_info():
     """Reads information about the latest revision.

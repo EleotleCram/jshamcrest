@@ -64,7 +64,7 @@ JsHamcrest.Integration = (function() {
     },
 
     /**
-     * Uses the Rhino's print() function to display the assertion results.
+     * Uses Rhino's print() function to display the assertion results.
      * Great for prototyping.
      */
     Rhino: function() {
@@ -119,6 +119,28 @@ JsHamcrest.Integration = (function() {
         return JsHamcrest.Operators.assert(actual, matcher, {
           message: message,
           fail: fail
+        });
+      };
+    },
+
+    /**
+     * NodeUnit (Node.js Unit Testing) integration.
+     */
+    Nodeunit: function(params) {
+      params = params ? params : {};
+      var target = params.scope || global;
+
+      JsHamcrest.Integration.copyMembers(target);
+
+      target.assertThat = function(actual, matcher, message, test) {
+        return JsHamcrest.Operators.assert(actual, matcher, {
+          message: message,
+          fail: function(message) {
+            test.ok(false, message);
+          },
+          pass: function(message) {
+            test.ok(true, message);
+          }
         });
       };
     },
@@ -267,3 +289,4 @@ JsHamcrest.Integration = (function() {
   };
 })();
 
+if (typeof exports !== "undefined") exports.JsHamcrest = JsHamcrest;

@@ -19,42 +19,32 @@ JsHamcrest.Matchers.truth = function() {
 /**
  * Delegate-only matcher frequently used to improve readability.
  */
-JsHamcrest.Matchers.is = function(matcherOrValue) {
-  // Uses 'equalTo' matcher if the given object is not a matcher
-  if (!JsHamcrest.isMatcher(matcherOrValue)) {
-    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
-  }
-
+JsHamcrest.Matchers.is = JsHamcrest.EqualTo(function(matcher) {
   return new JsHamcrest.SimpleMatcher({
     matches: function(actual) {
-      return matcherOrValue.matches(actual);
+      return matcher.matches(actual);
     },
 
     describeTo: function(description) {
-      description.append('is ').appendDescriptionOf(matcherOrValue);
+      description.append('is ').appendDescriptionOf(matcher);
     }
   });
-};
+});
 
 /**
  * The actual value must not match the given matcher or value.
  */
-JsHamcrest.Matchers.not = function(matcherOrValue) {
-  // Uses 'equalTo' matcher if the given object is not a matcher
-  if (!JsHamcrest.isMatcher(matcherOrValue)) {
-    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
-  }
-
+JsHamcrest.Matchers.not = JsHamcrest.EqualTo(function(matcher) {
   return new JsHamcrest.SimpleMatcher({
     matches: function(actual) {
-      return !matcherOrValue.matches(actual);
+      return !matcher.matches(actual);
     },
 
     describeTo: function(description) {
-      description.append('not ').appendDescriptionOf(matcherOrValue);
+      description.append('not ').appendDescriptionOf(matcher);
     }
   });
-};
+});
 
 /**
  * The actual value must be equal to the given value.
@@ -169,41 +159,31 @@ JsHamcrest.Matchers.raisesAnything = function() {
  * Combinable matcher where the actual value must match both of the given
  * matchers.
  */
-JsHamcrest.Matchers.both = function(matcherOrValue) {
-  // Uses 'equalTo' matcher if the given object is not a matcher
-  if (!JsHamcrest.isMatcher(matcherOrValue)) {
-    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
-  }
-
+JsHamcrest.Matchers.both = JsHamcrest.EqualTo(function(matcher) {
   return new JsHamcrest.CombinableMatcher({
-    matches: matcherOrValue.matches,
+    matches: matcher.matches,
     describeTo: function(description) {
-      description.append('both ').appendDescriptionOf(matcherOrValue);
+      description.append('both ').appendDescriptionOf(matcher);
     }
   });
-};
+});
 
 /**
  * Combinable matcher where the actual value must match at least one of the
  * given matchers.
  */
-JsHamcrest.Matchers.either = function(matcherOrValue) {
-  // Uses 'equalTo' matcher if the given object is not a matcher
-  if (!JsHamcrest.isMatcher(matcherOrValue)) {
-    matcherOrValue = JsHamcrest.Matchers.equalTo(matcherOrValue);
-  }
-
+JsHamcrest.Matchers.either = JsHamcrest.EqualTo(function(matcher) {
   return new JsHamcrest.CombinableMatcher({
-    matches: matcherOrValue.matches,
+    matches: matcher.matches,
     describeTo: function(description) {
-      description.append('either ').appendDescriptionOf(matcherOrValue);
+      description.append('either ').appendDescriptionOf(matcher);
     }
   });
-};
+});
 
 /**
  * All the given values or matchers should match the actual value to be
- * sucessful. This matcher behaves pretty much like the && operator.
+ * successful. This matcher behaves pretty much like the && operator.
  */
 JsHamcrest.Matchers.allOf = function() {
   var args = arguments;

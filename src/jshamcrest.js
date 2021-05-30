@@ -1,21 +1,33 @@
 /*
  * JsHamcrest v@VERSION
- * http://jshamcrest.destaquenet.com
+ * http://danielfm.github.com/jshamcrest/
  *
  * Library of matcher objects for JavaScript.
  *
- * Copyright (c) 2009-2010 Daniel Fernandes Martins
+ * Copyright (c) 2009-2013 Daniel Fernandes Martins
  * Licensed under the BSD license.
  *
  * Revision: @REV
  * Date:     @DATE
  */
- 
-JsHamcrest = {
+
+var JsHamcrest = {
   /**
    * Library version.
    */
   version: '@VERSION',
+
+  /**
+   * Delegate function, useful when used to create a matcher that has a value-equalTo semantic
+   */
+  EqualTo: function (func) {
+    return function (matcherOrValue) {
+      if (!JsHamcrest.isMatcher(matcherOrValue)) {
+        return func(JsHamcrest.Matchers.equalTo(matcherOrValue));
+      }
+      return func(matcherOrValue);
+    };
+  },
 
   /**
    * Returns whether the given object is a matcher.
@@ -38,7 +50,9 @@ JsHamcrest = {
         var b = anotherArray[i];
 
         if (a instanceof Array || b instanceof Array) {
-          return JsHamcrest.areArraysEqual(a, b);
+          if(!JsHamcrest.areArraysEqual(a, b)) {
+            return false;
+          }
         } else if (a != b) {
           return false;
         }
@@ -48,6 +62,142 @@ JsHamcrest = {
       return array == anotherArray;
     }
   },
+
+  /**
+   * Returns whether the given Arrays are equivalent. This will return true if the objects
+   * inside the Arrays are equivalent i.e. they don't have to be the same object reference.
+   * Two objects with the same key value pairs will be equivalent even though they are not
+   * the same object.
+   *
+   * @param {type} expected A map of expected values.
+   * @param {type} actual A map of the actual values.
+   * @returns {Boolean} A Boolean signifying if the two Arrays are equivalent, true if they are.
+   */
+  areArraysEquivalent: function(expected, actual)
+  {
+    if (expected.length !== actual.length)
+    {
+        return false;
+    }
+
+    for (var i = 0; i < expected.length; i++)
+    {
+        var a = expected[i];
+        var b = actual[i];
+
+        if(JsHamcrest.areTwoEntitiesEquivalent(a, b) === false)
+        {
+            return false;
+        }
+    }
+
+    return true;
+  },
+
+  /**
+   * Returns whether the given maps are equivalent. This will return true if the objects
+   * inside the maps are equivalent i.e. they don't have to be the same object reference.
+   * Two objects with the same key value pairs will be equivalent even though they are not
+   * the same object.
+   *
+   * @param {type} expected A map of expected values.
+   * @param {type} actual A map of the actual values.
+   * @returns {Boolean} A Boolean signifying if the two maps are equivalent, true if they are.
+   */
+  areMapsEquivalent: function(expected, actual)
+  {
+    // we need to do this both ways in case both maps have undefined values (which makes counting the number
+    // of keys a non-acceptable comparison).
+    if(JsHamcrest.simpleMapCompare(expected, actual) && JsHamcrest.simpleMapCompare(actual, expected))
+    {
+        return true;
+    }
+
+    return false;
+  },
+
+  simpleMapCompare: function(firstMap, secondMap)
+  {
+    for(var item in firstMap)
+    {
+        if(firstMap.hasOwnProperty(item))
+        {
+            if(!JsHamcrest.areTwoEntitiesEquivalent(firstMap[item], secondMap[item])) return false;
+        }
+    }
+
+    return true;
+  },
+
+  areTwoEntitiesEquivalent: function(expected, actual)
+  {
+    var expectedsMatcher = JsHamcrest.retreiveEntityMatcherFunction(expected);
+    var actualsMatcher = JsHamcrest.retreiveEntityMatcherFunction(actual);
+
+    if(expectedsMatcher === actualsMatcher && expectedsMatcher(expected, actual))
+    {
+        return true;
+    }
+
+    return false;
+  },
+
+  /**
+   * Returns the function that would be used to compare the entity with an entity of the same type.
+   *
+   * @param {type} entity A JavaScript entity, this method will try and figure out what type.
+   */
+  retreiveEntityMatcherFunction: function(entity) {
+    if ( (Array.isArray && Array.isArray(entity)) || entity instanceof Array ) return JsHamcrest.areArraysEquivalent;
+
+    if(entity instanceof Boolean) return JsHamcrest.areBooleansEqual;
+
+    if(entity instanceof Date) return JsHamcrest.areDatesEqual;
+
+    if(entity instanceof Function) return JsHamcrest.areFunctionsEqual;
+
+    if(entity instanceof Number || typeof entity === "number") return JsHamcrest.areNumbersEqual;
+
+    if(entity instanceof String || typeof entity === "string") return JsHamcrest.areStringsEqual;
+
+    if(entity instanceof RegExp) return JsHamcrest.areRegExpEqual;
+
+    if(entity instanceof Error) return JsHamcrest.areErrorsEqual;
+
+    if(typeof entity === "undefined") return JsHamcrest.areEntitiesUndefined;
+
+    if(entity === null) return JsHamcrest.areEntitiesNull;
+
+    if(entity.constructor === Object) return JsHamcrest.areMapsEquivalent;
+
+    return JsHamcrest.areEntitiesStrictlyEquals;
+  },
+
+  /**
+   * Simple comparator functions.
+   *
+   * @param {type} expected The Object that is expected to be present.
+   * @param {type} actual The Object that is actually present.
+   */
+  areBooleansEqual: function(expected, actual) { return expected.toString() === actual.toString(); },
+
+  areDatesEqual: function(expected, actual) {    return expected.toString() === actual.toString(); },
+
+  areFunctionsEqual: function(expected, actual) {    return expected === actual; },
+
+  areNumbersEqual: function(expected, actual) { return expected.valueOf() === actual.valueOf(); },
+
+  areStringsEqual: function(expected, actual) { return expected.valueOf() === actual.valueOf(); },
+
+  areRegExpEqual: function(expected, actual) { return expected.toString() === actual.toString(); },
+
+  areErrorsEqual: function(expected, actual) { return expected.constructor === actual.constructor && expected.message === actual.message; },
+
+  areEntitiesUndefined: function(expected, actual) { return expected === actual; },
+
+  areEntitiesNull: function(expected, actual) { return expected === actual; },
+
+  areEntitiesStrictlyEquals: function(expected, actual) { return expected === actual; },
 
   /**
    * Builds a matcher object that uses external functions provided by the
@@ -179,4 +329,3 @@ JsHamcrest.SimpleMatcher.prototype.describeValueTo = function(actual, descriptio
 // CombinableMatcher is a specialization of SimpleMatcher
 JsHamcrest.CombinableMatcher.prototype = new JsHamcrest.SimpleMatcher();
 JsHamcrest.CombinableMatcher.prototype.constructor = JsHamcrest.CombinableMatcher;
-

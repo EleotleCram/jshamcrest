@@ -26,6 +26,7 @@ new Test.Unit.Runner({
     var areArraysEqual = JsHamcrest.areArraysEqual;
     assert(!areArraysEqual([], {}));
     assert(!areArraysEqual([1,2], [1]));
+    assert(!areArraysEqual([[1],1], [[1],2]));
     assert(!areArraysEqual([1,[2,3]], [1,['2',2]]));
 
     assert(areArraysEqual());

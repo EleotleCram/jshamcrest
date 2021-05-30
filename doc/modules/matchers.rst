@@ -50,42 +50,44 @@ Collection Matchers
    :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
-.. function:: hasItems(MatchersOrValues...)
+.. function:: hasItems(matchersOrValues...)
 
    The actual value should be an array and *matchersOrValues* must match at
    least one item::
 
        assertThat([1,2,3], hasItems(2,3));
        assertThat([1,2,3], hasItems(greaterThan(2)));
-       assertThat([1,2,3], hasItems(1, greaterThan(2));
+       assertThat([1,2,3], hasItems(1, greaterThan(2)));
 
-   :arg MatchersOrValues: Matchers and/or values.
+   :arg matchersOrValues: Instances of :class:`JsHamcrest.SimpleMatcher` and/or
+                          values.
    :returns:              Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
 .. function:: hasSize(matcherOrValue)
 
-   The length of the actual value value must match *matcherOrValue*::
+   The length of the actual value must match *matcherOrValue*::
 
        assertThat([1,2,3], hasSize(3));
        assertThat([1,2,3], hasSize(lessThan(5)));
        assertThat('string', hasSize(6));
        assertThat('string', hasSize(greaterThan(3)));
+       assertThat({a:1, b:2}, hasSize(equalTo(2)));
 
    :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
                         value.
    :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
-.. function:: isIn(item...)
+.. function:: isIn(items...)
 
    The given array or arguments must contain the actual value::
 
        assertThat(1, isIn([1,2,3]));
        assertThat(1, isIn(1,2,3));
 
-   :arg item...: Array or list of values.
-   :returns:     Instance of :class:`JsHamcrest.SimpleMatcher`.
+   :arg items...: Array or list of values.
+   :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
 .. function:: oneOf()
@@ -160,7 +162,7 @@ Core Matchers
 
 .. function:: equalTo(expected)
 
-   The actual value must be equal to *expected*::
+   The actual value must be equal to (``==``) *expected*::
 
        assertThat('10', equalTo(10));
 
@@ -175,7 +177,7 @@ Core Matchers
        assertThat('10', is(10));
        assertThat('10', is(equalTo(10)));
 
-   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a 
+   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
                         value.
    :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
 
@@ -198,14 +200,14 @@ Core Matchers
        assertThat(10, not(20));
        assertThat(10, not(equalTo(20)));
 
-   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a 
+   :arg matcherOrValue: Instance of :class:`JsHamcrest.SimpleMatcher` or a
                         value.
    :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
 .. function:: raises(exceptionName)
 
-   The actual value is a function and, when invoked, it should thrown an
+   The actual value is a function and, when invoked, it should throw an
    exception with the given name::
 
        var MyException = function(message) {
@@ -217,7 +219,7 @@ Core Matchers
            // Do something dangerous...
            throw new MyException('Unexpected error');
        };
- 
+
        assertThat(myFunction, raises('MyException'));
 
    :arg exceptionName: Name of the expected exception.
@@ -226,7 +228,7 @@ Core Matchers
 
 .. function:: raisesAnything()
 
-   The actual value is a function and, when invoked, it should raise any
+   The actual value is a function and, when invoked, it should throw any
    exception::
 
        var myFunction = function() {
@@ -241,7 +243,7 @@ Core Matchers
 
 .. function:: sameAs(expected)
 
-   The actual value must be the same as *expected*::
+   The actual value must be strictly equal to (``===``) *expected*::
 
        var number = 10, anotherNumber = number;
        assertThat(number, sameAs(anotherNumber));
@@ -265,6 +267,32 @@ Core Matchers
    :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
+.. function:: equivalentMap(expected)
+
+   The actual value must be equivalent to *expected*. This works for maps
+   with nested arrays and maps::
+
+       var firstMap = {"key" : 1, "key2" : "String"};
+       var equivMap = {"key" : 1, "key2" : "String"};
+
+       assertThat(firstMap, equivalentMap(equivMap));
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
+.. function:: equivalentArray(expected)
+
+   The actual value must be equivalent to *expected*. This works for arrays
+   with nested arrays and maps::
+
+       var firstArray = [ 1, "String"];
+       var equivArray = [ 1, "String"];
+
+       assertThat(firstArray, equivalentArray(equivArray));
+
+   :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
+
+
 Number Matchers
 ---------------
 
@@ -275,7 +303,7 @@ Number Matchers
        assertThat(5, between(4).and(7));
 
    :arg start: Range start.
-   :returns:   Builder object with an :meth:`end` method, which returns a
+   :returns:   Builder object with an :meth:`and(end)` method, which returns a
                :class:`JsHamcrest.SimpleMatcher` instance and thus should be
                called to finish the matcher creation.
 
@@ -297,7 +325,7 @@ Number Matchers
 
 .. function:: divisibleBy(divisor)
 
-   The actual value must be divisible by *divisor*::
+   The actual number must be divisible by *divisor*::
 
        assertThat(21, divisibleBy(3));
 
@@ -344,7 +372,7 @@ Number Matchers
    :returns:      Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
-.. function:: lesThanOrEqualTo(expected)
+.. function:: lessThanOrEqualTo(expected)
 
    The actual number must be less than or equal to *expected*::
 
@@ -391,7 +419,7 @@ Object Matchers
 
        assertThat(true, bool());
        assertThat(false, bool());
-       assertThat("text" not(bool()));
+       assertThat("text", not(bool()));
 
    :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
 
@@ -415,7 +443,7 @@ Object Matchers
                alert('Hello, ' + name);
            }
        };
-       
+
        assertThat(greeter, hasFunction('sayHello'));
 
    :arg functionName: Function name.
@@ -432,7 +460,7 @@ Object Matchers
                alert('Hello, ' + name);
            }
        };
-       
+
        assertThat(greeter, hasMember('marco'));
        assertThat(greeter, hasMember('sayHello'));
 
@@ -445,7 +473,7 @@ Object Matchers
    :returns:            Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
-.. function:: isInstanceOf(clazz)
+.. function:: instanceOf(clazz)
 
    The actual value must be an instance of *clazz*::
 
@@ -477,10 +505,10 @@ Object Matchers
 
 .. function:: string()
 
-   The actual value must be an string::
+   The actual value must be a string::
 
        assertThat('10', string());
-       assertThat(10, not(string());
+       assertThat(10, not(string()));
 
    :returns: Instance of :class:`JsHamcrest.SimpleMatcher`.
 
@@ -491,7 +519,7 @@ Object Matchers
 
        assertThat(10, typeOf('number'));
        assertThat({}, typeOf('object'));
-       assertThat('10', typeOf('string');
+       assertThat('10', typeOf('string'));
        assertThat(function(){}, typeOf('function'));
 
    :arg typeName: Name of the type.
@@ -529,7 +557,7 @@ Text Matchers
 
        assertThat('string', endsWith('ring'));
 
-   :param str: String.
+   :param str: Substring.
    :returns:   Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
@@ -559,7 +587,7 @@ Text Matchers
 
        assertThat('string', startsWith('str'));
 
-   :param str: String.
+   :param str: Substring.
    :returns:   Instance of :class:`JsHamcrest.SimpleMatcher`.
 
 
